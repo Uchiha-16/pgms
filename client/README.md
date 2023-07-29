@@ -1,5 +1,16 @@
 # Getting Started with Create React App
 
+# Install node Modules
+### `npm install`
+### `npm install react react-dom --save`
+### `npm install webpack webpack-dev-server webpack-cli --save`
+### `npm install axios`
+### `npm install @mui/material @emotion/react @emotion/styled`
+### `npm install @fontsource/roboto`
+### `npm install @mui/icons-material`
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

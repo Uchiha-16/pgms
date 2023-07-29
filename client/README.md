@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
-# Install node Modules
+## Install node Modules
+
 ### `npm install`
 ### `npm install react react-dom --save`
 ### `npm install webpack webpack-dev-server webpack-cli --save`

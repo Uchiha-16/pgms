@@ -169,7 +169,7 @@ export default function HeaderComponent() {
         <Box sx={{ 
             flexGrow: 1, 
             position: 'fixed', 
-            width: '79%',
+            width: '78.8%',
             top: 20
             }}>
             <AppBar position="static" sx={{
@@ -177,7 +177,7 @@ export default function HeaderComponent() {
                 backgroundColor: 'transparent'
                 }}>
                 <Toolbar sx={{
-                    backgroundColor: '#F0F2F5',
+                    backgroundColor: 'transparent',
                     borderRadius: 2
                     }}>
                     <div role="presentation" onClick={handleClick}>

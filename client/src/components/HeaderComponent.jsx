@@ -11,8 +11,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
+import { Link } from 'react-router-dom';
 
 
 function handleClick(event) {
@@ -159,11 +159,15 @@ export default function HeaderComponent() {
                     
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                        <Link to="/popup">
                             <Badge badgeContent={4} color="error">
-                                <MailIcon />
+                               <MailIcon />
                             </Badge>
+                            </Link>
                         </IconButton>
+                        
                         <IconButton
                             size="large"
                             aria-label="show 17 new notifications"

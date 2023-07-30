@@ -8,15 +8,15 @@ class dashboard extends Component {
         return (
             <Box>
                 <Grid container spacing={2}>
-                    <Grid item xs={2.2}>
+                    <Grid item xs={2.5}>
                         <NavBarComponent />
                     </Grid>
-                    <Grid container xs={9.6} sx={{ display: 'grid', gridTemplateRows: 'repeat(3, 1fr)' }}>
+                    <Grid container xs={9.3} sx={{ display: 'grid', gridTemplateRows: 'repeat(3, 1fr)' }}>
                         <Grid item>
                             <HeaderComponent />
                         </Grid>
                         <Grid item>
-
+                            {/* content */}
                         </Grid>
                         <Grid item>
 

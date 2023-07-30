@@ -169,7 +169,7 @@ export default function HeaderComponent() {
         <Box sx={{ 
             flexGrow: 1, 
             position: 'fixed', 
-            width: '81%',
+            width: '79%',
             top: 20
             }}>
             <AppBar position="static" sx={{

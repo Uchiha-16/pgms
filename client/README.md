@@ -1,7 +1,11 @@
 # Getting Started with Create React App
 
+<<<<<<< Updated upstream
 # Install node Modules
 
+=======
+## Install node Modules
+>>>>>>> Stashed changes
 ### `npm install`
 ### `npm install react react-dom --save`
 ### `npm install webpack webpack-dev-server webpack-cli --save`

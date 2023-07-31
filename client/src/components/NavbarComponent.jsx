@@ -31,7 +31,12 @@ export default function NavbarComponent() {
     };
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ 
+            display: 'flex', 
+            '# .MuiPaper-root': {
+                overflowY: 'hidden'
+            }
+        }}>
             <CssBaseline />
             <Drawer
                 sx={{
@@ -49,6 +54,7 @@ export default function NavbarComponent() {
                         height: 'calc(100% - 40px)',
                         paddingTop: 2,
                         paddingBottom: 2,
+                        overflowY: 'hidden'
                     },
                 }}
                 variant="permanent"

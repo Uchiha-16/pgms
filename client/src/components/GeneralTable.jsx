@@ -13,6 +13,11 @@ const GeneralTable = ({ columns, data }) => {
         setAlignment(newAlignment);
     };
 
+    const isStatusColumn = (columnName) => {
+        // Replace the value with the name of the column you want to style differently
+        return columnName === 'STATUS';
+    };
+
     return (
         <><div style={{
             display: 'flex',
@@ -87,15 +92,25 @@ const GeneralTable = ({ columns, data }) => {
                     </ToggleButton>
                 </ToggleButtonGroup>
 
-                <Table>
+                <Table sx={{
+                    '# .MuiTable-roots': {
+                        
+                    }
+                }}>
                     <TableHead>
-                        <TableRow sx={{
-                            '# .MuiTable-root': {
-                                marginTop: 10,
-                            }
-                        }}>
+                        <TableRow>
                             {columns.map((column) => (
-                                <TableCell key={column}>{column}</TableCell>
+                                <TableCell key={column} sx={{
+                                    color: '#CCC9C9',
+                                    fontFamily: 'Roboto',
+                                    fontSize: '10px',
+                                    fontStyle: 'normal',
+                                    fontWeight: '800',
+                                    paddingTop: 4,
+                                    paddingLeft: 3
+                                }}>
+                                    {column}
+                                </TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
@@ -103,7 +118,14 @@ const GeneralTable = ({ columns, data }) => {
                         {data.map((row, rowIndex) => (
                             <TableRow key={rowIndex}>
                                 {columns.map((column, colIndex) => (
-                                    <TableCell key={`${rowIndex}-${colIndex}`}>{row[column]}</TableCell>
+                                    <TableCell key={`${rowIndex}-${colIndex}`}
+                                    sx={{
+                                        paddingLeft: 3,
+                                    }}
+                                        style={isStatusColumn(column) ? { background: 'linear-gradient(180deg, #66BB6A 0 %, #43A047 100 %)' } : null}
+                                    >
+                                        {row[column]}
+                                    </TableCell>
                                 ))}
                             </TableRow>
                         ))}

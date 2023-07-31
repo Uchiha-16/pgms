@@ -1,9 +1,18 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 
 const GeneralTable = ({ columns, data }) => {
+
+    const [alignment, setAlignment] = React.useState('');
+
+    const handleChange = (event, newAlignment) => {
+        setAlignment(newAlignment);
+    };
+
     return (
         <><div style={{
             display: 'flex',
@@ -13,6 +22,11 @@ const GeneralTable = ({ columns, data }) => {
             color: '#FFFFFF',
             paddingRight: '20px',
             paddingLeft: '20px',
+            width: '97%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            position: 'relative',
+            zIndex: 1,
         }}>
             <h3>Users</h3>
             <AddCircleIcon sx={{
@@ -28,9 +42,51 @@ const GeneralTable = ({ columns, data }) => {
                     transform: 'rotate(90deg)'
                 }
             }} />
-        </div><TableContainer component={Paper} sx={{
-            backgroundColor: '#FFFFFF'
+        </div>
+        
+        <TableContainer component={Paper} sx={{
+            backgroundColor: '#FFFFFF',
+            position: 'relative',
+            top: -40,
+            zIndex: 0,
+            paddingTop: 8,
         }}>
+                <ToggleButtonGroup
+                    value={alignment}
+                    exclusive
+                    onChange={handleChange}
+                    aria-label="Platform"
+                    sx={{
+                        color: "#343A40",
+                        backgroundColor: "#DEE2E6",
+                        filter: 'drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25))',
+                        borderRadius: 1,
+                        height: 30,
+                        float: 'right',
+                        marginRight: 2.5,
+                    }}
+                >
+                    <ToggleButton value="Online" sx={{ 
+                        border: 'none', 
+                        fontSize: 10,
+                        color: '#343A40',
+                        fontFamily: 'Inter',
+                        borderRight: '1px solid rgba(0, 0, 0, 0.1)',
+                        transition: '0.3s',
+                        }}>
+                            Online
+                    </ToggleButton>
+                    <ToggleButton value="Offline" sx={{ 
+                        border: 'none', 
+                        fontSize: 10,
+                        color: '#343A40',
+                        fontFamily: 'Inter',
+                        transition: '0.3s',
+                        }}>
+                            Offline
+                    </ToggleButton>
+                </ToggleButtonGroup>
+
                 <Table>
                     <TableHead>
                         <TableRow>

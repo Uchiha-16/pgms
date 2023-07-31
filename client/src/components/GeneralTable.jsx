@@ -89,7 +89,11 @@ const GeneralTable = ({ columns, data }) => {
 
                 <Table>
                     <TableHead>
-                        <TableRow>
+                        <TableRow sx={{
+                            '# .MuiTable-root': {
+                                marginTop: 10,
+                            }
+                        }}>
                             {columns.map((column) => (
                                 <TableCell key={column}>{column}</TableCell>
                             ))}

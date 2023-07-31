@@ -7,10 +7,10 @@ import { Box, Grid } from '@mui/material/';
 
 
 const Layout1 = () => {
-    const columns = ['Name', 'Address', 'Phone'];
+    const columns = ['NAME', 'FUNCTION', 'STATUS', 'EMPLOYED', 'ACTION'];
     const data = [
-        { Name: 'Alice', Address: '123 Main St', Phone: '555-1234' },
-        { Name: 'Bob', Address: '456 Elm St', Phone: '555-5678' },
+        { NAME: 'Johny Michael', FUNCTION: 'Deputy Registrar', STATUS: 'Online', EMPLOYED: '2019/01/01', ACTION: 'Edit' },
+        { NAME: 'Johny Michael', FUNCTION: 'Deputy Registrar', STATUS: 'Online', EMPLOYED: '2019/01/01', ACTION: 'Edit' },
     ];
 
     return <GeneralTable columns={columns} data={data} />;

@@ -14,8 +14,15 @@ const GeneralTable = ({ columns, data }) => {
     };
 
     const isStatusColumn = (columnName) => {
-        // Replace the value with the name of the column you want to style differently
         return columnName === 'STATUS';
+    };
+
+    const isFunctionColumn = (columnName) => {
+        return columnName === 'FUNCTION';
+    };
+
+    const isNameColumn = (columnName) => {
+        return columnName === 'FUNCTION';
     };
 
     return (
@@ -121,10 +128,46 @@ const GeneralTable = ({ columns, data }) => {
                                     <TableCell key={`${rowIndex}-${colIndex}`}
                                     sx={{
                                         paddingLeft: 3,
-                                    }}
-                                        style={isStatusColumn(column) ? { background: 'linear-gradient(180deg, #66BB6A 0 %, #43A047 100 %)' } : null}
-                                    >
-                                        {row[column]}
+                                        color: '#7B809A',
+                                        fontFamily: 'Roboto',
+                                        fontSize: '12px',
+                                        fontWeight: '700'
+                                    }}>
+                                        {isStatusColumn(column) ? (
+                                            <div style={{ 
+                                                background: 'linear-gradient(180deg, #66BB6A 0%, #43A047 100%)',
+                                                borderRadius: 50,
+                                                color: '#FFF',
+                                                width: 80,
+                                                fontFamily : 'Roboto',
+                                                fontSize: '12px',
+                                                fontWeight: '900',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center'
+                                            }}>{row[column]}</div>
+                                        ) : isFunctionColumn(column) ? (
+                                            <div>
+                                                <span>{row[column]}</span><br />
+                                                    <span style={{
+                                                        color: '#555', 
+                                                        fontSize: '9px', 
+                                                        fontWeight: '400'
+                                                    }}>UCSC</span>
+                                            </div>
+                                            ) : isNameColumn(column) ? (
+                                                <div>
+                                                    <span>{row[column]}</span><br />
+                                                    <span style={{
+                                                        color: '#555',
+                                                        fontSize: '9px',
+                                                        fontWeight: '400'
+                                                    }}>UCSC</span>
+                                                </div>
+                                            ) : (
+                                                row[column]
+                                            )
+                                        }
                                     </TableCell>
                                 ))}
                             </TableRow>

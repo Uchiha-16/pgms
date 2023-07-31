@@ -9,8 +9,8 @@ import { Box, Grid } from '@mui/material/';
 const Layout1 = () => {
     const columns = ['NAME', 'FUNCTION', 'STATUS', 'EMPLOYED', 'ACTION'];
     const data = [
-        { NAME: 'Johny Michael', FUNCTION: 'Deputy Registrar', STATUS: 'Online', EMPLOYED: '2019/01/01', ACTION: 'Edit' },
-        { NAME: 'Johny Michael', FUNCTION: 'Deputy Registrar', STATUS: 'Online', EMPLOYED: '2019/01/01', ACTION: 'Edit' },
+        { NAME: 'Johny Michael', FUNCTION: 'Deputy Registrar', STATUS: 'ONLINE', EMPLOYED: '2019/01/01', ACTION: 'Edit' },
+        { NAME: 'Johny Michael', FUNCTION: 'Deputy Registrar', STATUS: 'ONLINE', EMPLOYED: '2019/01/01', ACTION: 'Edit' },
     ];
 
     return <GeneralTable columns={columns} data={data} />;

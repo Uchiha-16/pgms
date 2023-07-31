@@ -6,6 +6,10 @@ import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import SideImageComponent from "./SideImageComponent";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import AlertBox from './GeneralAlert';
+
+
 
 import { Button, Box, Dialog, DialogActions, DialogContent, IconButton, Stack, TextField, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close"
@@ -21,6 +25,11 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
     contact: '',
   });
 
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState('success');
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
   
@@ -39,13 +48,20 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
     axios.post('http://localhost:8080/api/users/addUsers', formData)
       .then((response) => {
         console.log('User created:', response.data);
+        setOpenAlert(true);
+        setAlertSeverity('success');
+        setAlertMessage('User Added successfully!');
         // Handle success, display success message or redirect if needed
+        setTimeout(() => {
+          navigate('/users'); // Replace '/new-page-url' with the actual URL you want to navigate to
+        }, 3000);
       })
       .catch((error) => {
         console.error('Error creating user:', error);
         // Handle error, display error message
       });
     }
+
     const [open, setOpen] = useState(false); // Changed the state variable name to setOpen
     const functionOpenPopup = () => { // Changed the function name to start with "use"
         setOpen(true); // Changed the function to use setOpen
@@ -63,6 +79,8 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
       contact: '',
       });
     };
+    
+
 
     return (
         <div style={{textAlign:'center'}}>
@@ -198,7 +216,7 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
                                 >
                                     Reset
                                 </Button>
-                                
+                            
                             </div>
                     </Stack>
                 </DialogContent>
@@ -209,6 +227,12 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
                 </Grid>
               </Grid>
               </form>
+                <AlertBox 
+                open={openAlert}
+                onClose={() => setOpenAlert(false)}
+                severity={alertSeverity}
+                message={alertMessage}
+                />
             </Dialog>
         </div>
     );

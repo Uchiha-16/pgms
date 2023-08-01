@@ -16,6 +16,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { useState } from 'react';
 
 
 function handleClick(event) {
@@ -164,20 +165,32 @@ export default function HeaderComponent() {
         },
     }));
 
+    const [colorChange, setColorchange] = useState(false);
+    const changeNavbarColor = () => {
+        if (window.scrollY >= 80) {
+            setColorchange(true);
+        }
+        else {
+            setColorchange(false);
+        }
+    };
+    window.addEventListener('scroll', changeNavbarColor);
+
 
     return (
         <Box sx={{ 
             flexGrow: 1, 
             position: 'fixed', 
             width: '78.8%',
-            top: 20
+            top: 20,
+            zIndex: 30
             }}>
-            <AppBar position="static" sx={{
+            <AppBar position="static" className={colorChange ? 'navbar colorChange' : 'navbar'} 
+            sx={{
                 boxShadow: 'none',
-                backgroundColor: 'transparent'
+                backgroundColor: 'transparent',
                 }}>
                 <Toolbar sx={{
-                    backgroundColor: 'transparent',
                     borderRadius: 2
                     }}>
                     <div role="presentation" onClick={handleClick}>

@@ -14,7 +14,7 @@ class dashboard extends Component {
                     </Grid>
                     <Grid container xs={9.3} sx={{
                         display: 'grid',
-                        gridTemplateRows: '16.5% 73.5% 10%',
+                        gridTemplateRows: '16.5% auto 10%',
                         height: '100vh',
                     }}>
                         <Grid item>

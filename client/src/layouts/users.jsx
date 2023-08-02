@@ -4,23 +4,34 @@ import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
+import { useEffect, useState } from "react"
+import axios from "axios";
 
+const users_URL = "http://localhost:8080/api/users/getUsers"
 
 const Layout1 = () => {
-    const columns = ['NAME', 'FUNCTION', 'STATUS', 'EMPLOYED', 'ACTION'];
-    const data = [
-        { NAME: 'Johny Michael', FUNCTION: 'Deputy Registrar', STATUS: 'ONLINE', EMPLOYED: '2019/01/01', ACTION: 'Edit' },
-        { NAME: 'Alexa Liras', FUNCTION: 'Head', STATUS: 'ONLINE', EMPLOYED: '11/01/19', ACTION: 'Edit' },
-        { NAME: 'Laurent Perrier', FUNCTION: 'Lecturer', STATUS: 'OFFLINE', EMPLOYED: '19/07/17', ACTION: 'Edit' },
-        { NAME: 'Michael Levi', FUNCTION: 'Lecturer', STATUS: 'ONLINE', EMPLOYED: '24/12/08', ACTION: 'Edit' },
-        { NAME: 'Richard Gran', FUNCTION: 'Visiting Lecturer', STATUS: 'OFFLINE', EMPLOYED: '04/10/21', ACTION: 'Edit' },
-        { NAME: 'Miriam Eric', FUNCTION: 'Technical Assistant', STATUS: 'OFFLINE', EMPLOYED: '14/09/20', ACTION: 'Edit' },
-        { NAME: 'Anne Marie', FUNCTION: 'Head', STATUS: 'ONLINE', EMPLOYED: '22/05/18', ACTION: 'Edit' },
-        { NAME: 'Nick Daniel', FUNCTION: 'Visiting Lecturer', STATUS: 'OFFLINE', EMPLOYED: '11/01/19', ACTION: 'Edit' },
-        { NAME: 'Alexa Liras', FUNCTION: 'Head', STATUS: 'ONLINE', EMPLOYED: '11/01/19', ACTION: 'Edit' },
-    ];
+    const [users, setUsers] = useState([]);
+    
+    useEffect(() => {
+        axios.get(users_URL)
+            .then(res => {
+                console.log(res)
+                setUsers(res.data);
+            });
+    }, []);
 
-    return <GeneralTable columns={columns} data={data} />;
+    const columns = ['NAME', 'ROLE', 'STATUS', 'EMAIL', 'ACTION'];
+    const data = users.map(user => ({
+        NAME: `${user.firstName} ${user.lastName}`,
+        ROLE: user.role,
+        STATUS: 'ONLINE', // Assuming you want to display a static status for all users
+        EMAIL: user.email,
+        ACTION: 'Edit',
+    }));
+
+    return (
+        <GeneralTable columns={columns} data={data} />
+    );
 };
 
 class users extends Component {

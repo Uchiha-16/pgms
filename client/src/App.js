@@ -5,6 +5,8 @@ import Dashboard from './layouts/dashboard';
 import AddUser from './layouts/addUsers';
 import Login from './layouts/login';
 import Users from './layouts/users';
+import Demo from './layouts/demo';
+import Profile from './layouts/profile';
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
           <Route path="/addUsers" element={<AddUser/>} />
           <Route path="/users" element={<Users/>} />
           <Route path="/" element={<Login/>} />
+          <Route path="/profile" element={<Profile/>} />
         </Routes>
       </div>
     </Router>

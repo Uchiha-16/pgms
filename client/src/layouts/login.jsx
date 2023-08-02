@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box, Container, Paper, Typography, TextField, Button } from '@mui/material';
+import { Typography, Container, Box, Paper } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import backgroundImg from '../assets/images/login_background.jpg'; // Replace with the path to your background image
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
+import LoginForm from '../components/LoginForm' // Import the LoginForm component
 
 const theme = createTheme({
   typography: {
@@ -54,66 +55,12 @@ const LoginPage = () => {
             <Typography color={'white'}>
               <div>Postgraduate Management System</div>
               <br />
-              
               WELCOME
             </Typography>
-            <TextField
-              label="Email"
-              type="email"
-              margin="normal"
-              variant="outlined"
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#7B809A', // Silver outline for text field
-                },
-                '& input': {
-                  height: '15px', // Adjust the height as needed
-                  width: '100%',
-                  color: '#7B809A', // Adjust the width as needed
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#7B809A', // Set the color of the label
-                },
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-              }}
-            />
-            <TextField
-              label="Password"
-              type="password"
-              margin="normal"
-              variant="outlined"
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#7B809A', // Silver outline for text field
-                },
-                '& input': {
-                  height: '15px', // Adjust the height as needed
-                  width: '100%',
-                  color: '#7B809A', // Adjust the width as needed
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#7B809A', // Set the color of the label
-                },
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-              }}
-            />
-            <Button
-              variant="text"
-              color="primary"
-              sx={{
-                width: '100%', // Make the button take the full width
-                marginLeft: '30%', // Move the button to the right
-                marginRight: '0', // No margin on the right side
-                textTransform: 'none', // Disable capitalization of the button text
-                color: '#1A73E8', // Fill color for the button text
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-              }}
-            >
-              Forgot Password
-            </Button>
-            <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
-              login
-            </Button>
+            {/* Use the LoginForm component */}
+            <LoginForm />
+            
+           
           </Paper>
         </Container>
       </Box>

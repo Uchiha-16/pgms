@@ -5,6 +5,7 @@ import Dashboard from './layouts/dashboard';
 import AddUser from './layouts/addUsers';
 import Login from './layouts/login';
 import Users from './layouts/users';
+import Demo from './layouts/demo';
 
 function App() {
   return (

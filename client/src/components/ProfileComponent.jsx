@@ -68,7 +68,7 @@ function Profile() {
 
 
   const editButtonStyle = {
-    marginTop: '5px', // Add some space between the detail pairs and the button
+    marginLeft: '500px', 
     fontSize: '0.8rem',
     backgroundColor: '#2196F3', // Set the background color
     color: '#fff', // Set the text color

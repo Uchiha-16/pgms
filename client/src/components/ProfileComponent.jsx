@@ -8,10 +8,10 @@ function Profile() {
     <Paper elevation={3} style={{ padding: '10px', margin: '120px' }}>
       <Avatar alt="Profile Photo" src={profile} sx={{ width: 150, height: 150, position: 'absolute', top: '150px'}} />
       <Typography variant="h5" style={{ textAlign: 'center', marginBottom: '20px' }}>Dr. D A S Athukorala</Typography>
-      <Typography variant="body2">Frontend Developer</Typography>
+      <Typography variant="body2">B.Sc. (Col), Ph.D. (Queensland), MIEEE, MCSSL</Typography>
       <div style={{ textAlign: 'left', padding: '10px' }}>
         <Typography variant="h6" style={{ marginBottom: '20px' }}>Profile Information:</Typography>
-        <Typography variant="body2" style={{ marginBottom: '15px' }}>Position: Frontend Developer</Typography>
+        <Typography variant="body2" style={{ marginBottom: '15px' }}>Position: Director of University of Colombo School of Computing</Typography>
         <Typography variant="body2" style={{ marginBottom: '15px' }}>Full Name: Dr. D A S Athukorala</Typography>
         <Typography variant="body2" style={{ marginBottom: '15px' }}>Mobile: +1234567890</Typography>
         <Typography variant="body2" style={{ marginBottom: '15px' }}>Email: example@example.com</Typography>

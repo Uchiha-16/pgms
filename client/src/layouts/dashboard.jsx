@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
-import { Box, Grid } from '@mui/material/';
+import { Box, Grid, Typography } from '@mui/material/';
 import FooterComponent from '../components/FooterComponent';
+import CalendarComponent from '../components/CalendarComponent';
 
 class dashboard extends Component {
     render() {
@@ -17,12 +18,64 @@ class dashboard extends Component {
                         gridTemplateRows: '16.5% auto 10%',
                         height: '100vh',
                     }}>
+                        {/*============================== Header ==============================*/}
                         <Grid item>
                             <HeaderComponent />
                         </Grid>
-                        <Grid item>
-                            {/* content */}
+                        {/*=============================== Main ===============================*/}
+                        <Grid item sx={{
+                            display: 'grid',
+                            gridTemplateColumns: '75% 25%',
+                            marginBottom: 5,
+                        }}>
+                            {/*========== Content ==========*/}
+                            <Grid item>
+                                {/* content */}
+                            </Grid>
+                            {/*======= Right Sidebar =======*/}
+                            <Grid item sx={{
+                                borderRadius: '8px',
+                                background: 'white',
+                                boxShadow: '0px 3.720207452774048px 11px 0px rgba(0, 0, 0, 0.12)',
+                                display: 'grid',
+                                gridTemplateRows: 'auto auto auto',
+                            }}>
+                                {/* Head */}
+                                <Grid item sx={{
+                                    display: 'flex',
+                                    justifyContent : 'end',
+                                    alignItems: 'center',
+                                    marginRight: 3,
+                                    marginLeft: 3,
+                                    borderBottom: '1px solid #E0E0E0',
+                                }}>
+                                    <Typography variant='caption' sx={{
+                                        fontWeight: 'bold',
+                                        textTransform: 'uppercase',
+                                        marginRight: 3,
+                                        fontSize: '14px',
+                                    }}>
+                                        Ms. Anne Marie
+                                    </Typography>
+                                    <img src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' style={{
+                                        width: '50px',
+                                        height: '50px',
+                                        borderRadius: 8,
+                                    }}/>
+                                </Grid>
+                                {/* Calendar */}
+                                <Grid item sx={{
+                                    borderBottom: '1px solid #E0E0E0',
+                                }}>
+                                    <CalendarComponent />
+                                </Grid>
+                                {/* Description */}
+                                <Grid item>
+
+                                </Grid>
+                            </Grid>
                         </Grid>
+                        {/*============================== Footer ==============================*/}
                         <Grid item>
                             <FooterComponent />
                         </Grid>

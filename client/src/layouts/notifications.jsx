@@ -43,7 +43,7 @@ class NotificationsPage extends Component {
             <Grid item>
               {/* Content */}
               <Grid container justifyContent="center">
-                <Grid item xs={12} sm={7}>
+                <Grid item xs={12} sm={7} sx={{ mt: -12 }}>
                   <Paper elevation={3} sx={{ p: 2 }}>
                     <Typography
                       variant="h6"

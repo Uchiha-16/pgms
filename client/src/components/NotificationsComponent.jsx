@@ -32,7 +32,7 @@ const NotificationsComponent = ({ notifications, handleClose }) => {
             my: 2,
             background: `linear-gradient(45deg, #495361, #747B8A)`, // Switched colors here
             cursor: "pointer",
-            height: '70px',
+            height: "70px",
             borderRadius: "10px",
           }}
           onClick={() => handleNotificationClick(notification)}
@@ -60,7 +60,6 @@ const NotificationsComponent = ({ notifications, handleClose }) => {
                     event.stopPropagation(); // Prevent card click propagation
                     handleClose(notification.id);
                   }}
-                
                   sx={{ color: "white" }}
                 >
                   <CloseIcon fontSize="small" />

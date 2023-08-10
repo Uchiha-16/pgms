@@ -4,6 +4,7 @@ import HeaderComponent from '../components/HeaderComponent';
 import { Box, Grid, Typography } from '@mui/material/';
 import FooterComponent from '../components/FooterComponent';
 import CalendarComponent from '../components/CalendarComponent';
+import CalendarEventComponent from '../components/CalendarEventComponent';
 
 class dashboard extends Component {
     render() {
@@ -15,8 +16,7 @@ class dashboard extends Component {
                     </Grid>
                     <Grid container xs={9.3} sx={{
                         display: 'grid',
-                        gridTemplateRows: '16.5% auto 10%',
-                        height: '100vh',
+                        gridTemplateRows: '22% auto 10%',
                     }}>
                         {/*============================== Header ==============================*/}
                         <Grid item>
@@ -26,7 +26,7 @@ class dashboard extends Component {
                         <Grid item sx={{
                             display: 'grid',
                             gridTemplateColumns: '75% 25%',
-                            marginBottom: 5,
+                            marginBottom: 10,
                         }}>
                             {/*========== Content ==========*/}
                             <Grid item>
@@ -38,7 +38,8 @@ class dashboard extends Component {
                                 background: 'white',
                                 boxShadow: '0px 3.720207452774048px 11px 0px rgba(0, 0, 0, 0.12)',
                                 display: 'grid',
-                                gridTemplateRows: 'auto auto auto',
+                                gridTemplateRows: '20% 55% auto',
+                                height: 'auto',
                             }}>
                                 {/* Head */}
                                 <Grid item sx={{
@@ -71,7 +72,7 @@ class dashboard extends Component {
                                 </Grid>
                                 {/* Description */}
                                 <Grid item>
-
+                                    <CalendarEventComponent />
                                 </Grid>
                             </Grid>
                         </Grid>

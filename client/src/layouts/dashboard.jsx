@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { Box, Grid, Typography } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
-import { Box, Grid, Typography } from '@mui/material/';
 import FooterComponent from '../components/FooterComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import CalendarEventComponent from '../components/CalendarEventComponent';
+import DashboardCard from '../components/DashboardCardComponent';
+import ProgramsIcon from '../assets/icons/programs.png';
+import StaffIcon from '../assets/icons/staff.png';
+import UsersIcon from '../assets/icons/users.png';
 
 class dashboard extends Component {
     render() {
@@ -30,7 +34,38 @@ class dashboard extends Component {
                         }}>
                             {/*========== Content ==========*/}
                             <Grid item>
-                                {/* content */}
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12} md={6} lg={3}>
+                                        <Box mb={1.5} sx={{
+                                            borderRadius: '7px',
+                                            boxShadow: '0px 13px 20px -7px rgba(0, 0, 0, 0.15)'
+                                        }}>
+                                            <DashboardCard
+                                                icon={UsersIcon}
+                                                title="Users"
+                                                count="30"
+                                            />
+                                        </Box>
+                                    </Grid>
+                                    <Grid item xs={12} md={6} lg={3}>
+                                        <Box mb={1.5}>
+                                            <DashboardCard
+                                                icon={ProgramsIcon}
+                                                title="Programs"
+                                                count="4"
+                                            />
+                                        </Box>
+                                    </Grid>
+                                    <Grid item xs={12} md={6} lg={3}>
+                                        <Box mb={1.5}>
+                                            <DashboardCard
+                                                icon={StaffIcon}
+                                                title="Staff"
+                                                count="37"
+                                            />
+                                        </Box>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                             {/*======= Right Sidebar =======*/}
                             <Grid item sx={{
@@ -38,9 +73,10 @@ class dashboard extends Component {
                                 background: 'white',
                                 boxShadow: '0px 3.720207452774048px 11px 0px rgba(0, 0, 0, 0.12)',
                                 display: 'grid',
-                                gridTemplateRows: '20% 55% auto',
+                                gridTemplateRows: '100px 280px auto',
                                 height: 'auto',
                             }}>
+
                                 {/* Head */}
                                 <Grid item sx={{
                                     display: 'flex',
@@ -64,15 +100,28 @@ class dashboard extends Component {
                                         borderRadius: 8,
                                     }}/>
                                 </Grid>
+
                                 {/* Calendar */}
-                                <Grid item sx={{
-                                    borderBottom: '1px solid #E0E0E0',
-                                }}>
+                                <Grid item>
                                     <CalendarComponent />
                                 </Grid>
+
                                 {/* Description */}
-                                <Grid item>
-                                    <CalendarEventComponent />
+                                <Grid item sx={{
+                                    borderTop: '1px solid #E0E0E0',
+                                    marginLeft: 3,
+                                    marginRight: 3,
+                                }}>
+                                    <CalendarEventComponent 
+                                        date="Wednesday, 23 August 2023"
+                                        time="10.45 AM"
+                                        description="Modelling and Simulation of Data"
+                                    />
+                                    <CalendarEventComponent 
+                                        date="Wednesday, 23 August 2023"
+                                        time="01.30 PM"
+                                        description="Individual Research Project Practical"
+                                    />
                                 </Grid>
                             </Grid>
                         </Grid>

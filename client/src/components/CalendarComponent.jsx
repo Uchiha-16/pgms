@@ -47,7 +47,10 @@ export default function DateCalendarFormProps() {
                         '& .MuiPickersCalendarHeader-root': {
                             paddingLeft: '42px',
                             paddingRight: '32px'
-                        }
+                        },
+                        '& .MuiPickersDay-root[data-mui-test=23]': {
+                            backgroundColor: 'yellow', // Change this color as needed
+                        },
                     }}/>
                 </DemoItem>
             </DemoContainer>

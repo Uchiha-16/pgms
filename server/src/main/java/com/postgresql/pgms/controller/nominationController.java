@@ -1,19 +1,19 @@
 package com.postgresql.pgms.controller;
 
-import com.postgresql.pgms.model.nomination;
-import com.postgresql.pgms.repo.NominationRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.postgresql.pgms.DTO.NominationSaveDTO;
+
+import com.postgresql.pgms.Service.nominationService;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/nomination")
+@RequestMapping("/api/nominations")
 public class nominationController {
-    @Autowired
-    NominationRepo repo;
+    private nominationService nominationService;
 
-    @PostMapping("/addNomination")
-    public void addLecturer(@RequestBody nomination nomination){
-        repo.save(nomination);
+    @PostMapping(path = "/addNominations")
+    public String saveNomination(@RequestBody NominationSaveDTO nominationSaveDTO){
+        String id=nominationService.addNomination(nominationSaveDTO);
+        return id;
     }
 }

@@ -13,7 +13,7 @@ public class ProgramIntake {
 
     @ManyToOne
     @JoinColumn(name = "programID")
-    private Program program; // Foreign key referencing Program table
+    private com.postgresql.pgms.model.program program; // Foreign key referencing Program table
 
     @ManyToOne
     @JoinColumn(name = "intakeID")
@@ -22,7 +22,7 @@ public class ProgramIntake {
     public ProgramIntake() {
     }
 
-    public ProgramIntake(Program program, Intake intake) {
+    public ProgramIntake(com.postgresql.pgms.model.program program, Intake intake) {
         this.program = program;
         this.intake = intake;
     }

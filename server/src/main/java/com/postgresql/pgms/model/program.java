@@ -6,17 +6,17 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "Program")
-public class Program {
+public class program {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long programID;
 
     private String name;
 
-    public Program() {
+    public program() {
     }
 
-    public Program(String name) {
+    public program(String name) {
         this.name = name;
     }
 }

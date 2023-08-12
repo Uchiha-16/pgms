@@ -3,6 +3,7 @@ import HeaderComponent from '../components/HeaderComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import { Box, Grid } from '@mui/material/';
 import NominationsTable from '../components/NominationsTable';
+import NominationComponent from '../components/NominationComponent';
 
 class addUser extends Component {
     render() {
@@ -33,7 +34,7 @@ class addUser extends Component {
                         <Grid item>
                             {/* content */}
                             <Grid item xs={12}>
-                                {/* <NominationComponent /> */}
+                                <NominationComponent />
                                 <NominationsTable columns={nominationsColumns} data={nominationsData} />
                             </Grid>
                         </Grid>

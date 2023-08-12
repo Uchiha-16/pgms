@@ -7,6 +7,7 @@ import com.postgresql.pgms.repo.NominationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +16,17 @@ public class nominationServiceIMPL implements nominationService{
     @Autowired
     private NominationRepo nominationRepo;
     @Override
-    public String addNomination(NominationSaveDTO nominationSaveDTO) {
+    public long addNomination(NominationSaveDTO nominationSaveDTO) {
         nomination nomination = new nomination(
                 nominationSaveDTO.getUserID(),
-                nominationSaveDTO.getProgramName(),
+                nominationSaveDTO.getProgramId(),
                 nominationSaveDTO.getSemester(),
-                nominationSaveDTO.getCourseName()
+                nominationSaveDTO.getCourseId()
         );
+        nomination.setStatus("Pending");  // Set default status
+        nomination.setDate(LocalDate.now());  // Set current date
         nominationRepo.save(nomination);
-        return nomination.getCourseName();
+        return nomination.getCourseId();
     }
 
     @Override
@@ -32,11 +35,13 @@ public class nominationServiceIMPL implements nominationService{
         List<NominationDTO> nominationDTOList = new ArrayList<>();
         for (nomination a:getNominations){
             NominationDTO nominationDTO = new NominationDTO(
-                    a.getId(),
+                    a.getNominationid(),
                     a.getUserID(),
-                    a.getProgramName(),
+                    a.getProgramId(),
                     a.getSemester(),
-                    a.getCourseName()
+                    a.getCourseId(),
+                    a.getStatus(),
+                    a.getDate()
             );
             nominationDTOList.add(nominationDTO);
         }

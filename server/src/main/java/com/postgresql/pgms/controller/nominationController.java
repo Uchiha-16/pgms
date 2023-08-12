@@ -15,8 +15,8 @@ public class nominationController {
     private nominationService nominationService;
 
     @PostMapping(path = "/apply")
-    public String saveNomination(@RequestBody NominationSaveDTO nominationSaveDTO){
-        String id=nominationService.addNomination(nominationSaveDTO);
+    public long saveNomination(@RequestBody NominationSaveDTO nominationSaveDTO){
+        long id=nominationService.addNomination(nominationSaveDTO);
         return id;
     }
 

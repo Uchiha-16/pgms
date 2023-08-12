@@ -1,29 +1,35 @@
 package com.postgresql.pgms.DTO;
 
+import java.time.LocalDate;
+
 public class NominationDTO {
-    private long id;
+    private long nominationid;
     private long userID;
-    private String programName;
+    private long programId;
     private String semester;
-    private String courseName;
+    private long courseId;
+    private String status;
+    private LocalDate date;
 
     public NominationDTO() {
     }
 
-    public NominationDTO(long id, long userID, String programName, String semester, String courseName) {
-        this.id = id;
+    public NominationDTO(long nominationid, long userID, long programId, String semester, long courseId, String status, LocalDate date) {
+        this.nominationid = nominationid;
         this.userID = userID;
-        this.programName = programName;
+        this.programId = programId;
         this.semester = semester;
-        this.courseName = courseName;
+        this.courseId = courseId;
+        this.status = status;
+        this.date = date;
     }
 
-    public long getId() {
-        return id;
+    public long getNominationid() {
+        return nominationid;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setNominationid(long nominationid) {
+        this.nominationid = nominationid;
     }
 
     public long getUserID() {
@@ -34,12 +40,12 @@ public class NominationDTO {
         this.userID = userID;
     }
 
-    public String getProgramName() {
-        return programName;
+    public long getProgramId() {
+        return programId;
     }
 
-    public void setProgramName(String programName) {
-        this.programName = programName;
+    public void setProgramId(long programId) {
+        this.programId = programId;
     }
 
     public String getSemester() {
@@ -50,11 +56,27 @@ public class NominationDTO {
         this.semester = semester;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public long getCourseId() {
+        return courseId;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

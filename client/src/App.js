@@ -7,7 +7,6 @@ import Login from './layouts/login';
 import Users from './layouts/users';
 import AddNominations from './layouts/addNominations';
 import Profile from './layouts/profile';
-import Notifications from './layouts/notifications';
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
           <Route path="/users" element={<Users/>} />
           <Route path="/" element={<Login/>} />
           <Route path="/profile" element={<Profile/>} />
-          <Route path="/notifications" element={<Notifications/>} />
         </Routes>
       </div>
     </Router>

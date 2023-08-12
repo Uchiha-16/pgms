@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { useEffect, useState } from "react"
+import axios from "axios";
 import { Box, Grid, Typography } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
@@ -6,9 +8,35 @@ import FooterComponent from '../components/FooterComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import CalendarEventComponent from '../components/CalendarEventComponent';
 import DashboardCard from '../components/DashboardCardComponent';
+import GeneralDashboardTable from '../components/GeneralDashboardTable';
 import ProgramsIcon from '../assets/icons/programs.png';
 import StaffIcon from '../assets/icons/staff.png';
 import UsersIcon from '../assets/icons/users.png';
+
+// const users_URL = "http://localhost:8080/api/users/getUsers"
+
+const Layout1 = () => {
+    const [users, setUsers] = useState([]);
+    
+
+    // useEffect(() => {
+    //     axios.get(users_URL)
+    //         .then(res => {
+    //             console.log(res)
+    //             setUsers(res.data);
+    //         });
+    // }, []);
+
+    const columns = ['TIME', 'COURSE', 'STATUS'];
+    const data = [
+        {TIME: '12-08-2023', COURSE: 'AAA', STATUS: 'ONLINE'},
+        {TIME: '12-08-2023', COURSE: 'AAA', STATUS: 'ONLINE'},
+    ];
+
+    return (
+        <GeneralDashboardTable columns={columns} data={data} />
+    );
+};
 
 class dashboard extends Component {
     render() {
@@ -20,7 +48,7 @@ class dashboard extends Component {
                     </Grid>
                     <Grid container xs={9.3} sx={{
                         display: 'grid',
-                        gridTemplateRows: '22% auto 10%',
+                        gridTemplateRows: '19.2% auto 10%',
                     }}>
                         {/*============================== Header ==============================*/}
                         <Grid item>
@@ -31,10 +59,14 @@ class dashboard extends Component {
                             display: 'grid',
                             gridTemplateColumns: '75% 25%',
                             marginBottom: 10,
+                            marginLeft: '24px'
                         }}>
-                            {/*========== Content ==========*/}
+                            {/*========== Center ==========*/}
                             <Grid item>
-                                <Grid container spacing={3}>
+                                {/* cards */}
+                                <Grid container spacing={3} sx={{
+                                    gridColumnGap: '5.9rem'
+                                }}>
                                     <Grid item xs={12} md={6} lg={3}>
                                         <Box mb={1.5} sx={{
                                             borderRadius: '7px',
@@ -65,6 +97,12 @@ class dashboard extends Component {
                                             />
                                         </Box>
                                     </Grid>
+                                </Grid>
+                                {/* tables */}
+                                <Grid sx={{
+                                    marginTop: 5
+                                }}>
+                                    <Layout1 />
                                 </Grid>
                             </Grid>
                             {/*======= Right Sidebar =======*/}

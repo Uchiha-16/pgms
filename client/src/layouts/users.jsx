@@ -5,22 +5,19 @@ import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
 import { useEffect, useState } from "react"
-import useAxiosMethods from '../hooks/useAxiosMethods';
+import axios from "axios";
 
-const users_URL = "/demo-controller/users"
+const users_URL = "http://localhost:8080/api/users/getUsers"
 
 const Layout1 = () => {
     const [users, setUsers] = useState([]);
-    const {get} = useAxiosMethods();
     
     useEffect(() => {
-        
-            try {
-                get(users_URL, setUsers);
-
-            } catch (error) {
-                console.log(error)
-            }
+        axios.get(users_URL)
+            .then(res => {
+                console.log(res)
+                setUsers(res.data);
+            });
     }, []);
 
     const columns = ['NAME', 'ROLE', 'STATUS', 'EMAIL', 'ACTION'];

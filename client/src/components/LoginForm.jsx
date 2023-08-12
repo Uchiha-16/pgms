@@ -1,27 +1,9 @@
-import  { useEffect,  useState } from 'react';
+import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
-import { useNavigate, useLocation } from 'react-router-dom';
-import axios from '../api/axios';
-import useAuth from '../hooks/useAuth'
-
-const LOGIN_URL = '/auth/authenticate';
 
 const LoginForm = () => {
-  const { setAuth } = useAuth();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errMsg, setErrMsg] = useState('');
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from || {pathname: "/dashboard"} // direct to the page happen here
-
-  useEffect(()=>{
-    setErrMsg('');
-  },[email,password])
-
-
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -31,42 +13,13 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleLoginFormSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
-    try{
-        const response = await axios.post(LOGIN_URL,
-            JSON.stringify({email:email,password: password}),
-            {
-                headers: {'Content-Type': 'application/json'},
-                withCredentials: true
-            }
-        );
-        console.log(JSON.stringify(response?.data), "from loginForm.jsx");
-        setAuth(response?.data)
-
-        
-        setEmail('');
-        setPassword('');
-        navigate(from, {replace: true});  //navigate happen here
-
-    } catch(err){
-        if (!err?.response) {
-            setErrMsg('No Server Response');
-        } else if (err.response?.status === 400) {
-            setErrMsg('Missing Username or Password');
-        } else if (err.response?.status === 403) {
-            setErrMsg('Unauthorized');
-        } else {
-            setErrMsg('Login Failed');
-        }
-
-    }
-    }
-
+    // Handle form submission logic here (e.g., login request)
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleLoginFormSubmit}>
       <TextField
         label="Email"
         type="email"

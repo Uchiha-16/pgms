@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,16 +19,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import logo from "../assets/images/logo.png";
-import useAxiosMethods from '../hooks/useAxiosMethods';
 
 
 const drawerWidth = 270;
 
 export default function NavbarComponent() {
-
-    const {post} = useAxiosMethods();
-    const { setAuth } = useAuth();
-    const navigate = useNavigate();
 
     const [page, setPage] = useState("Dashboard");
     useEffect(() => {
@@ -38,17 +32,6 @@ export default function NavbarComponent() {
         const capitalizedRouteName = routeName.charAt(0).toUpperCase() + routeName.slice(1);
         setPage(capitalizedRouteName);
     }, []);
-
-    const logout = async () => {
-        try{
-            post('auth/logout', null, setAuth);
-            console.log('logouted!!!');
-
-        }catch(err){
-            console.error(err);
-        }
-        
-    }
 
     return (
         <Box sx={{ 
@@ -134,7 +117,7 @@ export default function NavbarComponent() {
                             { text: 'Nominations', path: '/nominations', icon: <GroupAddIcon /> },
                             { text: 'Notifications', path: '/notifications', icon: <NotificationsIcon /> },
                             { text: 'Profile', path: '/profile', icon: <PersonIcon /> },
-                            { text: 'Logout', path: '/', icon: <LogoutIcon /> },
+                            { text: 'Logout', path: '/logout', icon: <LogoutIcon /> },
                         ].map((text, index) => (
                             <ListItem 
                             key={text} 
@@ -152,7 +135,7 @@ export default function NavbarComponent() {
                                 }
                             }}
                             >
-                                <ListItemButton component={Link} to={text.path} onClick={text.text==='Logout' ? logout: ()=>{}}>
+                                <ListItemButton component={Link} to={text.path}>
                                     <ListItemIcon sx={{color: 'white'}}>
                                         {text.icon}
                                     </ListItemIcon>

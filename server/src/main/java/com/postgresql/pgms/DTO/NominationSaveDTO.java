@@ -1,50 +1,50 @@
 package com.postgresql.pgms.DTO;
 
 public class NominationSaveDTO {
-        private long courseId;
-        private String courseName;
-        private String description;
-        private Boolean status;
+    private long userID;
+    private String programName;
+    private String semester;
+    private String courseName;
 
-        public NominationSaveDTO() {
-        }
+    public NominationSaveDTO() {
+    }
 
-        public NominationSaveDTO(long courseId, String courseName, String description, Boolean status) {
-            this.courseId = courseId;
-            this.courseName = courseName;
-            this.description = description;
-            this.status = status;
-        }
+    public NominationSaveDTO(long userID, String programName, String semester, String courseName) {
+        this.userID = userID;
+        this.programName = programName;
+        this.semester = semester;
+        this.courseName = courseName;
+    }
 
-        public long getCourseId() {
-            return courseId;
-        }
+    public long getUserID() {
+        return userID;
+    }
 
-        public void setCourseId(long courseId) {
-            this.courseId = courseId;
-        }
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
 
-        public String getCourseName() {
-            return courseName;
-        }
+    public String getProgramName() {
+        return programName;
+    }
 
-        public void setCourseName(String courseName) {
-            this.courseName = courseName;
-        }
+    public void setProgramName(String programName) {
+        this.programName = programName;
+    }
 
-        public String getDescription() {
-            return description;
-        }
+    public String getSemester() {
+        return semester;
+    }
 
-        public void setDescription(String description) {
-            this.description = description;
-        }
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
 
-        public Boolean getStatus() {
-            return status;
-        }
+    public String getCourseName() {
+        return courseName;
+    }
 
-        public void setStatus(Boolean status) {
-            this.status = status;
-        }
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 }

@@ -4,31 +4,33 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table (name = "nomination")
+@Table (name = "Nomination")
 public class nomination {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private long courseId;
+    private long userID;
+    private String programName;
+    private String semester;
     private String courseName;
-    private String description;
-    private Boolean status;
+
+    //date and status to be added
 
     public nomination() {
     }
 
-    public nomination(long id, long courseId, String courseName, String description, Boolean status) {
+    public nomination(long id, long userID, String programName, String semester, String courseName) {
         this.id = id;
-        this.courseId = courseId;
+        this.userID = userID;
+        this.programName = programName;
+        this.semester = semester;
         this.courseName = courseName;
-        this.description = description;
-        this.status = status;
     }
 
-    public nomination(long courseId, String courseName, String description, Boolean status) {
-        this.courseId = courseId;
+    public nomination(long userID, String programName, String semester, String courseName) {
+        this.userID = userID;
+        this.programName = programName;
+        this.semester = semester;
         this.courseName = courseName;
-        this.description = description;
-        this.status = status;
     }
 }

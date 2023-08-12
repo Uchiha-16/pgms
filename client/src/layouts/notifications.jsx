@@ -4,28 +4,54 @@ import HeaderComponent from "../components/HeaderComponent";
 import NavbarComponent from "../components/NavbarComponent";
 import { Box, Grid, Paper, Typography } from "@mui/material/";
 
-class NotificationsPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notifications: [
-        { id: 1, message: "Dummy notification 1", open: true },
-        { id: 2, message: "Dummy notification 2", open: true },
-        { id: 3, message: "Dummy notification 3", open: true },
-        { id: 4, message: "Dummy notification 4", open: true },
-        { id: 5, message: "Dummy notification 5", open: true },
-      ], // Initialize an array of dummy notifications
-    };
-  }
+const table = () => {
+  const [users, setUsers] = useState([]);
+  const {get} = useAxiosMethods();
+  
+  useEffect(() => {
+      
+          try {
+              get(users_URL, setUsers);
 
-  handleCloseNotification = (id) => {
-    const updatedNotifications = this.state.notifications.map((notification) =>
-      notification.id === id ? { ...notification, open: false } : notification
-    );
+          } catch (error) {
+              console.log(error)
+          }
+  }, []);
 
-    this.setState({ notifications: updatedNotifications });
-  };
+  const columns = ['NAME', 'ROLE', 'STATUS', 'EMAIL', 'ACTION'];
+  const data = users.map(user => ({
+      NAME: `${user.firstName} ${user.lastName}`,
+      ROLE: user.role,
+      STATUS: 'ONLINE', // Assuming you want to display a static status for all users
+      EMAIL: user.email,
+      ACTION: 'Edit',
+  }));
 
+  return (
+      <GeneralTable columns={columns} data={data} />
+  );
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     notifications: [
+  //       { id: 1, message: "Dummy notification 1", open: true },
+  //       { id: 2, message: "Dummy notification 2", open: true },
+  //       { id: 3, message: "Dummy notification 3", open: true },
+  //       { id: 4, message: "Dummy notification 4", open: true },
+  //       { id: 5, message: "Dummy notification 5", open: true },
+  //     ], // Initialize an array of dummy notifications
+  //   };
+  // }
+
+  // handleCloseNotification = (id) => {
+  //   const updatedNotifications = this.state.notifications.map((notification) =>
+  //     notification.id === id ? { ...notification, open: false } : notification
+  //   );
+
+  //   this.setState({ notifications: updatedNotifications });
+  // };
+}
+  class NotificationsPage extends Component {
   render() {
     return (
       <Box>

@@ -91,8 +91,8 @@ console.log("Course Value:", formData.course);
             <Button onClick={functionOpenPopup} color="primary" variant="contained"
             sx={{
               position: 'absolute', // Position absolutely
-              top: '80px', // Place it at the top
-              right: 0, // Place it on the left
+              top: '90px', // Place it at the top
+              right: '20px', // Place it on the left
               margin: '16px', // Add margin for spacing
             }}
             >Apply for a Course

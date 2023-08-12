@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import user from '../assets/images/user.png';
 import TablePagination from '@mui/material/TablePagination';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -59,14 +60,16 @@ const NominationsTable = ({ columns, data }) => {
                 color: '#FFFFFF',
                 paddingRight: '20px',
                 paddingLeft: '20px',
-                width: '97%',
+                width: '72%',
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                position: 'relative',
+                position: 'absolute',
+                top: 200,
+                left: 355,
                 zIndex: 1,
             }}>
                 <h3>Nominations</h3>
-                {/* <AddCircleIcon sx={{
+                <AddCircleIcon sx={{
                     marginLeft: 'auto',
                     marginTop: 'auto',
                     marginBottom: 'auto',
@@ -78,8 +81,17 @@ const NominationsTable = ({ columns, data }) => {
                     ":hover": {
                         transform: 'rotate(90deg)'
                     }
-                }} /> */}
+                }} />
             </div>
+
+{/* Table */}
+            <TableContainer component={Paper} sx={{
+                backgroundColor: '#FFFFFF',
+                position: 'relative',
+                top: -100,
+                zIndex: 0,
+                paddingTop: 8,
+            }}>
 
             {/* Toggle buttons */}
             <ToggleButtonGroup
@@ -104,10 +116,6 @@ const NominationsTable = ({ columns, data }) => {
                     fontFamily: 'Inter',
                     borderRight: '1px solid rgba(0, 0, 0, 0.1)',
                     transition: '0.3s',
-                    backgroundColor: '#66BB6A',
-                    "&.Mui-selected": {
-                        backgroundColor: '#66BB6A',
-                    }
                 }}>
                     Accepted
                 </ToggleButton>
@@ -116,11 +124,8 @@ const NominationsTable = ({ columns, data }) => {
                     fontSize: 10,
                     color: '#343A40',
                     fontFamily: 'Inter',
+                    borderRight: '1px solid rgba(0, 0, 0, 0.1)',
                     transition: '0.3s',
-                    backgroundColor: '#EF5350',
-                    "&.Mui-selected": {
-                        backgroundColor: '#EF5350',
-                    }
                 }}>
                     Rejected
                 </ToggleButton>
@@ -130,23 +135,12 @@ const NominationsTable = ({ columns, data }) => {
                     color: '#343A40',
                     fontFamily: 'Inter',
                     transition: '0.3s',
-                    backgroundColor: '#FFD54F',
-                    "&.Mui-selected": {
-                        backgroundColor: '#FFD54F',
-                    }
                 }}>
                     Pending
                 </ToggleButton>
             </ToggleButtonGroup>
 
-            {/* Table */}
-            <TableContainer component={Paper} sx={{
-                backgroundColor: '#FFFFFF',
-                position: 'relative',
-                top: -40,
-                zIndex: 0,
-                paddingTop: 8,
-            }}>
+            
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -170,29 +164,65 @@ const NominationsTable = ({ columns, data }) => {
                             <TableRow key={rowIndex}>
                                 {columns.map((column, colIndex) => (
                                     <TableCell key={`${rowIndex}-${colIndex}`}
-                                        sx={{
-                                            paddingLeft: 3,
-                                            color: '#7B809A',
-                                            fontFamily: 'Roboto',
-                                            fontSize: '12px',
-                                            fontWeight: '700',
-                                            paddingTop: 2.3,
-                                            paddingBottom: 2.3,
-                                        }}>
+                                    sx={{
+                                        paddingLeft: 3,
+                                        color: '#7B809A',
+                                        fontFamily: 'Roboto',
+                                        fontSize: '12px',
+                                        fontWeight: '700',
+                                        paddingTop: 2.3,
+                                        paddingBottom: 2.3,
+                                    }}>
                                         {isAccepted(column, row[column]) ? (
-                                            <CheckCircleIcon sx={{ color: '#66BB6A', fontSize: '14px' }} />
+                                            <div style={{
+                                                background: 'linear-gradient(180deg, #66BB6A 0%, #43A047 100%)',
+                                                borderRadius: 50,
+                                                color: '#FFF',
+                                                width: 80,
+                                                fontFamily: 'Roboto',
+                                                fontSize: '12px',
+                                                fontWeight: '900',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                paddingTop: 2,
+                                            }}>{row[column]}</div>
                                         ) : isRejected(column, row[column]) ? (
-                                            <HighlightOffIcon sx={{ color: '#EF5350', fontSize: '14px' }} />
+                                                <div style={{
+                                                    background: 'black',
+                                                    borderRadius: 50,
+                                                    color: '#FFF',
+                                                    width: 80,
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '12px',
+                                                    fontWeight: '900',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    paddingTop: 2,
+                                                }}>{row[column]}</div>
                                         ) : isPending(column, row[column]) ? (
-                                            <PendingIcon sx={{ color: '#FFD54F', fontSize: '14px' }} />
+                                                <div style={{
+                                                    background: 'orange',
+                                                    borderRadius: 50,
+                                                    color: '#FFF',
+                                                    width: 80,
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '12px',
+                                                    fontWeight: '900',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    paddingTop: 2,
+                                                }}>{row[column]}</div>
                                         ) : isFunctionColumn(column) ? (
                                             <div>
                                                 <span>{row[column]}</span><br />
-                                                {/* <span style={{
+                                                <span style={{
                                                     color: '#555',
                                                     fontSize: '9px',
                                                     fontWeight: '400'
-                                                }}>UCSC</span> */}
+                                                }}>UCSC</span>
                                             </div>
                                         ) : isRequestColumn(column) ? (
                                             <div style={{

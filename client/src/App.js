@@ -49,7 +49,7 @@ function App() {
             <Route path='/users' element={<Users/>}/>
             <Route path='/profile' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
-
+            <Route path='/notifications' element={<Notifications />} />
             
 
 

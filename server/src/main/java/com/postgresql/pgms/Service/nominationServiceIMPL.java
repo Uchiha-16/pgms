@@ -11,12 +11,12 @@ public class nominationServiceIMPL implements nominationService{
     @Autowired
     private NominationRepo nominationRepo;
     @Override
-    public String addNomination(NominationSaveDTO nominationDTO) {
+    public String addNomination(NominationSaveDTO nominationSaveDTO) {
         nomination nomination = new nomination(
-            nominationDTO.getCourseId(),
-            nominationDTO.getCourseName(),
-            nominationDTO.getDescription(),
-            nominationDTO.getStatus()
+                nominationSaveDTO.getUserID(),
+                nominationSaveDTO.getProgramName(),
+                nominationSaveDTO.getSemester(),
+                nominationSaveDTO.getCourseName()
         );
         nominationRepo.save(nomination);
         return nomination.getCourseName();

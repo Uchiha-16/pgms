@@ -1,7 +1,6 @@
 package com.postgresql.pgms.controller;
 
 import com.postgresql.pgms.DTO.NominationSaveDTO;
-
 import com.postgresql.pgms.Service.nominationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class nominationController {
     private nominationService nominationService;
 
-    @PostMapping(path = "/addNominations")
+    @PostMapping(path = "/apply")
     public String saveNomination(@RequestBody NominationSaveDTO nominationSaveDTO){
         String id=nominationService.addNomination(nominationSaveDTO);
         return id;

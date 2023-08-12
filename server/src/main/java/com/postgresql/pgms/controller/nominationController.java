@@ -3,7 +3,6 @@ package com.postgresql.pgms.controller;
 import com.postgresql.pgms.DTO.NominationDTO;
 import com.postgresql.pgms.DTO.NominationSaveDTO;
 import com.postgresql.pgms.Service.nominationService;
-import com.postgresql.pgms.model.users;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

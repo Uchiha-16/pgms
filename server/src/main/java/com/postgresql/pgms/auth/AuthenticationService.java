@@ -131,7 +131,7 @@ public class AuthenticationService {
 //            return;
 //        }
 //        refreshToken=authHeader.substring(7);
-        userEmail = jwtService.extractUsername(refreshToken);
+        userEmail = jwtService.extractEmail(refreshToken);
         if (userEmail != null){
             var user = this.repository.findByEmail(userEmail).orElseThrow();
 
@@ -178,7 +178,7 @@ public class AuthenticationService {
         }
 
         jwt = authHeader.substring(7);
-        var email = jwtService.extractUsername(jwt);
+        var email = jwtService.extractEmail(jwt);
         var user = this.userRepository.findByEmail(email).orElseThrow();
 
         revokeAllUserTokens(user);

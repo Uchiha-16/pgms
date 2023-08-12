@@ -7,7 +7,7 @@ import { Box, Grid } from '@mui/material/';
 import { useEffect, useState } from "react"
 import useAxiosMethods from '../hooks/useAxiosMethods';
 
-const users_URL = "/demo-controller/users"
+const users_URL = "/Users/getUsers"
 
 const Layout1 = () => {
     const [users, setUsers] = useState([]);

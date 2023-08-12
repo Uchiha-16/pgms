@@ -12,7 +12,6 @@
 ### `npm install @mui/x-date-pickers @mui/material dayjs`
 
 
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

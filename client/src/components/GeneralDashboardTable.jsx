@@ -1,44 +1,69 @@
-import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import user from '../assets/images/user.png';
-import TableHeaderComponent from './TableHeaderComponent';
+import React from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Button, Box } from '@mui/material';
+import DoneIcon from '@mui/icons-material/Done';
+import ProgressbarComponent from './ProgressbarComponent';
+import VoucherSummaryComponent from './VoucherSummaryComponent';
 
+const GeneralDashboardTable = ({ columns, data, done, btn }) => {
 
-const GeneralDashboardTable = ({ columns, data }) => {
-
-    const [alignment, setAlignment] = React.useState('');
-
-    const handleChange = (event, newAlignment) => {
-        setAlignment(newAlignment);
+    const isChecked = (columnName, cellValue) => {
+        return columnName === 'STATUS' && cellValue === 1;
     };
 
-    const isOnline = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'ONLINE';
+    const isUnchecked = (columnName, cellValue) => {
+        return columnName === 'STATUS' && cellValue === 0;
     };
 
-    const isOffline = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'OFFLINE';
-    };
-
-    const isFunctionColumn = (columnName) => {
-        return columnName === 'FUNCTION';
-    };
-
-    const isNameColumn = (columnName) => {
-        return columnName === 'NAME';
-    };
+    const isPercentage = (columnName, cellValue) => {
+        return columnName === 'Completion' && cellValue.includes('%');
+    }
 
     return (
         <>
-            <TableHeaderComponent left={'Todays Schedule'} right={'Sat 12th Aug, 2023'}/>
             <TableContainer component={Paper} sx={{
                 backgroundColor: '#FFFFFF',
                 position: 'relative',
                 top: -40,
                 zIndex: 0,
-                paddingTop: 8,
-                width: '52.3rem'
+                paddingTop: 5,
+                width: '52.3rem',
+                boxShadow: '0px 13px 20px -7px rgba(0, 0, 0, 0.15)',
+                overflow: 'hidden',
             }}>
+                {done === 1 && btn === 1 ? (
+                    <><Box sx={{
+                        display: 'flex',
+                        paddingRight: '18px',
+                        paddingLeft: '22px',
+                        margin: 0,
+                        alignItems: 'center',
+                        paddingTop: '10px',
+                        }}>
+                        <div style={{
+                            width: '50%',
+                            textAlign: 'left',
+                            color: '#898989',
+                            display: 'flex',
+                            alignItems: 'center',
+                            }}>
+                            <DoneIcon sx={{ color: '#4CAF50' }}/><p><b>03 done</b> this month</p>
+                        </div>
+                        <div style={{
+                            width: '50%',
+                            textAlign: 'right',
+                            }}>
+                            <Button sx={{
+                                borderRadius: '11px',
+                                border: '1px solid #1A73E8',
+                                color: '#1A73E8',
+                                fontFamily: 'Inter',
+                                fontWeight: 700,
+                                fontSize: '12px',
+                                padding: '2px 20px',
+                            }}>View More</Button>
+                        </div>
+                    </Box></>
+                ) : ( '' )}
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -64,75 +89,32 @@ const GeneralDashboardTable = ({ columns, data }) => {
                                     <TableCell key={`${rowIndex}-${colIndex}`}
                                         sx={{
                                             paddingLeft: 3,
-                                            color: '#7B809A',
+                                            color: '#000',
                                             fontFamily: 'Roboto',
-                                            fontSize: '12px',
-                                            fontWeight: '700',
+                                            fontSize: '13px',
+                                            fontWeight: '500',
                                             paddingTop: 2.3,
                                             paddingBottom: 2.3,
                                         }}>
-                                        {isOnline(column, row[column]) ? (
-                                            <div style={{
-                                                background: 'linear-gradient(180deg, #66BB6A 0%, #43A047 100%)',
-                                                borderRadius: 50,
-                                                color: '#FFF',
-                                                width: 80,
-                                                fontFamily: 'Roboto',
-                                                fontSize: '12px',
-                                                fontWeight: '900',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                paddingTop: 2,
-                                            }}>{row[column]}</div>
-                                        ) : isOffline(column, row[column]) ? (
-                                            <div style={{
-                                                background: 'black',
-                                                borderRadius: 50,
-                                                color: '#FFF',
-                                                width: 80,
-                                                fontFamily: 'Roboto',
-                                                fontSize: '12px',
-                                                fontWeight: '900',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                paddingTop: 2,
-                                            }}>{row[column]}</div>
-                                        ) : isFunctionColumn(column) ? (
-                                            <div>
-                                                <span>{row[column]}</span><br />
-                                                <span style={{
-                                                    color: '#555',
-                                                    fontSize: '9px',
-                                                    fontWeight: '400'
-                                                }}>UCSC</span>
-                                            </div>
-                                        ) : isNameColumn(column) ? (
-                                            <div style={{
-                                                display: 'flex'
-                                            }}>
-                                                <div style={{
-                                                    marginRight: 10,
-                                                    display: 'flex',
-                                                    alignItems: 'center'
-                                                }}>
-                                                    <img src={user} width={30} height={30} alt="user" />
-                                                </div>
-                                                <div>
-                                                    <span style={{
-                                                        color: '#000',
-                                                        fontSize: '14px',
-                                                        fontWeight: '500'
-                                                    }}>{row[column]}</span>
-                                                    <br />
-                                                    <span style={{
-                                                        color: '#4A4949',
-                                                        fontSize: '10px',
-                                                        fontWeight: '400'
-                                                    }}>john@gmail.com</span>
-                                                </div>
-                                            </div>
+                                        {isChecked(column, row[column]) ? (
+                                            <Checkbox defaultChecked sx={{
+                                                color: '#D9D9D9',
+                                                '&.Mui-checked': {
+                                                    color: '#43A047',
+                                                },
+                                            }} />
+                                        ) : isUnchecked(column, row[column]) ? (
+                                            <Checkbox sx={{
+                                                color: '#D9D9D9',
+                                                '&.Mui-checked': {
+                                                    color: '#43A047',
+                                                },
+                                            }} />
+                                        ) : isPercentage(column, row[column]) ? (
+                                            <><div style={{ display: 'flex', alignItems: 'center' }}>
+                                                <p style={{ color: '#898989' }}>{row[column]}</p>
+                                                <ProgressbarComponent percentage={row[column].replace('%', '')} />
+                                            </div></> 
                                         ) : (
                                             row[column]
                                         )
@@ -143,6 +125,9 @@ const GeneralDashboardTable = ({ columns, data }) => {
                         ))}
                     </TableBody>
                 </Table>
+                {done === 1 && btn === 1 ? (
+                    <VoucherSummaryComponent />
+                ) : ( '' )}
             </TableContainer></>
     );
 };

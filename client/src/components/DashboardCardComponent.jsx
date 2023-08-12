@@ -1,7 +1,3 @@
-
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // @mui material components
 import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
@@ -13,7 +9,7 @@ function DashboardCard({ title, count, icon }) {
         <Box sx={{
             borderRadius: '7px',
             background: '#FFF',
-            boxShadow: '0px 13px 20px - 7px rgba(0, 0, 0, 0.15)',
+            boxShadow: '0px 13px 20px -7px rgba(0, 0, 0, 0.15)',
             marginTop: 2
         }}>
             <Box display="flex" justifyContent="space-between" pt={0.5} px={2}>
@@ -79,47 +75,6 @@ function DashboardCard({ title, count, icon }) {
             </Box>
         </Box>
     );
-}
-
-// Setting default values for the props of DashboardCard
-DashboardCard.defaultProps = {
-    color: "info",
-    percentage: {
-        color: "success",
-        text: "",
-        label: "",
-    },
-};
-
-// Typechecking props for the DashboardCard
-DashboardCard.propTypes = {
-    color: PropTypes.oneOf([
-        "primary",
-        "secondary",
-        "info",
-        "success",
-        "warning",
-        "error",
-        "light",
-        "dark",
-    ]),
-    title: PropTypes.string.isRequired,
-    count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    percentage: PropTypes.shape({
-        color: PropTypes.oneOf([
-            "primary",
-            "secondary",
-            "info",
-            "success",
-            "warning",
-            "error",
-            "dark",
-            "white",
-        ]),
-        amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        label: PropTypes.string,
-    }),
-    icon: PropTypes.node.isRequired,
 };
 
 export default DashboardCard;

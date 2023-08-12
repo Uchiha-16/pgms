@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { useEffect, useState } from "react"
-import axios from "axios";
-import { Box, Grid, Typography } from '@mui/material/';
+import { Box, Grid, Typography, Fade } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
@@ -9,6 +7,7 @@ import CalendarComponent from '../components/CalendarComponent';
 import CalendarEventComponent from '../components/CalendarEventComponent';
 import DashboardCard from '../components/DashboardCardComponent';
 import GeneralDashboardTable from '../components/GeneralDashboardTable';
+import TableHeaderComponent from '../components/TableHeaderComponent';
 import ProgramsIcon from '../assets/icons/programs.png';
 import StaffIcon from '../assets/icons/staff.png';
 import UsersIcon from '../assets/icons/users.png';
@@ -16,7 +15,7 @@ import UsersIcon from '../assets/icons/users.png';
 // const users_URL = "http://localhost:8080/api/users/getUsers"
 
 const Layout1 = () => {
-    const [users, setUsers] = useState([]);
+    // const [users, setUsers] = useState([]);
     
 
     // useEffect(() => {
@@ -29,12 +28,30 @@ const Layout1 = () => {
 
     const columns = ['TIME', 'COURSE', 'STATUS'];
     const data = [
-        {TIME: '12-08-2023', COURSE: 'AAA', STATUS: 'ONLINE'},
-        {TIME: '12-08-2023', COURSE: 'AAA', STATUS: 'ONLINE'},
+        { TIME: '10.45 AM - 12.45 PM', COURSE: 'BA3001 - Modelling and Simulation of Data', STATUS: 1},
+        { TIME: '01.30 PM - 03.30 PM', COURSE: 'MCS3202 - Individual Research Project', STATUS: 0},
     ];
+    const done = 0;
+    const btn = 0;
 
     return (
-        <GeneralDashboardTable columns={columns} data={data} />
+        <GeneralDashboardTable columns={columns} data={data} done={done} btn={btn} />
+    );
+};
+
+const Layout2 = () => {
+
+    const currentMonth = new Date().toLocaleString('default', { month: 'long' });
+
+    const columns = ['Month', 'Completion'];
+    const data = [
+        { Month: currentMonth, Completion: '75%' },
+    ];
+    const done = 1;
+    const btn = 1;
+
+    return (
+        <GeneralDashboardTable columns={columns} data={data} done={done} btn={btn}/>
     );
 };
 
@@ -48,30 +65,27 @@ class dashboard extends Component {
                     </Grid>
                     <Grid container xs={9.3} sx={{
                         display: 'grid',
-                        gridTemplateRows: '19.2% auto 10%',
-                    }}>
+                        gridTemplateRows: '149px auto 10%',
+                        }}>
                         {/*============================== Header ==============================*/}
                         <Grid item>
                             <HeaderComponent />
                         </Grid>
                         {/*=============================== Main ===============================*/}
-                        <Grid item sx={{
+                        <Fade in={true} timeout={1000}><Grid item sx={{
                             display: 'grid',
                             gridTemplateColumns: '75% 25%',
                             marginBottom: 10,
                             marginLeft: '24px'
-                        }}>
+                            }}>
                             {/*========== Center ==========*/}
                             <Grid item>
                                 {/* cards */}
                                 <Grid container spacing={3} sx={{
                                     gridColumnGap: '5.9rem'
-                                }}>
+                                    }}>
                                     <Grid item xs={12} md={6} lg={3}>
-                                        <Box mb={1.5} sx={{
-                                            borderRadius: '7px',
-                                            boxShadow: '0px 13px 20px -7px rgba(0, 0, 0, 0.15)'
-                                        }}>
+                                        <Box mb={1.5}>
                                             <DashboardCard
                                                 icon={UsersIcon}
                                                 title="Users"
@@ -99,10 +113,13 @@ class dashboard extends Component {
                                     </Grid>
                                 </Grid>
                                 {/* tables */}
-                                <Grid sx={{
-                                    marginTop: 5
-                                }}>
+                                <Grid sx={{ marginTop: 5 }}>
+                                    <TableHeaderComponent left={'Todays Schedule'} right={'Sat 12th Aug, 2023'} />
                                     <Layout1 />
+                                </Grid>
+                                <Grid sx={{ marginTop: 5 }}>
+                                    <TableHeaderComponent left={'Payment Vouchers'} right={''}/>
+                                    <Layout2 />
                                 </Grid>
                             </Grid>
                             {/*======= Right Sidebar =======*/}
@@ -113,7 +130,7 @@ class dashboard extends Component {
                                 display: 'grid',
                                 gridTemplateRows: '100px 280px auto',
                                 height: 'auto',
-                            }}>
+                                }}>
 
                                 {/* Head */}
                                 <Grid item sx={{
@@ -123,13 +140,13 @@ class dashboard extends Component {
                                     marginRight: 3,
                                     marginLeft: 3,
                                     borderBottom: '1px solid #E0E0E0',
-                                }}>
+                                    }}>
                                     <Typography variant='caption' sx={{
                                         fontWeight: 'bold',
                                         textTransform: 'uppercase',
                                         marginRight: 3,
                                         fontSize: '14px',
-                                    }}>
+                                        }}>
                                         Ms. Anne Marie
                                     </Typography>
                                     <img src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' style={{
@@ -149,7 +166,7 @@ class dashboard extends Component {
                                     borderTop: '1px solid #E0E0E0',
                                     marginLeft: 3,
                                     marginRight: 3,
-                                }}>
+                                    }}>
                                     <CalendarEventComponent 
                                         date="Wednesday, 23 August 2023"
                                         time="10.45 AM"
@@ -162,7 +179,7 @@ class dashboard extends Component {
                                     />
                                 </Grid>
                             </Grid>
-                        </Grid>
+                        </Grid></Fade>
                         {/*============================== Footer ==============================*/}
                         <Grid item>
                             <FooterComponent />

@@ -10,17 +10,21 @@ class TableHeaderComponent extends Component {
                 background: 'linear-gradient(270deg, #49A3F1 0%, #1A73E8 100%)',
                 boxShadow: '0px 4px 14px 0px rgba(0, 0, 0, 0.22)',
                 color: '#FFFFFF',
-                paddingRight: '11px',
+                paddingRight: '20px',
                 paddingLeft: '20px',
                 width: '91.5%',
                 marginLeft: 'auto',
                 marginRight: '3.5rem',
                 position: 'relative',
                 zIndex: 1,
+                fontSize: '13px',
             }}>
-                <h3>{left}</h3>
                 <h3 style={{
-                    width: '80%',
+                    width: '50%',
+                    textAlign: 'left'
+                }}>{left}</h3>
+                <h3 style={{
+                    width: '50%',
                     textAlign: 'right'
                 }}>{right}</h3>
             </div>

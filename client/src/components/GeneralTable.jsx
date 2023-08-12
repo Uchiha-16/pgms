@@ -31,6 +31,11 @@ const GeneralTable = ({ columns, data }) => {
         return columnName === 'NAME';
     };
 
+    const isRequestColumn = (columnName) => {
+        return columnName === 'Request';
+    };
+
+
     const [rowsPerPage, setRowsPerPage] = useState(5); // Number of rows per page
     const [page, setPage] = useState(0); // Current page number
     const handleChangePage = (event, newPage) => {

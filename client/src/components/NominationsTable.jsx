@@ -188,11 +188,11 @@ const NominationsTable = ({ columns, data }) => {
                                         ) : isFunctionColumn(column) ? (
                                             <div>
                                                 <span>{row[column]}</span><br />
-                                                <span style={{
+                                                {/* <span style={{
                                                     color: '#555',
                                                     fontSize: '9px',
                                                     fontWeight: '400'
-                                                }}>UCSC</span>
+                                                }}>UCSC</span> */}
                                             </div>
                                         ) : isRequestColumn(column) ? (
                                             <div style={{
@@ -212,11 +212,11 @@ const NominationsTable = ({ columns, data }) => {
                                                         fontWeight: '500'
                                                     }}>{row[column]}</span>
                                                     <br />
-                                                    <span style={{
+                                                    {/* <span style={{
                                                         color: '#4A4949',
                                                         fontSize: '10px',
                                                         fontWeight: '400'
-                                                    }}>john@gmail.com</span>
+                                                    }}>john@gmail.com</span> */}
                                                 </div>
                                             </div>
                                         ) : (

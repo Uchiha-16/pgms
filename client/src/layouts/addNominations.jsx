@@ -11,7 +11,7 @@ class addUser extends Component {
         const nominationsData = [
             {
                 Request: 'Nomination Request 1',
-                Function: 'Function 1',
+                Name: 'Varsa Gaythunga',
                 Status: 'Accepted',
                 Date: '2023-08-10',
                 Action: 'Edit',
@@ -19,7 +19,7 @@ class addUser extends Component {
             // ... add more data items
         ];
 
-        const nominationsColumns = ['Request', 'Function', 'Status', 'Date', 'Action'];
+        const nominationsColumns = ['Request', 'Name', 'Status', 'Date', 'Action'];
 
         return (
             <Box>

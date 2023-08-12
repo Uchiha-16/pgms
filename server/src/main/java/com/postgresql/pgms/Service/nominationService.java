@@ -5,7 +5,7 @@ import com.postgresql.pgms.DTO.NominationSaveDTO;
 import java.util.List;
 
 public interface nominationService {
-    String addNomination(NominationSaveDTO nominationDTO);
+    long addNomination(NominationSaveDTO nominationDTO);
 
     List<NominationDTO> getAllNominations();
 }

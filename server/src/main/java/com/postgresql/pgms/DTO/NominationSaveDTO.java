@@ -2,18 +2,18 @@ package com.postgresql.pgms.DTO;
 
 public class NominationSaveDTO {
     private long userID;
-    private String programName;
+    private long programId;
     private String semester;
-    private String courseName;
+    private long courseId;
 
     public NominationSaveDTO() {
     }
 
-    public NominationSaveDTO(long userID, String programName, String semester, String courseName) {
+    public NominationSaveDTO(long userID, long programId, String semester, long courseId) {
         this.userID = userID;
-        this.programName = programName;
+        this.programId = programId;
         this.semester = semester;
-        this.courseName = courseName;
+        this.courseId = courseId;
     }
 
     public long getUserID() {
@@ -24,12 +24,12 @@ public class NominationSaveDTO {
         this.userID = userID;
     }
 
-    public String getProgramName() {
-        return programName;
+    public long getProgramId() {
+        return programId;
     }
 
-    public void setProgramName(String programName) {
-        this.programName = programName;
+    public void setProgramId(long programId) {
+        this.programId = programId;
     }
 
     public String getSemester() {
@@ -40,11 +40,11 @@ public class NominationSaveDTO {
         this.semester = semester;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public long getCourseId() {
+        return courseId;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
     }
 }

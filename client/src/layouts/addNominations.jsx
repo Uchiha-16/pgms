@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
-import Nominations from '../components/NominationComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import { Box, Grid } from '@mui/material/';
-
+import NominationsTable from '../components/NominationsTable';
 
 class addUser extends Component {
     render() {
+        // Sample data for NominationsTable
+        const nominationsData = [
+            {
+                Request: 'Nomination Request 1',
+                Function: 'Function 1',
+                Status: 'Accepted',
+                Date: '2023-08-10',
+                Action: 'Edit',
+            },
+            // ... add more data items
+        ];
+
+        const nominationsColumns = ['Request', 'Function', 'Status', 'Date', 'Action'];
+
         return (
             <Box>
                 <Grid container spacing={2}>
@@ -20,8 +33,9 @@ class addUser extends Component {
                         <Grid item>
                             {/* content */}
                             <Grid item xs={12}>
-                                <Nominations />
-                            </Grid> 
+                                {/* <NominationComponent /> */}
+                                <NominationsTable columns={nominationsColumns} data={nominationsData} />
+                            </Grid>
                         </Grid>
                         <Grid item>
                         </Grid>

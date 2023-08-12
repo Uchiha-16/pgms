@@ -42,8 +42,8 @@ function App() {
         <Route path='/' element={<Login />} />
 
         {/* private */}
-        <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={["Lecturer"]}/>} >
+        {/* <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth allowedRoles={["Lecturer"]}/>} > */}
             <Route path='home' element={<Home />} />
             <Route path='/addUsers' element={<AddUser/>}/>
             <Route path='/nominations' element={<AddNominations />} />
@@ -54,8 +54,8 @@ function App() {
             
 
 
-          </Route>
-        </Route>
+          {/* </Route>
+        </Route> */}
 
 
       </Route>

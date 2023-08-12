@@ -23,14 +23,14 @@ const NotificationsComponent = ({ notifications, handleClose }) => {
   };
 
   return (
-    <div>
+    <div style={{ maxHeight: "300px", overflowY: "auto" }}>
       {notifications.map((notification) => (
         <Card
           key={notification.id}
           variant="outlined"
           sx={{
             my: 2,
-            background: `linear-gradient(45deg, #495361, #747B8A)`, // Switched colors here
+            background: `linear-gradient(45deg, #495361, #747B8A)`,
             cursor: "pointer",
             height: "70px",
             borderRadius: "10px",

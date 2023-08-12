@@ -12,6 +12,8 @@ class NotificationsPage extends Component {
         { id: 1, message: "Dummy notification 1", open: true },
         { id: 2, message: "Dummy notification 2", open: true },
         { id: 3, message: "Dummy notification 3", open: true },
+        { id: 4, message: "Dummy notification 4", open: true },
+        { id: 5, message: "Dummy notification 5", open: true },
       ], // Initialize an array of dummy notifications
     };
   }

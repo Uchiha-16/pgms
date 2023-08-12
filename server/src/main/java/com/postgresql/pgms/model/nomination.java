@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table (name = "nomination")
+@Table (name = "Nomination")
 public class nomination {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,6 +13,8 @@ public class nomination {
     private String programName;
     private String semester;
     private String courseName;
+
+    //date and status to be added
 
     public nomination() {
     }

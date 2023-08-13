@@ -55,8 +55,11 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
         setAlertSeverity('success');
         setAlertMessage('User Added successfully!');
         // Handle success, display success message or redirect if needed
-        setTimeout(() => {
-          navigate('/users'); // Replace '/new-page-url' with the actual URL you want to navigate to
+        setTimeout(() => { 
+          //refresh the page and leave the popup component
+          window.location.reload();
+          setOpenAlert(false);
+          navigate('/users', { replace: true });
         }, 3000);
       })
       .catch((error) => {
@@ -87,9 +90,8 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
 
     return (
         <div style={{textAlign:'center'}}>
-      
-            <h1>Add New User</h1>
-            <Button onClick={functionOpenPopup} color="primary" variant="contained">Add User</Button>
+    
+            <Button onClick={functionOpenPopup} color="primary" variant="contained" sx={{ position: 'relative', marginLeft: '1062px', marginBottom: '20px' }}>Add User</Button>
             <Dialog 
             // fullScreen 
             open={open} onClose={closePopup} fullWidth maxWidth="md" >

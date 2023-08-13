@@ -209,12 +209,6 @@ const GeneralTable = ({ columns, data }) => {
                                                         fontSize: '14px',
                                                         fontWeight: '500'
                                                     }}>{row[column]}</span>
-                                                    <br />
-                                                    <span style={{
-                                                        color: '#4A4949',
-                                                        fontSize: '10px',
-                                                        fontWeight: '400'
-                                                    }}>john@gmail.com</span>
                                                 </div>
                                             </div>
                                         ) : (

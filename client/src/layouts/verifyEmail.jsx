@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Paper, Typography, TextField, Button } from '@mui/material';
+import { Box, Container, Paper, Typography, Button, Grow } from '@mui/material';
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -50,7 +50,7 @@ const verifyEmail = () => {
           position: 'relative',
         }}
       >
-        <Container sx={{
+        <Grow in={true} timeout={1000}><Container sx={{
           height: '100vh', 
           display: 'flex', 
           justifyContent: 'center',
@@ -158,7 +158,7 @@ const verifyEmail = () => {
               Back
             </Button>
           </Paper>
-        </Container>
+        </Container></Grow>
       </Boxbg></AnimatedGradientBackground>
     </ThemeProvider>
   );

@@ -8,6 +8,7 @@ import Users from './layouts/users';
 import Profile from './layouts/profile';
 import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
+import ResetPassword from './layouts/resetPassword';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Login/>} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/verifyEmail" element={<VerifyEmail />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
           <Route path="/profile" element={<Profile/>} />
         </Routes>
       </div>

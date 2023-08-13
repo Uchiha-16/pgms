@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Paper, Typography, TextField, Button } from '@mui/material';
+import { Box, Container, Paper, Typography, TextField, Button, Grow } from '@mui/material';
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -49,7 +49,7 @@ const LoginPage = () => {
           position: 'relative',
         }}
       >
-        <Container sx={{
+        <Grow in={true} timeout={1000}><Container sx={{
           height: '100vh', 
           display: 'flex', 
           justifyContent: 'center',
@@ -182,7 +182,7 @@ const LoginPage = () => {
               login
             </Button>
           </Paper>
-        </Container>
+        </Container></Grow>
       </Boxbg></AnimatedGradientBackground>
     </ThemeProvider>
   );

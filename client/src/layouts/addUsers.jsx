@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Popup from '../components/PopupComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import NavbarComponent from '../components/NavbarComponent';
+import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
 
 
@@ -23,7 +24,9 @@ class addUser extends Component {
                                 <Popup />
                             </Grid> 
                         </Grid>
+                        {/*============================== Footer ==============================*/}
                         <Grid item>
+                            <FooterComponent />
                         </Grid>
                     </Grid>
                 </Grid>

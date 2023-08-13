@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HeaderComponent from '../components/HeaderComponent';
 import NavbarComponent from '../components/NavbarComponent';
+import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
 import NominationComponent from '../components/NominationComponent';
 import NominationsTable from '../components/NominationsTable';
@@ -67,7 +68,9 @@ class addUser extends Component {
                                 <NominationComponent />
                             </Grid>
                         </Grid>
+                        {/*============================== Footer ==============================*/}
                         <Grid item>
+                            <FooterComponent />
                         </Grid>
                     </Grid>
                 </Grid>

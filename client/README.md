@@ -10,6 +10,7 @@
 ### `npm install @fontsource/roboto`
 ### `npm install @mui/icons-material`
 ### `npm install @mui/x-date-pickers @mui/material dayjs`
+### `npm install --save react-input-verification-code`
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

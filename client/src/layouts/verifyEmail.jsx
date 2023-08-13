@@ -1,10 +1,10 @@
 import React from 'react';
-import { Box, Container, Paper, Typography, TextField, Button, Grow } from '@mui/material';
+import { Box, Container, Paper, Typography, Button, Grow } from '@mui/material';
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
-import LoginForm from '../components/LoginForm' // Import the LoginForm component
+import ReactInputVerificationCode from "react-input-verification-code";
 
 
 const theme = createTheme({
@@ -38,7 +38,7 @@ const Boxbg = styled.div`
 `;
 
 
-const LoginPage = () => {
+const verifyEmail = () => {
   return (
     <ThemeProvider theme={theme}>
       <AnimatedGradientBackground><Boxbg
@@ -66,7 +66,7 @@ const LoginPage = () => {
               paddingLeft: '10rem',
               paddingRight: '10rem',
               paddingBottom: '3rem',
-              paddingTop: '2rem',
+              paddingTop: '3rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -94,75 +94,38 @@ const LoginPage = () => {
               fontWeight: '600', 
               marginBottom: '1rem',
             }}>
-              Postgraduate Management System
+              Verify Your Email
               <br /><br />
-              WELCOME
+              <p style={{
+                fontSize: '12px',
+                fontWeight: '400',
+              }}>
+                Please Enter The 4 Digit Code Sent To dilkyliyanage22@gmail.com
+              </p>
             </Typography>
-            <TextField
-              label="Email"
-              type="email"
-              margin="normal"
-              variant="outlined"
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#F0F2F5', // Silver outline for text field
-                  transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
-                  borderRadius: '10px', // Rounded corners
-                },
-                ":hover": {
-                  '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1A73E8',
-                  },
-                },
-                '& input': {
-                  height: '15px', // Adjust the height as needed
-                  width: '100%',
-                  color: '#011632', // Adjust the width as needed
-                  fontSize: '14px',
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#898989', // Set the color of the label
-                  fontSize: '14px',
-                },
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-              }}
-            />
-            <TextField
-              label="Password"
-              type="password"
-              margin="normal"
-              variant="outlined"
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#F0F2F5', // Silver outline for text field
-                  transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
-                  borderRadius: '10px', // Rounded corners
-                },
-                ":hover": {
-                  '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1A73E8', // Silver outline for text field
-                  },
-                },
-                '& input': {
-                  height: '15px', // Adjust the height as needed
-                  width: '100%',
-                  color: '#011632', // Adjust the width as needed
-                  fontSize: '14px',
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#898989', // Set the color of the label
-                  fontSize: '14px',
-                },
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-              }}
-            />
+            
+            <div style={{
+              '--ReactInputVerificationCode-itemWidth': '2.5rem',
+              '--ReactInputVerificationCode-itemHeight': '3.5rem',
+              position: 'relative',
+              color: '#262626',
+              fontWeight: '500',
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+              <ReactInputVerificationCode
+                autoFocus
+                placeholder=""
+                onChange={console.log}
+                />
+            </div>
+            
+            <br />
             <Button
               variant="text"
               color="primary"
               sx={{
                 width: '100%', // Make the button take the full width
-                marginLeft: '30%', // Move the button to the right
-                marginRight: '0', // No margin on the right side
                 textTransform: 'none', // Disable capitalization of the button text
                 color: '#1A73E8', // Fill color for the button text
                 fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
@@ -175,12 +138,24 @@ const LoginPage = () => {
                   color: 'black'
                 },
                 fontSize: '12px',
+                marginBottom: '1rem',
               }}
             >
-              Forgot Password?
-            </Button><br />
+              Resend Code
+            </Button>
             <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
-              login
+              Verify
+            </Button><br />
+            <Button variant="contained" color="primary" fullWidth sx={{ 
+              backgroundColor: '#747b8a', 
+              fontFamily: 'Inter, sans-serif', 
+              fontSize: '15px', 
+              fontWeight: 'regular',
+              ":hover": {
+                backgroundColor: '#495361',
+              },
+              }}>
+              Back
             </Button>
           </Paper>
         </Container></Grow>
@@ -189,4 +164,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default verifyEmail;

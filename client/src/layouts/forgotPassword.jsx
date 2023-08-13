@@ -37,7 +37,7 @@ const Boxbg = styled.div`
 `;
 
 
-const LoginPage = () => {
+const forgotPassword = () => {
   return (
     <ThemeProvider theme={theme}>
       <AnimatedGradientBackground><Boxbg
@@ -93,9 +93,14 @@ const LoginPage = () => {
               fontWeight: '600', 
               marginBottom: '1rem',
             }}>
-              Postgraduate Management System
+              Forgot Password
               <br /><br />
-              WELCOME
+              <p style={{
+                fontSize: '12px',
+                fontWeight: '400',
+              }}>
+                Please Enter Your Email Address To Recieve a Verification Cord.
+              </p>
             </Typography>
             <TextField
               label="Email"
@@ -126,60 +131,21 @@ const LoginPage = () => {
                 fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
               }}
             />
-            <TextField
-              label="Password"
-              type="password"
-              margin="normal"
-              variant="outlined"
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#F0F2F5', // Silver outline for text field
-                  transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
-                  borderRadius: '10px', // Rounded corners
-                },
-                ":hover": {
-                  '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1A73E8', // Silver outline for text field
-                  },
-                },
-                '& input': {
-                  height: '15px', // Adjust the height as needed
-                  width: '100%',
-                  color: '#011632', // Adjust the width as needed
-                  fontSize: '14px',
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#898989', // Set the color of the label
-                  fontSize: '14px',
-                },
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-              }}
-            />
-            <Button
-              variant="text"
-              color="primary"
-              sx={{
-                width: '100%', // Make the button take the full width
-                marginLeft: '30%', // Move the button to the right
-                marginRight: '0', // No margin on the right side
-                textTransform: 'none', // Disable capitalization of the button text
-                color: '#1A73E8', // Fill color for the button text
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-                '& .MuiTouchRipple-root': {
-                  display: 'none', // Disable the ripple effect
-                },
-                "&:hover": {
-                  //you want this to be the same as the backgroundColor above
-                  backgroundColor: "transparent",
-                  color: 'black'
-                },
-                fontSize: '12px',
-              }}
-            >
-              Forgot Password?
-            </Button><br />
+            
+            <br />
             <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
-              login
+              Send
+            </Button><br />
+            <Button variant="contained" color="primary" fullWidth sx={{ 
+              backgroundColor: '#747b8a', 
+              fontFamily: 'Inter, sans-serif', 
+              fontSize: '15px', 
+              fontWeight: 'regular',
+              ":hover": {
+                backgroundColor: '#495361',
+              },
+              }}>
+              Back
             </Button>
           </Paper>
         </Container>
@@ -188,4 +154,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default forgotPassword;

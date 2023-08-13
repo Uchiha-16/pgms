@@ -71,6 +71,8 @@ const GeneralProgramTable = ({ columns, program }) => {
                 paddingBottom: 8,
                 borderRadius: '7px',
                 }}>
+
+                {/* Program 1 */}
                 <TableContainer component={Paper} sx={{
                     background: 'transparent',
                     boxShadow: 'none',
@@ -150,6 +152,7 @@ const GeneralProgramTable = ({ columns, program }) => {
                     </Table>
                 </TableContainer>
                 
+                {/* Program 2 */}
                 <TableContainer component={Paper} sx={{
                     background: 'transparent',
                     boxShadow: 'none',

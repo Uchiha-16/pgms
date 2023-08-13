@@ -15,15 +15,17 @@ class profile extends Component {
                     </Grid>
                     <Grid container xs={9.3} sx={{
                         display: 'grid',
-                        gridTemplateRows: '16.5% auto 10%',
-                        height: '100vh',
+                        gridTemplateRows: '149px auto 10%',
                     }}>
+                        {/*============================== Header ==============================*/}
                         <Grid item>
                             <HeaderComponent />
                         </Grid>
+                        {/*=============================== Main ===============================*/}
                         <Grid item>
                             <ProfileComponent />
                         </Grid>
+                        {/*============================== Footer ==============================*/}
                         <Grid item>
                             <FooterComponent />
                         </Grid>

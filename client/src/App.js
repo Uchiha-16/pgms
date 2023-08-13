@@ -15,7 +15,6 @@ import PersistLogin from './auth/PersistLogin';
 import RequireAuth from './auth/RequireAuth';
 import Unauthorized from './components/Unauthorized';
 import LinkPage from './layouts/LinkPage';
-import Profile from './layouts/profile';
 import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';

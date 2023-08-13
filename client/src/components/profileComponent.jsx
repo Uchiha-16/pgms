@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'; // Import Button
 import profile from '../assets/images/profile.png'; // Replace with the path to your background image
 
 
-function ProfileComponent() {
+function Profile() {
   const [isEditing, setIsEditing] = useState(false);
 
   const paperStyle = {
@@ -139,5 +139,5 @@ function ProfileComponent() {
   );
 }
 
-export default ProfileComponent;
+export default Profile;
 

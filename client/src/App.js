@@ -5,6 +5,7 @@ import Dashboard from './layouts/dashboard';
 import AddUser from './layouts/addUsers';
 import Login from './layouts/login';
 import Users from './layouts/users';
+import Programs from './layouts/programs';
 import AddNominations from './layouts/addNominations';
 import Profile from './layouts/profile';
 import Notifications from './layouts/notifications';
@@ -53,6 +54,7 @@ function App() {
             <Route path='home' element={<Home />} />
             <Route path='/nominations' element={<AddNominations />} />
             <Route path='/users' element={<Users/>}/>
+            <Route path='/programs' element={<Programs/>}/>
             <Route path='/profile' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />

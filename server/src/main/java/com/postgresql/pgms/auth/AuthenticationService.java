@@ -3,6 +3,7 @@ package com.postgresql.pgms.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.postgresql.pgms.assets.EmailTemplate;
 import com.postgresql.pgms.config.JwtService;
+import com.postgresql.pgms.exception.CustomErrorException;
 import com.postgresql.pgms.model.Token;
 import com.postgresql.pgms.repo.TokenRepository;
 import com.postgresql.pgms.enumeration.TokenType;

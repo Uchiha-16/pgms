@@ -19,6 +19,7 @@ public class EmailTemplate {
                 + "<div class=\"content\">"
                 + "<p>Hello,</p>"
                 + "<p>You have requested to send email.</p>"
+                + "<p><a href=\"" + Link + "\">Change Password</a></p>"
                 + "</div>"
                 + "</div>"
                 + "</body>"

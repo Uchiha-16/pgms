@@ -1,5 +1,10 @@
 package com.postgresql.pgms.DTO;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class CourseDTO {
     private long courseId ;
     private String courseNo;
@@ -8,19 +13,6 @@ public class CourseDTO {
     private Integer credit;
     private String hallName;
     private long programId;
-
-    public CourseDTO() {
-    }
-
-    public CourseDTO(long courseId, String courseNo, String courseName, long semester, Integer credit, String hallName, long programId) {
-        this.courseId = courseId;
-        this.courseNo = courseNo;
-        this.courseName = courseName;
-        this.semester = semester;
-        this.credit = credit;
-        this.hallName = hallName;
-        this.programId = programId;
-    }
 
     public long getCourseId() {
         return courseId;

@@ -1,6 +1,7 @@
 package com.postgresql.pgms.controller;
 
 import com.postgresql.pgms.DTO.CourseListResponseDTO;
+import com.postgresql.pgms.DTO.CourseSaveDTO;
 import com.postgresql.pgms.Service.courseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class courseController {
     private final courseService courseService;
 
-//    @PostMapping(path = "/addCourse")
-//    public String saveCourse(@RequestBody CourseSaveDTO courseSaveDTO){
-//        String id=courseService.addCourse(courseSaveDTO);
-//        return id;
-//    }
+    //addcourse
+    @PostMapping(path = "/addcourse")
+    public ResponseEntity<String> addCourse(@RequestBody CourseSaveDTO courseSaveDTO){
+        return ResponseEntity.ok(courseService.addCourse(courseSaveDTO));
+    }
 
     @GetMapping(path = "/viewcourses")
     public ResponseEntity<CourseListResponseDTO> getCourses(){

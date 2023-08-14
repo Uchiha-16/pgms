@@ -16,6 +16,20 @@ public class courseService{
 
     private final CourseRepo courseRepo;
 
+    //add course
+    public String addCourse(CourseSaveDTO courseSaveDTO) {
+        course course = new course(
+                courseSaveDTO.getCourseNo(),
+                courseSaveDTO.getCourseName(),
+                courseSaveDTO.getSemester(),
+                courseSaveDTO.getCredit(),
+                courseSaveDTO.getHallName(),
+                courseSaveDTO.getProgramId()
+        );
+        courseRepo.save(course);
+        return "Course added successfully";
+    }
+
     public CourseListResponseDTO getAllCourses() {
         List<Object> coursesList = courseRepo.findAllCourses();
         return new CourseListResponseDTO((coursesList));

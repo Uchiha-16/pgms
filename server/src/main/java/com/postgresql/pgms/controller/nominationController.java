@@ -1,8 +1,13 @@
 package com.postgresql.pgms.controller;
 
 import com.postgresql.pgms.DTO.NominationDTO;
+import com.postgresql.pgms.DTO.NominationListResponseDTO;
 import com.postgresql.pgms.DTO.NominationSaveDTO;
+import com.postgresql.pgms.DTO.UserListResponseDTO;
+import com.postgresql.pgms.model.Nominations;
 import com.postgresql.pgms.Service.nominationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,18 +16,27 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/nominations")
+@RequiredArgsConstructor
 public class nominationController {
-    private nominationService nominationService;
 
-    @PostMapping(path = "/apply")
-    public ResponseEntity<String> saveNomination(@RequestBody NominationSaveDTO nominationSaveDTO){
-       // nominationService.addNomination(nominationSaveDTO);
-        return ResponseEntity.ok("Nomination OK");
+    private final nominationService service;
+
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addNomination(@RequestBody NominationSaveDTO nominationSaveDTO) {
+        service.addNomination(nominationSaveDTO);
+        return ResponseEntity.ok("Nomination added successfully.");
     }
 
-    @GetMapping(path = "/getAllNominations")
-    public List <NominationDTO> getAllNominations(){
-        List<NominationDTO> allNominations = nominationService.getAllNominations();
-        return allNominations;
+    @GetMapping("/nominations")
+    public ResponseEntity<NominationListResponseDTO> getAllNominations(){
+        return ResponseEntity.ok(service.listnominations());
     }
+
+//    @PostMapping("/add")
+//    public ResponseEntity<String> addNomination(@RequestBody NominationSaveDTO nominationSaveDTO) {
+//        service.addNomination(nominationSaveDTO);
+//        return ResponseEntity.ok("Nomination added successfully.");
+//    }
+
 }

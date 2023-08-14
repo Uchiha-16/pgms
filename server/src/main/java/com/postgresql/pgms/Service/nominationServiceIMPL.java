@@ -16,7 +16,7 @@ public class nominationServiceIMPL implements nominationService{
     @Autowired
     private NominationRepo nominationRepo;
     @Override
-    public long addNomination(NominationSaveDTO nominationSaveDTO) {
+    public void addNomination(NominationSaveDTO nominationSaveDTO) {
         nomination nomination = new nomination(
                 nominationSaveDTO.getUserID(),
                 nominationSaveDTO.getProgramId(),
@@ -26,7 +26,7 @@ public class nominationServiceIMPL implements nominationService{
         nomination.setStatus("Pending");  // Set default status
         nomination.setDate(LocalDate.now());  // Set current date
         nominationRepo.save(nomination);
-        return nomination.getCourseId();
+
     }
 
     @Override

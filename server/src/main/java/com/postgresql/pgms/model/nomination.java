@@ -1,15 +1,19 @@
 package com.postgresql.pgms.model;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table (name = "Nomination")
 public class nomination {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long nominationid;
     private long userID;
     private long programId;
@@ -17,19 +21,6 @@ public class nomination {
     private long courseId;
     private String status = "Pending";
     private LocalDate date = LocalDate.now();
-
-    public nomination() {
-    }
-
-    public nomination(long nominationid, long userID, long programId, String semester, long courseId, String status, LocalDate date) {
-        this.nominationid = nominationid;
-        this.userID = userID;
-        this.programId = programId;
-        this.semester = semester;
-        this.courseId = courseId;
-        this.status = status;
-        this.date = date;
-    }
 
     public nomination(long userID, long programId, String semester, long courseId) {
         this.userID = userID;

@@ -1,12 +1,14 @@
 package com.postgresql.pgms.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.postgresql.pgms.assets.EmailTemplate;
 import com.postgresql.pgms.config.JwtService;
 import com.postgresql.pgms.model.Token;
 import com.postgresql.pgms.repo.TokenRepository;
 import com.postgresql.pgms.enumeration.TokenType;
 import com.postgresql.pgms.model.Users;
 import com.postgresql.pgms.repo.UserRepository;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @Service
 @RequiredArgsConstructor
@@ -79,6 +82,17 @@ public class AuthenticationService {
                 .role(user.getRole())
                 .id(user.getId())
                 .message("login Success!!!!!!!!!!!!!")
+                .build();
+    }
+
+    public AuthenticationResponse forgotPassword(HttpServletResponse response, String email) throws MessagingException, UnsupportedEncodingException {//=======================================================================================================
+        var user = userRepository.findByEmail(email).orElseThrow(() -> new CustomErrorException("User Not Found"));//create exception
+        var token = jwtService.generateForgotPasswordToken(user);//create func
+        emailService.sendMail(email, "Reset Password", EmailTemplate.PasswordResetEmailTemplate("http://localhost:3000/reset-password/" + token));//mail
+        revokeResetTokens(user);
+        saveResetToken(user, token);//create
+        return AuthenticationResponse.builder()
+                .message("Forgot password Email sent!!!!!!!!")
                 .build();
     }
 

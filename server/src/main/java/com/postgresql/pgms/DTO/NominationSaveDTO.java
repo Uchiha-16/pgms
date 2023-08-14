@@ -1,5 +1,7 @@
 package com.postgresql.pgms.DTO;
 
+import com.postgresql.pgms.model.Users;
+
 public class NominationSaveDTO {
     private long userID;
     private long programId;

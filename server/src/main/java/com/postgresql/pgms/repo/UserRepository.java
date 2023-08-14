@@ -4,7 +4,7 @@ import com.postgresql.pgms.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import com.postgresql.pgms.DTO.UserDTO;
+
 
 import java.util.Optional;
 import java.util.List;

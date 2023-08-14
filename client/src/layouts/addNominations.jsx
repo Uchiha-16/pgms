@@ -6,44 +6,39 @@ import { Box, Grid } from '@mui/material/';
 import NominationComponent from '../components/NominationComponent';
 import NominationsTable from '../components/NominationsTable';
 import { useEffect, useState } from "react";
-import useAxiosMethods from '../hooks/useAxiosMethods';
+import axios from '../api/axios';
 
 
-    const nominations_URL = "/nominations/getAllNominations"
+    const nominations_URL = "/nominations/nominations"
 
     const TableLayout = () => {
         const [nominations, setnominations] = useState([]);
-        const {get} = useAxiosMethods();
         
         useEffect(() => {
-            
+            const fetchUsers = async () => {
                 try {
-                    get(nominations_URL, setnominations);
-    
+                    const response = await axios.get(nominations_URL); // Change the URL according to your backend setup
+                    console.log(response.data.nominationsList);
+                    setnominations(response.data.nominationsList);
                 } catch (error) {
-                    console.log(error)
+                    console.error("Error fetching users:", error);
                 }
+            };
+    
+            fetchUsers();
         }, []);
     
         const columns = ['REQUEST', 'NAME', 'STATUS', 'DATE', 'ACTION'];
 
-        const data = [
-            {
-                REQUEST: 'Application for MCS 2203 Lecturer',
-                NAME: 'Dr. Kasun Gunawardhana',
-                STATUS: 'Accepted',
-                DATE: '2023-10-05',
-                ACTION: 'Edit',
-            },
-            {
-                REQUEST: 'Application for MIT 1201 Lecturer',
-                NAME: 'Prof. Sarah Johnson',
-                STATUS: 'Pending',
-                DATE: '2023-09-20',
-                ACTION: 'Edit',
-            },
-            // Add more static nominations as needed
-        ];
+        const data = nominations.map(nomination => ({
+            REQUEST: `Application for ${nomination[0]} Lecturer`,
+            NAME: `${nomination[5]} ${nomination[6]}`,
+            STATUS: 'Pending', 
+            DATE: nomination[1],
+            ACTION: 'Edit',
+        }
+        ));
+    
         return (
             <NominationsTable columns={columns} data={data} />
         );
@@ -57,7 +52,10 @@ class addUser extends Component {
                     <Grid item xs={2.5}>
                         <NavbarComponent />
                     </Grid>
-                    <Grid container xs={9.3} sx={{ display: 'grid', gridTemplateRows: 'repeat(3, 1fr)' }}>
+                    <Grid container xs={9.3} sx={{ 
+                        display: 'grid', 
+                        gridTemplateRows: '350px auto 10%',
+                        }}>
                         <Grid item>
                             <HeaderComponent />
                         </Grid>

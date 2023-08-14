@@ -17,9 +17,10 @@ import CloseIcon from "@mui/icons-material/Close"
 
 const Nomination = () => { // Changed the function name to start with uppercase "P"
   const [formData, setFormData] = useState({
-    program: '',
+    programId: '',
     semester:'',
-    course: '',
+    courseId: '',
+    userID: '2',
   });
 
   const [openAlert, setOpenAlert] = useState(false);
@@ -31,36 +32,39 @@ const Nomination = () => { // Changed the function name to start with uppercase 
   const handleChange = (event) => {
     const { name, value } = event.target;
   
-    if (name === "program" || name === "semester") {
+    if (name === "programId" || name === "semester") {
       setFormData({
         ...formData,
         [name]: value,
-        course: '', // Reset course when program or semester changes
+        courseId: '', // Reset course when program or semester changes
       });
-    } else if (name === "course") {
+    } else if (name === "courseId") {
       setFormData({
         ...formData,
-        course: value,
+        courseId: value,
       });
     }
   };
 
 
   // Inside your component's render function
-console.log("Course Value:", formData.course);
+console.log("Course Value:", formData.courseId);
+console.log("Program Value:", formData.programId);
 
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8080/api/nominations/apply', formData)
+    axios.post('http://localhost:8080/api/v1/nominations/add', formData)
       .then((response) => {
-        console.log('User created:', response.data);
+        console.log('Nomination Added:', response.data);
         setOpenAlert(true);
         setAlertSeverity('success');
         setAlertMessage('Application Sent!');
         // Handle success, display success message or redirect if needed
         setTimeout(() => {
-          navigate('/users'); // Replace '/new-page-url' with the actual URL you want to navigate to
+          window.location.reload();
+          setOpenAlert(false);
+          navigate('/nominations', { replace: true }); // Replace '/new-page-url' with the actual URL you want to navigate to
         }, 3000);
       })
       .catch((error) => {
@@ -78,9 +82,10 @@ console.log("Course Value:", formData.course);
     }
     const handleReset = () => {
       setFormData({
-        program: '',
+        programId: '',
         semester:'',
-        course: '',
+        courseId: '',
+        userID: '2',
       });
     };
 
@@ -132,9 +137,9 @@ console.log("Course Value:", formData.course);
                   required
                   label="Program"
                   id="progam"
-                  value={formData.program}
+                  value={formData.programId}
                   onChange={handleChange}
-                  name="program"
+                  name="programId"
                 >
                     <MenuItem value={'MCS'}>Master of Computer Science</MenuItem>
                     <MenuItem value={'MIT'}>Master of Information Technology</MenuItem>
@@ -166,15 +171,15 @@ console.log("Course Value:", formData.course);
               <InputLabel id="demo-simple-select-label" required>Course</InputLabel>
 
                 { 
-                    formData.program === 'MCS' && formData.semester === '1' && (
+                    formData.programId === 'MCS' && formData.semester === '1' && (
                       
                       <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'MCS 1201'}>MCS1201 - Advanced Algorithms</MenuItem>
                           <MenuItem value={'MCS 1202'}>MCS1202 - Advanced Software Engineering</MenuItem>
                           <MenuItem value={'MCS 1203'}>MCS1203 - Advanced Database Systems</MenuItem>
@@ -185,15 +190,15 @@ console.log("Course Value:", formData.course);
                 }
                                 
                 {
-                    formData.program === 'MCS' && formData.semester === '2' && (
+                    formData.programId === 'MCS' && formData.semester === '2' && (
                       
                         <Select
                           required
                           label="Course"
                           id="course"
-                          value={formData.course}
+                          value={formData.courseId}
                           onChange={handleChange}
-                          name="course">
+                          name="courseId">
                             <MenuItem value={'MCS 2201'}>MCS2201 - Information Systems Security</MenuItem>
                             <MenuItem value={'MCS 2202'}>MCS2202 - Advanced Concepts in Data Communications Networks</MenuItem>
                             <MenuItem value={'MCS 2203'}>MCS2203 - Data Analytics & Machine Learning</MenuItem>
@@ -203,15 +208,15 @@ console.log("Course Value:", formData.course);
                 }
 
                 {
-                    formData.program === 'MCS' && formData.semester === '3' && (
+                    formData.programId === 'MCS' && formData.semester === '3' && (
 
                         <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'MCS 3201'}>MCS3201 - Intelligent Systems</MenuItem>
                           <MenuItem value={'MCS 3202'}>MCS3202 - Systems Modelling & Simulation</MenuItem>
                           <MenuItem value={'MCS 3205'}>MCS3205 - Distributed Systems</MenuItem>
@@ -223,15 +228,15 @@ console.log("Course Value:", formData.course);
                 }
 
 { 
-                    formData.program === 'MCS' && formData.semester === '4' && (
+                    formData.programId === 'MCS' && formData.semester === '4' && (
                       
                       <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'MCS 4201'}>MCS4201 - Cognitive Systems</MenuItem>
                           <MenuItem value={'MCS 4202'}>MCS4202 - Embedded Systems</MenuItem>
                           <MenuItem value={'MCS 4203'}>MCS4203 - Image Processing and Vision</MenuItem>
@@ -244,15 +249,15 @@ console.log("Course Value:", formData.course);
                 }
                                 
                 {
-                    formData.program === 'MIT' && formData.semester === '1' && (
+                    formData.programId === 'MIT' && formData.semester === '1' && (
                       
                         <Select
                           required
                           label="Course"
                           id="course"
-                          value={formData.course}
+                          value={formData.courseId}
                           onChange={handleChange}
-                          name="course">
+                          name="courseId">
                             <MenuItem value={'MIT 1201'}>MIT1201 - Program Design and Programming</MenuItem>
                             <MenuItem value={'MIT 1202'}>MIT1202 - Computer Systems</MenuItem>
                             <MenuItem value={'MIT 1203'}>MIT1203 - Database Management Systems</MenuItem>
@@ -262,15 +267,15 @@ console.log("Course Value:", formData.course);
                 }
                 
                 {
-                    formData.program === 'MIT' && formData.semester === '2' && (
+                    formData.programId === 'MIT' && formData.semester === '2' && (
 
                         <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'MIT 2201'}>MIT2201 - Computer Networking</MenuItem>
                           <MenuItem value={'MIT 2202'}>MIT2202 - Software Engineering</MenuItem>
                           <MenuItem value={'MIT 2203'}>MIT2203 - Data and Network Security</MenuItem>
@@ -281,15 +286,15 @@ console.log("Course Value:", formData.course);
                 }
 
 { 
-                    formData.program === 'MIT' && formData.semester === '3' && (
+                    formData.programId === 'MIT' && formData.semester === '3' && (
                       
                       <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'MIT 3202'}>MIT3202 - Project Management & Professional Issues in IT</MenuItem>
                           <MenuItem value={'MIT 3203'}>MIT3203 - The Foundations of e-Learning</MenuItem>
                           <MenuItem value={'MIT 3204'}>MIT3204 - Data Mining and Warehousing</MenuItem>
@@ -300,15 +305,15 @@ console.log("Course Value:", formData.course);
                 }
                                 
                 {
-                    formData.program === 'MIT' && formData.semester === '4' && (
+                    formData.programId === 'MIT' && formData.semester === '4' && (
                       
                         <Select
                           required
                           label="Course"
                           id="course"
-                          value={formData.course}
+                          value={formData.courseId}
                           onChange={handleChange}
-                          name="course">
+                          name="courseId">
                             <MenuItem value={'MIT 4201'}>MIT4201 - Software Quality Assurance</MenuItem>
                             <MenuItem value={'MIT 4202'}>MIT4202 - IT Strategy and Policy</MenuItem>
                             <MenuItem value={'MIT 4203'}>MIT4203 - Business Statistics and Operational Research</MenuItem>
@@ -318,15 +323,15 @@ console.log("Course Value:", formData.course);
                 }
 
                 {
-                    formData.program === 'MIS' && formData.semester === '1' && (
+                    formData.programId === 'MIS' && formData.semester === '1' && (
 
                         <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'MIS 1201'}>MIS1201 - Principles of Information Security</MenuItem>
                           <MenuItem value={'MIS 1202'}>MIS1202 - Cryptographic Systems</MenuItem>
                           <MenuItem value={'MIS 1203'}>MIS1203 - Information Risk Management and Audit</MenuItem>
@@ -337,15 +342,15 @@ console.log("Course Value:", formData.course);
                 }
 
 { 
-                    formData.program === 'MIS' && formData.semester === '2' && (
+                    formData.programId === 'MIS' && formData.semester === '2' && (
                       
                       <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'MIS 3201'}>MIS3201 - Information and Coding Theory</MenuItem>
                           <MenuItem value={'MIS 3202'}>MIS3202 - Secure Software Systems</MenuItem>
                           <MenuItem value={'MIS 3203'}>MIS3203 - Information Security Governance</MenuItem>
@@ -355,15 +360,15 @@ console.log("Course Value:", formData.course);
                 }
                                 
                 {
-                    formData.program === 'MIS' && formData.semester === '3' && (
+                    formData.programId === 'MIS' && formData.semester === '3' && (
                       
                         <Select
                           required
                           label="Course"
                           id="course"
-                          value={formData.course}
+                          value={formData.courseId}
                           onChange={handleChange}
-                          name="course">
+                          name="courseId">
                             <MenuItem value={'MIS 2201'}>MIS2201 - Database Security</MenuItem>
                             <MenuItem value={'MIS 2202'}>MIS2202 - Digital Forensics</MenuItem>
                             <MenuItem value={'MIS 2203'}>MIS2203 - Security in Mobile and Wireless Networks</MenuItem>
@@ -373,15 +378,15 @@ console.log("Course Value:", formData.course);
                 }
                 
                 {
-                    formData.program === 'MIS' && formData.semester === '4' && (
+                    formData.programId === 'MIS' && formData.semester === '4' && (
 
                         <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'MIS 4201'}>MIS4201 - Cyber Security and Law</MenuItem>
                           <MenuItem value={'MIS 4202'}>MIS4202 - Multimedia Security and Digital Rights Management</MenuItem>
                           <MenuItem value={'MIS 4203'}>MIS4203 - Independent Studies in Information Security</MenuItem>
@@ -390,15 +395,15 @@ console.log("Course Value:", formData.course);
                 }
 
 {
-                    formData.program === 'MBA' && formData.semester === '1' && (
+                    formData.programId === 'MBA' && formData.semester === '1' && (
 
                         <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'BA 1001'}>BA1001 - Business Statistics</MenuItem>
                           <MenuItem value={'BA 1002'}>BA1002 - Organizational Data Management</MenuItem>
                           <MenuItem value={'BA 1003'}>BA1003 - Fundamentals of Data Science and Business Analytics</MenuItem>
@@ -408,15 +413,15 @@ console.log("Course Value:", formData.course);
                 }
 
 { 
-                    formData.program === 'MBA' && formData.semester === '2' && (
+                    formData.programId === 'MBA' && formData.semester === '2' && (
                       
                       <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'BA 2001'}>BA2001 - Statistical Inference for Analytics</MenuItem>
                           <MenuItem value={'BA 2002'}>BA2002 - Machine Learning and Pattern Recognition</MenuItem>
                           <MenuItem value={'BA 2003'}>BA2003 - Data Warehousing and Mining</MenuItem>
@@ -426,15 +431,15 @@ console.log("Course Value:", formData.course);
                 }
                                 
                 {
-                    formData.program === 'MBA' && formData.semester === '3' && (
+                    formData.programId === 'MBA' && formData.semester === '3' && (
                       
                         <Select
                           required
                           label="Course"
                           id="course"
-                          value={formData.course}
+                          value={formData.courseId}
                           onChange={handleChange}
-                          name="course">
+                          name="courseId">
                             <MenuItem value={'BA 3001'}>BA3001 - Modelling and Simulation of Data</MenuItem>
                             <MenuItem value={'BA 3002'}>BA3002 - Predictive Analytics</MenuItem>
                             <MenuItem value={'BA 3003'}>BA3003 - Computational Social Science</MenuItem>
@@ -446,15 +451,15 @@ console.log("Course Value:", formData.course);
                 }
                 
                 {
-                    formData.program === 'MBA' && formData.semester === '4' && (
+                    formData.programId === 'MBA' && formData.semester === '4' && (
 
                         <Select
                         required
                         label="Course"
                         id="course"
-                        value={formData.course}
+                        value={formData.courseId}
                         onChange={handleChange}
-                        name="course">
+                        name="courseId">
                           <MenuItem value={'BA 4001'}>BA4001 - Big Data Analytics</MenuItem>  
                           <MenuItem value={'BA 4002'}>BA4002 - Analytics for Process Improvement</MenuItem>
                           <MenuItem value={'BA 4003'}>BA4003 - Intelligent Agents in Gaming</MenuItem>

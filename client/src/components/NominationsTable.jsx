@@ -9,37 +9,60 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import PendingIcon from '@mui/icons-material/QueryBuilder';
 
+
 const NominationsTable = ({ columns, data }) => {
-  const [alignment, setAlignment] = useState("");
-  const [statusFilter, setStatusFilter] = useState(null); // To filter nominations
 
-  const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
-  };
+const [alignment, setAlignment] = useState("");
+const [statusFilter, setStatusFilter] = useState(null); // To filter nominations
 
-  const handleStatusFilter = (event, newStatusFilter) => {
-    setStatusFilter(newStatusFilter);
-  };
+const handleChange = (event, newAlignment) => {
+  setAlignment(newAlignment);
+};
 
-  const filteredData = statusFilter
-    ? data.filter((item) => item.STATUS === statusFilter)
-    : data;
+const handleStatusFilter = (event, newStatusFilter) => {
+  setStatusFilter(newStatusFilter);
+};
 
-  const isAccepted = (columnName, cellValue) => {
-    return columnName === "STATUS" && cellValue === "Accepted";
-  };
+const filteredData = statusFilter
+  ? data.filter((item) => item.STATUS === statusFilter)
+  : data;
 
-  const isRejected = (columnName, cellValue) => {
-    return columnName === "STATUS" && cellValue === "Rejected";
-  };
+const isAccepted = (columnName, cellValue) => {
+  return columnName === "STATUS" && cellValue === "Accepted";
+};
 
-  const isPending = (columnName, cellValue) => {
-    return columnName === "STATUS" && cellValue === "Pending";
-  };
+const isRejected = (columnName, cellValue) => {
+  return columnName === "STATUS" && cellValue === "Rejected";
+};
 
-  const isNameColumn = (columnName) => {
-    return columnName === "Name";
-  };
+const isPending = (columnName, cellValue) => {
+  return columnName === "STATUS" && cellValue === "Pending";
+};
+
+const isNameColumn = (columnName) => {
+  return columnName === "Name";
+};
+
+const isRequestColumn = (columnName) => {
+  return columnName === "Request";
+};
+
+const isFunctionColumn = (columnName) => {
+  return columnName === 'Function';
+};
+
+const [rowsPerPage, setRowsPerPage] = useState(5); // Number of rows per page
+const [page, setPage] = useState(0); // Current page number
+const handleChangePage = (event, newPage) => {
+  setPage(newPage);
+};
+const handleChangeRowsPerPage = (event) => {
+  setRowsPerPage(parseInt(event.target.value, 10));
+  setPage(0); // Reset the page number when rows per page changes
+};
+const startRowIndex = page * rowsPerPage;
+const endRowIndex = startRowIndex + rowsPerPage;
+const visibleRows = data.slice(startRowIndex, endRowIndex);
 
     return (
         <>

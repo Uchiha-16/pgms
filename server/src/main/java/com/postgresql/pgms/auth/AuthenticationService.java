@@ -1,10 +1,12 @@
 package com.postgresql.pgms.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.postgresql.pgms.Service.EmailService;
 import com.postgresql.pgms.assets.EmailTemplate;
 import com.postgresql.pgms.config.JwtService;
 import com.postgresql.pgms.exception.CustomErrorException;
 import com.postgresql.pgms.model.Token;
+import com.postgresql.pgms.repo.ResetRepository;
 import com.postgresql.pgms.repo.TokenRepository;
 import com.postgresql.pgms.enumeration.TokenType;
 import com.postgresql.pgms.model.Users;
@@ -29,12 +31,14 @@ public class AuthenticationService {
 
     private final UserRepository repository;
     private final TokenRepository tokenRepository;
+    private final ResetRepository resetRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     private final Integer refreshExpiration = 604800000; //for cookie
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = Users.builder()

@@ -52,7 +52,6 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/att' element={<Attendance />} />
             <Route path='/notifications' element={<Notifications />} />
-            
 
 
           {/* </Route>

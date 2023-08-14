@@ -1,276 +1,506 @@
-import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import user from '../assets/images/user.png';
-import TablePagination from '@mui/material/TablePagination';
+import React, { useState } from "react"; // Import React and useState
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
+import SideImageComponent from "./SideImageComponent";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import AlertBox from './GeneralAlert';
 
-const AttendanceComponent = ({ columns, data }) => {
-    const [alignment, setAlignment] = useState('');
 
-    const handleChange = (event, newAlignment) => {
-        setAlignment(newAlignment);
+
+import { Button, Box, Dialog, DialogActions, DialogContent, IconButton, Stack, Typography } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close"
+
+
+const Nomination = () => { // Changed the function name to start with uppercase "P"
+  const [formData, setFormData] = useState({
+    program: '',
+    semester:'',
+    course: '',
+  });
+
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState('success');
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+  
+    if (name === "program" || name === "semester") {
+      setFormData({
+        ...formData,
+        [name]: value,
+        course: '', // Reset course when program or semester changes
+      });
+    } else if (name === "course") {
+      setFormData({
+        ...formData,
+        course: value,
+      });
+    }
+  };
+
+
+  // Inside your component's render function
+console.log("Course Value:", formData.course);
+
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:8080/api/nominations/apply', formData)
+      .then((response) => {
+        console.log('User created:', response.data);
+        setOpenAlert(true);
+        setAlertSeverity('success');
+        setAlertMessage('Application Sent!');
+        // Handle success, display success message or redirect if needed
+        setTimeout(() => {
+          navigate('/users'); // Replace '/new-page-url' with the actual URL you want to navigate to
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error('Error creating user:', error);
+        // Handle error, display error message
+      });
+    }
+
+    const [open, setOpen] = useState(false); // Changed the state variable name to setOpen
+    const functionOpenPopup = () => { // Changed the function name to start with "use"
+        setOpen(true); // Changed the function to use setOpen
+    }
+    const closePopup = () => { // Changed the function name to start with "use"
+        setOpen(false); // Changed the function to use setOpen
+    }
+    const handleReset = () => {
+      setFormData({
+        program: '',
+        semester:'',
+        course: '',
+      });
     };
 
-    const isAccepted = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'Accepted';
-    };
-
-    const isRejected = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'Rejected';
-    };
-
-    const isPending = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'Pending';
-    };
-
-    const isFunctionColumn = (columnName) => {
-        return columnName === 'Function';
-    };
-
-    const isRequestColumn = (columnName) => {
-        return columnName === 'Request';
-    };
-
-    const [rowsPerPage, setRowsPerPage] = useState(5); // Number of rows per page
-    const [page, setPage] = useState(0); // Current page number
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0); // Reset the page number when rows per page changes
-    };
-    const startRowIndex = page * rowsPerPage;
-    const endRowIndex = startRowIndex + rowsPerPage;
-    const visibleRows = data.slice(startRowIndex, endRowIndex);
-
-return (
-    <>
-        {/* Header */}
-        <div style={{
-            display: 'flex',
-            borderRadius: '7px',
-            background: 'linear-gradient(270deg, #49A3F1 0%, #1A73E8 100%)',
-            boxShadow: '0px 4px 14px 0px rgba(0, 0, 0, 0.22)',
-            color: '#FFFFFF',
-            paddingRight: '20px',
-            paddingLeft: '20px',
-            width: '72%',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            position: 'absolute',
-            top: 200,
-            left: 355,
-            zIndex: 1,
-        }}>
-            <h3>Nominations</h3>
-            <AddCircleIcon sx={{
-                marginLeft: 'auto',
-                marginTop: 'auto',
-                marginBottom: 'auto',
-                color: '#FFFFFF',
-                fontSize: '30px',
-                filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15))',
-                cursor: 'pointer',
-                transition: '0.3s',
-                ":hover": {
-                    transform: 'rotate(90deg)'
-                }
-            }} />
-        </div>
-
-{/* Table */}
-        <TableContainer component={Paper} sx={{
-            backgroundColor: '#FFFFFF',
-            position: 'relative',
-            top: -100,
-            zIndex: 0,
-            paddingTop: 8,
-        }}>
-
-        {/* Toggle buttons */}
-        <ToggleButtonGroup
-            value={alignment}
-            exclusive
-            onChange={handleChange}
-            aria-label="Platform"
+    return (
+        <div style={{textAlign:'center'}}>
+      
+            {/* <h1>Nomination Application</h1> */}
+            <Button onClick={functionOpenPopup} color="primary" variant="contained"
             sx={{
-                color: "#343A40",
-                backgroundColor: "#DEE2E6",
-                filter: 'drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25))',
-                borderRadius: 1,
-                height: 30,
-                float: 'right',
-                marginRight: 2.5,
+              position: 'absolute', // Position absolutely
+              top: '90px', // Place it at the top
+              right: '20px', // Place it on the left
+              margin: '16px', // Add margin for spacing
             }}
-        >
-            <ToggleButton value="Accepted" sx={{
-                border: 'none',
-                fontSize: 10,
-                color: '#343A40',
-                fontFamily: 'Inter',
-                borderRight: '1px solid rgba(0, 0, 0, 0.1)',
-                transition: '0.3s',
-            }}>
-                Accepted
-            </ToggleButton>
-            <ToggleButton value="Rejected" sx={{
-                border: 'none',
-                fontSize: 10,
-                color: '#343A40',
-                fontFamily: 'Inter',
-                borderRight: '1px solid rgba(0, 0, 0, 0.1)',
-                transition: '0.3s',
-            }}>
-                Rejected
-            </ToggleButton>
-            <ToggleButton value="Pending" sx={{
-                border: 'none',
-                fontSize: 10,
-                color: '#343A40',
-                fontFamily: 'Inter',
-                transition: '0.3s',
-            }}>
-                Pending
-            </ToggleButton>
-        </ToggleButtonGroup>
+            >Apply for a Course
+            </Button>
+            <Dialog 
+            // fullScreen 
+            open={open} onClose={closePopup} fullWidth maxWidth="md" >
+              <form onSubmit={handleSubmit}>
+            <Grid container direction="row" >
+              <Grid container xs={4} sx={{backgroundColor:"#1A73E8"}}>
+                <SideImageComponent />
+              </Grid>
+              <Grid xs={8}>
+              <IconButton onClick={closePopup} style={{float:'right', marginBottom:2 }}><CloseIcon color="primary" /></IconButton>
+             <Box sx={{
+                      backgroundColor:'black',
+                      textDecorationColor:'white',
+                      mt:7,  
+                      maxWidth:200,
+                      height:30,
+                      borderTopRightRadius:50,
+                      borderBottomRightRadius:50,
+                      textAlign:"center"
+                          }}>
+                  <Typography paddingTop={"2px"} color={"white"}>Apply for a Course</Typography></Box>
+                 {/* Added a closing tag for CloseIcon */}
+                <DialogContent>
+                    {/* <DialogContentText>Do you want to remove this user?</DialogContentText> */}
+                    <Stack spacing={2} margin={2}>
+                    <Grid container spacing={2}>
+                    
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+              
+              <InputLabel id="demo-simple-select-label" required>Program</InputLabel>
+                <Select
+                  required
+                  label="Program"
+                  id="progam"
+                  value={formData.program}
+                  onChange={handleChange}
+                  name="program"
+                >
+                    <MenuItem value={'MCS'}>Master of Computer Science</MenuItem>
+                    <MenuItem value={'MIT'}>Master of Information Technology</MenuItem>
+                    <MenuItem value={'MIS'}>Master of Information Security</MenuItem>
+                    <MenuItem value={'MBA'}>Master of Business Analytics</MenuItem>
+                </Select>
+                </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+              
+                <InputLabel id="demo-simple-select-label" required>Semester</InputLabel>
+                <Select
+                  required
+                  label="Semester"
+                  id="semester"
+                  value={formData.semester}
+                  onChange={handleChange}
+                  name="semester">
+                    <MenuItem value={'1'}>Semester 1</MenuItem>
+                    <MenuItem value={'2'}>Semester 2</MenuItem>
+                    <MenuItem value={'3'}>Semester 3</MenuItem>
+                    <MenuItem value={'4'}>Semester 4</MenuItem>
+                </Select>
+                </FormControl>
+            </Grid>
+              <Grid item xs={12}>
+              <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label" required>Course</InputLabel>
 
-        
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        {columns.map((column) => (
-                            <TableCell key={column} sx={{
-                                color: '#CCC9C9',
-                                fontFamily: 'Roboto',
-                                fontSize: '10px',
-                                fontStyle: 'normal',
-                                fontWeight: '800',
-                                paddingTop: 4,
-                                paddingLeft: 3
-                            }}>
-                                {column}
-                            </TableCell>
-                        ))}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {visibleRows.map((row, rowIndex) => (
-                        <TableRow key={rowIndex}>
-                            {columns.map((column, colIndex) => (
-                                <TableCell key={`${rowIndex}-${colIndex}`}
-                                sx={{
-                                    paddingLeft: 3,
-                                    color: '#7B809A',
-                                    fontFamily: 'Roboto',
-                                    fontSize: '12px',
-                                    fontWeight: '700',
-                                    paddingTop: 2.3,
-                                    paddingBottom: 2.3,
-                                }}>
-                                    {isAccepted(column, row[column]) ? (
-                                        <div style={{
-                                            background: 'linear-gradient(180deg, #66BB6A 0%, #43A047 100%)',
-                                            borderRadius: 50,
-                                            color: '#FFF',
-                                            width: 80,
-                                            fontFamily: 'Roboto',
-                                            fontSize: '12px',
-                                            fontWeight: '900',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            paddingTop: 2,
-                                        }}>{row[column]}</div>
-                                    ) : isRejected(column, row[column]) ? (
-                                            <div style={{
-                                                background: 'black',
-                                                borderRadius: 50,
-                                                color: '#FFF',
-                                                width: 80,
-                                                fontFamily: 'Roboto',
-                                                fontSize: '12px',
-                                                fontWeight: '900',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                paddingTop: 2,
-                                            }}>{row[column]}</div>
-                                    ) : isPending(column, row[column]) ? (
-                                            <div style={{
-                                                background: 'orange',
-                                                borderRadius: 50,
-                                                color: '#FFF',
-                                                width: 80,
-                                                fontFamily: 'Roboto',
-                                                fontSize: '12px',
-                                                fontWeight: '900',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                paddingTop: 2,
-                                            }}>{row[column]}</div>
-                                    ) : isFunctionColumn(column) ? (
-                                        <div>
-                                            <span>{row[column]}</span><br />
-                                            <span style={{
-                                                color: '#555',
-                                                fontSize: '9px',
-                                                fontWeight: '400'
-                                            }}>UCSC</span>
-                                        </div>
-                                    ) : isRequestColumn(column) ? (
-                                        <div style={{
-                                            display: 'flex'
-                                        }}>
-                                            <div style={{
-                                                marginRight: 10,
-                                                display: 'flex',
-                                                alignItems: 'center'
-                                            }}>
-                                                <img src={user} width={30} height={30} alt="user" />
-                                            </div>
-                                            <div>
-                                                <span style={{
-                                                    color: '#000',
-                                                    fontSize: '14px',
-                                                    fontWeight: '500'
-                                                }}>{row[column]}</span>
-                                                <br />
-                                                {/* <span style={{
-                                                    color: '#4A4949',
-                                                    fontSize: '10px',
-                                                    fontWeight: '400'
-                                                }}>john@gmail.com</span> */}
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        row[column]
-                                    )}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                { 
+                    formData.program === 'MCS' && formData.semester === '1' && (
+                      
+                      <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'MCS 1201'}>MCS1201 - Advanced Algorithms</MenuItem>
+                          <MenuItem value={'MCS 1202'}>MCS1202 - Advanced Software Engineering</MenuItem>
+                          <MenuItem value={'MCS 1203'}>MCS1203 - Advanced Database Systems</MenuItem>
+                          <MenuItem value={'MCS 1204'}>MCS1204 - Selected Topics in Computer Science</MenuItem>
+                          <MenuItem value={'MCS 1205'}>MCS1205 - Principles of Programming Languages</MenuItem>
+                      </Select>
+                    )
+                }
+                                
+                {
+                    formData.program === 'MCS' && formData.semester === '2' && (
+                      
+                        <Select
+                          required
+                          label="Course"
+                          id="course"
+                          value={formData.course}
+                          onChange={handleChange}
+                          name="course">
+                            <MenuItem value={'MCS 2201'}>MCS2201 - Information Systems Security</MenuItem>
+                            <MenuItem value={'MCS 2202'}>MCS2202 - Advanced Concepts in Data Communications Networks</MenuItem>
+                            <MenuItem value={'MCS 2203'}>MCS2203 - Data Analytics & Machine Learning</MenuItem>
+                            <MenuItem value={'MCS 2204'}>MCS2204 - Theoretical Computing</MenuItem>
+                        </Select>
+                    )
+                }
 
-        {/* Table Pagination */}
-        <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={data.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-    </>
-    
-);
+                {
+                    formData.program === 'MCS' && formData.semester === '3' && (
 
-}
+                        <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'MCS 3201'}>MCS3201 - Intelligent Systems</MenuItem>
+                          <MenuItem value={'MCS 3202'}>MCS3202 - Systems Modelling & Simulation</MenuItem>
+                          <MenuItem value={'MCS 3205'}>MCS3205 - Distributed Systems</MenuItem>
+                          <MenuItem value={'MCS 3206'}>MCS3206 - Advanced Computer Graphics and Gaming</MenuItem>
+                          <MenuItem value={'MCS 3207'}>MCS3207 - Bioinformatics</MenuItem>
+                          <MenuItem value={'MCS 3208'}>MCS3208 - Research Methods</MenuItem>
+                        </Select>
+                    )
+                }
 
-export default AttendanceComponent;
+{ 
+                    formData.program === 'MCS' && formData.semester === '4' && (
+                      
+                      <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'MCS 4201'}>MCS4201 - Cognitive Systems</MenuItem>
+                          <MenuItem value={'MCS 4202'}>MCS4202 - Embedded Systems</MenuItem>
+                          <MenuItem value={'MCS 4203'}>MCS4203 - Image Processing and Vision</MenuItem>
+                          <MenuItem value={'MCS 4204'}>MCS4204 - Software Project Management and Quality Assurance</MenuItem>
+                          <MenuItem value={'MCS 4205'}>MCS4205 - Natural Algorithms</MenuItem>
+                          <MenuItem value={'MCS 4206'}>MCS4206 - Mobile Computing</MenuItem>
+                          <MenuItem value={'MCS 4207'}>MCS4207 - Enterprise Web Architecture</MenuItem>
+                      </Select>
+                    )
+                }
+                                
+                {
+                    formData.program === 'MIT' && formData.semester === '1' && (
+                      
+                        <Select
+                          required
+                          label="Course"
+                          id="course"
+                          value={formData.course}
+                          onChange={handleChange}
+                          name="course">
+                            <MenuItem value={'MIT 1201'}>MIT1201 - Program Design and Programming</MenuItem>
+                            <MenuItem value={'MIT 1202'}>MIT1202 - Computer Systems</MenuItem>
+                            <MenuItem value={'MIT 1203'}>MIT1203 - Database Management Systems</MenuItem>
+                            <MenuItem value={'MIT 1204'}>MIT1204 - Systems Analysis and Modelling</MenuItem>
+                        </Select>
+                    )
+                }
+                
+                {
+                    formData.program === 'MIT' && formData.semester === '2' && (
+
+                        <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'MIT 2201'}>MIT2201 - Computer Networking</MenuItem>
+                          <MenuItem value={'MIT 2202'}>MIT2202 - Software Engineering</MenuItem>
+                          <MenuItem value={'MIT 2203'}>MIT2203 - Data and Network Security</MenuItem>
+                          <MenuItem value={'MIT 2204'}>MIT2204 - Agile Software Development</MenuItem>
+                          <MenuItem value={'MIT 2205'}>MIT2205 - IT Innovation</MenuItem>
+                        </Select>
+                    )
+                }
+
+{ 
+                    formData.program === 'MIT' && formData.semester === '3' && (
+                      
+                      <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'MIT 3202'}>MIT3202 - Project Management & Professional Issues in IT</MenuItem>
+                          <MenuItem value={'MIT 3203'}>MIT3203 - The Foundations of e-Learning</MenuItem>
+                          <MenuItem value={'MIT 3204'}>MIT3204 - Data Mining and Warehousing</MenuItem>
+                          <MenuItem value={'MIT 3205'}>MIT3205 - User Interface Design</MenuItem>
+                          <MenuItem value={'MIT 3206'}>MIT3206 - Mobile Computing</MenuItem>
+                      </Select>
+                    )
+                }
+                                
+                {
+                    formData.program === 'MIT' && formData.semester === '4' && (
+                      
+                        <Select
+                          required
+                          label="Course"
+                          id="course"
+                          value={formData.course}
+                          onChange={handleChange}
+                          name="course">
+                            <MenuItem value={'MIT 4201'}>MIT4201 - Software Quality Assurance</MenuItem>
+                            <MenuItem value={'MIT 4202'}>MIT4202 - IT Strategy and Policy</MenuItem>
+                            <MenuItem value={'MIT 4203'}>MIT4203 - Business Statistics and Operational Research</MenuItem>
+                            <MenuItem value={'MIT 4204'}>MIT4204 - e-Business Applications and Strategies</MenuItem>
+                        </Select>
+                    )
+                }
+
+                {
+                    formData.program === 'MIS' && formData.semester === '1' && (
+
+                        <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'MIS 1201'}>MIS1201 - Principles of Information Security</MenuItem>
+                          <MenuItem value={'MIS 1202'}>MIS1202 - Cryptographic Systems</MenuItem>
+                          <MenuItem value={'MIS 1203'}>MIS1203 - Information Risk Management and Audit</MenuItem>
+                          <MenuItem value={'MIS 1204'}>MIS1204 - Network Security</MenuItem>
+                          <MenuItem value={'MIS 1205'}>MIS1205 - Special Topics in Information Security</MenuItem>
+                        </Select>
+                    )
+                }
+
+{ 
+                    formData.program === 'MIS' && formData.semester === '2' && (
+                      
+                      <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'MIS 3201'}>MIS3201 - Information and Coding Theory</MenuItem>
+                          <MenuItem value={'MIS 3202'}>MIS3202 - Secure Software Systems</MenuItem>
+                          <MenuItem value={'MIS 3203'}>MIS3203 - Information Security Governance</MenuItem>
+                          <MenuItem value={'MIS 3204'}>MIS3204 - Incident Management</MenuItem>
+                      </Select>
+                    )
+                }
+                                
+                {
+                    formData.program === 'MIS' && formData.semester === '3' && (
+                      
+                        <Select
+                          required
+                          label="Course"
+                          id="course"
+                          value={formData.course}
+                          onChange={handleChange}
+                          name="course">
+                            <MenuItem value={'MIS 2201'}>MIS2201 - Database Security</MenuItem>
+                            <MenuItem value={'MIS 2202'}>MIS2202 - Digital Forensics</MenuItem>
+                            <MenuItem value={'MIS 2203'}>MIS2203 - Security in Mobile and Wireless Networks</MenuItem>
+                            <MenuItem value={'MIS 2204'}>MIS2204 - Data Mining for Information Security</MenuItem>
+                        </Select>
+                    )
+                }
+                
+                {
+                    formData.program === 'MIS' && formData.semester === '4' && (
+
+                        <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'MIS 4201'}>MIS4201 - Cyber Security and Law</MenuItem>
+                          <MenuItem value={'MIS 4202'}>MIS4202 - Multimedia Security and Digital Rights Management</MenuItem>
+                          <MenuItem value={'MIS 4203'}>MIS4203 - Independent Studies in Information Security</MenuItem>
+                        </Select>
+                    )
+                }
+
+{
+                    formData.program === 'MBA' && formData.semester === '1' && (
+
+                        <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'BA 1001'}>BA1001 - Business Statistics</MenuItem>
+                          <MenuItem value={'BA 1002'}>BA1002 - Organizational Data Management</MenuItem>
+                          <MenuItem value={'BA 1003'}>BA1003 - Fundamentals of Data Science and Business Analytics</MenuItem>
+                          <MenuItem value={'BA 1004'}>BA1004 - Data Programming</MenuItem>
+                        </Select>
+                    )
+                }
+
+{ 
+                    formData.program === 'MBA' && formData.semester === '2' && (
+                      
+                      <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'BA 2001'}>BA2001 - Statistical Inference for Analytics</MenuItem>
+                          <MenuItem value={'BA 2002'}>BA2002 - Machine Learning and Pattern Recognition</MenuItem>
+                          <MenuItem value={'BA 2003'}>BA2003 - Data Warehousing and Mining</MenuItem>
+                          <MenuItem value={'BA 2004'}>BA2004 - Information Visualization</MenuItem>
+                      </Select>
+                    )
+                }
+                                
+                {
+                    formData.program === 'MBA' && formData.semester === '3' && (
+                      
+                        <Select
+                          required
+                          label="Course"
+                          id="course"
+                          value={formData.course}
+                          onChange={handleChange}
+                          name="course">
+                            <MenuItem value={'BA 3001'}>BA3001 - Modelling and Simulation of Data</MenuItem>
+                            <MenuItem value={'BA 3002'}>BA3002 - Predictive Analytics</MenuItem>
+                            <MenuItem value={'BA 3003'}>BA3003 - Computational Social Science</MenuItem>
+                            <MenuItem value={'BA 3004'}>BA3004 - Applied Optimization</MenuItem>
+                            <MenuItem value={'BA 3005'}>BA3005 - Open Source Intelligence</MenuItem>
+                            <MenuItem value={'BA 3006'}>BA3006 - Text Analytics</MenuItem>
+                        </Select>
+                    )
+                }
+                
+                {
+                    formData.program === 'MBA' && formData.semester === '4' && (
+
+                        <Select
+                        required
+                        label="Course"
+                        id="course"
+                        value={formData.course}
+                        onChange={handleChange}
+                        name="course">
+                          <MenuItem value={'BA 4001'}>BA4001 - Big Data Analytics</MenuItem>  
+                          <MenuItem value={'BA 4002'}>BA4002 - Analytics for Process Improvement</MenuItem>
+                          <MenuItem value={'BA 4003'}>BA4003 - Intelligent Agents in Gaming</MenuItem>
+                          <MenuItem value={'BA 4004'}>BA4004 - Confidential Information and Legal Regime</MenuItem>
+                          <MenuItem value={'BA 4005'}>BA4005 - Independent Studies in Business Analytics</MenuItem>
+                        </Select>
+                    )
+                }
+                </FormControl>
+              </Grid>
+            </Grid>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{ mt: 3, mr: 2, minWidth: 150, minHeight: 30, justifyItems: 'left',fontSize:18 }}
+                                >
+                                    Apply
+                                </Button>
+                                <Button
+                                    type="reset"
+                                    variant="contained"
+                                    onClick={handleReset}
+                                    sx={{ mt: 3, minWidth: 150, minHeight: 30 ,justifyItems: 'left', fontSize:18, backgroundColor: '#7B809A', ":hover":{background:'#495361'}}}
+                                >
+                                    Reset
+                                </Button>
+                            
+                            </div>
+                    </Stack>
+                </DialogContent>
+                <DialogActions>
+                {/* <Button color="success" variant="contained">Yes</Button>
+                    <Button onClick={closePopup} color="error" variant="contained">Close</Button> */}
+                </DialogActions>
+                </Grid>
+              </Grid>
+              </form>
+                <AlertBox 
+                open={openAlert}
+                onClose={() => setOpenAlert(false)}
+                severity={alertSeverity}
+                message={alertMessage}
+                />
+            </Dialog>
+        </div>
+    );
+  }
+export default Nomination; // Changed the export name to match the component name

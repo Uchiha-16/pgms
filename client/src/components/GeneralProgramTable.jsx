@@ -10,7 +10,7 @@ import TablePagination from '@mui/material/TablePagination';
 import { Box } from '@mui/system';
 
 
-const GeneralProgramTable = ({ columns, program }) => {
+const GeneralProgramTable = ({ columns, program, data }) => {
     
     const [alignment, setAlignment] = React.useState('');
 

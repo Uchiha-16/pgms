@@ -5,44 +5,46 @@ import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
 import { useEffect, useState } from "react"
-import useAxiosMethods from '../hooks/useAxiosMethods';
+import axios from '../api/axios';
 import AddCourse from '../components/AddCourseComponent';
 
-const users_URL = "/Users/getUsers"
+const courses_URL = "/courses/viewcourses"
 
 const Layout1 = () => {
-    const [users, setUsers] = useState([]);
-    const {get} = useAxiosMethods();
-    
-    useEffect(() => {
-        
-            try {
-                get(users_URL, setUsers);
+    const [courses, setCourses] = useState([]);
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get(courses_URL); // Change the URL according to your backend setup
+                console.log(response.data.coursesList);
+                setCourses(response.data.coursesList);
             } catch (error) {
-                console.log(error)
+                console.error("Error fetching users:", error);
             }
+        };
+
+        fetchUsers();
     }, []);
 
-    const columns = ['Semester', 'Code', 'Course Name', 'Lecturer', 'Credits'];
-    // const data = users.map(user => ({
-    //     NAME: `${user.firstName} ${user.lastName}`,
-    //     ROLE: user.role,
-    //     STATUS: 'ONLINE', // Assuming you want to display a static status for all users
-    //     EMAIL: user.email,
-    //     ACTION: 'Edit',
-    // }));
+    const columns = ['Semester', 'Code', 'Course Name', 'Lecture Hall', 'Credits'];
+    const data = users.map(user => ({
+        NAME: `${user.firstName} ${user.lastName}`,
+        ROLE: user.role,
+        STATUS: 'ONLINE', // Assuming you want to display a static status for all users
+        EMAIL: user.email,
+        ACTION: 'Edit',
+    }));
     const program = [
         {
             title: 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE',
             pc: 'Program Coordinator',
             pcName: 'Mr. K P M K Silva',
-        }
-        
+        },
     ];
 
     return (
-        <GeneralProgramTable columns={columns} program={program} />
+        <GeneralProgramTable columns={columns} program={program} data={data} />
     );
 };
 

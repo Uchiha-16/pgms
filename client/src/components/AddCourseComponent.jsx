@@ -14,7 +14,7 @@ import AlertBox from './GeneralAlert';
 import { Button, Box, Dialog, DialogActions, DialogContent, IconButton, Stack, TextField, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close"
 
-const Popup = () => { // Changed the function name to start with uppercase "P"
+const Course = () => { // Changed the function name to start with uppercase "P"
   const [formData, setFormData] = useState({
     courseNo: '',
     courseName: '',
@@ -30,11 +30,12 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
   const [alertMessage, setAlertMessage] = useState('');
 
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
   
     // For the "role" field, we need to handle its value differently
-    if (name === 'role') {
+    if (name === 'programId') {
       // Access the selected value using event.target.value directly
       setFormData({ ...formData, [name]: e.target.value });
     } else {
@@ -47,7 +48,7 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
     console.log(JSON.stringify(formData));
 
     e.preventDefault();
-    axios.post("/course/addcourse", formData)
+    axios.post("/courses/add", formData)
       .then((response) => {
         console.log(response);
         setOpenAlert(true);
@@ -126,9 +127,9 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
                   required
                   label="Program"
                   id="progam"
-                  value={formData.program}
+                  value={formData.programId}
                   onChange={handleChange}
-                  name="program"
+                  name="programId"
                 >
                     <MenuItem value={'MCS'}>Master of Computer Science</MenuItem>
                     <MenuItem value={'MIT'}>Master of Information Technology</MenuItem>
@@ -241,4 +242,4 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
         </div>
     );
   }
-export default Popup; // Changed the export name to match the component name
+export default Course; // Changed the export name to match the component name

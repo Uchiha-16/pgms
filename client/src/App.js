@@ -21,24 +21,10 @@ import ResetPassword from './layouts/resetPassword';
 
 function App() {
   return (
-    // <Router>
-    //   <div className="App">
-    //     <Routes>
-    //       <Route path="/dashboard" element={<Dashboard/>} />
-    //       <Route path="/addUsers" element={<AddUser/>} />
-    //       <Route path="/nominations" element={<AddNominations/>} />
-    //       <Route path="/users" element={<Users/>} />
-    //       <Route path="/" element={<Login/>} />
-    //       <Route path="/profile" element={<Profile/>} />
-    //       <Route path="/notifications" element={<Notifications/>} />
-    //     </Routes>
-    //   </div>
-    // </Router>
-
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public routes */}
-        {/* <Route path='login' element={<Login />} /> */}
+        <Route path='login' element={<Login />} />
         <Route path='linkpage' element={<LinkPage />} />
         <Route path='unauthorized' element={<Unauthorized />} />
         <Route path='/' element={<Login />} />
@@ -47,8 +33,8 @@ function App() {
         <Route path="/resetPassword" element={<ResetPassword />} />
 
         {/* private */}
-        {/* <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} > */}
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} >
             <Route path='home' element={<Home />} />
             <Route path='/nominations' element={<AddNominations />} />
             <Route path='/users' element={<Users/>}/>
@@ -61,11 +47,11 @@ function App() {
             
 
 
-          {/* </Route>
-          <Route element={<RequireAuth allowedRoles={["Staff"]}/>} > */}
+          </Route>
+          <Route element={<RequireAuth allowedRoles={["Staff"]}/>} >
             <Route path='/addUsers' element={<AddUser/>}/>
-          {/* </Route>
-        </Route> */}
+          </Route>
+        </Route>
 
 
       </Route>

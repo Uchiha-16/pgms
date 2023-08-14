@@ -10,7 +10,7 @@ const TimeTableLayout = () => {
         <Box>
             <Grid container spacing={2}>
                 <Grid item xs={2.5}>
-                    {/* <NavBarComponent /> */}
+                    <NavBarComponent />
                 </Grid>
                 <Grid container xs={9.3} sx={{
                     display: 'grid',

@@ -5,6 +5,7 @@ import com.postgresql.pgms.Service.EmailService;
 import com.postgresql.pgms.assets.EmailTemplate;
 import com.postgresql.pgms.config.JwtService;
 import com.postgresql.pgms.exception.CustomErrorException;
+import com.postgresql.pgms.model.ResetToken;
 import com.postgresql.pgms.model.Token;
 import com.postgresql.pgms.repo.ResetRepository;
 import com.postgresql.pgms.repo.TokenRepository;
@@ -167,6 +168,16 @@ public class AuthenticationService {
                 .revoked(false)
                 .build();
         tokenRepository.save(token);
+    }
+
+    private void saveResetToken(Users user, String jwtToken) {//============================================================================================================================
+        var token = ResetToken.builder()//create dto
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.RESET_PASSWORD)
+                .expired(false)
+                .build();
+        resetRepository.save(token);
     }
 
     public void refreshToken(

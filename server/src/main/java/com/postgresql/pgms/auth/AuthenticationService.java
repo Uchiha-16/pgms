@@ -96,6 +96,33 @@ public class AuthenticationService {
                 .build();
     }
 
+    public AuthenticationResponse resetPassword(HttpServletResponse response, String password, String token) {//========================================================================================
+
+        var reset = resetRepository.findByToken(token).orElseThrow(() -> new CustomErrorException("Token Not Found"));//create exception
+
+        if (reset.isExpired()) {
+            return AuthenticationResponse.builder()
+                    .message("Token Expired!!!!!!!!")
+                    .build();
+        }
+
+//        if (password.equals("Token Check")) {
+//            return GlobalService.response("Alert", "Token Valid");//use authresponse
+//        }
+
+        var email = jwtService.extractEmail(token);
+        var user = userRepository.findByEmail(email).orElseThrow(() -> new CustomErrorException("User Not Found"));//create exception
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+
+        reset.setExpired(true);
+        resetRepository.save(reset);//reset repo
+
+        return AuthenticationResponse.builder()
+                .message("Success password reseted!!!!!!!!")
+                .build();
+    }
+
     private void createCookie(HttpServletResponse response, String refreshToken, int refreshExpiration) {
         Cookie refreshCookie = new Cookie("refreshToken",refreshToken);
         refreshCookie.setMaxAge(refreshExpiration);

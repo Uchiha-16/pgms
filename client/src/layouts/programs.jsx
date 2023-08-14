@@ -6,6 +6,7 @@ import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
 import { useEffect, useState } from "react"
 import useAxiosMethods from '../hooks/useAxiosMethods';
+import AddCourse from '../components/AddCourseComponent';
 
 const users_URL = "/Users/getUsers"
 
@@ -63,6 +64,7 @@ class programs extends Component {
                         {/*=============================== Main ===============================*/}
                         <Grid item>
                             {/* content */}
+                            <AddCourse />
                             <Layout1 />
                         </Grid>
                         {/*============================== Footer ==============================*/}

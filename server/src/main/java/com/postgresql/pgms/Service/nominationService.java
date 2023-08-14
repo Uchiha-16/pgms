@@ -2,7 +2,6 @@ package com.postgresql.pgms.Service;
 
 import com.postgresql.pgms.DTO.NominationListResponseDTO;
 import com.postgresql.pgms.DTO.NominationSaveDTO;
-import com.postgresql.pgms.DTO.NominationDTO;
 import com.postgresql.pgms.model.Nominations;
 import com.postgresql.pgms.repo.NominationRepo;
 import lombok.AllArgsConstructor;

@@ -5,6 +5,7 @@ import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
 import LoginForm from '../components/LoginForm' // Import the LoginForm component
+import { useNavigate } from 'react-router-dom';
 
 
 const theme = createTheme({
@@ -39,6 +40,14 @@ const Boxbg = styled.div`
 
 
 const LoginPage = () => {
+
+  const navigate = useNavigate();
+
+  const handleForgotPasswordClick = () => {
+    navigate('/forgotpassword'); // Redirect on button click
+  };
+
+
   return (
     <ThemeProvider theme={theme}>
       <AnimatedGradientBackground><Boxbg
@@ -159,6 +168,7 @@ const LoginPage = () => {
             <Button
               variant="text"
               color="primary"
+              onClick={handleForgotPasswordClick}
               sx={{
                 width: '100%', // Make the button take the full width
                 marginLeft: '30%', // Move the button to the right

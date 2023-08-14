@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
+import { Link } from 'react-router-dom';
 
 
 const theme = createTheme({
@@ -163,9 +164,9 @@ const resetPassword = () => {
             />
             <br /><br />
             <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
-              Send
+              Change
             </Button><br />
-            <Button variant="contained" color="primary" fullWidth sx={{
+            <Link to="/" style={{ textDecoration: 'none' }}><Button variant="contained" color="primary" fullWidth sx={{
               backgroundColor: '#747b8a',
               fontFamily: 'Inter, sans-serif',
               fontSize: '15px',
@@ -175,7 +176,7 @@ const resetPassword = () => {
               },
             }}>
               Cancel
-            </Button>
+            </Button></Link>
           </Paper>
         </Container></Grow>
       </Boxbg></AnimatedGradientBackground>

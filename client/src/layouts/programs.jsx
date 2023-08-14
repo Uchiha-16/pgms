@@ -23,24 +23,57 @@ const Layout1 = () => {
             }
     }, []);
 
-    const columns = ['Semester', 'Code', 'Course Name', 'Lecturer', 'Credits'];
-    // const data = users.map(user => ({
-    //     NAME: `${user.firstName} ${user.lastName}`,
-    //     ROLE: user.role,
-    //     STATUS: 'ONLINE', // Assuming you want to display a static status for all users
-    //     EMAIL: user.email,
-    //     ACTION: 'Edit',
-    // }));
+    const columns = ['Semester', 'Code', 'Course Name', 'Lecture Hall', 'Credits'];
+    
     const program = [
         {
             title: 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE',
             pc: 'Program Coordinator',
             pcName: 'Mr. K P M K Silva',
+        },
+        {
+            title: 'MASTER OF INFORMATION SYSTEMS',
+            pc: 'Program Coordinator',
+            pcName: 'Mr. K P M K Silva',
         }
     ];
 
+    const dataP1 = [
+        {
+            'Semester': '1',
+            'Code': 'MCS1201',
+            'Course Name': 'Advanced Algorithms',
+            'Lecturer': 'W002',
+            'Credits': '3',
+        },
+        {
+            'Semester': '1',
+            'Code': 'MCS1202',
+            'Course Name': 'Advanced Software Engineering',
+            'Lecturer': 'W002',
+            'Credits': '3',
+        }
+    ];
+
+    const dataP2 = [
+        {
+            'Semester': '1',
+            'Code': 'MIS1201',
+            'Course Name': 'Principles of Information Security',
+            'Lecturer': 'W002',
+            'Credits': '3',
+        },
+        {
+            'Semester': '1',
+            'Code': 'MIS1202',
+            'Course Name': 'Cryptographic Systems',
+            'Lecturer': 'W002',
+            'Credits': '3',
+        },
+    ];
+
     return (
-        <GeneralProgramTable columns={columns} program={program} />
+        <GeneralProgramTable columns={columns} program={program} dataP1={dataP1} dataP2={dataP2}/>
     );
 };
 

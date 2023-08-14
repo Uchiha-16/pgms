@@ -38,6 +38,11 @@ const Boxbg = styled.div`
 
 
 const forgotPassword = () => {
+
+  const handleBackClick = () => {
+    window.history.back(); // Navigate back using window.history
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <AnimatedGradientBackground><Boxbg
@@ -144,7 +149,9 @@ const forgotPassword = () => {
               ":hover": {
                 backgroundColor: '#495361',
               },
-              }}>
+              }}
+              onClick={handleBackClick} // Trigger navigation on button click
+              >
               Back
             </Button>
           </Paper>

@@ -5,6 +5,7 @@ import Dashboard from './layouts/dashboard';
 import AddUser from './layouts/addUsers';
 import Login from './layouts/login';
 import Users from './layouts/users';
+import Attendance from './layouts/attendance';
 import AddNominations from './layouts/addNominations';
 import Profile from './layouts/profile';
 import Notifications from './layouts/notifications';
@@ -49,6 +50,7 @@ function App() {
             <Route path='/users' element={<Users/>}/>
             <Route path='/profile' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/att' element={<Attendance />} />
             <Route path='/notifications' element={<Notifications />} />
             
 

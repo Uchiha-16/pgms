@@ -17,4 +17,10 @@ public class UserService {
         List<Object> usersList = repo.findAllUsers();
         return new UserListResponseDTO(usersList);
     }
+
+//get user by Id
+    public UserListResponseDTO getUserById(Integer id) {
+        List<Object> usersList = repo.findUserById(id);
+        return new UserListResponseDTO(usersList);
+    }
 }

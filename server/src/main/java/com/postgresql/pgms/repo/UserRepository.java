@@ -19,4 +19,10 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
     SELECT u.firstname , u.lastname, u.email , u.role FROM Users u ORDER BY u.id DESC
     """)
     List<Object> findAllUsers();
+
+    //get user by Id
+    @Query("""
+    SELECT u.firstname , u.lastname, u.email , u.role FROM Users u WHERE u.id = :id
+    """)
+    List<Object> findUserById(Integer id);
 }

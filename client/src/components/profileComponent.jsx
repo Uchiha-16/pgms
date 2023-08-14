@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, Typography, Paper } from '@mui/material';
 import TextField from '@mui/material/TextField'; // Import TextField
 import Button from '@mui/material/Button'; // Import Button
-import profile from '../assets/images/profile.png'; // Replace with the path to your background image
+import profile from '../assets/images/user.png'; // Replace with the path to your background image
 import { fontSize } from '@mui/system';
 
  

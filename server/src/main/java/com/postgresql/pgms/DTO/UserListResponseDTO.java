@@ -16,4 +16,3 @@ import java.util.List;
 public class UserListResponseDTO {
     private List<Object> usersList;
 }
-

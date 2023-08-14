@@ -81,9 +81,30 @@ function DashboardCard({ title, count, icon }) {
                     >   VIEW MORE
                         </Typography>
 
-                ) : (
+                ) :  title === "Programs" ? (
                         
                             <Typography
+                                component="span"
+                                variant="button"
+                                fontWeight="400"
+                                color={'#898989'}
+                                sx={{
+                                    cursor: 'pointer',
+                                    fontSize: '13px',
+                                    fontFamily: 'Inter',
+                                    fontWeight: 500,
+                                    transition: '0.3s',
+                                    ":hover":{
+                                        color: '#42424A'
+                                    }
+                                }}
+                                onClick={() => navigate("/programs")}
+                            >
+                                
+                               VIEW MORE
+                            </Typography>
+                ):(
+                    <Typography
                                 component="span"
                                 variant="button"
                                 fontWeight="400"
@@ -102,7 +123,8 @@ function DashboardCard({ title, count, icon }) {
                             >
                                VIEW MORE
                             </Typography>
-                            )}
+
+                    )}
                 </Typography>
             </Box>
         </Box>

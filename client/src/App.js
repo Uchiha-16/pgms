@@ -9,7 +9,6 @@ import Programs from './layouts/programs';
 import AddNominations from './layouts/addNominations';
 import Profile from './layouts/profile';
 import Notifications from './layouts/notifications';
-
 import Layout from './auth/Layout';
 import Home from './components/Home';
 import PersistLogin from './auth/PersistLogin';
@@ -58,6 +57,8 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />
+            <Route path='/programs' element={<Programs />} />
+
             
 
 

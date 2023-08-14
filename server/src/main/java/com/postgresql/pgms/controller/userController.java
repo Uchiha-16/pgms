@@ -1,5 +1,6 @@
 package com.postgresql.pgms.controller;
 
+import com.postgresql.pgms.DTO.UserDTO;
 import com.postgresql.pgms.Service.UserService;
 import com.postgresql.pgms.DTO.UserListResponseDTO;
 import com.postgresql.pgms.model.Users;
@@ -22,9 +23,9 @@ public class userController {
         return ResponseEntity.ok(service.listusers());
     }
 
-//    @GetMapping("/users/{id}")
-//    public ResponseEntity<Users> sayHello(@PathVariable Integer id){
-//        return ResponseEntity.ok(service.getUser(id));
-//    }
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserListResponseDTO> getUserByID(Integer id){
+        return ResponseEntity.ok(service.getUserById(id));
+    }
 }
 

@@ -3,8 +3,9 @@ import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import { Box, Grid } from '@mui/material/';
 import FooterComponent from '../components/FooterComponent';
+import ProfileComponent from '../components/ProfileComponent';
 
-class profile extends Component {
+class profile extends Component { 
     render() {
         return (
             <Box>
@@ -14,15 +15,17 @@ class profile extends Component {
                     </Grid>
                     <Grid container xs={9.3} sx={{
                         display: 'grid',
-                        gridTemplateRows: '16.5% auto 10%',
-                        height: '100vh',
+                        gridTemplateRows: '149px auto 10%',
                     }}>
+                        {/*============================== Header ==============================*/}
                         <Grid item>
                             <HeaderComponent />
                         </Grid>
+                        {/*=============================== Main ===============================*/}
                         <Grid item>
-                            {/* content */}
+                            <ProfileComponent />
                         </Grid>
+                        {/*============================== Footer ==============================*/}
                         <Grid item>
                             <FooterComponent />
                         </Grid>

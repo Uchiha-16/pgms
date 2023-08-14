@@ -20,14 +20,12 @@ public class UserDTO {
 
     private String contact;
 
-    public UserDTO(int id, String firstname, String lastname, String email, String password, Role role, String contact) {
-        this.id = id;
+    public UserDTO(String firstname, String lastname, String email, Role role) {
+
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.password = password;
         this.role = role;
-        this.contact = contact;
     }
 
     public long getID() { return id; }

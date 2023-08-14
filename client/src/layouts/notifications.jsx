@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import NotificationsComponent from "../components/NotificationsComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import NavbarComponent from "../components/NavbarComponent";
+import FooterComponent from "../components/FooterComponent";
 import { Box, Grid, Paper, Typography } from "@mui/material/";
+import { bottom } from "@popperjs/core";
 
 class NotificationsPage extends Component {
   constructor(props) {
@@ -32,17 +34,16 @@ class NotificationsPage extends Component {
             <NavbarComponent />
           </Grid>
           <Grid
-            item
             container
             xs={9.3}
-            sx={{ display: "grid", gridTemplateRows: "repeat(3, 1fr)" }}
+            sx={{ display: "grid", gridTemplateRows: "149px auto 10%" }}
           >
             <Grid item>
               <HeaderComponent />
             </Grid>
             <Grid item>
               {/* Content */}
-              <Grid container justifyContent="center">
+              <Grid container justifyContent="center" sx={{ paddingBottom: 20 }}>
                 <Grid item xs={12} sm={7}>
                   <Paper elevation={3} sx={{ p: 2 }}>
                     <Typography
@@ -60,7 +61,10 @@ class NotificationsPage extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item>{/* Other components */}</Grid>
+                        {/*============================== Footer ==============================*/}
+                        <Grid item>
+                            <FooterComponent />
+                        </Grid>
           </Grid>
         </Grid>
       </Box>

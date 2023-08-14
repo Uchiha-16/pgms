@@ -1,28 +1,31 @@
 package com.postgresql.pgms.controller;
 
 import com.postgresql.pgms.DTO.UserDTO;
-import com.postgresql.pgms.DTO.UserSaveDTO;
-import com.postgresql.pgms.Service.userService;
+import com.postgresql.pgms.Service.UserService;
+import com.postgresql.pgms.DTO.UserListResponseDTO;
+import com.postgresql.pgms.model.Users;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
 public class userController {
-    private userService userService;
 
-    @PostMapping(path = "/getUsers")
-    public List<UserDTO> getAllUsers(@RequestBody UserSaveDTO userSaveDTO){
-        List<UserDTO> allUsers = userService.getAllUsers();
-        return allUsers;
+    private final UserService service;
+
+    @GetMapping("/users")
+    public ResponseEntity<UserListResponseDTO> getUsers(){
+        return ResponseEntity.ok(service.listusers());
     }
 
-    @GetMapping(path = "/getUser/{id}")
-    public UserDTO getUserById(@PathVariable long id){
-        UserDTO userDTO = userService.getUserById(id);
-        return userDTO;
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserListResponseDTO> getUserByID(Integer id){
+        return ResponseEntity.ok(service.getUserById(id));
     }
 }
 

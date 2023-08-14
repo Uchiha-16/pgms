@@ -9,10 +9,10 @@ public class CourseDTO {
     private long courseId ;
     private String courseNo;
     private String courseName;
-    private long semester;
+    private Integer semester;
     private Integer credit;
     private String hallName;
-    private long programId;
+    private String programId;
 
     public long getCourseId() {
         return courseId;
@@ -42,7 +42,7 @@ public class CourseDTO {
         return semester;
     }
 
-    public void setSemester(long semester) {
+    public void setSemester(Integer semester) {
         this.semester = semester;
     }
 
@@ -62,11 +62,11 @@ public class CourseDTO {
         this.hallName = hallName;
     }
 
-    public long getProgramId() {
+    public String getProgramId() {
         return programId;
     }
 
-    public void setProgramId(long programId) {
+    public void setProgramId(String programId) {
         this.programId = programId;
     }
 }

@@ -15,9 +15,10 @@ public class courseController {
     private final courseService courseService;
 
     //addcourse
-    @PostMapping(path = "/addcourse")
+    @PostMapping(path = "/add")
     public ResponseEntity<String> addCourse(@RequestBody CourseSaveDTO courseSaveDTO){
-        return ResponseEntity.ok(courseService.addCourse(courseSaveDTO));
+        courseService.addCourse(courseSaveDTO);
+        return ResponseEntity.ok("Course added successfully.");
     }
 
     @GetMapping(path = "/viewcourses")

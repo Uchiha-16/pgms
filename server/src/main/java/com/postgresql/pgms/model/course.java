@@ -11,16 +11,16 @@ import lombok.NoArgsConstructor;
 @Table(name = "Course")
 public class course {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long courseId ;
     private String courseNo;
     private String courseName;
-    private long semester;
+    private Integer semester;
     private Integer credit;
     private String hallName;
-    private long programId;
+    private String programId;
 
-    public course(String courseNo, String courseName, long semester, Integer credit, String hallName, long programId) {
+    public course(String courseNo, String courseName, Integer semester, Integer credit, String hallName, String programId) {
         this.courseNo = courseNo;
         this.courseName = courseName;
         this.semester = semester;

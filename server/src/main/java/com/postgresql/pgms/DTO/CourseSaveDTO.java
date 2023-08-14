@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 public class CourseSaveDTO {
     private String courseNo;
     private String courseName;
-    private long semester;
+    private Integer semester;
     private Integer credit;
     private String hallName;
-    private long programId;
+    private String programId;
 
     public String getCourseNo() {
         return courseNo;
@@ -29,11 +29,11 @@ public class CourseSaveDTO {
         this.courseName = courseName;
     }
 
-    public long getSemester() {
+    public Integer getSemester() {
         return semester;
     }
 
-    public void setSemester(long semester) {
+    public void setSemester(Integer semester) {
         this.semester = semester;
     }
 
@@ -53,11 +53,11 @@ public class CourseSaveDTO {
         this.hallName = hallName;
     }
 
-    public long getProgramId() {
+    public String getProgramId() {
         return programId;
     }
 
-    public void setProgramId(long programId) {
+    public void setProgramId(String programId) {
         this.programId = programId;
     }
 }

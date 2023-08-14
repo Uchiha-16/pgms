@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Avatar, Typography, Paper } from '@mui/material';
-import TextField from '@mui/material/TextField'; // Import TextField
-import Button from '@mui/material/Button'; // Import Button
-import profile from '../assets/images/profile.png'; // Replace with the path to your background image
-
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import profile from '../assets/images/profile.png';
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
+  const [profileData, setProfile] = useState(/* Initial profile data here */);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const history = useHistory();
+
+  const handleDeleteProfile = () => {
+
+    setProfile(null);
+
+    // Redirect to the login page
+    history.push('/login'); // Redirect to the login page
+  };
 
   const paperStyle = {
     width: '70%', // Set the width and height to create a square card
@@ -132,6 +143,16 @@ function Profile() {
         <Button variant="outlined" style={editButtonStyle} onClick={handleEditToggle}>
             {isEditing ? 'Save' : 'Edit'}
           </Button>
+          <Button
+        variant="outlined"
+        color="secondary"
+        style={editButtonStyle}
+        onClick={handleDeleteProfile}
+      >
+        Delete Profile
+      </Button>
+      {/* Content after deletion */}
+      {isDeleted && <Typography variant="h6">Profile deleted successfully.</Typography>}
       </div>
       </div>
       </div>

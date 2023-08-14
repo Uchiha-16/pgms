@@ -31,6 +31,11 @@ const GeneralTable = ({ columns, data }) => {
         return columnName === 'NAME';
     };
 
+    const isRequestColumn = (columnName) => {
+        return columnName === 'Request';
+    };
+
+
     const [rowsPerPage, setRowsPerPage] = useState(5); // Number of rows per page
     const [page, setPage] = useState(0); // Current page number
     const handleChangePage = (event, newPage) => {
@@ -204,12 +209,6 @@ const GeneralTable = ({ columns, data }) => {
                                                         fontSize: '14px',
                                                         fontWeight: '500'
                                                     }}>{row[column]}</span>
-                                                    <br />
-                                                    <span style={{
-                                                        color: '#4A4949',
-                                                        fontSize: '10px',
-                                                        fontWeight: '400'
-                                                    }}>john@gmail.com</span>
                                                 </div>
                                             </div>
                                         ) : (

@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import NotificationsComponent from "../components/NotificationsComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import NavbarComponent from "../components/NavbarComponent";
+import FooterComponent from "../components/FooterComponent";
 import { Box, Grid, Paper, Typography } from "@mui/material/";
+import { bottom } from "@popperjs/core";
 
 class NotificationsPage extends Component {
   constructor(props) {
@@ -12,8 +14,6 @@ class NotificationsPage extends Component {
         { id: 1, message: "Dummy notification 1", open: true },
         { id: 2, message: "Dummy notification 2", open: true },
         { id: 3, message: "Dummy notification 3", open: true },
-        { id: 4, message: "Dummy notification 4", open: true },
-        { id: 5, message: "Dummy notification 5", open: true },
       ], // Initialize an array of dummy notifications
     };
   }
@@ -34,18 +34,17 @@ class NotificationsPage extends Component {
             <NavbarComponent />
           </Grid>
           <Grid
-            item
             container
             xs={9.3}
-            sx={{ display: "grid", gridTemplateRows: "repeat(3, 1fr)" }}
+            sx={{ display: "grid", gridTemplateRows: "149px auto 10%" }}
           >
             <Grid item>
               <HeaderComponent />
             </Grid>
             <Grid item>
               {/* Content */}
-              <Grid container justifyContent="center">
-                <Grid item xs={12} sm={7} sx={{ mt: -12 }}>
+              <Grid container justifyContent="center" sx={{ paddingBottom: 20 }}>
+                <Grid item xs={12} sm={7}>
                   <Paper elevation={3} sx={{ p: 2 }}>
                     <Typography
                       variant="h6"
@@ -62,7 +61,10 @@ class NotificationsPage extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item>{/* Other components */}</Grid>
+                        {/*============================== Footer ==============================*/}
+                        <Grid item>
+                            <FooterComponent />
+                        </Grid>
           </Grid>
         </Grid>
       </Box>

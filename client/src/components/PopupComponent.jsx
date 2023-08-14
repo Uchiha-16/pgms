@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import SideImageComponent from "./SideImageComponent";
-import axios from 'axios';
+import axios from "../api/axios";
 import { useNavigate } from 'react-router-dom';
 import AlertBox from './GeneralAlert';
 
@@ -17,13 +17,14 @@ import CloseIcon from "@mui/icons-material/Close"
 
 const Popup = () => { // Changed the function name to start with uppercase "P"
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
     role: '',
     contact: '',
   });
+
 
   const [openAlert, setOpenAlert] = useState(false);
   const [alertSeverity, setAlertSeverity] = useState('success');
@@ -44,16 +45,21 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
   };
 
   const handleSubmit = (e) => {
+    console.log(JSON.stringify(formData));
+
     e.preventDefault();
-    axios.post('http://localhost:8080/api/users/addUsers', formData)
+    axios.post("/auth/register", formData)
       .then((response) => {
-        console.log('User created:', response.data);
+        console.log(response);
         setOpenAlert(true);
         setAlertSeverity('success');
         setAlertMessage('User Added successfully!');
         // Handle success, display success message or redirect if needed
-        setTimeout(() => {
-          navigate('/users'); // Replace '/new-page-url' with the actual URL you want to navigate to
+        setTimeout(() => { 
+          //refresh the page and leave the popup component
+          window.location.reload();
+          setOpenAlert(false);
+          navigate('/users', { replace: true });
         }, 3000);
       })
       .catch((error) => {
@@ -71,12 +77,12 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
     }
     const handleReset = () => {
       setFormData({
-        firstName: '',
-        lastName: '',
-      email: '',
-      password: '',
-      role: '',
-      contact: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        role: '',
+        contact: '',
       });
     };
     
@@ -84,9 +90,8 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
 
     return (
         <div style={{textAlign:'center'}}>
-      
-            <h1>Add New User</h1>
-            <Button onClick={functionOpenPopup} color="primary" variant="contained">Add User</Button>
+    
+            <Button onClick={functionOpenPopup} color="primary" variant="contained" sx={{ position: 'relative', marginLeft: '1062px', marginBottom: '20px' }}>Add User</Button>
             <Dialog 
             // fullScreen 
             open={open} onClose={closePopup} fullWidth maxWidth="md" >
@@ -118,12 +123,12 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
               
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
                   value={formData.firstName}
                   onChange={handleChange}
-                  id="firstName"
+                  id="firstname"
                   label="First Name"
                   autoFocus
                 />
@@ -132,9 +137,9 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="lastname"
                   label="Last Name"
-                  name="lastName"
+                  name="lastname"
                   value={formData.lastName}
                   onChange={handleChange}
                   autoComplete="family-name"
@@ -178,10 +183,10 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
                   onChange={handleChange}
                   name="role"
                 >
-                    <MenuItem value={'lecturer'}>UCSC Lecturer</MenuItem>
-                    <MenuItem value={'visitinglecturer'}>Visiting Lecturer</MenuItem>
-                    <MenuItem value={'Technical'}>Technical Assistant</MenuItem>
-                    <MenuItem value={'staff'}>Staff</MenuItem>
+                    <MenuItem value={'Lecturer'}>UCSC Lecturer</MenuItem>
+                    <MenuItem value={'VisitingLecturer'}>Visiting Lecturer</MenuItem>
+                    <MenuItem value={'TechnicalStaff'}>Technical Assistant</MenuItem>
+                    <MenuItem value={'Staff'}>Staff</MenuItem>
                 </Select>
                 </FormControl>
               </Grid>

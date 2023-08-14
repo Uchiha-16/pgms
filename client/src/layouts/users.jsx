@@ -5,32 +5,38 @@ import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
 import { useEffect, useState } from "react"
-import useAxiosMethods from '../hooks/useAxiosMethods';
+import axios from '../api/axios';
+import Popup from '../components/PopupComponent';
 
-const users_URL = "/demo-controller/users"
+const users_URL = "/users/users"
 
 const Layout1 = () => {
     const [users, setUsers] = useState([]);
-    const {get} = useAxiosMethods();
+    // const { get } = useAxiosMethods();
     
     useEffect(() => {
-        
+        const fetchUsers = async () => {
             try {
-                get(users_URL, setUsers);
-
+                const response = await axios.get(users_URL); // Change the URL according to your backend setup
+                console.log(response.data.usersList);
+                setUsers(response.data.usersList);
             } catch (error) {
-                console.log(error)
+                console.error("Error fetching users:", error);
             }
+        };
+
+        fetchUsers();
     }, []);
 
     const columns = ['NAME', 'ROLE', 'STATUS', 'EMAIL', 'ACTION'];
     const data = users.map(user => ({
-        NAME: `${user.firstName} ${user.lastName}`,
-        ROLE: user.role,
-        STATUS: 'ONLINE', // Assuming you want to display a static status for all users
-        EMAIL: user.email,
+        NAME: `${user[0]} ${user[1]}`,
+        ROLE: user[3],
+        STATUS: 'OFFLINE', 
+        EMAIL: user[2],
         ACTION: 'Edit',
-    }));
+    }
+    ));
 
     return (
         <GeneralTable columns={columns} data={data} />
@@ -55,6 +61,7 @@ class users extends Component {
                         </Grid>
                         <Grid item>
                             {/* content */}
+                            <Popup />
                             <Layout1 />
                         </Grid>
                         <Grid item>

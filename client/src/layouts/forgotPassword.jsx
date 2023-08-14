@@ -1,10 +1,12 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom/dist';
 import { Box, Container, Paper, Typography, TextField, Button, Grow } from '@mui/material';
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
-
+import axios from '../api/axios';
 
 const theme = createTheme({
   typography: {
@@ -38,6 +40,15 @@ const Boxbg = styled.div`
 
 
 const forgotPassword = () => {
+  
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+  // const [validEmail, setValidEmail] = useState(false)
+  const [state, setState] = useState(null);
+
+  const backPage = () => navigate(-1);
+
   return (
     <ThemeProvider theme={theme}>
       <AnimatedGradientBackground><Boxbg

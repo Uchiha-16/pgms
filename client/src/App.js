@@ -28,9 +28,9 @@ function App() {
         <Route path='linkpage' element={<LinkPage />} />
         <Route path='unauthorized' element={<Unauthorized />} />
         <Route path='/' element={<Login />} />
-        <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
-        <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         {/* private */}
         <Route element={<PersistLogin />}>

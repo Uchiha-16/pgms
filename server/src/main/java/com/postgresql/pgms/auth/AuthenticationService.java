@@ -148,6 +148,16 @@ public class AuthenticationService {
         tokenRepository.saveAll(validUserTokens);
     }
 
+    private void  revokeResetTokens(Users user) {//========================================================
+        var validResetTokens = resetRepository.findAllValidResetTokensByUser(user.getId());
+        if(validResetTokens.isEmpty())
+            return;
+        validResetTokens.forEach(token -> {
+            token.setExpired(true);
+        });
+        resetRepository.saveAll(validResetTokens);
+    }
+
     private void saveUserToken(Users user, String jwtToken) {
         var token = Token.builder()
                 .user(user)

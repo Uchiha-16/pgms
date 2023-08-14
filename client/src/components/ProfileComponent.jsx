@@ -3,46 +3,57 @@ import { Avatar, Typography, Paper } from '@mui/material';
 import TextField from '@mui/material/TextField'; // Import TextField
 import Button from '@mui/material/Button'; // Import Button
 import profile from '../assets/images/profile.png'; // Replace with the path to your background image
+import { fontSize } from '@mui/system';
 
-
+ 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
 
   const paperStyle = {
     width: '70%', // Set the width and height to create a square card
-    height: '70%',
-    margin: '90px auto', // Center the card horizontally
+    height: 'auto',
+    margin: '50px auto', // Center the card horizontally
     position: 'relative',
-    textAlign: 'center'
+    textAlign: 'center',
+    borderRadius: '10px',
   };
 
   const avatarStyle = {
-    width: '160px',
-    height: '160px',
+    width: '140px',
+    height: '140px',
     position: 'absolute',
-    top: '-65px', // Keep the image at the top
+    top: '-60px', // Keep the image at the top
     left: '150px',
-    transform: 'translateX(-50%)'
+    transform: 'translateX(-50%)',
+    boxShadow: '0px 4px 7px rgba(0, 0, 0, 0.20)'
   };
 
   const nameStyle = {
-    textAlign: 'center',
+    textAlign: 'left',
+    paddingLeft: '9rem',
+    paddingTop: 30,
     marginBottom: '2px',
-    fontSize: '1.5rem',
-    fontWeight: 'bold'
+    color: '#000',
+    fontFamily: 'Inter',
+    fontSize: '20px',
+    fontWeight: '700',
   };
 
   const roleStyle = {
+    textAlign: 'left',
+    paddingLeft: '9rem',
     marginBottom: '40px',
-    color: '#666',
-    left: '30px',
-    marginLeft: '120px'
+    color: '#42424A',
+    fontFamily: 'Inter',
+    fontSize: '12px',
   };
 
   const infoStyle = {
     textAlign: 'left',
     padding: '20px',
-    marginLeft: '40px'
+    marginLeft: '40px',
+    borderTop: '1px solid #F0F2F5',
+    width: '28rem'
   };
 
   const sectionStyle = {
@@ -58,12 +69,14 @@ function Profile() {
 
   const labelStyle = {
     width: '150px', // Set a fixed width for the labels
-    color: '#444'
+    color: '#444',
+    fontWeight: 'bold'
   };
 
   const contentStyle = {
     flex: '1', // Allow the content to grow and take up remaining space
-    color: '#444'
+    color: '#444',
+    fontSize: '14px'
   };
 
 
@@ -84,9 +97,9 @@ function Profile() {
 
   return (
     <Paper elevation={3} style={paperStyle}>
-      <Avatar alt="Profile Photo" src={profile} style={avatarStyle} /> 
+      <Avatar alt="Profile Photo" src={profile} style={avatarStyle}/> 
       <div style={roleStyle}>
-      <Typography variant="h5" style={nameStyle}>Dr. D A S Athukorala</Typography>
+      <Typography variant="h5" style={nameStyle}>Dr. D A S Athukorale</Typography>
       <Typography variant="body1" style={roleStyle}>B.Sc. (Col), Ph.D. (Queensland), MIEEE, MCSSL</Typography> 
 
       <div style={infoStyle}>

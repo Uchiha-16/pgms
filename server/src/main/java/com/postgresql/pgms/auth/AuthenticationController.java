@@ -58,4 +58,13 @@ public class AuthenticationController {
     ) throws MessagingException, UnsupportedEncodingException {
         return ResponseEntity.ok(service.forgotPassword(response, request.getEmail()));
     }
+
+    @PostMapping("/reset-password/{token}")//======================================================================================================================================
+    public ResponseEntity<AuthenticationResponse> resetPassword(
+            HttpServletResponse response,
+            @RequestBody AuthenticationRequest request,
+            @PathVariable String token
+    ) {
+        return ResponseEntity.ok(service.resetPassword(response, request.getPassword(), token));
+    }
 }

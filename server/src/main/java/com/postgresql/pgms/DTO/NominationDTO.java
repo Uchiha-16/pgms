@@ -1,5 +1,7 @@
 package com.postgresql.pgms.DTO;
 
+import com.postgresql.pgms.model.Users;
+
 import java.time.LocalDate;
 
 public class NominationDTO {

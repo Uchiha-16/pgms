@@ -4,12 +4,7 @@ import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
-import  { useEffect,  useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import axios from '../api/axios';
-import useAuth from '../hooks/useAuth'
 
-const LOGIN_URL = '/auth/authenticate';
 
 const theme = createTheme({
   typography: {
@@ -42,64 +37,7 @@ const Boxbg = styled.div`
 `;
 
 
-const LoginPage = () => {
-  const { setAuth } = useAuth();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errMsg, setErrMsg] = useState('');
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from || {pathname: "/dashboard"} // direct to the page happen here
-
-  useEffect(()=>{
-    setErrMsg('');
-  },[email,password])
-
-
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(email, password);
-    try{
-        const response = await axios.post(LOGIN_URL,
-            JSON.stringify({email:email,password: password}),
-            {
-                headers: {'Content-Type': 'application/json'},
-                withCredentials: true
-            }
-        );
-        console.log(JSON.stringify(response?.data), "from loginForm.jsx");
-        setAuth(response?.data)
-
-        
-        setEmail('');
-        setPassword('');
-        navigate(from, {replace: true});  //navigate happen here
-
-    } catch(err){
-        if (!err?.response) {
-            setErrMsg('No Server Response');
-        } else if (err.response?.status === 400) {
-            setErrMsg('Missing Username or Password');
-        } else if (err.response?.status === 403) {
-            setErrMsg('Unauthorized');
-        } else {
-            setErrMsg('Login Failed');
-        }
-
-    }
-  }
-
+const resetPassword = () => {
   return (
     <ThemeProvider theme={theme}>
       <AnimatedGradientBackground><Boxbg
@@ -126,8 +64,8 @@ const LoginPage = () => {
               width: '18rem',
               paddingLeft: '10rem',
               paddingRight: '10rem',
-              paddingBottom: '3rem',
-              paddingTop: '2rem',
+              paddingBottom: '5rem',
+              paddingTop: '4rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -146,54 +84,27 @@ const LoginPage = () => {
                   height: '85px', // Adjust the size of the logo as needed
                   borderRadius: '50%',
                   position: 'absolute',
-                  top: '-100px', // Move the logo higher up by increasing the negative value
+                  top: '-90px', // Move the logo higher up by increasing the negative value
                   left: 'calc(50% - 40px)',
                 }}
               />
             </Box>
             <Typography color={'#011632'} sx={{
-              fontWeight: '600', 
+              fontWeight: '600',
               marginBottom: '1rem',
             }}>
-              Postgraduate Management System
+              Create New Password
               <br /><br />
-              WELCOME
+              <p style={{
+                fontSize: '12px',
+                fontWeight: '400',
+              }}>
+                Your New Password Must Be Different from Previously Used Password.
+              </p>
             </Typography>
-            <form onSubmit={handleSubmit}> 
+            
             <TextField
-              label="Email"
-              type="email"
-              margin="normal"
-              variant="outlined"
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#F0F2F5', // Silver outline for text field
-                  transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
-                  borderRadius: '10px', // Rounded corners
-                },
-                ":hover": {
-                  '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1A73E8',
-                  },
-                },
-                '& input': {
-                  height: '15px', // Adjust the height as needed
-                  width: '100%',
-                  color: '#011632', // Adjust the width as needed
-                  fontSize: '14px',
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#898989', // Set the color of the label
-                  fontSize: '14px',
-                },
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-              }}
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-            <TextField
-              label="Password"
+              label="New Password"
               type="password"
               margin="normal"
               variant="outlined"
@@ -220,37 +131,51 @@ const LoginPage = () => {
                 },
                 fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
               }}
-              value={password}
-              onChange={handlePasswordChange}
-              required
             />
-            <Button
-              variant="text"
-              color="primary"
+            <TextField
+              label="Confirm Password"
+              type="password"
+              margin="normal"
+              variant="outlined"
               sx={{
-                width: '100%', // Make the button take the full width
-                marginLeft: '30%', // Move the button to the right
-                marginRight: '0', // No margin on the right side
-                textTransform: 'none', // Disable capitalization of the button text
-                color: '#1A73E8', // Fill color for the button text
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#F0F2F5', // Silver outline for text field
+                  transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
+                  borderRadius: '10px', // Rounded corners
+                },
+                ":hover": {
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#1A73E8', // Silver outline for text field
+                  },
+                },
+                '& input': {
+                  height: '15px', // Adjust the height as needed
+                  width: '100%',
+                  color: '#011632', // Adjust the width as needed
+                  fontSize: '14px',
+                },
+                '& .MuiInputLabel-root': {
+                  color: '#898989', // Set the color of the label
+                  fontSize: '14px',
+                },
                 fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-                '& .MuiTouchRipple-root': {
-                  display: 'none', // Disable the ripple effect
-                },
-                "&:hover": {
-                  //you want this to be the same as the backgroundColor above
-                  backgroundColor: "transparent",
-                  color: 'black'
-                },
-                fontSize: '12px',
               }}
-            >
-              Forgot Password?
+            />
+            <br /><br />
+            <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
+              Send
             </Button><br />
-            <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }} type='submit'>
-              login
+            <Button variant="contained" color="primary" fullWidth sx={{
+              backgroundColor: '#747b8a',
+              fontFamily: 'Inter, sans-serif',
+              fontSize: '15px',
+              fontWeight: 'regular',
+              ":hover": {
+                backgroundColor: '#495361',
+              },
+            }}>
+              Cancel
             </Button>
-            </form>
           </Paper>
         </Container></Grow>
       </Boxbg></AnimatedGradientBackground>
@@ -258,4 +183,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default resetPassword;

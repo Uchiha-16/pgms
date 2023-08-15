@@ -7,6 +7,8 @@ import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
 import axios from '../api/axios';
+import { Link } from 'react-router-dom';
+
 
 const theme = createTheme({
   typography: {
@@ -203,25 +205,24 @@ const resetPassword = () => {
                       borderColor: '#1A73E8', // Silver outline for text field
                     },
                   },
-                  '& input': {
-                    height: '15px', // Adjust the height as needed
-                    width: '100%',
-                    color: '#011632', // Adjust the width as needed
-                    fontSize: '14px',
-                  },
-                  '& .MuiInputLabel-root': {
-                    color: '#898989', // Set the color of the label
-                    fontSize: '14px',
-                  },
-                  fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-                }}
-              />
-              <br /><br />
-              <Button disabled={!validMatch ?true : false} type="submit" variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
-                Send
-              </Button><br />
-            </form>
-            <Button variant="contained" color="primary" fullWidth sx={{
+                '& input': {
+                  height: '15px', // Adjust the height as needed
+                  width: '100%',
+                  color: '#011632', // Adjust the width as needed
+                  fontSize: '14px',
+                },
+                '& .MuiInputLabel-root': {
+                  color: '#898989', // Set the color of the label
+                  fontSize: '14px',
+                },
+                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
+              }}
+            />
+            <br /><br />
+            <Button disabled={!validMatch ?true : false} type="submit"  variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
+              Change
+            </Button><br />
+            <Link to="/" style={{ textDecoration: 'none' }}><Button variant="contained" color="primary" fullWidth sx={{
               backgroundColor: '#747b8a',
               fontFamily: 'Inter, sans-serif',
               fontSize: '15px',
@@ -231,7 +232,8 @@ const resetPassword = () => {
               },
             }}>
               Cancel
-            </Button>
+            </Button></Link>
+            </form>
           </Paper>
         </Container></Grow>
       </Boxbg></AnimatedGradientBackground>

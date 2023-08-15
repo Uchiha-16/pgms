@@ -8,6 +8,7 @@ import  { useEffect,  useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth'
+import { useNavigate } from 'react-router-dom';
 
 const LOGIN_URL = '/auth/authenticate';
 
@@ -99,6 +100,12 @@ const LoginPage = () => {
 
     }
   }
+
+
+  const handleForgotPasswordClick = () => {
+    navigate('/forgotpassword'); // Redirect on button click
+  };
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -227,6 +234,7 @@ const LoginPage = () => {
             <Button
               variant="text"
               color="primary"
+              onClick={handleForgotPasswordClick}
               sx={{
                 width: '100%', // Make the button take the full width
                 marginLeft: '30%', // Move the button to the right

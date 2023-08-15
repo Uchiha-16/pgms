@@ -9,45 +9,60 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import PendingIcon from '@mui/icons-material/QueryBuilder';
 
+
 const NominationsTable = ({ columns, data }) => {
-    const [alignment, setAlignment] = useState('');
 
-    const handleChange = (event, newAlignment) => {
-        setAlignment(newAlignment);
-    };
+const [alignment, setAlignment] = useState("");
+const [statusFilter, setStatusFilter] = useState(null); // To filter nominations
 
-    const isAccepted = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'Accepted';
-    };
+const handleChange = (event, newAlignment) => {
+  setAlignment(newAlignment);
+};
 
-    const isRejected = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'Rejected';
-    };
+const handleStatusFilter = (event, newStatusFilter) => {
+  setStatusFilter(newStatusFilter);
+};
 
-    const isPending = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'Pending';
-    };
+const filteredData = statusFilter
+  ? data.filter((item) => item.STATUS === statusFilter)
+  : data;
 
-    const isFunctionColumn = (columnName) => {
-        return columnName === 'Function';
-    };
+const isAccepted = (columnName, cellValue) => {
+  return columnName === "STATUS" && cellValue === "Accepted";
+};
 
-    const isRequestColumn = (columnName) => {
-        return columnName === 'Request';
-    };
+const isRejected = (columnName, cellValue) => {
+  return columnName === "STATUS" && cellValue === "Rejected";
+};
 
-    const [rowsPerPage, setRowsPerPage] = useState(5); // Number of rows per page
-    const [page, setPage] = useState(0); // Current page number
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0); // Reset the page number when rows per page changes
-    };
-    const startRowIndex = page * rowsPerPage;
-    const endRowIndex = startRowIndex + rowsPerPage;
-    const visibleRows = data.slice(startRowIndex, endRowIndex);
+const isPending = (columnName, cellValue) => {
+  return columnName === "STATUS" && cellValue === "Pending";
+};
+
+const isNameColumn = (columnName) => {
+  return columnName === "Name";
+};
+
+const isRequestColumn = (columnName) => {
+  return columnName === "Request";
+};
+
+const isFunctionColumn = (columnName) => {
+  return columnName === 'Function';
+};
+
+const [rowsPerPage, setRowsPerPage] = useState(5); // Number of rows per page
+const [page, setPage] = useState(0); // Current page number
+const handleChangePage = (event, newPage) => {
+  setPage(newPage);
+};
+const handleChangeRowsPerPage = (event) => {
+  setRowsPerPage(parseInt(event.target.value, 10));
+  setPage(0); // Reset the page number when rows per page changes
+};
+const startRowIndex = page * rowsPerPage;
+const endRowIndex = startRowIndex + rowsPerPage;
+const visibleRows = data.slice(startRowIndex, endRowIndex);
 
     return (
         <>
@@ -247,31 +262,31 @@ const NominationsTable = ({ columns, data }) => {
                                                         fontSize: '10px',
                                                         fontWeight: '400'
                                                     }}>john@gmail.com</span> */}
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            row[column]
-                                        )}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                        </div>
+                      </div>
+                    ) : (
+                      row[column]
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-            {/* Table Pagination */}
-            <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
-                component="div"
-                count={data.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </>
-    );
+      {/* Table Pagination */}
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </>
+  );
 };
 
 export default NominationsTable;

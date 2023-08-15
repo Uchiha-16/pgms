@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Import React and useState
+import React, { useState, useEffect } from "react"; // Import React and useState
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,16 +11,18 @@ import AlertBox from './GeneralAlert';
 
 
 
+
 import { Button, Box, Dialog, DialogActions, DialogContent, IconButton, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close"
 
 
 const Nomination = () => { // Changed the function name to start with uppercase "P"
+
   const [formData, setFormData] = useState({
     programId: '',
     semester:'',
     courseId: '',
-    userID: '2',
+    userID: 2,
   });
 
   const [openAlert, setOpenAlert] = useState(false);
@@ -85,7 +87,7 @@ console.log("Program Value:", formData.programId);
         programId: '',
         semester:'',
         courseId: '',
-        userID: '2',
+        userID: 2,
       });
     };
 

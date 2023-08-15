@@ -28,13 +28,13 @@ const Layout1 = () => {
     }, []);
 
     const columns = ['Semester', 'Code', 'Course Name', 'Lecture Hall', 'Credits'];
-    const data = users.map(user => ({
-        NAME: `${user.firstName} ${user.lastName}`,
-        ROLE: user.role,
-        STATUS: 'ONLINE', // Assuming you want to display a static status for all users
-        EMAIL: user.email,
-        ACTION: 'Edit',
-    }));
+    // const data = users.map(user => ({
+    //     NAME: `${user.firstName} ${user.lastName}`,
+    //     ROLE: user.role,
+    //     STATUS: 'ONLINE', // Assuming you want to display a static status for all users
+    //     EMAIL: user.email,
+    //     ACTION: 'Edit',
+    // }));
     const program = [
         {
             title: 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE',
@@ -44,7 +44,7 @@ const Layout1 = () => {
     ];
 
     return (
-        <GeneralProgramTable columns={columns} program={program} data={data} />
+        <GeneralProgramTable columns={columns} program={program} />
     );
 };
 

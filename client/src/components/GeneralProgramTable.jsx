@@ -10,7 +10,7 @@ import TablePagination from '@mui/material/TablePagination';
 import { Box } from '@mui/system';
 
 
-const GeneralProgramTable = ({ columns, program, dataP1, dataP2 }) => {
+const GeneralProgramTable = ({ columns, program, dataP1, dataP2, dataP3, dataP4 }) => {
     
     const [alignment, setAlignment] = React.useState('');
 
@@ -151,7 +151,37 @@ const GeneralProgramTable = ({ columns, program, dataP1, dataP2 }) => {
                                 </TableCell>
                             ))}
                         </TableRow>
-                    )) : dataP2.map((rowData, rowIndex) => (
+                    )) : index === 1 ? dataP2.map((rowData, rowIndex) => (
+                        <TableRow key={rowIndex}>
+                            {columns.map((column, colIndex) => (
+                                <TableCell key={colIndex} sx={{
+                                    fontFamily: 'Roboto',
+                                    fontSize: '12px',
+                                    paddingTop: 1,
+                                    paddingBottom: 1,
+                                    paddingLeft: 2,
+                                    border: '1px solid white',
+                                }}>
+                                    {rowData[column]}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                            )) : index === 2 ?  dataP3.map((rowData, rowIndex) => (
+                                <TableRow key={rowIndex}>
+                                    {columns.map((column, colIndex) => (
+                                        <TableCell key={colIndex} sx={{
+                                            fontFamily: 'Roboto',
+                                            fontSize: '12px',
+                                            paddingTop: 1,
+                                            paddingBottom: 1,
+                                            paddingLeft: 2,
+                                            border: '1px solid white',
+                                        }}>
+                                            {rowData[column]}
+                                        </TableCell>
+                                    ))}
+                        </TableRow>
+                    )) : dataP4.map((rowData, rowIndex) => (
                         <TableRow key={rowIndex}>
                             {columns.map((column, colIndex) => (
                                 <TableCell key={colIndex} sx={{

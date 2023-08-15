@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 import { Box, Container, Paper, Typography, TextField, Button, Grow } from '@mui/material';
 import styled from "styled-components";
@@ -7,7 +7,6 @@ import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
 import axios from '../api/axios';
-import { Link } from 'react-router-dom';
 
 
 const theme = createTheme({
@@ -41,10 +40,11 @@ const Boxbg = styled.div`
 `;
 
 
-const resetPassword = () => {
+const ResetPassword = () => {
 
   const {token} = useParams();
   const [password, setPassword] = useState('');
+  const naviagate = useNavigate();
 
   const [matchPassword, setMatchPassword] = useState('');
   const [validMatch, setValidMatch] = useState(false);
@@ -77,6 +77,9 @@ const resetPassword = () => {
       setErrMsg(response?.data?.message);
       setPassword('');
       setMatchPassword('');
+      setTimeout(() => {
+        naviagate('/'); 
+      }, 3000);
 
     } catch (err) {
       if (!err?.response) {
@@ -241,4 +244,4 @@ const resetPassword = () => {
   );
 };
 
-export default resetPassword;
+export default ResetPassword;

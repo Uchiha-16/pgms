@@ -31,7 +31,7 @@ const Layout1 = () => {
     
     const program = [
         {
-            title: 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE',
+            title: 'MASTER OF COMPUTER SCIENCE',
             pc: 'Program Coordinator',
             pcName: 'Mr. K P M K Silva',
         },
@@ -39,25 +39,27 @@ const Layout1 = () => {
             title: 'MASTER OF INFORMATION SYSTEMS',
             pc: 'Program Coordinator',
             pcName: 'Mr. K P M K Silva',
+        },
+        {
+            title: 'MASTER OF INFORMATION TECHNOLOGY',
+            pc: 'Program Coordinator',
+            pcName: 'Mr. K P M K Silva',
+        },
+        {
+            title: 'MASTER OF BUISNESS ANALYSIS',
+            pc: 'Program Coordinator',
+            pcName: 'Mr. K P M K Silva',
         }
     ];
 
-    const dataP1 = [
-        {
-            'Semester': '1',
-            'Code': 'MCS1201',
-            'Course Name': 'Advanced Algorithms',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
-        {
-            'Semester': '1',
-            'Code': 'MCS1202',
-            'Course Name': 'Advanced Software Engineering',
-            'Lecturer': 'W002',
-            'Credits': '3',
+        const dataP1 = courses.map(course => ({
+            'Semester': course[3],
+            'Code' : course[1],
+            'Course Name': course[2], 
+            'Lecture Hall': course[5],
+            'Credits': course[4],
         }
-    ];
+        ));
 
     const dataP2 = [
         {
@@ -74,10 +76,47 @@ const Layout1 = () => {
             'Lecturer': 'W002',
             'Credits': '3',
         },
+        
+    ];
+
+    const dataP3 = [
+        {
+            'Semester': '1',
+            'Code': 'MIS1201',
+            'Course Name': 'Principles of Information Security',
+            'Lecturer': 'W002',
+            'Credits': '3',
+        },
+        {
+            'Semester': '1',
+            'Code': 'MIS1202',
+            'Course Name': 'Cryptographic Systems',
+            'Lecturer': 'W002',
+            'Credits': '3',
+        },
+        
+    ];
+
+    const dataP4 = [
+        {
+            'Semester': '1',
+            'Code': 'MIS1201',
+            'Course Name': 'Principles of Information Security',
+            'Lecturer': 'W002',
+            'Credits': '3',
+        },
+        {
+            'Semester': '1',
+            'Code': 'MIS1202',
+            'Course Name': 'Cryptographic Systems',
+            'Lecturer': 'W002',
+            'Credits': '3',
+        },
+        
     ];
 
     return (
-        <GeneralProgramTable columns={columns} program={program} dataP1={dataP1} dataP2={dataP2}/>
+        <GeneralProgramTable columns={columns} program={program} dataP1={dataP1} dataP2={dataP2} dataP3={dataP3} dataP4={dataP4}/>
     );
 };
 

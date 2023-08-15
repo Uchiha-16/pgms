@@ -8,7 +8,6 @@ import  { useEffect,  useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth'
-import { useNavigate } from 'react-router-dom';
 
 const LOGIN_URL = '/auth/authenticate';
 
@@ -93,7 +92,7 @@ const LoginPage = () => {
         } else if (err.response?.status === 400) {
             setErrMsg('Missing Username or Password');
         } else if (err.response?.status === 403) {
-            setErrMsg('Unauthorized');
+            setErrMsg('Invalid Username or Password');
         } else {
             setErrMsg('Login Failed');
         }
@@ -103,7 +102,7 @@ const LoginPage = () => {
 
 
   const handleForgotPasswordClick = () => {
-    navigate('/forgotpassword'); // Redirect on button click
+    navigate('/forgot-password'); // Redirect on button click
   };
 
 
@@ -166,6 +165,7 @@ const LoginPage = () => {
               <br /><br />
               WELCOME
             </Typography>
+            <p>{errMsg}</p>
             <form onSubmit={handleSubmit}> 
             <TextField
               label="Email"

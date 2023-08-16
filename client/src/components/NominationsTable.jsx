@@ -12,20 +12,11 @@ import PendingIcon from '@mui/icons-material/QueryBuilder';
 
 const NominationsTable = ({ columns, data }) => {
 
-const [alignment, setAlignment] = useState("");
-const [statusFilter, setStatusFilter] = useState(null); // To filter nominations
+    const [alignment, setAlignment] = useState('');
 
-const handleChange = (event, newAlignment) => {
-  setAlignment(newAlignment);
-};
-
-const handleStatusFilter = (event, newStatusFilter) => {
-  setStatusFilter(newStatusFilter);
-};
-
-const filteredData = statusFilter
-  ? data.filter((item) => item.STATUS === statusFilter)
-  : data;
+    const handleChange = (event, newAlignment) => {
+        setAlignment(newAlignment);
+    };
 
 const isAccepted = (columnName, cellValue) => {
   return columnName === "STATUS" && cellValue === "Accepted";

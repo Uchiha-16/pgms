@@ -98,7 +98,7 @@ public class AuthenticationService {
         revokeResetTokens(user);
         saveResetToken(user, token);//create
         return AuthenticationResponse.builder()
-                .message("Forgot password Email sent!!!!!!!!")
+                .message("Forgot password Email sent!")
                 .build();
     }
 
@@ -125,7 +125,7 @@ public class AuthenticationService {
         resetRepository.save(reset);//reset repo
 
         return AuthenticationResponse.builder()
-                .message("Success password reseted!!!!!!!!")
+                .message("Success password reseted!")
                 .build();
     }
 

@@ -39,7 +39,7 @@ const Boxbg = styled.div`
 `;
 
 
-const forgotPassword = () => {
+const ForgotPassword = () => {
 
   const navigate = useNavigate();
 
@@ -189,7 +189,7 @@ const forgotPassword = () => {
               <br />
               <Button type="submit" variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
                 Send
-              </Button><br />
+              </Button><br /><br />
             </form>
             <Button variant="contained" color="primary" fullWidth sx={{ 
               backgroundColor: '#747b8a', 
@@ -210,4 +210,4 @@ const forgotPassword = () => {
   );
 };
 
-export default forgotPassword;
+export default ForgotPassword;

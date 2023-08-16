@@ -99,8 +99,8 @@ function Profile() {
     <Paper elevation={3} style={paperStyle}>
       <Avatar alt="Profile Photo" src={profile} style={avatarStyle}/> 
       <div style={roleStyle}>
-      <Typography variant="h5" style={nameStyle}>Dr. D A S Athukorale</Typography>
-      <Typography variant="body1" style={roleStyle}>B.Sc. (Col), Ph.D. (Queensland), MIEEE, MCSSL</Typography> 
+      <Typography variant="h5" style={nameStyle}>Varsha Wijethunge</Typography>
+      <Typography variant="body1" style={roleStyle}>Staff Member</Typography> 
 
       <div style={infoStyle}>
         <Typography variant="h6" style={sectionStyle}>Profile Information:</Typography>
@@ -110,7 +110,7 @@ function Profile() {
           {isEditing ? (
             <TextField variant="outlined" size="small" style={contentStyle} defaultValue="Frontend Developer" />
           ) : (
-            <Typography variant="body2" style={contentStyle}>Frontend Developer</Typography>
+            <Typography variant="body2" style={contentStyle}>Staff</Typography>
           )}
          
         </div>
@@ -120,7 +120,7 @@ function Profile() {
           {isEditing ? (
             <TextField variant="outlined" size="small" style={contentStyle} defaultValue="Dr. D A S Athukorala" />
           ) : (
-            <Typography variant="body2" style={contentStyle}>Dr. D A S Athukorala</Typography>
+            <Typography variant="body2" style={contentStyle}>Varsha Wijethunge</Typography>
           )}
          
         </div>

@@ -152,7 +152,7 @@ const ResetPassword = () => {
                 fontSize: '12px',
                 fontWeight: '400',
               }}>
-                Your New Password Must Be Different from Previously Used Password.
+                Add a New Password
               </p>
             </Typography>
             <p>{errMsg}</p>

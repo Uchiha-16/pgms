@@ -49,6 +49,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .contact(request.getContact())
+                .profileImage("user.png")
                 .build();
         var saveduser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -111,10 +112,6 @@ public class AuthenticationService {
                     .message("Token Expired!!!!!!!!")
                     .build();
         }
-
-//        if (password.equals("Token Check")) {
-//            return GlobalService.response("Alert", "Token Valid");//use authresponse
-//        }
 
         var email = jwtService.extractEmail(token);
         var user = userRepository.findByEmail(email).orElseThrow(() -> new CustomErrorException("User Not Found"));//create exception

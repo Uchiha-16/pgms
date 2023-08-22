@@ -43,7 +43,7 @@ function App() {
             <Route path='/nominations' element={<AddNominations />} />
             <Route path='/users' element={<Users/>}/>
             <Route path='/programs' element={<Programs/>}/>
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/:userID' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/programs' element={<Programs />} />

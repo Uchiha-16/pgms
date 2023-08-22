@@ -20,6 +20,7 @@ public class ResetToken {
     private String token;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private TokenType tokenType = TokenType.RESET_PASSWORD;
 
     private boolean expired;

@@ -11,11 +11,11 @@ import java.util.List;
 @RepositoryRestResource
 public interface NominationRepo extends JpaRepository<Nominations, Integer> {
 
-    @Query("""
-    SELECT n.courseId, n.date, n.programId, n.status, n.userID, u.firstname, u.lastname
-    FROM Nominations n
-    JOIN Users u ON n.userID = u.id
-    ORDER BY n.nominationid DESC
-    """)
-    List<Object> getAllNominations();
+//    @Query("""
+//    SELECT n.courseId, n.date, n.programId, n.status, n.user, u.firstname, u.lastname
+//    FROM Nominations n
+//    JOIN Users u ON n.user = u.id
+//    ORDER BY n.nominationid DESC
+//    """)
+//    List<Object> getAllNominations();
 }

@@ -5,9 +5,12 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import user from '../assets/images/user.png';
 import TablePagination from '@mui/material/TablePagination';
+import { useNavigate } from 'react-router-dom';
 
 
 const GeneralTable = ({ columns, data }) => {
+
+    const navigate = useNavigate();
 
     const [alignment, setAlignment] = React.useState('');
 
@@ -34,6 +37,16 @@ const GeneralTable = ({ columns, data }) => {
     const isRequestColumn = (columnName) => {
         return columnName === 'Request';
     };
+
+    const isEdit = (columnName) => {
+        return columnName === 'ACTION';
+    };
+
+    const navigateProfile = (userID) => {
+        return () => {
+            navigate(`/profile/${userID}`);
+        };
+    }
 
 
     const [rowsPerPage, setRowsPerPage] = useState(5); // Number of rows per page
@@ -211,8 +224,11 @@ const GeneralTable = ({ columns, data }) => {
                                                     }}>{row[column]}</span>
                                                 </div>
                                             </div>
+                                        ) : isEdit(column) ? (
+                                            <span onClick={navigateProfile(row['ID'])} style={{cursor: 'pointer'}}>{row[column]}</span>
+                                            
                                         ) : (
-                                            row[column]
+                                            row[column] // For all other columns, just render the cell data
                                         )
                                         }
                                     </TableCell>

@@ -8,6 +8,7 @@ import SideImageComponent from "./SideImageComponent";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AlertBox from './GeneralAlert';
+import useAuth from "../hooks/useAuth";
 
 
 
@@ -18,11 +19,13 @@ import CloseIcon from "@mui/icons-material/Close"
 
 const Nomination = () => { // Changed the function name to start with uppercase "P"
 
+  const { auth } = useAuth();
+  
   const [formData, setFormData] = useState({
     programId: '',
     semester:'',
     courseId: '',
-    userID: 2,
+    userID: auth.user_id,
   });
 
   const [openAlert, setOpenAlert] = useState(false);

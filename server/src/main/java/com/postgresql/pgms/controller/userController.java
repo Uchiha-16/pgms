@@ -2,7 +2,6 @@ package com.postgresql.pgms.controller;
 
 import com.postgresql.pgms.DTO.UserDTO;
 import com.postgresql.pgms.Service.UserService;
-import com.postgresql.pgms.DTO.UserListResponseDTO;
 import com.postgresql.pgms.model.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +18,18 @@ public class userController {
     private final UserService service;
 
     @GetMapping("/users")
-    public ResponseEntity<UserListResponseDTO> getUsers(){
+    public ResponseEntity<List<Users>> getUsers(){
         return ResponseEntity.ok(service.listusers());
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserListResponseDTO> getUserByID(Integer id){
-        return ResponseEntity.ok(service.getUserById(id));
+    @GetMapping("getUser/{id}")
+    public ResponseEntity<UserDTO> getUserByID(@PathVariable Integer id) {
+        UserDTO userDTO = service.getUserDTOByID(id);
+        if (userDTO != null) {
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
 

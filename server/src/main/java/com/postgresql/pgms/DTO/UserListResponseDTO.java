@@ -1,6 +1,7 @@
 package com.postgresql.pgms.DTO;
 
 import com.postgresql.pgms.enumeration.Role;
+import com.postgresql.pgms.model.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

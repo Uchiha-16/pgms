@@ -3,6 +3,7 @@ package com.postgresql.pgms.DTO;
 import com.postgresql.pgms.enumeration.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jdk.jshell.Snippet;
 
 public class UserDTO {
     private Integer id;
@@ -20,13 +21,20 @@ public class UserDTO {
 
     private String contact;
 
-    public UserDTO(String firstname, String lastname, String email, Role role) {
+    private String profileImage = "user.png";
 
+    public UserDTO(Integer id, String firstname, String lastname, String email, Role role, String contact, String profileImage) {
+
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.role = role;
+        this.contact = contact;
+        this.profileImage = profileImage;
     }
+
+
 
     public long getID() { return id; }
 
@@ -68,6 +76,12 @@ public class UserDTO {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getProfileImage() { return profileImage; }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
 }

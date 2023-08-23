@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { visuallyHidden } from '@mui/utils';
 
+// Helper functions to determine cell conditions
 const isOnline = (columnName, cellValue) => {
         return columnName === 'STATUS' && cellValue === 'ONLINE';
     };
@@ -29,6 +30,7 @@ const isOnline = (columnName, cellValue) => {
         return columnName === 'NAME';
     };
 
+// Comparator functions for sorting
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -45,6 +47,7 @@ function getComparator(order, orderBy) {
         : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
+// Stable sort function
 function stableSort(array, comparator) {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
@@ -56,6 +59,8 @@ function stableSort(array, comparator) {
     });
     return stabilizedThis.map((el) => el[0]);
 }
+
+// Component for the table header
 function EnhancedTableHead(props) {
     const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } =
         props;
@@ -125,6 +130,7 @@ EnhancedTableHead.propTypes = {
     headCells: PropTypes.array.isRequired,
 };
 
+// Component for the table toolbar
 function EnhancedTableToolbar(props) {
     const { numSelected } = props;
 
@@ -172,6 +178,7 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
+// Main table component
 export default function GeneralTable({ rows, headCells }) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('NAME');

@@ -44,7 +44,7 @@ const Layout1 = () => {
     ));
 
 
-    //====================== Dummy Data
+    //====================== Dummy Data for testing ======================//
     // const rows = [
     //     createData('Johny Michael', 'Lecturer', 'ONLINE', 'john@gmail.com', 'Edit'),
     //     createData('Alexa Liras', 'Lecturer', 'ONLINE', 'alexa@gmail.com', 'Edit'),

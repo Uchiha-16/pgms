@@ -114,11 +114,11 @@ class dashboard extends Component {
                                 </Grid>
                                 {/* tables */}
                                 <Grid sx={{ marginTop: 5 }}>
-                                    <TableHeaderComponent left={'Todays Schedule'} right={'Sat 12th Aug, 2023'} />
+                                    <TableHeaderComponent left={'Todays Schedule'} right={'Sat 12th Aug, 2023'} addbtn={false}/>
                                     <Layout1 />
                                 </Grid>
                                 <Grid sx={{ marginTop: 5 }}>
-                                    <TableHeaderComponent left={'Payment Vouchers'} right={''}/>
+                                    <TableHeaderComponent left={'Payment Vouchers'} right={''} addbtn={false} />
                                     <Layout2 />
                                 </Grid>
                             </Grid>

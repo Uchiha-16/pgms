@@ -19,6 +19,7 @@ import LinkPage from './layouts/LinkPage';
 import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
+import DemoComponent from './components/Demo';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/demo" element={<DemoComponent />} />
 
         {/* private */}
         {/* <Route element={<PersistLogin />}>

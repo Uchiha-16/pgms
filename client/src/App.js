@@ -19,7 +19,7 @@ import LinkPage from './layouts/LinkPage';
 import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
-import DemoComponent from './components/Demo';
+import TimeTable from './layouts/timeTable';
 
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
-        <Route path="/demo" element={<DemoComponent />} />
+        <Route path="/timeTable" element={<TimeTable />} />
 
         {/* private */}
         {/* <Route element={<PersistLogin />}>

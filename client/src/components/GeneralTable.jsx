@@ -62,8 +62,7 @@ function stableSort(array, comparator) {
 
 // Component for the table header
 function EnhancedTableHead(props) {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } =
-        props;
+    const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } = props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
     };

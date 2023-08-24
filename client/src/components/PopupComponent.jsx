@@ -8,7 +8,7 @@ import SideImageComponent from "./SideImageComponent";
 import axios from "../api/axios";
 import { useNavigate } from 'react-router-dom';
 import AlertBox from './GeneralAlert';
-
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 import { Button, Box, Dialog, DialogActions, DialogContent, IconButton, Stack, TextField, Typography } from "@mui/material";
@@ -91,7 +91,21 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
     return (
         <div style={{textAlign:'center'}}>
     
-            <Button onClick={functionOpenPopup} color="primary" variant="contained" sx={{ position: 'relative', marginLeft: '1062px', marginBottom: '20px' }}>Add User</Button>
+            {/* <Button onClick={functionOpenPopup} color="primary" variant="contained" sx={{ position: 'relative', marginLeft: '1062px', marginBottom: '20px' }}>Add User</Button> */}
+            <AddCircleIcon sx={{
+                        marginLeft: 'auto',
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        color: '#FFFFFF',
+                        fontSize: '30px',
+                        filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15))',
+                        cursor: 'pointer',
+                        transition: '0.3s',
+                        ":hover": {
+                            transform: 'rotate(90deg)'
+                        }
+                    }}
+                    onClick={functionOpenPopup} /> 
             <Dialog 
             // fullScreen 
             open={open} onClose={closePopup} fullWidth maxWidth="md" >

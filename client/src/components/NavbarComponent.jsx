@@ -23,13 +23,17 @@ import logo from "../assets/images/logo.png";
 import useAxiosMethods from '../hooks/useAxiosMethods';
 
 
+
 const drawerWidth = 270;
 
 export default function NavbarComponent() {
 
     const {post} = useAxiosMethods();
     const { setAuth } = useAuth();
+    const { auth } = useAuth();
     const navigate = useNavigate();
+
+    const userID = auth.user_id
 
     const [page, setPage] = useState("Dashboard");
     useEffect(() => {
@@ -133,7 +137,7 @@ export default function NavbarComponent() {
                             { text: 'Payment Voucher', path: '/payment-voucher', icon: <DescriptionIcon /> },
                             { text: 'Nominations', path: '/nominations', icon: <GroupAddIcon /> },
                             { text: 'Notifications', path: '/notifications', icon: <NotificationsIcon /> },
-                            { text: 'Profile', path: '/profile', icon: <PersonIcon /> },
+                            { text: 'Profile', path: `/profile/${userID}`, icon: <PersonIcon /> },
                             { text: 'Logout', path: '/', icon: <LogoutIcon /> },
                         ].map((text, index) => (
                             <ListItem 

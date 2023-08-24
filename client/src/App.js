@@ -46,8 +46,7 @@ function App() {
             <Route path='/profile/:userID' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />
-            <Route path='/programs' element={<Programs />} />
-
+            
             {/* <Route path='/timetable' element={<timeTable />} /> */}
             <Route path='/timetable' element={<Hello />} />
             

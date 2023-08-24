@@ -3,9 +3,12 @@ package com.postgresql.pgms.controller;
 import com.postgresql.pgms.DTO.CourseListResponseDTO;
 import com.postgresql.pgms.DTO.CourseSaveDTO;
 import com.postgresql.pgms.Service.courseService;
+import com.postgresql.pgms.model.course;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -22,7 +25,7 @@ public class courseController {
     }
 
     @GetMapping(path = "/viewcourses")
-    public ResponseEntity<CourseListResponseDTO> getCourses(){
+    public ResponseEntity<List<course>> getCourses(){
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 }

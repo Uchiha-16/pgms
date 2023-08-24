@@ -8,6 +8,7 @@ import com.postgresql.pgms.model.Users;
 import com.postgresql.pgms.repo.NominationRepo;
 import com.postgresql.pgms.repo.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,14 @@ public class nominationService {
     private final UserRepository userRepository;
 
     public List<Nominations> listnominations() {
-        List<Nominations> nominationsList = repo.findAll();
+        List<Nominations> nominationsList = repo.findAllByOrderByNominationidDesc();
+        return nominationsList;
+    }
+
+    public List<Nominations> listnominationsByUser(Integer id) {
+        Users user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found")); // Handle this exception properly
+        List<Nominations> nominationsList = repo.findAllByUser(user);
         return nominationsList;
     }
 

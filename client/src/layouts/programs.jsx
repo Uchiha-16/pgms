@@ -7,25 +7,19 @@ import { Box, Grid } from '@mui/material/';
 import { useEffect, useState } from "react"
 import axios from '../api/axios';
 import AddCourse from '../components/AddCourseComponent';
+import useAxiosMethods from '../hooks/useAxiosMethods';
 
 const courses_URL = "/courses/viewcourses"
 
 const Layout1 = () => {
     const [courses, setCourses] = useState([]);
-
+    const { get } = useAxiosMethods();
+    
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await axios.get(courses_URL); // Change the URL according to your backend setup
-                console.log(response.data.coursesList);
-                setCourses(response.data.coursesList);
-            } catch (error) {
-                console.error("Error fetching users:", error);
-            }
-        };
-
-        fetchUsers();
+        // Call the get method to fetch user data
+        get(courses_URL, setCourses);
     }, []);
+
 
     const columns = ['Semester', 'Code', 'Course Name', 'Lecture Hall', 'Credits'];
     
@@ -51,69 +45,104 @@ const Layout1 = () => {
             pcName: 'Mr. K P M K Silva',
         }
     ];
+    
 
-        const dataP1 = courses.map(course => ({
-            'Semester': course[3],
-            'Code' : course[1],
-            'Course Name': course[2], 
-            'Lecture Hall': course[5],
-            'Credits': course[4],
+    // Initialize data arrays
+    let dataP1 = [];
+    let dataP2 = [];
+    let dataP3 = [];
+    let dataP4 = [];
+
+    // Filter courses based on programID and populate data arrays
+    courses.forEach(course => {
+        if (course.programId === "MCS") {
+            dataP1.push({
+                'Semester': course.semester,
+                'Code': course.courseNo,
+                'Course Name': course.courseName,
+                'Lecture Hall': course.hallName,
+                'Credits': course.credit,
+            });
+        } else if (course.programId === "MIS") {
+            dataP2.push({
+                'Semester': course.semester,
+                'Code': course.courseNo,
+                'Course Name': course.courseName,
+                'Lecture Hall': course.hallName,
+                'Credits': course.credit,
+            });
+        } else if (course.programId === "MIT") {
+            dataP3.push({
+                'Semester': course.semester,
+                'Code': course.courseNo,
+                'Course Name': course.courseName,
+                'Lecture Hall': course.hallName,
+                'Credits': course.credit,
+            });
+        } else {
+            dataP4.push({
+                'Semester': course.semester,
+                'Code': course.courseNo,
+                'Course Name': course.courseName,
+                'Lecture Hall': course.hallName,
+                'Credits': course.credit,
+            });
         }
-        ));
+    });
 
-    const dataP2 = [
-        {
-            'Semester': '1',
-            'Code': 'MIS1201',
-            'Course Name': 'Principles of Information Security',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
-        {
-            'Semester': '1',
-            'Code': 'MIS1202',
-            'Course Name': 'Cryptographic Systems',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
+    // const dataP2 = [
+    //     {
+    //         'Semester': '1',
+    //         'Code': 'MIS1201',
+    //         'Course Name': 'Principles of Information Security',
+    //         'Lecturer': 'W002',
+    //         'Credits': '3',
+    //     },
+    //     {
+    //         'Semester': '1',
+    //         'Code': 'MIS1202',
+    //         'Course Name': 'Cryptographic Systems',
+    //         'Lecturer': 'W002',
+    //         'Credits': '3',
+    //     },
         
-    ];
+    // ];
 
-    const dataP3 = [
-        {
-            'Semester': '1',
-            'Code': 'MIS1201',
-            'Course Name': 'Principles of Information Security',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
-        {
-            'Semester': '1',
-            'Code': 'MIS1202',
-            'Course Name': 'Cryptographic Systems',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
+    // const dataP3 = [
+    //     {
+    //         'Semester': '1',
+    //         'Code': 'MIS1201',
+    //         'Course Name': 'Principles of Information Security',
+    //         'Lecturer': 'W002',
+    //         'Credits': '3',
+    //     },
+    //     {
+    //         'Semester': '1',
+    //         'Code': 'MIS1202',
+    //         'Course Name': 'Cryptographic Systems',
+    //         'Lecturer': 'W002',
+    //         'Credits': '3',
+    //     },
         
-    ];
+    // ];
 
-    const dataP4 = [
-        {
-            'Semester': '1',
-            'Code': 'MIS1201',
-            'Course Name': 'Principles of Information Security',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
-        {
-            'Semester': '1',
-            'Code': 'MIS1202',
-            'Course Name': 'Cryptographic Systems',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
+    // const dataP4 = [
+    //     {
+    //         'Semester': '1',
+    //         'Code': 'MIS1201',
+    //         'Course Name': 'Principles of Information Security',
+    //         'Lecturer': 'W002',
+    //         'Credits': '3',
+    //     },
+    //     {
+    //         'Semester': '1',
+    //         'Code': 'MIS1202',
+    //         'Course Name': 'Cryptographic Systems',
+    //         'Lecturer': 'W002',
+    //         'Credits': '3',
+    //     },
         
-    ];
+    // ];
 
     return (
         <GeneralProgramTable columns={columns} program={program} dataP1={dataP1} dataP2={dataP2} dataP3={dataP3} dataP4={dataP4}/>

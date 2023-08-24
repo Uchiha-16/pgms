@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 import axios from '../api/axios';
 import AddCourse from '../components/AddCourseComponent';
 import useAxiosMethods from '../hooks/useAxiosMethods';
+import TableHeaderComponent from '../components/TableHeaderComponent';
 
 const courses_URL = "/courses/viewcourses"
 
@@ -90,59 +91,6 @@ const Layout1 = () => {
         }
     });
 
-    // const dataP2 = [
-    //     {
-    //         'Semester': '1',
-    //         'Code': 'MIS1201',
-    //         'Course Name': 'Principles of Information Security',
-    //         'Lecturer': 'W002',
-    //         'Credits': '3',
-    //     },
-    //     {
-    //         'Semester': '1',
-    //         'Code': 'MIS1202',
-    //         'Course Name': 'Cryptographic Systems',
-    //         'Lecturer': 'W002',
-    //         'Credits': '3',
-    //     },
-        
-    // ];
-
-    // const dataP3 = [
-    //     {
-    //         'Semester': '1',
-    //         'Code': 'MIS1201',
-    //         'Course Name': 'Principles of Information Security',
-    //         'Lecturer': 'W002',
-    //         'Credits': '3',
-    //     },
-    //     {
-    //         'Semester': '1',
-    //         'Code': 'MIS1202',
-    //         'Course Name': 'Cryptographic Systems',
-    //         'Lecturer': 'W002',
-    //         'Credits': '3',
-    //     },
-        
-    // ];
-
-    // const dataP4 = [
-    //     {
-    //         'Semester': '1',
-    //         'Code': 'MIS1201',
-    //         'Course Name': 'Principles of Information Security',
-    //         'Lecturer': 'W002',
-    //         'Credits': '3',
-    //     },
-    //     {
-    //         'Semester': '1',
-    //         'Code': 'MIS1202',
-    //         'Course Name': 'Cryptographic Systems',
-    //         'Lecturer': 'W002',
-    //         'Credits': '3',
-    //     },
-        
-    // ];
 
     return (
         <GeneralProgramTable columns={columns} program={program} dataP1={dataP1} dataP2={dataP2} dataP3={dataP3} dataP4={dataP4}/>
@@ -169,6 +117,7 @@ class programs extends Component {
                         <Grid item>
                             {/* content */}
                             <AddCourse />
+                            <TableHeaderComponent left="Programs" right="" addbtn={true} />
                             <Layout1 />
                         </Grid>
                         {/*============================== Footer ==============================*/}

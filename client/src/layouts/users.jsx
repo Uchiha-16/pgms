@@ -7,6 +7,8 @@ import { Box, Grid } from '@mui/material/';
 import { useEffect, useState } from "react"
 import Popup from '../components/PopupComponent';
 import useAxiosMethods from '../hooks/useAxiosMethods';
+import TableHeaderComponent from '../components/TableHeaderComponent';
+import { headCells } from '../config/userConfig';
 
 const users_URL = "/users/users"
 
@@ -20,19 +22,56 @@ const Layout1 = () => {
     }, []);
 
 
-    const columns = ['NAME', 'ROLE', 'STATUS', 'EMAIL', 'ACTION'];
-    const data = users.map(user => ({
-        NAME: `${user.firstname} ${user.lastname}`,
-        ROLE: user.role,
-        STATUS: 'ONLINE', 
-        EMAIL: user.email,
-        ACTION: 'Edit',
-        ID: user.id,
+    // const columns = ['NAME', 'ROLE', 'STATUS', 'EMAIL', 'ACTION'];
+    // const data = users.map(user => ({
+    //     NAME: `${user.firstname} ${user.lastname}`,
+    //     ROLE: user.role,
+    //     STATUS: 'ONLINE', 
+    //     EMAIL: user.email,
+    //     ACTION: 'Edit',
+    //     ID: user.id,
+    // }
+    // ));
+    function createData(ID, NAME, ROLE, STATUS, EMAIL, ACTION) {
+        return {
+            ID,
+            NAME,
+            ROLE,
+            STATUS,
+            EMAIL,
+            ACTION
+        };
     }
+
+    const rows = users.map(user => createData(
+        user.id,
+    `${user.firstName} ${user.lastName}`,
+        user.role,
+        'ONLINE', // Assuming you want to display a static status for all users
+        user.email,
+        'Edit'
     ));
 
+
+    //====================== Dummy Data for testing ======================//
+    // const rows = [
+    //     createData('Johny Michael', 'Lecturer', 'ONLINE', 'john@gmail.com', 'Edit'),
+    //     createData('Alexa Liras', 'Lecturer', 'ONLINE', 'alexa@gmail.com', 'Edit'),
+    //     createData('Laurent Perrier', 'Lecturer', 'OFFLINE', 'laurent@gmail.com', 'Edit'),
+    //     createData('Michael Levi', 'Lecturer', 'ONLINE', 'michael@gmail.com', 'Edit'),
+    //     createData('Richard Gran', 'Visiting Lecturer', 'ONLINE', 'richard@gmail.com', 'Edit'),
+    //     createData('Miriam Eric', 'Lecturer', 'ONLINE', 'miriam@gmail.com', 'Edit'),
+    //     createData('Anne Marie', 'Lecturer', 'ONLINE', 'annemarie@gmail.com', 'Edit'),
+    //     createData('Nick Daniel', 'Visiting Lecturer', 'OFFLINE', 'nickdaniel@gmail.com', 'Edit'),
+    //     createData('KitKat', 'Staff', 'OFFLINE', 'kitkat@gmail.com', 'Edit'),
+    //     createData('Lollipop', 'Staff', 'ONLINE', 'lollipop@gmail.com', 'Edit'),
+    //     createData('Marshmallow', 'Staff', 'OFFLINE', 'marshmellow@gmail.com', 'Edit'),
+    //     createData('Nougat', 'Staff', 'ONLINE', 'nougat@gmail.com', 'Edit'),
+    //     createData('Oreo', 'Staff', 'ONLINE', 'oreo@gmail.com', 'Edit'),
+    // ];
+
     return (
-        <GeneralTable columns={columns} data={data} />
+        <GeneralTable rows={rows} headCells={headCells} />
     );
 };
 
@@ -55,6 +94,7 @@ class users extends Component {
                         <Grid item>
                             {/* content */}
                             <Popup />
+                            <TableHeaderComponent left="Users" right="" addbtn={true} />
                             <Layout1 />
                         </Grid>
                         <Grid item>

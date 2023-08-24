@@ -17,12 +17,18 @@ public class Nominations {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long nominationid;
-    private long userID;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
     private String programId;
     private Integer semester;
     private String courseId;
+
+    @Builder.Default
     private String status = "Pending";
+    @Builder.Default
     private LocalDate date = LocalDate.now();
 
-    }
+}
 

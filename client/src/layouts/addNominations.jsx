@@ -6,45 +6,44 @@ import { Box, Grid } from '@mui/material/';
 import NominationComponent from '../components/NominationComponent';
 import NominationsTable from '../components/NominationsTable';
 import { useEffect, useState } from "react";
-import axios from '../api/axios';
+import useAxiosMethods from '../hooks/useAxiosMethods';
+import useAuth from "../hooks/useAuth";
 
 
-    const nominations_URL = "/nominations/nominations"
+const TableLayout = () => {
+    const [nominations, setNominations] = useState([]);
+    // Define filteredNominations variable
+    let filteredNominations = [];
+    const { auth } = useAuth();
+    const { get } = useAxiosMethods();
 
-    const TableLayout = () => {
-        const [nominations, setnominations] = useState([]);
-        
-        useEffect(() => {
-            const fetchUsers = async () => {
-                try {
-                    const response = await axios.get(nominations_URL); // Change the URL according to your backend setup
-                    console.log(response.data.nominationsList);
-                    setnominations(response.data.nominationsList);
-                } catch (error) {
-                    console.error("Error fetching users:", error);
-                }
-            };
-    
-            fetchUsers();
-        }, []);
-    
-        const columns = ['REQUEST', 'NAME', 'STATUS', 'DATE', 'ACTION'];
+    const nominations_StaffURL = "/nominations/nominations";
+    const nominations_LecturerURL = `/nominations/nominations/${auth.user_id}`;    
 
-        const data = nominations.map(nomination => ({
-            REQUEST: `Application for ${nomination[0]} Lecturer`,
-            NAME: `${nomination[5]} ${nomination[6]}`,
-            STATUS: 'Pending', 
-            DATE: nomination[1],
-            ACTION: 'Edit',
+    useEffect(() => {
+        if(auth.role == "Lecturer"){
+            get(nominations_LecturerURL, setNominations);
+        }else{
+            get(nominations_StaffURL, setNominations);
         }
-        ));
-    
-        return (
-            <NominationsTable columns={columns} data={data} />
-        );
-    }
+    }, []);
 
-class addUser extends Component {
+    const columns = ['REQUEST', 'NAME', 'STATUS', 'DATE', 'ACTION'];
+
+    const data = nominations.map(nomination => ({
+        REQUEST: `Application for ${nomination.courseId} Lecturer`,
+        NAME: `${nomination.user.firstname} ${nomination.user.lastname}` ,
+        STATUS: 'Pending', 
+        DATE: nomination.date,
+        ACTION: 'Edit',
+    }));
+
+    return (
+        <NominationsTable columns={columns} data={data} />
+    );
+}
+
+class addNominations extends Component {
     render() {
         return (
             <Box>
@@ -77,4 +76,4 @@ class addUser extends Component {
     }
 }
 
-export default addUser;
+export default addNominations;

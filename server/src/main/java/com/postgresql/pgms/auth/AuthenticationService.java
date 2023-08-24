@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -49,6 +50,8 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .contact(request.getContact())
+                .profileImage("user.png")
+                .EmployedDate(LocalDate.now())
                 .build();
         var saveduser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -111,10 +114,6 @@ public class AuthenticationService {
                     .message("Token Expired!!!!!!!!")
                     .build();
         }
-
-//        if (password.equals("Token Check")) {
-//            return GlobalService.response("Alert", "Token Valid");//use authresponse
-//        }
 
         var email = jwtService.extractEmail(token);
         var user = userRepository.findByEmail(email).orElseThrow(() -> new CustomErrorException("User Not Found"));//create exception

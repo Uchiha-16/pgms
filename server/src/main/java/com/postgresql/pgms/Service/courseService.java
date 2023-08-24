@@ -29,8 +29,8 @@ public class courseService{
         courseRepo.save(course);
     }
 
-    public CourseListResponseDTO getAllCourses() {
-        List<Object> coursesList = courseRepo.findAllCourses();
-        return new CourseListResponseDTO((coursesList));
+    public List<course> getAllCourses() {
+        List<course> coursesList = courseRepo.findAll();
+        return (coursesList);
     }
 }

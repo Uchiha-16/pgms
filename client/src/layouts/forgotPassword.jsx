@@ -146,7 +146,7 @@ const ForgotPassword = () => {
                 fontSize: '12px',
                 fontWeight: '400',
               }}>
-                Please Enter Your Email Address To Recieve a Verification Cord.
+                Please Enter Your Email Address To Recieve a Verification Link.
               </p>
             </Typography>
             <p>{state}</p>

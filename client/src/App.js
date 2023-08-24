@@ -8,8 +8,6 @@ import Programs from './layouts/programs';
 import AddNominations from './layouts/addNominations';
 import Profile from './layouts/profile';
 import Notifications from './layouts/notifications';
-import timeTable from './layouts/timeTable';
-import Hello from './layouts/timeTable';
 
 
 import Layout from './auth/Layout';
@@ -22,6 +20,7 @@ import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
 import AttendanceTracking from './layouts/attendanceTracking';
+import TimeTable from './layouts/timeTable';
 
 
 function App() {
@@ -36,6 +35,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/timeTable" element={<TimeTable />} />
 
         {/* private */}
         <Route element={<PersistLogin />}>
@@ -44,7 +44,7 @@ function App() {
             <Route path='/nominations' element={<AddNominations />} />
             <Route path='/users' element={<Users/>}/>
             <Route path='/programs' element={<Programs/>}/>
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/:userID' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/programs' element={<Programs />} />
@@ -52,6 +52,7 @@ function App() {
 
             {/* <Route path='/timetable' element={<timeTable />} /> */}
             <Route path='/timetable' element={<Hello />} />
+            
             
 
 

@@ -1,11 +1,10 @@
 package com.postgresql.pgms.DTO;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.io.Serializable;
 
-public class NominationSaveDTO {
+public class NominationSaveDTO implements Serializable {
 
-    private long userID;
+    private Integer userID;
     private String programId;
     private Integer semester;
     private String courseId;
@@ -13,18 +12,18 @@ public class NominationSaveDTO {
     public NominationSaveDTO() {
     }
 
-    public NominationSaveDTO(long userID, String programId, Integer semester, String courseId) {
+    public NominationSaveDTO(Integer userID, String programId, Integer semester, String courseId) {
         this.userID = userID;
         this.programId = programId;
         this.semester = semester;
         this.courseId = courseId;
     }
 
-    public long getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(long userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
@@ -48,4 +47,7 @@ public class NominationSaveDTO {
         return courseId;
     }
 
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
 }

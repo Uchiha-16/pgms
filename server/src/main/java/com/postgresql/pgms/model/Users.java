@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity()
+@Entity
 @Table(name = "Users")
 public class Users implements UserDetails {
     @Id
@@ -37,8 +38,12 @@ public class Users implements UserDetails {
 
     private String contact;
 
-    @OneToMany(mappedBy = "user")
-    private List<Token> tokens;
+    @Builder.Default
+    private String profileImage = "user.png";
+
+    @Builder.Default
+    private LocalDate EmployedDate = LocalDate.now();
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

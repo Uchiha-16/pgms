@@ -9,8 +9,5 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface CourseRepo extends JpaRepository<course,Long> {
-    @Query("""
-SELECT courseId,courseNo,courseName,semester,credit,hallName,programId FROM course ORDER BY courseId DESC
-""")
-    List<Object> findAllCourses();
+
 }

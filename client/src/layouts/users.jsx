@@ -15,45 +15,47 @@ const users_URL = "/users/users"
 const Layout1 = () => {
     const [users, setUsers] = useState([]);
     const { get } = useAxiosMethods();
-    
+    console.log(users);
     useEffect(() => {
         // Call the get method to fetch user data
+        
         get(users_URL, setUsers);
-    }, []);
-
+        
+    }, [get]);
+    console.log(users);
 
     // const columns = ['NAME', 'ROLE', 'STATUS', 'EMAIL', 'ACTION'];
-    // const data = users.map(user => ({
-    //     NAME: `${user.firstname} ${user.lastname}`,
-    //     ROLE: user.role,
-    //     STATUS: 'ONLINE', 
-    //     EMAIL: user.email,
-    //     ACTION: 'Edit',
-    //     ID: user.id,
-    // }
-    // ));
-    function createData(ID, NAME, ROLE, STATUS, EMAIL, ACTION) {
-        return {
-            ID,
-            NAME,
-            ROLE,
-            STATUS,
-            EMAIL,
-            ACTION
-        };
+    const rows = users.map(user => ({
+        NAME: `${user.firstname} ${user.lastname}`,
+        ROLE: user.role,
+        STATUS: 'ONLINE', 
+        EMAIL: user.email,
+        ACTION: 'Edit',
+        ID: user.id,
+        EMPLOYED: user.employedDate,
+        PROFILEPIC: user.profileImage
     }
-
-    const rows = users.map(user => createData(
-        user.id,
-    `${user.firstName} ${user.lastName}`,
-        user.role,
-        'ONLINE', // Assuming you want to display a static status for all users
-        user.email,
-        'Edit'
     ));
+    // function createData(NAME, ROLE, STATUS, EMAIL, ACTION) {
+    //     return {
+    //         NAME,
+    //         ROLE,
+    //         STATUS,
+    //         EMAIL,
+    //         ACTION
+    //     };
+    // }
+
+    // const rows = users.map(user => createData(
+    //         `${user.firstname} ${user.lastname}`,
+    //         user.role,
+    //         'ONLINE', // Assuming you want to display a static status for all users
+    //         user.email,
+    //         'Edit'
+    // ));
 
 
-    //====================== Dummy Data for testing ======================//
+   // ====================== Dummy Data for testing ======================//
     // const rows = [
     //     createData('Johny Michael', 'Lecturer', 'ONLINE', 'john@gmail.com', 'Edit'),
     //     createData('Alexa Liras', 'Lecturer', 'ONLINE', 'alexa@gmail.com', 'Edit'),

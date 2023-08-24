@@ -29,7 +29,7 @@ public class UserService {
 
         if (userOptional.isPresent()) {
             Users user = userOptional.get();
-            return new UserDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getRole(), user.getContact(), user.getProfileImage());
+            return new UserDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getRole(), user.getContact(), user.getProfileImage(), user.getEmployedDate());
         } else {
             return null;
         }

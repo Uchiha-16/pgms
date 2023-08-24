@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import user from '../assets/images/user.png';
 import TablePagination from '@mui/material/TablePagination';
@@ -192,13 +192,13 @@ export default function GeneralTable({ rows, headCells }) {
 
     const navigate = useNavigate();
 
-    const [alignment, setAlignment] = React.useState('');
-
     const navigateProfile = (userID) => {
         return () => {
             navigate(`/profile/${userID}`);
         };
     }
+
+    const profileImage = user?.profileImage || 'user.png';
 
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('NAME');
@@ -262,7 +262,7 @@ export default function GeneralTable({ rows, headCells }) {
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage,
             ),
-        [order, orderBy, page, rowsPerPage],
+        [order, orderBy, page, rowsPerPage, rows],
     );
 
     return (
@@ -390,7 +390,7 @@ export default function GeneralTable({ rows, headCells }) {
                                                             display: 'flex',
                                                             alignItems: 'center'
                                                         }}>
-                                                            <img src={user} width={30} height={30} alt="user" />
+                                                            <img src={require(`../assets/images/${row['PROFILEPIC']}`)} width={30} height={30} alt="user" />
                                                         </div>
                                                         <div>
                                                             <span style={{
@@ -403,7 +403,9 @@ export default function GeneralTable({ rows, headCells }) {
                                                                 color: '#4A4949',
                                                                 fontSize: '10px',
                                                                 fontWeight: '400'
-                                                            }}>john@gmail.com</span>
+                                                                //give the email
+                                                            }}>{row['EMAIL']}</span>
+                                                          
                                                         </div>
                                                     </div>
                                                 ) : isEdit(headCell.id) ? (

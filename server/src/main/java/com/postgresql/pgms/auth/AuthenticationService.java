@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -50,6 +51,7 @@ public class AuthenticationService {
                 .role(request.getRole())
                 .contact(request.getContact())
                 .profileImage("user.png")
+                .EmployedDate(LocalDate.now())
                 .build();
         var saveduser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);

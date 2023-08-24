@@ -5,6 +5,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jdk.jshell.Snippet;
 
+import java.time.LocalDate;
+
 public class UserDTO {
     private Integer id;
 
@@ -23,7 +25,9 @@ public class UserDTO {
 
     private String profileImage = "user.png";
 
-    public UserDTO(Integer id, String firstname, String lastname, String email, Role role, String contact, String profileImage) {
+    private LocalDate EmployedDate = LocalDate.now();
+
+    public UserDTO(Integer id, String firstname, String lastname, String email, Role role, String contact, String profileImage, LocalDate employedDate) {
 
         this.id = id;
         this.firstname = firstname;
@@ -32,6 +36,7 @@ public class UserDTO {
         this.role = role;
         this.contact = contact;
         this.profileImage = profileImage;
+        EmployedDate = employedDate;
     }
 
 
@@ -82,6 +87,12 @@ public class UserDTO {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public LocalDate getEmployedDate() { return EmployedDate; }
+
+    public void setEmployedDate(LocalDate employedDate) {
+        EmployedDate = employedDate;
     }
 
 }

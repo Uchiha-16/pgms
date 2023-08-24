@@ -22,19 +22,19 @@ const AttendanceTrackingLayout = () => {
                     </Grid>
                     <Grid item>
                         {/* Display Degree Title 1 */}
-                        <TableHeaderComponent left={'Degree Name 1'} right={'Sat 12th Aug, 2023'} />
+                        <TableHeaderComponent left={'Master of Information Security'} right={'Sat 12th Aug, 2023'} />
                         <AttendanceTrackingComponent degree={'Degree Name 1'} /> {/* Pass degree name as prop */}
                         
                         {/* Display Degree Title 2 */}
-                        <TableHeaderComponent left={'Degree Name 2'} right={'Sat 12th Aug, 2023'} />
+                        <TableHeaderComponent left={'Master of Computer Science'} right={'Sat 12th Aug, 2023'} />
                         <AttendanceTrackingComponent degree={'Degree Name 2'} /> {/* Pass degree name as prop */}
                         
                         {/* Display Degree Title 3 */}
-                        <TableHeaderComponent left={'Degree Name 3'} right={'Sat 12th Aug, 2023'} />
+                        <TableHeaderComponent left={'Master of Information Technology'} right={'Sat 12th Aug, 2023'} />
                         <AttendanceTrackingComponent degree={'Degree Name 3'} /> {/* Pass degree name as prop */}
                         
                         {/* Display Degree Title 4 */}
-                        <TableHeaderComponent left={'Degree Name 4'} right={'Sat 12th Aug, 2023'} />
+                        <TableHeaderComponent left={'Master of Business Analytics'} right={'Sat 12th Aug, 2023'} />
                         <AttendanceTrackingComponent degree={'Degree Name 4'} /> {/* Pass degree name as prop */}
                     </Grid>
                     <Grid item>

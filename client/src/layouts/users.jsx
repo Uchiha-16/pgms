@@ -36,15 +36,7 @@ const Layout1 = () => {
         PROFILEPIC: user.profileImage
     }
     ));
-    // function createData(NAME, ROLE, STATUS, EMAIL, ACTION) {
-    //     return {
-    //         NAME,
-    //         ROLE,
-    //         STATUS,
-    //         EMAIL,
-    //         ACTION
-    //     };
-    // }
+
 
     // const rows = users.map(user => createData(
     //         `${user.firstname} ${user.lastname}`,
@@ -56,6 +48,15 @@ const Layout1 = () => {
 
 
    // ====================== Dummy Data for testing ======================//
+    // function createData(NAME, ROLE, STATUS, EMAIL, ACTION) {
+    //     return {
+    //         NAME,
+    //         ROLE,
+    //         STATUS,
+    //         EMAIL,
+    //         ACTION
+    //     };
+    // }
     // const rows = [
     //     createData('Johny Michael', 'Lecturer', 'ONLINE', 'john@gmail.com', 'Edit'),
     //     createData('Alexa Liras', 'Lecturer', 'ONLINE', 'alexa@gmail.com', 'Edit'),

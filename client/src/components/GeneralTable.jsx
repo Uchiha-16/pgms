@@ -390,7 +390,7 @@ export default function GeneralTable({ rows, headCells }) {
                                                             display: 'flex',
                                                             alignItems: 'center'
                                                         }}>
-                                                            <img src={require(`../assets/images/${row['PROFILEPIC']}`)} width={30} height={30} alt="user" />
+                                                            {/* <img src={require(`../assets/images/${row['PROFILEPIC']}`)} width={30} height={30} alt="user" /> */}
                                                         </div>
                                                         <div>
                                                             <span style={{

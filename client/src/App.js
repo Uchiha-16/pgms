@@ -21,6 +21,7 @@ import LinkPage from './layouts/LinkPage';
 import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
+import AttendanceTracking from './layouts/attendanceTracking';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/programs' element={<Programs />} />
+            <Route path='/attendance-tracking' element={<AttendanceTracking />} />
 
             {/* <Route path='/timetable' element={<timeTable />} /> */}
             <Route path='/timetable' element={<Hello />} />

@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DescriptionIcon from '@mui/icons-material/Description';
+import PlaceIcon from '@mui/icons-material/Place';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
@@ -131,6 +132,7 @@ export default function NavbarComponent() {
                             { text: 'Dashboard', path: '/dashboard', icon: <DashboardRoundedIcon /> },
                             { text: 'Timetable', path: '/timetable', icon: <CalendarMonthIcon /> },
                             { text: 'Payment Voucher', path: '/payment-voucher', icon: <DescriptionIcon /> },
+                            { text: 'Attendance Tracking', path: '/attendance-tracking', icon: <PlaceIcon /> },
                             { text: 'Nominations', path: '/nominations', icon: <GroupAddIcon /> },
                             { text: 'Notifications', path: '/notifications', icon: <NotificationsIcon /> },
                             { text: 'Profile', path: '/profile', icon: <PersonIcon /> },

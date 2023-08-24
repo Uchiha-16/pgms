@@ -1,20 +1,22 @@
 package com.postgresql.pgms.DTO;
 
+import com.postgresql.pgms.model.Nominations;
+
 import java.time.LocalDate;
 
 public class NominationDTO {
     private long nominationid;
     private long userID;
-    private long programId;
-    private String semester;
-    private long courseId;
+    private String programId;
+    private Integer semester;
+    private String courseId;
     private String status;
     private LocalDate date;
 
-    public NominationDTO() {
+    public NominationDTO(Nominations nomination) {
     }
 
-    public NominationDTO(long nominationid, long userID, long programId, String semester, long courseId, String status, LocalDate date) {
+    public NominationDTO(long nominationid, long userID, String programId, Integer semester, String courseId, String status, LocalDate date) {
         this.nominationid = nominationid;
         this.userID = userID;
         this.programId = programId;
@@ -40,27 +42,27 @@ public class NominationDTO {
         this.userID = userID;
     }
 
-    public long getProgramId() {
+    public String getProgramId() {
         return programId;
     }
 
-    public void setProgramId(long programId) {
+    public void setProgramId(String programId) {
         this.programId = programId;
     }
 
-    public String getSemester() {
+    public Integer getSemester() {
         return semester;
     }
 
-    public void setSemester(String semester) {
+    public void setSemester(Integer semester) {
         this.semester = semester;
     }
 
-    public long getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(long courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 

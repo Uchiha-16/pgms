@@ -14,15 +14,14 @@ import AlertBox from './GeneralAlert';
 import { Button, Box, Dialog, DialogActions, DialogContent, IconButton, Stack, TextField, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close"
 
-
-const Popup = () => { // Changed the function name to start with uppercase "P"
+const Course = () => { // Changed the function name to start with uppercase "P"
   const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-    role: '',
-    contact: '',
+    courseNo: '',
+    courseName: '',
+    semester: '',
+    credit: '',
+    hallName: '',
+    programId: '',
   });
 
 
@@ -31,11 +30,12 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
   const [alertMessage, setAlertMessage] = useState('');
 
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
   
     // For the "role" field, we need to handle its value differently
-    if (name === 'role') {
+    if (name === 'programId') {
       // Access the selected value using event.target.value directly
       setFormData({ ...formData, [name]: e.target.value });
     } else {
@@ -48,18 +48,18 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
     console.log(JSON.stringify(formData));
 
     e.preventDefault();
-    axios.post("/auth/register", formData)
+    axios.post("/courses/add", formData)
       .then((response) => {
         console.log(response);
         setOpenAlert(true);
         setAlertSeverity('success');
-        setAlertMessage('User Added successfully!');
+        setAlertMessage('Course Added successfully!');
         // Handle success, display success message or redirect if needed
         setTimeout(() => { 
           //refresh the page and leave the popup component
           window.location.reload();
           setOpenAlert(false);
-          navigate('/users', { replace: true });
+          navigate('/programs', { replace: true });
         }, 3000);
       })
       .catch((error) => {
@@ -77,12 +77,12 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
     }
     const handleReset = () => {
       setFormData({
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        role: '',
-        contact: '',
+        courseNo: '',
+        courseName: '',
+        semester: '',
+        credit: '',
+        hallName: '',
+        programId: '',
       });
     };
     
@@ -91,7 +91,7 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
     return (
         <div style={{textAlign:'center'}}>
     
-            <Button onClick={functionOpenPopup} color="primary" variant="contained" sx={{ position: 'relative', marginLeft: '1062px', marginBottom: '20px' }}>Add User</Button>
+            <Button onClick={functionOpenPopup} color="primary" variant="contained" sx={{ position: 'relative', marginLeft: '1062px', marginBottom: '20px' }}>Add Courses</Button>
             <Dialog 
             // fullScreen 
             open={open} onClose={closePopup} fullWidth maxWidth="md" >
@@ -112,24 +112,42 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
                       borderBottomRightRadius:50,
                       textAlign:"center"
                           }}>
-                  <Typography paddingTop={"2px"} color={"white"}>Add User</Typography></Box>
+                  <Typography paddingTop={"2px"} color={"white"}>Add Course</Typography></Box>
                  {/* Added a closing tag for CloseIcon */}
                 <DialogContent>
                     {/* <DialogContentText>Do you want to remove this user?</DialogContentText> */}
                     <Stack spacing={2} margin={2}>
                     <Grid container spacing={2}>
-                    
-              <Grid item xs={12} sm={6}>
+
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+              
+              <InputLabel id="demo-simple-select-label" required>Program</InputLabel>
+                <Select
+                  required
+                  label="Program"
+                  id="progam"
+                  value={formData.programId}
+                  onChange={handleChange}
+                  name="programId"
+                >
+                    <MenuItem value={'MCS'}>Master of Computer Science</MenuItem>
+                    <MenuItem value={'MIT'}>Master of Information Technology</MenuItem>
+                    <MenuItem value={'MIS'}>Master of Information Security</MenuItem>
+                    <MenuItem value={'MBA'}>Master of Business Analytics</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+              <Grid item xs={12}>
               
                 <TextField
-                  autoComplete="given-name"
-                  name="firstname"
+                  name="courseName"
                   required
                   fullWidth
-                  value={formData.firstName}
+                  value={formData.courseName}
                   onChange={handleChange}
-                  id="firstname"
-                  label="First Name"
+                  id="courseName"
+                  label="Course Name"
                   autoFocus
                 />
               </Grid>
@@ -137,73 +155,55 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
                 <TextField
                   required
                   fullWidth
-                  id="lastname"
-                  label="Last Name"
-                  name="lastname"
-                  value={formData.lastName}
+                  id="courseNo"
+                  label="Course Code"
+                  name="courseNo"
+                  value={formData.courseNo}
                   onChange={handleChange}
-                  autoComplete="family-name"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  autoComplete="new-password"
-                />
-              </Grid>
-
               <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
               
-                <InputLabel id="demo-simple-select-label" required>Role</InputLabel>
+                <InputLabel id="demo-simple-select-label" required>Semester</InputLabel>
                 <Select
                   required
-                  label="Role"
-                  id="role"
-                  value={formData.role}
+                  label="Semester"
+                  id="semester"
+                  value={formData.semester}
                   onChange={handleChange}
-                  name="role"
-                >
-                    <MenuItem value={'Lecturer'}>UCSC Lecturer</MenuItem>
-                    <MenuItem value={'VisitingLecturer'}>Visiting Lecturer</MenuItem>
-                    <MenuItem value={'TechnicalStaff'}>Technical Assistant</MenuItem>
-                    <MenuItem value={'Staff'}>Staff</MenuItem>
+                  name="semester">
+                    <MenuItem value={'1'}>Semester 1</MenuItem>
+                    <MenuItem value={'2'}>Semester 2</MenuItem>
+                    <MenuItem value={'3'}>Semester 3</MenuItem>
+                    <MenuItem value={'4'}>Semester 4</MenuItem>
                 </Select>
                 </FormControl>
-              </Grid>
-
-              <Grid item xs={12}>
+            </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  name="contact"
-                  label="Contact No"
-                  type="phone"
-                  id="contact"
-                  value={formData.contact}
+                  id="credit"
+                  label="Course Credit"
+                  name="credit"
+                  value={formData.credit}
                   onChange={handleChange}
-                  autoComplete="contact"
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  name="hallName"
+                  label="Hall Name"
+                  id="hallName"
+                  value={formData.hallName}
+                  onChange={handleChange}
+                />
+              </Grid>
+
+
             </Grid>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button
@@ -242,4 +242,4 @@ const Popup = () => { // Changed the function name to start with uppercase "P"
         </div>
     );
   }
-export default Popup; // Changed the export name to match the component name
+export default Course; // Changed the export name to match the component name

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import user from '../assets/images/user.png';
 import TablePagination from '@mui/material/TablePagination';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TableSortLabel from '@mui/material/TableSortLabel';
@@ -15,20 +16,28 @@ import { visuallyHidden } from '@mui/utils';
 
 // Helper functions to determine cell conditions
 const isOnline = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'ONLINE';
-    };
+    return columnName === 'STATUS' && cellValue === 'ONLINE';
+};
 
-    const isOffline = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 'OFFLINE';
-    };
+const isOffline = (columnName, cellValue) => {
+    return columnName === 'STATUS' && cellValue === 'OFFLINE';
+};
 
-    const isFunctionColumn = (columnName) => {
-        return columnName === 'FUNCTION';
-    };
+const isFunctionColumn = (columnName) => {
+    return columnName === 'FUNCTION';
+};
 
-    const isNameColumn = (columnName) => {
-        return columnName === 'NAME';
-    };
+const isNameColumn = (columnName) => {
+    return columnName === 'NAME';
+};
+
+// const isRequestColumn = (columnName) => {
+//     return columnName === 'Request';
+// };
+
+const isEdit = (columnName) => {
+    return columnName === 'ACTION';
+};
 
 // Comparator functions for sorting
 function descendingComparator(a, b, orderBy) {
@@ -179,6 +188,17 @@ EnhancedTableToolbar.propTypes = {
 
 // Main table component
 export default function GeneralTable({ rows, headCells }) {
+
+    const navigate = useNavigate();
+
+    const navigateProfile = (userID) => {
+        return () => {
+            navigate(`/profile/${userID}`);
+        };
+    }
+
+    const profileImage = user?.profileImage || 'user.png';
+
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('NAME');
     const [selected, setSelected] = React.useState([]);
@@ -241,45 +261,45 @@ export default function GeneralTable({ rows, headCells }) {
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage,
             ),
-        [order, orderBy, page, rowsPerPage],
+        [order, orderBy, page, rowsPerPage, rows],
     );
 
     return (
-        <Box>
-            <Paper sx={{ 
-                background: 'transparent', 
-                boxShadow: 'none', 
-                height: 'auto',
-                zIndex: 0,
-                }}>
-                <EnhancedTableToolbar numSelected={selected.length} sx={{
-                    '& .MuiToolbar-root': {
-                        float: 'right',
-                        zIndex: 1,
-                    },
-                    zIndex: 1,
-                    float: 'right',
-                }} />
-                <TableContainer sx={{
-                    backgroundColor: '#FFFFFF',
-                    position: 'relative',
-                    top: '-6rem',
+            <Box>
+                <Paper sx={{
+                    background: 'transparent',
+                    boxShadow: 'none',
+                    height: 'auto',
                     zIndex: 0,
-                    paddingTop: '78px',
-                    paddingBottom: 3,
-                    borderRadius: '5px',
                 }}>
-                    <Table aria-labelledby="tableTitle">
-                        <EnhancedTableHead
-                            numSelected={selected.length}
-                            order={order}
-                            orderBy={orderBy}
-                            onSelectAllClick={handleSelectAllClick}
-                            onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
-                            headCells={headCells}
-                        />
-                        <TableBody>
+                    <EnhancedTableToolbar numSelected={selected.length} sx={{
+                        '& .MuiToolbar-root': {
+                            float: 'right',
+                            zIndex: 1,
+                        },
+                        zIndex: 1,
+                        float: 'right',
+                    }} />
+                    <TableContainer sx={{
+                        backgroundColor: '#FFFFFF',
+                        position: 'relative',
+                        top: '-6rem',
+                        zIndex: 0,
+                        paddingTop: '78px',
+                        paddingBottom: 3,
+                        borderRadius: '5px',
+                    }}>
+                        <Table aria-labelledby="tableTitle">
+                            <EnhancedTableHead
+                                numSelected={selected.length}
+                                order={order}
+                                orderBy={orderBy}
+                                onSelectAllClick={handleSelectAllClick}
+                                onRequestSort={handleRequestSort}
+                                rowCount={rows.length}
+                                headCells={headCells}
+                            />
+                            <TableBody>
                             {visibleRows.map((row, index) => {
                                 const isItemSelected = isSelected(row.NAME);
                                 const labelId = `enhanced-table-checkbox-${index}`;
@@ -295,17 +315,17 @@ export default function GeneralTable({ rows, headCells }) {
                                         selected={isItemSelected}
                                         sx={{ cursor: 'pointer' }}
                                     >
-                                        
+
                                         <TableCell padding="checkbox" sx={{
                                             padding: '0 0 0 28px'
                                         }}>
-                                                <Checkbox
-                                                    checked={isItemSelected}
-                                                    inputProps={{
-                                                        'aria-labelledby': labelId,
-                                                    }}
-                                                />
-                                            </TableCell>
+                                            <Checkbox
+                                                checked={isItemSelected}
+                                                inputProps={{
+                                                    'aria-labelledby': labelId,
+                                                }}
+                                            />
+                                        </TableCell>
                                         {headCells.map((headCell, colIndex) => (
 
                                             <TableCell
@@ -337,56 +357,60 @@ export default function GeneralTable({ rows, headCells }) {
                                                         alignItems: 'center',
                                                         paddingTop: 2,
                                                     }}>{row[headCell.id]}</div>
-                                                ): isOffline(headCell.id, row[headCell.id]) ? (
-                                                        <div style={{
-                                                            background: 'black',
-                                                            borderRadius: 50,
-                                                            color: '#FFF',
-                                                            width: 80,
-                                                            fontFamily: 'Roboto',
-                                                            fontSize: '12px',
-                                                            fontWeight: '900',
-                                                            display: 'flex',
-                                                            justifyContent: 'center',
-                                                            alignItems: 'center',
-                                                            paddingTop: 2,
-                                                        }}>{row[headCell.id]}</div>
+                                                ) : isOffline(headCell.id, row[headCell.id]) ? (
+                                                    <div style={{
+                                                        background: 'black',
+                                                        borderRadius: 50,
+                                                        color: '#FFF',
+                                                        width: 80,
+                                                        fontFamily: 'Roboto',
+                                                        fontSize: '12px',
+                                                        fontWeight: '900',
+                                                        display: 'flex',
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                        paddingTop: 2,
+                                                    }}>{row[headCell.id]}</div>
                                                 ) : isFunctionColumn(headCell.id) ? (
-                                                            <div>
-                                                             <span>{row[headCell.id]}</span><br />
-                                                             <span style={{
-                                                                color: '#555',
-                                                                fontSize: '9px',
-                                                                fontWeight: '400'
-                                                            }}>UCSC</span>
-                                                          </div>
+                                                    <div>
+                                                        <span>{row[headCell.id]}</span><br />
+                                                        <span style={{
+                                                            color: '#555',
+                                                            fontSize: '9px',
+                                                            fontWeight: '400'
+                                                        }}>UCSC</span>
+                                                    </div>
                                                 ) : isNameColumn(headCell.id) ? (
-                                                                <div style={{
-                                                                    display: 'flex'
-                                                                }}>
-                                                                    <div style={{
-                                                                        marginRight: 10,
-                                                                        display: 'flex',
-                                                                        alignItems: 'center'
-                                                                    }}>
-                                                                        <img src={user} width={30} height={30} alt="user" />
-                                                                    </div>
-                                                                    <div>
-                                                                        <span style={{
-                                                                            color: '#000',
-                                                                            fontSize: '14px',
-                                                                            fontWeight: '500'
-                                                                        }}>{row[headCell.id]}</span>
-                                                                        <br />
-                                                                        <span style={{
-                                                                            color: '#4A4949',
-                                                                            fontSize: '10px',
-                                                                            fontWeight: '400'
-                                                                        }}>john@gmail.com</span>
-                                                                    </div>
-                                                                </div>
+                                                    <div style={{
+                                                        display: 'flex'
+                                                    }}>
+                                                        <div style={{
+                                                            marginRight: 10,
+                                                            display: 'flex',
+                                                            alignItems: 'center'
+                                                        }}>
+                                                            <img src={require(`../assets/images/${row['PROFILEPIC']}`)} width={30} height={30} alt="user" />
+                                                        </div>
+                                                        <div>
+                                                            <span style={{
+                                                                color: '#000',
+                                                                fontSize: '14px',
+                                                                fontWeight: '500'
+                                                            }}>{row[headCell.id]}</span>
+                                                            <br />
+                                                            <span style={{
+                                                                color: '#4A4949',
+                                                                fontSize: '10px',
+                                                                fontWeight: '400'
+                                                                //give the email
+                                                            }}>{row['EMAIL']}</span>
+                                                          
+                                                        </div>
+                                                    </div>
+                                                ) : isEdit(headCell.id) ? (
+                                                    <span onClick={navigateProfile(row['ID'])} style={{ cursor: 'pointer' }}>{row[headCell.id]}</span>
                                                 ) : (
-                                                row[headCell.id]
+                                                    row[headCell.id]
                                                 )}
                                             </TableCell>
                                         ))}

@@ -20,9 +20,11 @@ public class JwtService {
 
     private final String secretKey="69586F57334D6A62424C714945525A564733563936466B42546E785A67547074";
 
-    private final Integer jwtExpiration= 60000;
+    private final Integer jwtExpiration= 100000;
 
     private final Integer refreshExpiration = 604800000;
+
+    private final Integer forgotPasswordExpiration = 3600000;
     public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -47,6 +49,10 @@ public class JwtService {
             UserDetails userDetails
     ){
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
+    }
+
+    public String generateForgotPasswordToken(UserDetails userDetails) {//====================================================================
+        return buildToken(new HashMap<>(), userDetails, forgotPasswordExpiration);
     }
 
     private String buildToken(

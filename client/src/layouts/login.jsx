@@ -4,9 +4,12 @@ import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
-import LoginForm from '../components/LoginForm' // Import the LoginForm component
-import { useNavigate } from 'react-router-dom';
+import  { useEffect,  useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from '../api/axios';
+import useAuth from '../hooks/useAuth'
 
+const LOGIN_URL = '/auth/authenticate';
 
 const theme = createTheme({
   typography: {
@@ -40,11 +43,66 @@ const Boxbg = styled.div`
 
 
 const LoginPage = () => {
+  const { setAuth } = useAuth();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errMsg, setErrMsg] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || {pathname: "/dashboard"} // direct to the page happen here
+
+  useEffect(()=>{
+    setErrMsg('');
+  },[email,password])
+
+
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    try{
+        const response = await axios.post(LOGIN_URL,
+            JSON.stringify({email:email,password: password}),
+            {
+                headers: {'Content-Type': 'application/json'},
+                withCredentials: true
+            }
+        );
+        console.log(JSON.stringify(response?.data), "from loginForm.jsx");
+        setAuth(response?.data)
+
+        
+        setEmail('');
+        setPassword('');
+        navigate(from, {replace: true});  //navigate happen here
+
+    } catch(err){
+        if (!err?.response) {
+            setErrMsg('No Server Response');
+        } else if (err.response?.status === 400) {
+            setErrMsg('Missing Username or Password');
+        } else if (err.response?.status === 403) {
+            setErrMsg('Invalid Username or Password');
+        } else {
+            setErrMsg('Login Failed');
+        }
+
+    }
+  }
+
 
   const handleForgotPasswordClick = () => {
-    navigate('/forgotpassword'); // Redirect on button click
+    navigate('/forgot-password'); // Redirect on button click
   };
 
 
@@ -107,6 +165,8 @@ const LoginPage = () => {
               <br /><br />
               WELCOME
             </Typography>
+            <p>{errMsg}</p>
+            <form onSubmit={handleSubmit}> 
             <TextField
               label="Email"
               type="email"
@@ -135,6 +195,9 @@ const LoginPage = () => {
                 },
                 fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
               }}
+              value={email}
+              onChange={handleEmailChange}
+              required
             />
             <TextField
               label="Password"
@@ -164,6 +227,9 @@ const LoginPage = () => {
                 },
                 fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
               }}
+              value={password}
+              onChange={handlePasswordChange}
+              required
             />
             <Button
               variant="text"
@@ -189,9 +255,10 @@ const LoginPage = () => {
             >
               Forgot Password?
             </Button><br />
-            <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
+            <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }} type='submit'>
               login
             </Button>
+            </form>
           </Paper>
         </Container></Grow>
       </Boxbg></AnimatedGradientBackground>

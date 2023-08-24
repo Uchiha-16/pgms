@@ -1,50 +1,53 @@
 package com.postgresql.pgms.DTO;
 
-public class NominationSaveDTO {
-    private long userID;
-    private long programId;
-    private String semester;
-    private long courseId;
+import java.io.Serializable;
+
+public class NominationSaveDTO implements Serializable {
+
+    private Integer userID;
+    private String programId;
+    private Integer semester;
+    private String courseId;
 
     public NominationSaveDTO() {
     }
 
-    public NominationSaveDTO(long userID, long programId, String semester, long courseId) {
+    public NominationSaveDTO(Integer userID, String programId, Integer semester, String courseId) {
         this.userID = userID;
         this.programId = programId;
         this.semester = semester;
         this.courseId = courseId;
     }
 
-    public long getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(long userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
-    public long getProgramId() {
+    public String getProgramId() {
         return programId;
     }
 
-    public void setProgramId(long programId) {
+    public void setProgramId(String programId) {
         this.programId = programId;
     }
 
-    public String getSemester() {
+    public Integer getSemester() {
         return semester;
     }
 
-    public void setSemester(String semester) {
+    public void setSemester(Integer semester) {
         this.semester = semester;
     }
 
-    public long getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(long courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 }

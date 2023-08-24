@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+
 import { Box, Container, Paper, Typography, TextField, Button, Grow } from '@mui/material';
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
-import { Link } from 'react-router-dom';
+import axios from '../api/axios';
 
 
 const theme = createTheme({
@@ -38,7 +40,57 @@ const Boxbg = styled.div`
 `;
 
 
-const resetPassword = () => {
+const ResetPassword = () => {
+
+  const {token} = useParams();
+  const [password, setPassword] = useState('');
+  const naviagate = useNavigate();
+
+  const [matchPassword, setMatchPassword] = useState('');
+  const [validMatch, setValidMatch] = useState(false);
+
+  const [errMsg, setErrMsg] = useState(null);
+
+  useEffect(() => {
+    setValidMatch(password === matchPassword);
+  }, [password, matchPassword])
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault()
+
+    // if (!PWD_REGEX.test(password)) {
+    //   setErrMsg("Invalid Email");
+    //   return;
+    // }
+
+    try {
+      const response = await axios.post(`/auth/reset-password/${token}`,
+        JSON.stringify({ password: password}),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
+      );
+
+      console.log(response.data.message);
+      setErrMsg(response?.data?.message);
+      setPassword('');
+      setMatchPassword('');
+      setTimeout(() => {
+        naviagate('/'); 
+      }, 3000);
+
+    } catch (err) {
+      if (!err?.response) {
+        console.log(err.response?.data?.message);
+        setErrMsg('No Server Response');
+      } else {
+        setErrMsg(err.response?.data?.message);
+      }
+    }
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <AnimatedGradientBackground><Boxbg
@@ -100,55 +152,62 @@ const resetPassword = () => {
                 fontSize: '12px',
                 fontWeight: '400',
               }}>
-                Your New Password Must Be Different from Previously Used Password.
+                Add a New Password
               </p>
             </Typography>
-            
-            <TextField
-              label="New Password"
-              type="password"
-              margin="normal"
-              variant="outlined"
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#F0F2F5', // Silver outline for text field
-                  transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
-                  borderRadius: '10px', // Rounded corners
-                },
-                ":hover": {
+            <p>{errMsg}</p>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                label="New Password"
+                type="password"
+                id="password"
+                onChange={(e)=> setPassword(e.target.value)}
+                value={password}
+                margin="normal"
+                variant="outlined"
+                sx={{
                   '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1A73E8', // Silver outline for text field
+                    borderColor: '#F0F2F5', // Silver outline for text field
+                    transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
+                    borderRadius: '10px', // Rounded corners
                   },
-                },
-                '& input': {
-                  height: '15px', // Adjust the height as needed
-                  width: '100%',
-                  color: '#011632', // Adjust the width as needed
-                  fontSize: '14px',
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#898989', // Set the color of the label
-                  fontSize: '14px',
-                },
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-              }}
-            />
-            <TextField
-              label="Confirm Password"
-              type="password"
-              margin="normal"
-              variant="outlined"
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#F0F2F5', // Silver outline for text field
-                  transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
-                  borderRadius: '10px', // Rounded corners
-                },
-                ":hover": {
+                  ":hover": {
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#1A73E8', // Silver outline for text field
+                    },
+                  },
+                  '& input': {
+                    height: '15px', // Adjust the height as needed
+                    width: '100%',
+                    color: '#011632', // Adjust the width as needed
+                    fontSize: '14px',
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: '#898989', // Set the color of the label
+                    fontSize: '14px',
+                  },
+                  fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
+                }}
+              />
+              <TextField
+                label="Confirm Password"
+                type="password"
+                id="confirmpassword"
+                onChange={(e)=> setMatchPassword(e.target.value)}
+                value={matchPassword}
+                margin="normal"
+                variant="outlined"
+                sx={{
                   '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1A73E8', // Silver outline for text field
+                    borderColor: '#F0F2F5', // Silver outline for text field
+                    transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
+                    borderRadius: '10px', // Rounded corners
                   },
-                },
+                  ":hover": {
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#1A73E8', // Silver outline for text field
+                    },
+                  },
                 '& input': {
                   height: '15px', // Adjust the height as needed
                   width: '100%',
@@ -163,7 +222,7 @@ const resetPassword = () => {
               }}
             />
             <br /><br />
-            <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
+            <Button disabled={!validMatch ?true : false} type="submit"  variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
               Change
             </Button><br />
             <Link to="/" style={{ textDecoration: 'none' }}><Button variant="contained" color="primary" fullWidth sx={{
@@ -177,6 +236,7 @@ const resetPassword = () => {
             }}>
               Cancel
             </Button></Link>
+            </form>
           </Paper>
         </Container></Grow>
       </Boxbg></AnimatedGradientBackground>
@@ -184,4 +244,4 @@ const resetPassword = () => {
   );
 };
 
-export default resetPassword;
+export default ResetPassword;

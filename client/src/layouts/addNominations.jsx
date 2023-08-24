@@ -7,49 +7,43 @@ import NominationComponent from '../components/NominationComponent';
 import NominationsTable from '../components/NominationsTable';
 import { useEffect, useState } from "react";
 import useAxiosMethods from '../hooks/useAxiosMethods';
+import useAuth from "../hooks/useAuth";
 
 
-    const nominations_URL = "/nominations/getAllNominations"
+const TableLayout = () => {
+    const [nominations, setNominations] = useState([]);
+    // Define filteredNominations variable
+    let filteredNominations = [];
+    const { auth } = useAuth();
+    const { get } = useAxiosMethods();
 
-    const TableLayout = () => {
-        const [nominations, setnominations] = useState([]);
-        const {get} = useAxiosMethods();
-        
-        useEffect(() => {
-            
-                try {
-                    get(nominations_URL, setnominations);
-    
-                } catch (error) {
-                    console.log(error)
-                }
-        }, []);
-    
-        const columns = ['REQUEST', 'NAME', 'STATUS', 'DATE', 'ACTION'];
+    const nominations_StaffURL = "/nominations/nominations";
+    const nominations_LecturerURL = `/nominations/nominations/${auth.user_id}`;    
 
-        const data = [
-            {
-                REQUEST: 'Application for MCS 2203 Lecturer',
-                NAME: 'Dr. Kasun Gunawardhana',
-                STATUS: 'Accepted',
-                DATE: '2023-10-05',
-                ACTION: 'Edit',
-            },
-            {
-                REQUEST: 'Application for MIT 1201 Lecturer',
-                NAME: 'Prof. Sarah Johnson',
-                STATUS: 'Pending',
-                DATE: '2023-09-20',
-                ACTION: 'Edit',
-            },
-            // Add more static nominations as needed
-        ];
-        return (
-            <NominationsTable columns={columns} data={data} />
-        );
-    }
+    useEffect(() => {
+        if(auth.role == "Lecturer"){
+            get(nominations_LecturerURL, setNominations);
+        }else{
+            get(nominations_StaffURL, setNominations);
+        }
+    }, []);
 
-class addUser extends Component {
+    const columns = ['REQUEST', 'NAME', 'STATUS', 'DATE', 'ACTION'];
+
+    const data = nominations.map(nomination => ({
+        REQUEST: `Application for ${nomination.courseId} Lecturer`,
+        NAME: `${nomination.user.firstname} ${nomination.user.lastname}` ,
+        STATUS: 'Pending', 
+        DATE: nomination.date,
+        ACTION: 'Edit',
+    }));
+
+    return (
+        <NominationsTable columns={columns} data={data} />
+    );
+}
+
+class addNominations extends Component {
     render() {
         return (
             <Box>
@@ -57,7 +51,10 @@ class addUser extends Component {
                     <Grid item xs={2.5}>
                         <NavbarComponent />
                     </Grid>
-                    <Grid container xs={9.3} sx={{ display: 'grid', gridTemplateRows: 'repeat(3, 1fr)' }}>
+                    <Grid container xs={9.3} sx={{ 
+                        display: 'grid', 
+                        gridTemplateRows: '350px auto 10%',
+                        }}>
                         <Grid item>
                             <HeaderComponent />
                         </Grid>
@@ -79,4 +76,4 @@ class addUser extends Component {
     }
 }
 
-export default addUser;
+export default addNominations;

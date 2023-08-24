@@ -3,6 +3,9 @@ package com.postgresql.pgms.DTO;
 import com.postgresql.pgms.enumeration.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jdk.jshell.Snippet;
+
+import java.time.LocalDate;
 
 public class UserDTO {
     private Integer id;
@@ -20,15 +23,23 @@ public class UserDTO {
 
     private String contact;
 
-    public UserDTO(int id, String firstname, String lastname, String email, String password, Role role, String contact) {
+    private String profileImage = "user.png";
+
+    private LocalDate EmployedDate = LocalDate.now();
+
+    public UserDTO(Integer id, String firstname, String lastname, String email, Role role, String contact, String profileImage, LocalDate employedDate) {
+
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.password = password;
         this.role = role;
         this.contact = contact;
+        this.profileImage = profileImage;
+        EmployedDate = employedDate;
     }
+
+
 
     public long getID() { return id; }
 
@@ -70,6 +81,18 @@ public class UserDTO {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getProfileImage() { return profileImage; }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public LocalDate getEmployedDate() { return EmployedDate; }
+
+    public void setEmployedDate(LocalDate employedDate) {
+        EmployedDate = employedDate;
     }
 
 }

@@ -5,30 +5,28 @@ import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
 import { useEffect, useState } from "react"
+import axios from '../api/axios';
+import AddCourse from '../components/AddCourseComponent';
 import useAxiosMethods from '../hooks/useAxiosMethods';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 
-const users_URL = "/Users/getUsers"
+const courses_URL = "/courses/viewcourses"
 
 const Layout1 = () => {
-    const [users, setUsers] = useState([]);
-    const {get} = useAxiosMethods();
+    const [courses, setCourses] = useState([]);
+    const { get } = useAxiosMethods();
     
     useEffect(() => {
-        
-            try {
-                get(users_URL, setUsers);
-
-            } catch (error) {
-                console.log(error)
-            }
+        // Call the get method to fetch user data
+        get(courses_URL, setCourses);
     }, []);
+
 
     const columns = ['Semester', 'Code', 'Course Name', 'Lecture Hall', 'Credits'];
     
     const program = [
         {
-            title: 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE',
+            title: 'MASTER OF COMPUTER SCIENCE',
             pc: 'Program Coordinator',
             pcName: 'Mr. K P M K Silva',
         },
@@ -36,45 +34,66 @@ const Layout1 = () => {
             title: 'MASTER OF INFORMATION SYSTEMS',
             pc: 'Program Coordinator',
             pcName: 'Mr. K P M K Silva',
+        },
+        {
+            title: 'MASTER OF INFORMATION TECHNOLOGY',
+            pc: 'Program Coordinator',
+            pcName: 'Mr. K P M K Silva',
+        },
+        {
+            title: 'MASTER OF BUISNESS ANALYSIS',
+            pc: 'Program Coordinator',
+            pcName: 'Mr. K P M K Silva',
         }
     ];
+    
 
-    const dataP1 = [
-        {
-            'Semester': '1',
-            'Code': 'MCS1201',
-            'Course Name': 'Advanced Algorithms',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
-        {
-            'Semester': '1',
-            'Code': 'MCS1202',
-            'Course Name': 'Advanced Software Engineering',
-            'Lecturer': 'W002',
-            'Credits': '3',
+    // Initialize data arrays
+    let dataP1 = [];
+    let dataP2 = [];
+    let dataP3 = [];
+    let dataP4 = [];
+
+    // Filter courses based on programID and populate data arrays
+    courses.forEach(course => {
+        if (course.programId === "MCS") {
+            dataP1.push({
+                'Semester': course.semester,
+                'Code': course.courseNo,
+                'Course Name': course.courseName,
+                'Lecture Hall': course.hallName,
+                'Credits': course.credit,
+            });
+        } else if (course.programId === "MIS") {
+            dataP2.push({
+                'Semester': course.semester,
+                'Code': course.courseNo,
+                'Course Name': course.courseName,
+                'Lecture Hall': course.hallName,
+                'Credits': course.credit,
+            });
+        } else if (course.programId === "MIT") {
+            dataP3.push({
+                'Semester': course.semester,
+                'Code': course.courseNo,
+                'Course Name': course.courseName,
+                'Lecture Hall': course.hallName,
+                'Credits': course.credit,
+            });
+        } else {
+            dataP4.push({
+                'Semester': course.semester,
+                'Code': course.courseNo,
+                'Course Name': course.courseName,
+                'Lecture Hall': course.hallName,
+                'Credits': course.credit,
+            });
         }
-    ];
+    });
 
-    const dataP2 = [
-        {
-            'Semester': '1',
-            'Code': 'MIS1201',
-            'Course Name': 'Principles of Information Security',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
-        {
-            'Semester': '1',
-            'Code': 'MIS1202',
-            'Course Name': 'Cryptographic Systems',
-            'Lecturer': 'W002',
-            'Credits': '3',
-        },
-    ];
 
     return (
-        <GeneralProgramTable columns={columns} program={program} dataP1={dataP1} dataP2={dataP2}/>
+        <GeneralProgramTable columns={columns} program={program} dataP1={dataP1} dataP2={dataP2} dataP3={dataP3} dataP4={dataP4}/>
     );
 };
 
@@ -97,6 +116,7 @@ class programs extends Component {
                         {/*=============================== Main ===============================*/}
                         <Grid item>
                             {/* content */}
+                            <AddCourse />
                             <TableHeaderComponent left="Programs" right="" addbtn={true} />
                             <Layout1 />
                         </Grid>

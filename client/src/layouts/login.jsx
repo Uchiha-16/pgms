@@ -92,13 +92,19 @@ const LoginPage = () => {
         } else if (err.response?.status === 400) {
             setErrMsg('Missing Username or Password');
         } else if (err.response?.status === 403) {
-            setErrMsg('Unauthorized');
+            setErrMsg('Invalid Username or Password');
         } else {
             setErrMsg('Login Failed');
         }
 
     }
   }
+
+
+  const handleForgotPasswordClick = () => {
+    navigate('/forgot-password'); // Redirect on button click
+  };
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -159,6 +165,7 @@ const LoginPage = () => {
               <br /><br />
               WELCOME
             </Typography>
+            <p>{errMsg}</p>
             <form onSubmit={handleSubmit}> 
             <TextField
               label="Email"
@@ -227,6 +234,7 @@ const LoginPage = () => {
             <Button
               variant="text"
               color="primary"
+              onClick={handleForgotPasswordClick}
               sx={{
                 width: '100%', // Make the button take the full width
                 marginLeft: '30%', // Move the button to the right

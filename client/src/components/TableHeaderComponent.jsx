@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { width } from '@mui/system';
+import Popup from './PopupComponent';
+
+
 
 class TableHeaderComponent extends Component {
     render() {
-        const { left, right } = this.props;
+        const { left, right, addbtn } = this.props;
         return (
             <div style={{
                 display: 'flex',
@@ -12,21 +16,28 @@ class TableHeaderComponent extends Component {
                 color: '#FFFFFF',
                 paddingRight: '20px',
                 paddingLeft: '20px',
-                width: '91.5%',
-                marginLeft: 'auto',
-                marginRight: '3.5rem',
+                width: addbtn ? '97%' : '91.5%',
+                marginRight: addbtn ? 'auto' : '3.5rem',
+                marginLeft: addbtn? 'auto' : '1rem', 
                 position: 'relative',
                 zIndex: 1,
-                fontSize: '13px',
+                fontSize: addbtn ? '18.72px' : '13px',
+                height: addbtn ? '70px' : '60px',
+                alignItems: 'center',
             }}>
                 <h3 style={{
                     width: '50%',
                     textAlign: 'left'
                 }}>{left}</h3>
-                <h3 style={{
-                    width: '50%',
-                    textAlign: 'right'
-                }}>{right}</h3>
+                {/* if addbtn add aaddcircleIcon else add right text */}
+                {addbtn ? 
+                    <Popup/> 
+                    : 
+                    <h3 style={{
+                        width: '50%',
+                        textAlign: 'right'
+                    }}>{right}</h3>
+                }
             </div>
         );
     }

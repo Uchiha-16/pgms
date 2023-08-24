@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox, Button, Box } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import ProgressbarComponent from './ProgressbarComponent';
 import VoucherSummaryComponent from './VoucherSummaryComponent';
+
+const voucherSummaryStyle = {
+    maxHeight: '0',
+    overflow: 'hidden',
+    transition: '0.4s max-height',
+};
+
+const expandedVoucherSummaryStyle = {
+    maxHeight: '500px', /* Adjust this value as needed */
+    transition: '0.4s max-height',
+};
+
 
 const GeneralDashboardTable = ({ columns, data, done, btn }) => {
 
@@ -17,6 +29,16 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
     const isPercentage = (columnName, cellValue) => {
         return columnName === 'Completion' && cellValue.includes('%');
     }
+
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const handleViewMoreClick = () => {
+        setIsExpanded(true);
+    };
+
+    const handleViewLessClick = () => {
+        setIsExpanded(false);
+    };
 
     return (
         <>
@@ -60,7 +82,10 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                                 fontWeight: 700,
                                 fontSize: '12px',
                                 padding: '2px 20px',
-                            }}>View More</Button>
+                            }}
+                            onClick={isExpanded ? handleViewLessClick : handleViewMoreClick}>
+                                {isExpanded ? 'View Less' : 'View More'}
+                            </Button>
                         </div>
                     </Box></>
                 ) : ( '' )}
@@ -125,9 +150,9 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                         ))}
                     </TableBody>
                 </Table>
-                {done === 1 && btn === 1 ? (
-                    <VoucherSummaryComponent />
-                ) : ( '' )}
+                <div className="voucher-summary" sx={{ ...voucherSummaryStyle, ...(isExpanded && expandedVoucherSummaryStyle) }}>
+                    {done === 1 && btn === 1 && isExpanded && <VoucherSummaryComponent />}
+                </div>
             </TableContainer></>
     );
 };

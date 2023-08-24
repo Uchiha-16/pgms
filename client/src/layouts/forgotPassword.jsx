@@ -1,10 +1,12 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom/dist';
 import { Box, Container, Paper, Typography, TextField, Button, Grow } from '@mui/material';
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../assets/images/logo.png'; // Replace with the path to your logo image
-
+import axios from '../api/axios';
 
 const theme = createTheme({
   typography: {
@@ -37,7 +39,52 @@ const Boxbg = styled.div`
 `;
 
 
-const forgotPassword = () => {
+const ForgotPassword = () => {
+
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+  // const [validEmail, setValidEmail] = useState(false)
+  const [state, setState] = useState(null);
+
+  const backPage = () => navigate(-1);
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault()
+    console.log(JSON.stringify({email: email}));
+
+    // if (!EMAIL_REGEX.test(email)) {
+    //   setState("Invalid Email");
+    //   return;
+    // }
+
+    try {
+      const response = await axios.post('/auth/forgot-password',
+        JSON.stringify({ email:email }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
+      );
+
+      console.log(response.data.message);
+      setState(response.data.message);
+      setEmail('')
+      // setValidEmail(false);
+
+    } catch (err) {
+      if (!err?.response) {
+        setState('No Server Response');
+      } else if (err.response?.status === 403) {
+        setState("User Not Found");
+      }
+      else {
+        setState(err.response?.data?.message);
+      }
+    }
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <AnimatedGradientBackground><Boxbg
@@ -99,43 +146,51 @@ const forgotPassword = () => {
                 fontSize: '12px',
                 fontWeight: '400',
               }}>
-                Please Enter Your Email Address To Recieve a Verification Cord.
+                Please Enter Your Email Address To Recieve a Verification Link.
               </p>
             </Typography>
-            <TextField
-              label="Email"
-              type="email"
-              margin="normal"
-              variant="outlined"
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#F0F2F5', // Silver outline for text field
-                  transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
-                  borderRadius: '10px', // Rounded corners
-                },
-                ":hover": {
+            <p>{state}</p>
+
+            <form onSubmit={handleSubmit}>
+              <TextField
+                label="Email"
+                id="email"
+                type="email"
+                onChange={(e)=> setEmail(e.target.value)}
+                value={email}
+                required
+                margin="normal"
+                variant="outlined"
+                sx={{
                   '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1A73E8',
+                    borderColor: '#F0F2F5', // Silver outline for text field
+                    transition: 'border-color 0.2s ease-in-out', // Add a transition on hover
+                    borderRadius: '10px', // Rounded corners
                   },
-                },
-                '& input': {
-                  height: '15px', // Adjust the height as needed
-                  width: '100%',
-                  color: '#011632', // Adjust the width as needed
-                  fontSize: '14px',
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#898989', // Set the color of the label
-                  fontSize: '14px',
-                },
-                fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
-              }}
-            />
-            
-            <br />
-            <Button variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
-              Send
-            </Button><br />
+                  ":hover": {
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#1A73E8',
+                    },
+                  },
+                  '& input': {
+                    height: '15px', // Adjust the height as needed
+                    width: '100%',
+                    color: '#011632', // Adjust the width as needed
+                    fontSize: '14px',
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: '#898989', // Set the color of the label
+                    fontSize: '14px',
+                  },
+                  fontFamily: 'Inter, sans-serif', // Set the font family to "Inter"
+                }}
+              />
+              
+              <br />
+              <Button type="submit" variant="contained" color="primary" fullWidth sx={{ backgroundColor: '#2C85EB', fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 'regular' }}>
+                Send
+              </Button><br /><br />
+            </form>
             <Button variant="contained" color="primary" fullWidth sx={{ 
               backgroundColor: '#747b8a', 
               fontFamily: 'Inter, sans-serif', 
@@ -144,7 +199,8 @@ const forgotPassword = () => {
               ":hover": {
                 backgroundColor: '#495361',
               },
-              }}>
+              }}
+              onClick={backPage}>
               Back
             </Button>
           </Paper>
@@ -154,4 +210,4 @@ const forgotPassword = () => {
   );
 };
 
-export default forgotPassword;
+export default ForgotPassword;

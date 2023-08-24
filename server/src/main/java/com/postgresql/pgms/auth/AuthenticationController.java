@@ -1,5 +1,6 @@
 package com.postgresql.pgms.auth;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -47,5 +49,22 @@ public class AuthenticationController {
             HttpServletResponse response
     ) throws IOException {
         service.refreshToken(request,response);
+    }
+
+    @PostMapping("/forgot-password")//======================================================================================================================================================
+    public ResponseEntity<AuthenticationResponse> forgotPassword(
+            HttpServletResponse response,
+            @RequestBody AuthenticationRequest request
+    ) throws MessagingException, UnsupportedEncodingException {
+        return ResponseEntity.ok(service.forgotPassword(response, request.getEmail()));
+    }
+
+    @PostMapping("/reset-password/{token}")//======================================================================================================================================
+    public ResponseEntity<AuthenticationResponse> resetPassword(
+            HttpServletResponse response,
+            @RequestBody AuthenticationRequest request,
+            @PathVariable String token
+    ) {
+        return ResponseEntity.ok(service.resetPassword(response, request.getPassword(), token));
     }
 }

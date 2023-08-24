@@ -5,11 +5,12 @@ import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
 import { useEffect, useState } from "react"
+import Popup from '../components/PopupComponent';
 import useAxiosMethods from '../hooks/useAxiosMethods';
 import TableHeaderComponent from '../components/TableHeaderComponent';
-import { headCells } from '../config/userConfig';
+import { headCells } from '../config/lecturerConfig';
 
-const users_URL = "/users/users"
+const users_URL = "/users/lecturerList"
 
 const Layout1 = () => {
     const [users, setUsers] = useState([]);
@@ -47,12 +48,12 @@ const Layout1 = () => {
 
 
    // ====================== Dummy Data for testing ======================//
-    // function createData(NAME, ROLE, STATUS, EMAIL, ACTION) {
+    // function createData(NAME, ROLE, STATUS, COURSE, ACTION) {
     //     return {
     //         NAME,
     //         ROLE,
     //         STATUS,
-    //         EMAIL,
+    //         COURSE,
     //         ACTION
     //     };
     // }
@@ -77,7 +78,7 @@ const Layout1 = () => {
     );
 };
 
-class users extends Component {
+class lecturers extends Component {
     render() {
         return (
             <Box>
@@ -95,8 +96,8 @@ class users extends Component {
                         </Grid>
                         <Grid item>
                             {/* content */}
-                            {/* <Popup /> */}
-                            <TableHeaderComponent left="Users" right="" addbtn={true} />
+                            <Popup />
+                            <TableHeaderComponent left="Lecturers in MCS" right="" addbtn={true} />
                             <Layout1 />
                         </Grid>
                         <Grid item>
@@ -109,4 +110,4 @@ class users extends Component {
     }
 }
 
-export default users;
+export default lecturers;

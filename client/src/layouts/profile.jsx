@@ -4,7 +4,6 @@ import HeaderComponent from '../components/HeaderComponent';
 import { Box, Grid } from '@mui/material/';
 import FooterComponent from '../components/FooterComponent';
 import ProfileComponent from '../components/ProfileComponent';
-
 class profile extends Component { 
     render() {
         return (

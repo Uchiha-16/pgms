@@ -1,5 +1,7 @@
 package com.postgresql.pgms.repo;
 
+import com.postgresql.pgms.DTO.UserDTO;
+import com.postgresql.pgms.model.ResetToken;
 import com.postgresql.pgms.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,17 +14,20 @@ import java.util.List;
 @RepositoryRestResource
 public interface UserRepository extends JpaRepository<Users, Integer> {
 
+    Optional<Users> findById(Long id);
+
     Optional<Users> findByEmail(String email);
-    Optional<Users> findAllByOrderByIdDesc();
+
+    List<Users> findAllByOrderByIdDesc();
 
     @Query("""
-    SELECT u.firstname , u.lastname, u.email , u.role FROM Users u ORDER BY u.id DESC
+    select u from Users u where u.role = 'Lecturer'
     """)
-    List<Object> findAllUsers();
+    List<Users> findAllLecturers();
 
-    //get user by Id
     @Query("""
-    SELECT u.firstname , u.lastname, u.email , u.role FROM Users u WHERE u.id = :id
+    select u from Users u where u.role = 'Staff'
     """)
-    List<Object> findUserById(Integer id);
+    List<Users> findAllStaff();
+
 }

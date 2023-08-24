@@ -1,12 +1,18 @@
 package com.postgresql.pgms.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.postgresql.pgms.Service.EmailService;
+import com.postgresql.pgms.assets.EmailTemplate;
 import com.postgresql.pgms.config.JwtService;
+import com.postgresql.pgms.exception.CustomErrorException;
+import com.postgresql.pgms.model.ResetToken;
 import com.postgresql.pgms.model.Token;
+import com.postgresql.pgms.repo.ResetRepository;
 import com.postgresql.pgms.repo.TokenRepository;
 import com.postgresql.pgms.enumeration.TokenType;
 import com.postgresql.pgms.model.Users;
 import com.postgresql.pgms.repo.UserRepository;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +24,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -25,12 +33,14 @@ public class AuthenticationService {
 
     private final UserRepository repository;
     private final TokenRepository tokenRepository;
+    private final ResetRepository resetRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     private final Integer refreshExpiration = 604800000; //for cookie
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = Users.builder()
@@ -40,6 +50,8 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .contact(request.getContact())
+                .profileImage("user.png")
+                .EmployedDate(LocalDate.now())
                 .build();
         var saveduser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -82,6 +94,40 @@ public class AuthenticationService {
                 .build();
     }
 
+    public AuthenticationResponse forgotPassword(HttpServletResponse response, String email) throws MessagingException, UnsupportedEncodingException {//=======================================================================================================
+        var user = userRepository.findByEmail(email).orElseThrow(() -> new CustomErrorException("User Not Found"));//create exception
+        var token = jwtService.generateForgotPasswordToken(user);//create func
+        emailService.sendMail(email, "Reset Password", EmailTemplate.PasswordResetEmailTemplate("http://localhost:3000/reset-password/" + token));//mail
+        revokeResetTokens(user);
+        saveResetToken(user, token);//create
+        return AuthenticationResponse.builder()
+                .message("Forgot password Email sent!")
+                .build();
+    }
+
+    public AuthenticationResponse resetPassword(HttpServletResponse response, String password, String token) {//========================================================================================
+
+        var reset = resetRepository.findByToken(token).orElseThrow(() -> new CustomErrorException("Token Not Found"));//create exception
+
+        if (reset.isExpired()) {
+            return AuthenticationResponse.builder()
+                    .message("Token Expired!!!!!!!!")
+                    .build();
+        }
+
+        var email = jwtService.extractEmail(token);
+        var user = userRepository.findByEmail(email).orElseThrow(() -> new CustomErrorException("User Not Found"));//create exception
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+
+        reset.setExpired(true);
+        resetRepository.save(reset);//reset repo
+
+        return AuthenticationResponse.builder()
+                .message("Success password reseted!")
+                .build();
+    }
+
     private void createCookie(HttpServletResponse response, String refreshToken, int refreshExpiration) {
         Cookie refreshCookie = new Cookie("refreshToken",refreshToken);
         refreshCookie.setMaxAge(refreshExpiration);
@@ -102,6 +148,16 @@ public class AuthenticationService {
         tokenRepository.saveAll(validUserTokens);
     }
 
+    private void  revokeResetTokens(Users user) {//========================================================
+        var validResetTokens = resetRepository.findAllValidResetTokensByUser(user.getId());
+        if(validResetTokens.isEmpty())
+            return;
+        validResetTokens.forEach(token -> {
+            token.setExpired(true);
+        });
+        resetRepository.saveAll(validResetTokens);
+    }
+
     private void saveUserToken(Users user, String jwtToken) {
         var token = Token.builder()
                 .user(user)
@@ -111,6 +167,16 @@ public class AuthenticationService {
                 .revoked(false)
                 .build();
         tokenRepository.save(token);
+    }
+
+    private void saveResetToken(Users user, String jwtToken) {//============================================================================================================================
+        var token = ResetToken.builder()//create dto
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.RESET_PASSWORD)
+                .expired(false)
+                .build();
+        resetRepository.save(token);
     }
 
     public void refreshToken(

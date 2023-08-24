@@ -2,12 +2,27 @@ import React, { useState } from 'react';
 import { Avatar, Typography, Paper } from '@mui/material';
 import TextField from '@mui/material/TextField'; // Import TextField
 import Button from '@mui/material/Button'; // Import Button
-import profile from '../assets/images/user.png'; // Replace with the path to your background image
 import { fontSize } from '@mui/system';
-
+import { useParams } from 'react-router-dom';
+import useAxiosMethods from '../hooks/useAxiosMethods';
+import { useEffect } from 'react';
  
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
+
+  const { userID } = useParams();
+  const [user, setUser] = useState(null);
+  const { get } = useAxiosMethods();
+
+  const users_URL = `users/getUser/${userID}`
+    
+  useEffect(() => {
+    // Call the get method to fetch user data
+    get(users_URL, setUser);
+
+  }, []);
+
+  const profileImage = user?.profileImage || 'user.png';
 
   const paperStyle = {
     width: '70%', // Set the width and height to create a square card
@@ -22,7 +37,7 @@ function Profile() {
     width: '140px',
     height: '140px',
     position: 'absolute',
-    top: '-60px', // Keep the image at the top
+    top: '-60px',
     left: '150px',
     transform: 'translateX(-50%)',
     boxShadow: '0px 4px 7px rgba(0, 0, 0, 0.20)'
@@ -97,10 +112,10 @@ function Profile() {
 
   return (
     <Paper elevation={3} style={paperStyle}>
-      <Avatar alt="Profile Photo" src={profile} style={avatarStyle}/> 
+      <Avatar alt="Profile Photo" src={require(`../assets/images/${profileImage}`)}  style={avatarStyle}/> 
       <div style={roleStyle}>
-      <Typography variant="h5" style={nameStyle}>Dr. D A S Athukorale</Typography>
-      <Typography variant="body1" style={roleStyle}>B.Sc. (Col), Ph.D. (Queensland), MIEEE, MCSSL</Typography> 
+      <Typography variant="h5" style={nameStyle}>{user?.firstname} {user?.lastname}</Typography>
+      <Typography variant="body1" style={roleStyle}>{user?.role}</Typography> 
 
       <div style={infoStyle}>
         <Typography variant="h6" style={sectionStyle}>Profile Information:</Typography>
@@ -108,9 +123,9 @@ function Profile() {
         <div style={detailContainerStyle}>
           <Typography variant="body2" style={labelStyle}>Position:</Typography>
           {isEditing ? (
-            <TextField variant="outlined" size="small" style={contentStyle} defaultValue="Frontend Developer" />
+            <TextField variant="outlined" size="small" style={contentStyle} defaultValue={user?.role} />
           ) : (
-            <Typography variant="body2" style={contentStyle}>Frontend Developer</Typography>
+            <Typography variant="body2" style={contentStyle}>{user?.role}</Typography>
           )}
          
         </div>
@@ -118,27 +133,27 @@ function Profile() {
         <div style={detailContainerStyle}>
           <Typography variant="body2" style={labelStyle}>Full Name:</Typography>
           {isEditing ? (
-            <TextField variant="outlined" size="small" style={contentStyle} defaultValue="Dr. D A S Athukorala" />
+            <TextField variant="outlined" size="small" style={contentStyle} defaultValue={`${user?.firstname} ${user?.lastname}`}  />
           ) : (
-            <Typography variant="body2" style={contentStyle}>Dr. D A S Athukorala</Typography>
+            <Typography variant="body2" style={contentStyle}>{user?.firstname} {user?.lastname}</Typography>
           )}
          
         </div>
         <div style={detailContainerStyle}>
           <Typography variant="body2" style={labelStyle}>Mobile:</Typography>
           {isEditing ? (
-            <TextField variant="outlined" size="small" style={contentStyle} defaultValue="+1234567890" />
+            <TextField variant="outlined" size="small" style={contentStyle} defaultValue={user?.contact}  />
           ) : (
-            <Typography variant="body2" style={contentStyle}>+1234567890</Typography>
+            <Typography variant="body2" style={contentStyle}>{user?.contact}</Typography>
           )}
          
         </div>
         <div style={detailContainerStyle}>
           <Typography variant="body2" style={labelStyle}>Email:</Typography>
           {isEditing ? (
-            <TextField variant="outlined" size="small" style={contentStyle} defaultValue="example@example.com" />
+            <TextField variant="outlined" size="small" style={contentStyle} defaultValue={user?.email} />
           ) : (
-            <Typography variant="body2" style={contentStyle}>example@example.com</Typography>
+            <Typography variant="body2" style={contentStyle}>{user?.email} </Typography>
           )}
           
         </div>

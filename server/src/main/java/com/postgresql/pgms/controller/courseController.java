@@ -1,27 +1,31 @@
 package com.postgresql.pgms.controller;
 
+import com.postgresql.pgms.DTO.CourseListResponseDTO;
 import com.postgresql.pgms.DTO.CourseSaveDTO;
-import com.postgresql.pgms.DTO.CourseDTO;
 import com.postgresql.pgms.Service.courseService;
+import com.postgresql.pgms.model.course;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/courses")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/courses")
 public class courseController {
-    private courseService courseService;
+    private final courseService courseService;
 
-    @PostMapping(path = "/addCourse")
-    public String saveCourse(@RequestBody CourseSaveDTO courseSaveDTO){
-        String id=courseService.addCourse(courseSaveDTO);
-        return id;
+    //addcourse
+    @PostMapping(path = "/add")
+    public ResponseEntity<String> addCourse(@RequestBody CourseSaveDTO courseSaveDTO){
+        courseService.addCourse(courseSaveDTO);
+        return ResponseEntity.ok("Course added successfully.");
     }
 
-    @GetMapping(path = "/getAllCourses")
-    public List <CourseDTO> getAllCourses(){
-        List<CourseDTO> allCourses = courseService.getAllCourses();
-        return allCourses;
+    @GetMapping(path = "/viewcourses")
+    public ResponseEntity<List<course>> getCourses(){
+        return ResponseEntity.ok(courseService.getAllCourses());
     }
 }

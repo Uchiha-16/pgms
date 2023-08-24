@@ -1,6 +1,7 @@
 package com.postgresql.pgms.DTO;
 
 import com.postgresql.pgms.enumeration.Role;
+import com.postgresql.pgms.model.Nominations;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +15,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NominationListResponseDTO {
-    private List<Object> nominationsList;
+    private List<Nominations> nominationsList;
 }

@@ -15,7 +15,10 @@ class addUser extends Component {
                     <Grid item xs={2.5}>
                         <NavbarComponent />
                     </Grid>
-                    <Grid container xs={9.3} sx={{ display: 'grid', gridTemplateRows: 'repeat(3, 1fr)' }}>
+                    <Grid container xs={9.3} sx={{
+                        display: 'grid',
+                        gridTemplateRows: '149px auto 10%',
+                    }}>
                         <Grid item>
                             <HeaderComponent />
                         </Grid>

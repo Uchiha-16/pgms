@@ -6,7 +6,7 @@ import FooterComponent from '../components/FooterComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import CalendarEventComponent from '../components/CalendarEventComponent';
 import DashboardCard from '../components/DashboardCardComponent';
-import PaymentCard from '../components/PaymentCard';
+import PaymentTable from '../components/PaymentTable';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 import ProgramsIcon from '../assets/icons/programs.png';
 import StaffIcon from '../assets/icons/staff.png';
@@ -27,7 +27,7 @@ const Layout1 = () => {
     //         });
     // }, []);
 
-    const columns = ['No', 'Date', 'Subject', 'Hours', 'Rate Rs', 'Amount', 'Attendance Status', 'AddtoVoucher'];
+    const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
     const data = [
         { No: '01', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved', AddtoVoucher: 1},
         { No: '02', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved', AddtoVoucher: 0},
@@ -40,25 +40,11 @@ const Layout1 = () => {
     const btn = 0;
 
     return (
-        <PaymentCard columns={columns} data={data} done={done} btn={btn} />
+        <PaymentTable columns={columns} data={data} done={done} btn={btn} />
     );
 };
 
-const Layout2 = () => {
 
-    const currentMonth = new Date().toLocaleString('default', { month: 'long' });
-
-    const columns = ['Month', 'Completion'];
-    const data = [
-        { Month: currentMonth, Completion: '75%' },
-    ];
-    const done = 1;
-    const btn = 1;
-
-    return (
-        <PaymentCard columns={columns} data={data} done={done} btn={btn}/>
-    );
-};
 
 class payment extends Component {
     render() {
@@ -85,17 +71,6 @@ class payment extends Component {
                             }}>
                             {/*========== Center ==========*/}
                             <Grid item>
-                                {/* cards */}
-                                   <Grid item sx={{
-                                borderRadius: '8px',
-                                background: 'white',
-                                boxShadow: '0px 3.720207452774048px 11px 0px rgba(0, 0, 0, 0.12)',
-                                display: 'grid',
-                                gridTemplateRows: '100px 280px auto',
-                                height: '20%',
-                                marginRight: '30px'
-                                }}>
-                                </Grid>
                                 {/* tables */}
                                 <Grid sx={{ marginTop: 5 }}>
                                     <TableHeaderComponent left ={'<'} center={'General Voucher - August 2020/2021 Intake'} right={'>'} addbtn={false}/>
@@ -103,22 +78,7 @@ class payment extends Component {
                                 </Grid>
                               
                             </Grid>
-                            {/*======= Right Sidebar =======*/}
-                            <Grid item sx={{
-                                borderRadius: '8px',
-                                background: 'white',
-                                boxShadow: '0px 3.720207452774048px 11px 0px rgba(0, 0, 0, 0.12)',
-                                display: 'grid',
-                                gridTemplateRows: '100px 280px auto',
-                                height: '20%',
-                                }}>
-                            <Grid sx={{ marginTop: -2,  }}>
-                                
-                             <TableHeaderComponent  center={'Payment Vouchers'} addbtn={false}/>
-                             <Layout2 />
-</Grid>
-                               
-                            </Grid>
+                         
                         </Grid></Fade>
                         {/*============================== Footer ==============================*/}
                         <Grid item>

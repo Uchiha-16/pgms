@@ -6,7 +6,7 @@ import Popup from './PopupComponent';
 
 class TableHeaderComponent extends Component {
     render() {
-        const { left, right, addbtn } = this.props;
+        const { left, right,center, addbtn } = this.props;
         return (
             <div style={{
                 display: 'flex',
@@ -34,10 +34,16 @@ class TableHeaderComponent extends Component {
                     <Popup/> 
                     : 
                     <h3 style={{
+                        width: '100%',
+                        textAlign: 'center'
+                    }}>{center}</h3>
+                }
+                    <h3 style={{
                         width: '50%',
                         textAlign: 'right'
                     }}>{right}</h3>
-                }
+                
+                 
             </div>
         );
     }

@@ -20,6 +20,7 @@ import ResetPassword from './layouts/resetPassword';
 import TimeTable from './layouts/timeTable';
 import Lecturers from './layouts/lecturers';
 import Staff from './layouts/staff';
+import Payment from './layouts/payment';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/timeTable" element={<TimeTable />} />
+        <Route path="/payment" element={<Payment />} />
 
         {/* private */}
         <Route element={<PersistLogin />}>
@@ -46,6 +48,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/att' element={<Attendance />} />
             <Route path='/notifications' element={<Notifications />} />
+            
 
 
           </Route>

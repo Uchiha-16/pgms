@@ -19,8 +19,9 @@ import LinkPage from './layouts/LinkPage';
 import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
-import AttendanceTracking from './layouts/attendanceTracking';
+// import AttendanceTracking from './layouts/attendanceTracking';
 import TimeTable from './layouts/timeTable';
+import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
 
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
 
         {/* private */}
         <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} >
+          {/* <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} > */}
             <Route path='home' element={<Home />} />
             <Route path='/nominations' element={<AddNominations />} />
             <Route path='/users' element={<Users/>}/>
@@ -48,15 +49,14 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/programs' element={<Programs />} />
-            <Route path='/attendance-tracking' element={<AttendanceTracking />} />
+            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
 
-            {/* <Route path='/timetable' element={<timeTable />} /> */}
-            <Route path='/timetable' element={<Hello />} />
+          
             
             
 
 
-          </Route>
+          {/* </Route> */}
           <Route element={<RequireAuth allowedRoles={["Staff"]}/>} >
             <Route path='/addUsers' element={<AddUser/>}/>
           </Route>

@@ -16,17 +16,7 @@ import UsersIcon from '../assets/icons/users.png';
 
 
 const Layout1 = () => {
-    // const [users, setUsers] = useState([]);
-    
-
-    // useEffect(() => {
-    //     axios.get(users_URL)
-    //         .then(res => {
-    //             console.log(res)
-    //             setUsers(res.data);
-    //         });
-    // }, []);
-
+ 
     const columns = ['No', 'Date', 'Subject', 'Hours', 'Rate Rs', 'Amount', 'Attendance Status', 'AddtoVoucher'];
     const data = [
         { No: '01', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved', AddtoVoucher: 1},
@@ -70,7 +60,7 @@ class payment extends Component {
                     </Grid>
                     <Grid container xs={9.3} sx={{
                         display: 'grid',
-                        gridTemplateRows: '149px auto 10%',
+                        gridTemplateRows: '149px',
                         }}>
                         {/*============================== Header ==============================*/}
                         <Grid item>
@@ -82,7 +72,7 @@ class payment extends Component {
                             gridTemplateColumns: '75% 25%',
                             marginBottom: 10,
                             marginLeft: '24px'
-                            }}>
+                            }}> 
                             {/*========== Center ==========*/}
                             <Grid item>
                                 {/* cards */}
@@ -95,11 +85,6 @@ class payment extends Component {
                                 height: '20%',
                                 marginRight: '30px'
                                 }}>
-                                </Grid>
-                                {/* tables */}
-                                <Grid sx={{ marginTop: 5 }}>
-                                    <TableHeaderComponent left ={'<'} center={'General Voucher - August 2020/2021 Intake'} right={'>'} addbtn={false}/>
-                                    <Layout1 />
                                 </Grid>
                               
                             </Grid>
@@ -119,7 +104,14 @@ class payment extends Component {
 </Grid>
                                
                             </Grid>
+                            
                         </Grid></Fade>
+
+                           {/* tables */}
+                           <Grid item sx={{ marginTop:-25, marginLeft:4}}>
+                                    <TableHeaderComponent left ={'<'} center={'General Voucher - August 2020/2021 Intake'} right={'>'} addbtn={false}/>
+                                    <Layout1 />
+                                </Grid>
                         {/*============================== Footer ==============================*/}
                         <Grid item>
                             <FooterComponent />

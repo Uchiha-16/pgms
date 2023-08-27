@@ -21,7 +21,7 @@ import TimeTable from './layouts/timeTable';
 import Lecturers from './layouts/lecturers';
 import Staff from './layouts/staff';
 import Payment from './layouts/payment';
-import PaymentReport from './layouts/paymentreport';
+import PaymentReport1 from './layouts/paymentreport1';
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/timeTable" element={<TimeTable />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/paymentreport" element={<PaymentReport />} />
+        <Route path="/paymentreport1" element={<PaymentReport1 />} />
 
 
         {/* private */}

@@ -17,7 +17,7 @@ const expandedVoucherSummaryStyle = {
 };
 
 
-const PaymentTable = ({ columns, data, done, btn }) => {
+const PaymentTable = ({title2, title, columns, data, done, btn }) => {
 
   
 
@@ -93,7 +93,35 @@ const PaymentTable = ({ columns, data, done, btn }) => {
                     </Box></>
                 ) : ( '' )}
                 <Table>
+
                     <TableHead>
+                    <TableCell colSpan={columns.length} sx={{ alignItems: 'center' }}>
+    <div>
+        <h2 style={{ fontSize: '13px' }}>{title}</h2>
+        <h2 style={{ fontSize: '11px', color: '#495057' }}>{title2}</h2>
+    </div>
+    <div style={{ marginLeft: '750px', marginTop: '-50px', position: 'absolute', transform: 'translateY(-40%)', display: 'flex', alignItems: 'center', background: '#D9D9D9', borderRadius: '4%' ,width: '300px'}}>
+    <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, margin: '0px' }} />
+    <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' },marginLeft : '40px' }} />
+    <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '40px' }} />
+    <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '40px' }} />
+</div>
+
+<div style={{ marginLeft: '750px', marginTop: '-20px', position: 'absolute', transform: 'translateY(-40%)', display: 'flex', alignItems: 'center',width: '300px'}}>
+<div style={{ marginTop: '4px',marginLeft : '4px' }}>Staff</div>
+<div style={{ marginTop: '4px',marginLeft : '33px' }}> Coordinator</div>
+<div style={{ marginTop: '4px',marginLeft : '34px' }}>DR</div>
+<div style={{ marginTop: '4px',marginLeft : '55px' }}>Head</div>
+
+</div>
+
+
+</TableCell>
+
+
+
+        
+
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell key={column} sx={{
@@ -166,6 +194,8 @@ const PaymentTable = ({ columns, data, done, btn }) => {
                 <div className="voucher-summary" sx={{ ...voucherSummaryStyle, ...(isExpanded && expandedVoucherSummaryStyle) }}>
                     {done === 1 && btn === 1 && isExpanded && <VoucherSummaryComponent />}
                 </div>
+
+
             </TableContainer></>
     );
 };

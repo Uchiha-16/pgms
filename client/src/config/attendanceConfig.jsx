@@ -30,7 +30,7 @@ export const headCells = [
         label: 'STAFF CONFIRMATION',
     },
     {
-        id: 'STATUS',
+        id: 'STATUS1',
         numeric: false,
         disablePadding: true,
         label: 'STATUS',

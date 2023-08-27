@@ -19,7 +19,7 @@ import LinkPage from './layouts/LinkPage';
 import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
-// import AttendanceTracking from './layouts/attendanceTracking';
+import AttendanceTracking from './layouts/attendanceTracking';
 import TimeTable from './layouts/timeTable';
 import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
 

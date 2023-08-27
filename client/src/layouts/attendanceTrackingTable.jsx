@@ -60,19 +60,9 @@ const Layout1 = () => {
         };
     }
     const rows = [
-        // createData('Johny Michael', 'Lecturer', 'ONLINE', 'john@gmail.com', 'Edit', 'hi', 'ddd'),
-    //     createData('Alexa Liras', 'Lecturer', 'ONLINE', 'alexa@gmail.com', 'Edit'),
-    //     createData('Laurent Perrier', 'Lecturer', 'OFFLINE', 'laurent@gmail.com', 'Edit'),
-    //     createData('Michael Levi', 'Lecturer', 'ONLINE', 'michael@gmail.com', 'Edit'),
-    //     createData('Richard Gran', 'Visiting Lecturer', 'ONLINE', 'richard@gmail.com', 'Edit'),
-    //     createData('Miriam Eric', 'Lecturer', 'ONLINE', 'miriam@gmail.com', 'Edit'),
-    //     createData('Anne Marie', 'Lecturer', 'ONLINE', 'annemarie@gmail.com', 'Edit'),
-    //     createData('Nick Daniel', 'Visiting Lecturer', 'OFFLINE', 'nickdaniel@gmail.com', 'Edit'),
-    //     createData('KitKat', 'Staff', 'OFFLINE', 'kitkat@gmail.com', 'Edit'),
-    //     createData('Lollipop', 'Staff', 'ONLINE', 'lollipop@gmail.com', 'Edit'),
-    //     createData('Marshmallow', 'Staff', 'OFFLINE', 'marshmellow@gmail.com', 'Edit'),
-    //     createData('Nougat', 'Staff', 'ONLINE', 'nougat@gmail.com', 'Edit'),
-    //     createData('Oreo', 'Staff', 'ONLINE', 'oreo@gmail.com', 'Edit'),
+        createData('10:45 AM', 'Modelling and Simulation of Data', 'Dr. Smith', 'Confirmed', 'Not Confirmed', 'Online', 'Edit'),
+        createData('01:30 PM', 'Individual Research Project', 'Prof. Johnson', 'Confirmed', 'Confirmed', 'Online', 'Edit'),
+        // Add more rows...
     ];
 
     return (

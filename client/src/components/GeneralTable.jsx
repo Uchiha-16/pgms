@@ -48,11 +48,11 @@ const isEdit = (columnName) => {
 };
 
 const isChecked = (columnName, cellValue) => {
-  return columnName === "STATUS" && cellValue === 1;
+  return columnName === "STATUS1" && cellValue === 1;
 };
 
 const isUnchecked = (columnName, cellValue) => {
-  return columnName === "STATUS" && cellValue === 0;
+  return columnName === "STATUS1" && cellValue === 0;
 };
 
 const isPending = (columnName, cellValue) => {

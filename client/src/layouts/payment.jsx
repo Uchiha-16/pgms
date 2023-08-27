@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Checkbox } from '@mui/material';
 import { Box, Grid, Typography, Fade } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
@@ -82,12 +83,30 @@ class payment extends Component {
                                 boxShadow: '0px 3.720207452774048px 11px 0px rgba(0, 0, 0, 0.12)',
                                 display: 'grid',
                                 gridTemplateRows: '100px 280px auto',
-                                height: '20%',
+                                height: '57%',
                                 marginRight: '30px'
                                 }}>
-                                </Grid>
-                              
+   
+   <div style={{ marginLeft: '100px', marginTop: '90px', position: 'absolute', transform: 'translateY(-40%)', display: 'flex', alignItems: 'center'}}>
+   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, margin: '0px' }} />
+   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' },marginLeft : '100px' }} />
+   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '100px' }} />
+   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '100px' }} />
+   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '100px' }} />
+
+</div>
+
+<div style={{ marginLeft: '100px', marginTop: '140px', position: 'absolute', transform: 'translateY(-40%)', display: 'flex', alignItems: 'center',width: '300px'}}>
+<div style={{ marginTop: '4px',marginLeft : '-9px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}>Forward Payments</div>
+<div style={{ marginTop: '4px',marginLeft : '75px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}> Staff Approval</div>
+<div style={{ marginTop: '4px',marginLeft : '80px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}>Coordinator Approval</div>
+<div style={{ marginTop: '4px',marginLeft : '75px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}>DR Approval</div>
+<div style={{ marginTop: '4px',marginLeft : '85px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}>Head Approval</div>
+
+</div>
                             </Grid>
+                            </Grid>
+
                             {/*======= Right Sidebar =======*/}
                             <Grid item sx={{
                                 borderRadius: '8px',

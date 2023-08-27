@@ -94,6 +94,7 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                 ) : ( '' )}
                 <Table>
                     <TableHead>
+
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell key={column} sx={{

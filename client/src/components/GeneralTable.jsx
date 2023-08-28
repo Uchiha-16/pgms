@@ -56,11 +56,21 @@ const isUnchecked = (columnName, cellValue) => {
 };
 
 const isPending = (columnName, cellValue) => {
-  return columnName === "LECTURER CONFRIMATION" && cellValue === 0;
+  return (
+    (columnName === "LECTURER CONFRIMATION" || columnName === "STAFF CONFIRMATION") &&
+    cellValue === "PENDING"
+  );
 };
 
 const isMarked = (columnName, cellValue) => {
-  return columnName === "LECTURER CONFRIMATION" && cellValue === 0;
+  return (
+    (columnName === "LECTURER CONFRIMATION" || columnName === "STAFF CONFIRMATION") &&
+    cellValue === "MARKED"
+  );
+};
+
+const isAction = (columnName) => {
+  return columnName === "ACTION";
 };
 
 // Comparator functions for sorting
@@ -498,25 +508,62 @@ export default function GeneralTable({ rows, headCells }) {
                               },
                             }}
                           />
-                        ) : isPending(headCell.id) ? (
-                          <Checkbox
-                            defaultChecked
-                            sx={{
-                              color: "#D9D9D9",
-                              "&.Mui-checked": {
-                                color: "#43A047",
-                              },
+                        ) : isPending(headCell.id, row[headCell.id]) ? (
+                          <div
+                            style={{
+                              background: "black",
+                              borderRadius: 50,
+                              color: "#FFA726",
+                              width: 80,
+                              fontFamily: "Roboto",
+                              fontSize: "12px",
+                              fontWeight: "900",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              paddingTop: 2,
                             }}
-                          />
-                        ) : isMarked(headCell.id) ? (
-                          <Checkbox
-                            sx={{
-                              color: "#D9D9D9",
-                              "&.Mui-checked": {
-                                color: "#43A047",
-                              },
+                          >
+                            {row[headCell.id]}
+                          </div>
+                        ) : isMarked(headCell.id, row[headCell.id]) ? (
+                          <div
+                            style={{
+                              background: "black",
+                              borderRadius: 50,
+                              color: "#4CAF50",
+                              width: 80,
+                              fontFamily: "Roboto",
+                              fontSize: "12px",
+                              fontWeight: "900",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              paddingTop: 2,
                             }}
-                          />
+                          >
+                            {row[headCell.id]}
+                          </div>
+                        ) : isAction(headCell.id) ? (
+                          <button
+                            style={{
+                              background: "linear-gradient(180deg, #2196F3 0%, #1976D2 100%)",
+                              borderRadius: 50,
+                              color: "#FFF",
+                              width: 80,
+                              fontFamily: "Roboto",
+                              fontSize: "12px",
+                              fontWeight: "900",
+                              border: "none",
+                              cursor: "pointer",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              paddingTop: 2,
+                            }}
+                          >
+                            Inform
+                          </button>
                         ) : (
                           row[headCell.id]
                         )}

@@ -17,7 +17,7 @@ const Layout1 = () => {
     // const { get } = useAxiosMethods();
     // console.log(users);
     // useEffect(() => {
-    //     // Call the get method to fetch user data
+    //     // Call the get method to fetch user data 
         
     //     get(users_URL, setUsers);
         
@@ -48,20 +48,20 @@ const Layout1 = () => {
 
 
    // ====================== Dummy Data for testing ======================//
-    function createData(TIME, COURSE, LECTURER, LECTURERCONFRIMATION, STAFFCONFIRMATION, STATUS, ACTION) {
+    function createData(TIME, COURSE, LECTURER, LECTURERCONFRIMATION, STAFFCONFIRMATION, STATUS1, ACTION) {
         return {
             TIME,
             COURSE,
             LECTURER,
             LECTURERCONFRIMATION,
             STAFFCONFIRMATION,
-            STATUS,
+            STATUS1,
             ACTION
         };
     }
     const rows = [
-        createData('10:45 AM', 'Modelling and Simulation of Data', 'Dr. Smith', 'Confirmed', 'Not Confirmed', 'Online', 'Edit'),
-        createData('01:30 PM', 'Individual Research Project', 'Prof. Johnson', 'Confirmed', 'Confirmed', 'Online', 'Edit'),
+        createData('10.45 AM - 12.45 PM', 'Modelling and Simulation of Data', 'Dr. Smith', 'PENDING', 'MARKED', '1', 'Inform'),
+        createData('12.45 AM - 2.45 PM', 'Individual Research Project', 'Prof. Johnson', 'PENDING', 'PENDING', '0', 'Inform'),
         // Add more rows...
     ];
 

@@ -18,13 +18,13 @@ export const headCells = [
         label: 'LECTURER',
     },
     {
-        id: 'LECTURER CONFRIMATION',
+        id: 'LECTURERCONFRIMATION',
         numeric: false,
         disablePadding: true,
         label: 'LECTURER CONFRIMATION',
     },
     {
-        id: 'STAFF CONFIRMATION',
+        id: 'STAFFCONFIRMATION',
         numeric: false,
         disablePadding: true,
         label: 'STAFF CONFIRMATION',

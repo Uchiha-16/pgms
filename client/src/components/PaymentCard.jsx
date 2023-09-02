@@ -64,32 +64,6 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                         alignItems: 'center',
                         paddingTop: '15px',
                         }}>
-                        {/* <div style={{
-                            width: '50%',
-                            textAlign: 'left',
-                            color: '#898989',
-                            display: 'flex',
-                            alignItems: 'center',
-                            }}>
-                            <DoneIcon sx={{ color: '#4CAF50' }}/><p><b>03 done</b> this month</p>
-                        </div> */}
-                        {/* <div style={{
-                            width: '50%',
-                            textAlign: 'right',
-                            }}> */}
-                            {/* <Button sx={{
-                                borderRadius: '11px',
-                                border: '1px solid #1A73E8',
-                                color: '#1A73E8',
-                                fontFamily: 'Inter',
-                                fontWeight: 700,
-                                fontSize: '12px',
-                                padding: '2px 20px',
-                            }}
-                            onClick={isExpanded ? handleViewLessClick : handleViewMoreClick}>
-                                {isExpanded ? 'View Less' : 'View More'}
-                            </Button> */}
-                        {/* </div> */}
                     </Box></>
                 ) : ( '' )}
                 <Table>
@@ -151,6 +125,8 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                                                 },
                                             }} />
                                         ) :
+
+                                        
                                         (
                                             row[column]
                                         )
@@ -163,6 +139,7 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                             </TableRow>
                         ))}
                     </TableBody>
+                
                 </Table>
                 <div className="voucher-summary" sx={{ ...voucherSummaryStyle, ...(isExpanded && expandedVoucherSummaryStyle) }}>
                     {done === 1 && btn === 1 && isExpanded && <VoucherSummaryComponent />}

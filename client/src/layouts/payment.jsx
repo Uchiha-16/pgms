@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Checkbox } from '@mui/material';
-import { Box, Grid, Typography, Fade } from '@mui/material/';
+import { Box, Grid, Typography, Fade, Paper } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
@@ -12,13 +12,14 @@ import TableHeaderComponent from '../components/TableHeaderComponent';
 import ProgramsIcon from '../assets/icons/programs.png';
 import StaffIcon from '../assets/icons/staff.png';
 import UsersIcon from '../assets/icons/users.png';
+import HStepper from '../components/HStepper';
 
 // const users_URL = "http://localhost:8080/api/users/getUsers"
 
 
 const Layout1 = () => {
  
-    const columns = ['No', 'Date', 'Subject', 'Hours', 'Rate Rs', 'Amount', 'Attendance Status', 'AddtoVoucher'];
+    const columns = ['No', 'Date', 'Subject', 'Hours', 'Rate Rs', 'Amount', 'AttendanceStatus', 'AddtoVoucher'];
     const data = [
         { No: '01', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved', AddtoVoucher: 1},
         { No: '02', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved', AddtoVoucher: 0},
@@ -87,23 +88,7 @@ class payment extends Component {
                                 marginRight: '30px'
                                 }}>
    
-   <div style={{ marginLeft: '100px', marginTop: '90px', position: 'absolute', transform: 'translateY(-40%)', display: 'flex', alignItems: 'center'}}>
-   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, margin: '0px' }} />
-   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' },marginLeft : '100px' }} />
-   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '100px' }} />
-   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '100px' }} />
-   <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '100px' }} />
-
-</div>
-
-<div style={{ marginLeft: '100px', marginTop: '140px', position: 'absolute', transform: 'translateY(-40%)', display: 'flex', alignItems: 'center',width: '300px'}}>
-<div style={{ marginTop: '4px',marginLeft : '-9px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}>Forward Payments</div>
-<div style={{ marginTop: '4px',marginLeft : '75px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}> Staff Approval</div>
-<div style={{ marginTop: '4px',marginLeft : '80px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}>Coordinator Approval</div>
-<div style={{ marginTop: '4px',marginLeft : '75px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}>DR Approval</div>
-<div style={{ marginTop: '4px',marginLeft : '85px' , fontSize: '14px', fontStyle: 'normal',  fontWeight: '800',}}>Head Approval</div>
-
-</div>
+ <HStepper ></HStepper>
                             </Grid>
                             </Grid>
 
@@ -116,7 +101,7 @@ class payment extends Component {
                                 gridTemplateRows: '100px 280px auto',
                                 height: '20%',
                                 }}>
-                            <Grid sx={{ marginTop: -2,  }}>
+                            <Grid sx={{ marginTop: -2 }}>
                                 
                              <TableHeaderComponent  center={'Payment Vouchers'} addbtn={false}/>
                              <Layout2 />
@@ -128,8 +113,13 @@ class payment extends Component {
 
                            {/* tables */}
                            <Grid item sx={{ marginTop:-25, marginLeft:4}}>
-                                    <TableHeaderComponent left ={'<'} center={'General Voucher - August 2020/2021 Intake'} right={'>'} addbtn={false}/>
+<Grid item sx={{marginBottom:-2}}>
+                                    <TableHeaderComponent   left ={'<'} center={'General Voucher - August 2020/2021 Intake'} right={'>'} addbtn={false}/>
+                                    </Grid>
+                                    <Paper elevation={3}  style={{ maxHeight: '230px', overflowY: 'scroll' }}>
+
                                     <Layout1 />
+                                    </Paper>
                                 </Grid>
                         {/*============================== Footer ==============================*/}
                         <Grid item>

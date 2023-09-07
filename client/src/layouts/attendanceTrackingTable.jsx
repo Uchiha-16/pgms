@@ -9,6 +9,8 @@ import Popup from '../components/PopupComponent';
 import useAxiosMethods from '../hooks/useAxiosMethods';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 import { headCells } from '../config/attendanceConfig';
+import AttendanceTrackingComponent from '../components/AttendanceTrackingTableComponent';
+
 
 // const users_URL = "/users/users"
 
@@ -66,7 +68,7 @@ const Layout1 = () => {
     ];
 
     return (
-        <GeneralTable rows={rows} headCells={headCells} />
+        <AttendanceTrackingComponent rows={rows} headCells={headCells} />
     );
 };
 

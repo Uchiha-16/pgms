@@ -79,8 +79,8 @@ function Profile() {
 
   const plusIconStyle = {
     position: "absolute",
-    bottom: "10px",
-    left: "10px",
+    bottom: "-30px",
+    left: "200px",
     backgroundColor: "#fff",
     borderRadius: "50%",
     padding: "2px",

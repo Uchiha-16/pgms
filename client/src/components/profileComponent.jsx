@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Typography, Paper } from "@mui/material";
+import {
+  Avatar,
+  Typography,
+  Paper,
+  IconButton,
+  Input,
+} from "@mui/material";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
@@ -10,6 +17,7 @@ function Profile() {
   const [formData, setFormData] = useState({});
   const { userID } = useParams();
   const [user, setUser] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const { get, put } = useAxiosMethods();
 
   const users_URL = `users/getUser/${userID}`;
@@ -29,8 +37,16 @@ function Profile() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleImageUpload = (e) => {
+    const uploadedImage = e.target.files[0];
+    setSelectedImage(URL.createObjectURL(uploadedImage));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Handle image upload here if selectedImage is not null
+    // Example: Upload selectedImage to the server and update user's profile image
 
     put(users_URL, formData)
       .then((response) => {
@@ -59,6 +75,15 @@ function Profile() {
     left: "150px",
     transform: "translateX(-50%)",
     boxShadow: "0px 4px 7px rgba(0, 0, 0, 0.20)",
+  };
+
+  const plusIconStyle = {
+    position: "absolute",
+    bottom: "10px",
+    left: "10px",
+    backgroundColor: "#fff",
+    borderRadius: "50%",
+    padding: "2px",
   };
 
   const nameStyle = {
@@ -126,11 +151,29 @@ function Profile() {
   return (
     <form onSubmit={handleSubmit}>
       <Paper elevation={3} style={paperStyle}>
-        <Avatar
-          alt="Profile Photo"
-          src={require(`../assets/images/${profileImage}`)}
-          style={avatarStyle}
-        />
+        <div style={{ position: "relative" }}>
+          <Avatar
+            alt="Profile Photo"
+            src={selectedImage || require(`../assets/images/${profileImage}`)}
+            style={avatarStyle}
+          />
+          <input
+            accept="image/*"
+            type="file"
+            style={{ display: "none" }}
+            onChange={handleImageUpload}
+            id="image-upload"
+          />
+          <label htmlFor="image-upload" >
+            <IconButton
+              aria-label="Upload Profile Photo"
+              component="span"
+              style={plusIconStyle}
+            >
+              <PhotoCameraIcon fontSize="small" />
+            </IconButton>
+          </label>
+        </div>
         <div style={roleStyle}>
           <Typography variant="h5" style={nameStyle}>
             {!isEditing ? (
@@ -173,8 +216,6 @@ function Profile() {
             )}
           </Typography>
         </div>
-
-        {/* Profile Information Section */}
         <div style={infoStyle}>
           <Typography variant="h6" style={sectionStyle}>
             Profile Information:
@@ -199,8 +240,6 @@ function Profile() {
                 </Typography>
               )}
             </div>
-
-            {/* Other detail pairs */}
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
                 Full Name:
@@ -208,7 +247,7 @@ function Profile() {
               {isEditing ? (
                 <>
                   <TextField
-                    name="firstname" // Change to "firstname"
+                    name="firstname"
                     variant="outlined"
                     size="small"
                     style={contentStyle}
@@ -216,7 +255,7 @@ function Profile() {
                     onChange={handleInputChange}
                   />
                   <TextField
-                    name="lastname" // Change to "lastname"
+                    name="lastname"
                     variant="outlined"
                     size="small"
                     style={contentStyle}
@@ -230,7 +269,6 @@ function Profile() {
                 </Typography>
               )}
             </div>
-
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
                 Mobile:

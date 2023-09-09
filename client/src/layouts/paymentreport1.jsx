@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Grid, Typography, Fade } from '@mui/material/';
+import { Box, Grid, Typography, Fade, Paper } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
@@ -75,7 +75,9 @@ class payment extends Component {
                                 {/* tables */}
                                 <Grid sx={{ marginTop: 5 }}>
                                     <TableHeaderComponent left ={'Payment Voucher'}  right={<img src={DownloadButton} alt="Download" height={20} />} addbtn={false}  />
+
                                     <Layout1 />
+
                                 </Grid>
                               
                             </Grid>

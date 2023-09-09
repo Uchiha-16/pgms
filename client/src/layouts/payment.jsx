@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import { Checkbox } from '@mui/material';
 import { Box, Grid, Typography, Fade, Paper } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
-import CalendarComponent from '../components/CalendarComponent';
-import CalendarEventComponent from '../components/CalendarEventComponent';
-import DashboardCard from '../components/DashboardCardComponent';
 import PaymentCard from '../components/PaymentCard';
 import TableHeaderComponent from '../components/TableHeaderComponent';
-import ProgramsIcon from '../assets/icons/programs.png';
-import StaffIcon from '../assets/icons/staff.png';
-import UsersIcon from '../assets/icons/users.png';
 import HStepper from '../components/HStepper';
 
 // const users_URL = "http://localhost:8080/api/users/getUsers"

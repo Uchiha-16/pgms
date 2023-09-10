@@ -28,7 +28,7 @@ class AttendaceTrackingTable extends Component {
 
   render() {
     const dummyRows = [
-      this.createData('10.45 AM - 12.45 PM', 'Modelling and Simulation of Data', 'Dr. Smith', 'PENDING', 'MARKED', 1, 'Inform'),
+      this.createData('10.45 AM - 12.45 PM', 'Modelling and Simulation of Data', 'Dr. Smith', 'MARKED', 'PENDING', 1, 'Inform'),
       this.createData('12.45 AM - 2.45 PM', 'Individual Research Project', 'Prof. Johnson', 'PENDING', 'PENDING', 0, 'Inform'),
       // Add more rows...
     ];

@@ -17,6 +17,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { visuallyHidden } from "@mui/utils";
 
 
+
 // Helper functions to determine cell conditions
 
 const isChecked = (columnName, cellValue) => {
@@ -41,8 +42,12 @@ const isMarked = (columnName, cellValue) => {
   );
 };
 
-const isAction = (columnName) => {
-  return columnName === "ACTION";
+const isAction = (columnName, row) => {
+  return (
+    columnName === "ACTION" &&
+    (isPending("LECTURERCONFRIMATION", row["LECTURERCONFRIMATION"]) ||
+      isPending("STAFFCONFIRMATION", row["STAFFCONFIRMATION"]))
+  );
 };
 
 // Comparator functions for sorting
@@ -79,10 +84,10 @@ function stableSort(array, comparator) {
 export default function AttendanceTrackingComponent({ rows, headCells }) {
   const navigate = useNavigate();
 
-  const navigateProfile = (userID) => {
-    return () => {
-      navigate(`/profile/${userID}`);
-    };
+  const handleInformClick = (row) => {
+    // Handle the "Inform" button click here
+    // You can navigate to a specific route or perform other actions as needed
+    navigate(`/inform/${row.ID}`); // Example: Redirect to the /inform/:ID route
   };
 
   const [order, setOrder] = React.useState("asc");
@@ -230,7 +235,7 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
                         <div
                           style={{
                             background: "#FFA726",
-                            borderRadius: 50,
+                            borderRadius: '5px',
                             color: "white",
                             width: 80,
                             fontFamily: "Roboto",
@@ -248,7 +253,7 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
                         <div
                           style={{
                             background: "#4CAF50",
-                            borderRadius: 50,
+                            borderRadius: '5px',
                             color: "white",
                             width: 80,
                             fontFamily: "Roboto",
@@ -262,7 +267,7 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
                         >
                           {row[headCell.id]}
                         </div>
-                      ) : isAction(headCell.id) ? (
+                      ) : isAction(headCell.id, row) ? (
                         <button
                           style={{
                             background: "#FFF", // White background
@@ -277,8 +282,9 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
                             justifyContent: "center",
                             alignItems: "center",
                             paddingTop: 2,
-                            borderRadius: 50,
+                            borderRadius: '5px',
                           }}
+                          onClick={() => handleInformClick(row)} // Handle the "Inform" button click
                         >
                           Inform
                         </button>

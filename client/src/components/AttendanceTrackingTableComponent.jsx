@@ -8,63 +8,35 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import user from "../assets/images/user.png";
 import TablePagination from "@mui/material/TablePagination";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
 
+
 // Helper functions to determine cell conditions
-const isOnline = (columnName, cellValue) => {
-  return columnName === "STATUS" && cellValue === "ONLINE";
-};
-
-const isOffline = (columnName, cellValue) => {
-  return columnName === "STATUS" && cellValue === "OFFLINE";
-};
-
-const isFunctionColumn = (columnName) => {
-  return columnName === "FUNCTION";
-};
-
-const isNameColumn = (columnName) => {
-  return columnName === "NAME";
-};
-
-// const isRequestColumn = (columnName) => {
-//     return columnName === 'Request';
-// };
-
-const isEdit = (columnName) => {
-  return columnName === "ACTION";
-};
 
 const isChecked = (columnName, cellValue) => {
-  return columnName === "STATUS1" && cellValue === 1;
+  return columnName === "STATUS" && cellValue === 1;
 };
 
 const isUnchecked = (columnName, cellValue) => {
-  return columnName === "STATUS1" && cellValue === 0;
+  return columnName === "STATUS" && cellValue === 0;
 };
 
 const isPending = (columnName, cellValue) => {
   return (
-    (columnName === "LECTURER CONFRIMATION" || columnName === "STAFF CONFIRMATION") &&
+    (columnName === "LECTURERCONFRIMATION" || columnName === "STAFFCONFIRMATION") &&
     cellValue === "PENDING"
   );
 };
 
 const isMarked = (columnName, cellValue) => {
   return (
-    (columnName === "LECTURER CONFRIMATION" || columnName === "STAFF CONFIRMATION") &&
+    (columnName === "LECTURERCONFRIMATION" || columnName === "STAFFCONFIRMATION") &&
     cellValue === "MARKED"
   );
 };
@@ -103,88 +75,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-// Component for the table header
-function EnhancedTableHead(props) {
-  const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-    headCells,
-  } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell
-          sx={{
-            padding: "0 0 0 28px",
-          }}
-        >
-          {/* <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            sx={{
-              paddingBottom: "0px",
-            }}
-          /> */}
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align="left"
-            padding={headCell.disablePadding ? "none" : "normal"}
-            sortDirection={orderBy === headCell.id ? order : false}
-            sx={{
-              color: "#CCC9C9",
-              fontFamily: "Roboto",
-              fontSize: "10px",
-              fontStyle: "normal",
-              fontWeight: "800",
-              paddingTop: 4,
-              paddingLeft: 3,
-              paddingBottom: 4,
-            }}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-  headCells: PropTypes.array.isRequired,
-};
-
-// Component for the table toolbar
-
-
 // Main table component
 export default function AttendanceTrackingComponent({ rows, headCells }) {
   const navigate = useNavigate();
@@ -194,8 +84,6 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
       navigate(`/profile/${userID}`);
     };
   };
-
-  const profileImage = user?.profileImage || "user.png";
 
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("NAME");
@@ -216,26 +104,6 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
       return;
     }
     setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -284,244 +152,143 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
           }}
         >
           <Table aria-labelledby="tableTitle">
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-              headCells={headCells}
-            />
-            <TableBody>
-              {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.NAME);
-                const labelId = `enhanced-table-checkbox-${index}`;
-
-                return (
-                  <TableRow
-                    key={index}
-                    hover
-                    onClick={(event) => handleClick(event, row.NAME)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    selected={isItemSelected}
-                    sx={{ cursor: "pointer" }}
+            <TableHead>
+              <TableRow>
+                {headCells.map((headCell) => (
+                  <TableCell
+                    key={headCell.id}
+                    align="left"
+                    padding="normal"
+                    sortDirection={orderBy === headCell.id ? order : false}
+                    sx={{
+                      color: "#CCC9C9",
+                      fontFamily: "Roboto",
+                      fontSize: "10px",
+                      fontStyle: "normal",
+                      fontWeight: "800",
+                      paddingTop: 4,
+                      paddingLeft: 3,
+                      paddingBottom: 4,
+                    }}
                   >
-                    {/* <TableCell
-                      padding="checkbox"
+                    <TableSortLabel
+                      active={orderBy === headCell.id}
+                      direction={orderBy === headCell.id ? order : "asc"}
+                      onClick={() => handleRequestSort(headCell.id)}
+                    >
+                      {headCell.label}
+                      {orderBy === headCell.id ? (
+                        <Box component="span" sx={visuallyHidden}>
+                          {order === "desc"
+                            ? "sorted descending"
+                            : "sorted ascending"}
+                        </Box>
+                      ) : null}
+                    </TableSortLabel>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {visibleRows.map((row, index) => (
+                <TableRow key={index}>
+                  {headCells.map((headCell, colIndex) => (
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      key={`${index}-${colIndex}`}
                       sx={{
-                        padding: "0 0 0 28px",
+                        paddingLeft: 3,
+                        color: "#7B809A",
+                        fontFamily: "Roboto",
+                        fontSize: "12px",
+                        fontWeight: "700",
+                        paddingTop: 2.3,
+                        paddingBottom: 2.3,
                       }}
                     >
-                      <Checkbox
-                        checked={isItemSelected}
-                        inputProps={{
-                          "aria-labelledby": labelId,
-                        }}
-                      />
-                    </TableCell> */}
-                    {headCells.map((headCell, colIndex) => (
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        key={`${index}-${colIndex}`}
-                        sx={{
-                          paddingLeft: 3,
-                          color: "#7B809A",
-                          fontFamily: "Roboto",
-                          fontSize: "12px",
-                          fontWeight: "700",
-                          paddingTop: 2.3,
-                          paddingBottom: 2.3,
-                        }}
-                      >
-                        {isOnline(headCell.id, row[headCell.id]) ? (
-                          <div
-                            style={{
-                              background:
-                                "linear-gradient(180deg, #66BB6A 0%, #43A047 100%)",
-                              borderRadius: 50,
-                              color: "#FFF",
-                              width: 80,
-                              fontFamily: "Roboto",
-                              fontSize: "12px",
-                              fontWeight: "900",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              paddingTop: 2,
-                            }}
-                          >
-                            {row[headCell.id]}
-                          </div>
-                        ) : isOffline(headCell.id, row[headCell.id]) ? (
-                          <div
-                            style={{
-                              background: "black",
-                              borderRadius: 50,
-                              color: "#FFF",
-                              width: 80,
-                              fontFamily: "Roboto",
-                              fontSize: "12px",
-                              fontWeight: "900",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              paddingTop: 2,
-                            }}
-                          >
-                            {row[headCell.id]}
-                          </div>
-                        ) : isFunctionColumn(headCell.id) ? (
-                          <div>
-                            <span>{row[headCell.id]}</span>
-                            <br />
-                            <span
-                              style={{
-                                color: "#555",
-                                fontSize: "9px",
-                                fontWeight: "400",
-                              }}
-                            >
-                              UCSC
-                            </span>
-                          </div>
-                        ) : isNameColumn(headCell.id) ? (
-                          <div
-                            style={{
-                              display: "flex",
-                            }}
-                          >
-                            <div
-                              style={{
-                                marginRight: 10,
-                                display: "flex",
-                                alignItems: "center",
-                              }}
-                            >
-                              <img
-                                src={require(`../assets/images/${row["PROFILEPIC"]}`)}
-                                width={30}
-                                height={30}
-                                alt="user"
-                              />
-                            </div>
-                            <div>
-                              <span
-                                style={{
-                                  color: "#000",
-                                  fontSize: "14px",
-                                  fontWeight: "500",
-                                }}
-                              >
-                                {row[headCell.id]}
-                              </span>
-                              <br />
-                              <span
-                                style={{
-                                  color: "#4A4949",
-                                  fontSize: "10px",
-                                  fontWeight: "400",
-                                  //give the email
-                                }}
-                              >
-                                {row["EMAIL"]}
-                              </span>
-                            </div>
-                          </div>
-                        ) : isEdit(headCell.id) ? (
-                          <span
-                            onClick={navigateProfile(row["ID"])}
-                            style={{ cursor: "pointer" }}
-                          >
-                            {row[headCell.id]}
-                          </span>
-                        ) : isChecked(headCell.id) ? (
-                          <Checkbox
-                            defaultChecked
-                            sx={{
-                              color: "#D9D9D9",
-                              "&.Mui-checked": {
-                                color: "#43A047",
-                              },
-                            }}
-                          />
-                        ) : isUnchecked(headCell.id) ? (
-                          <Checkbox
-                            sx={{
-                              color: "#D9D9D9",
-                              "&.Mui-checked": {
-                                color: "#43A047",
-                              },
-                            }}
-                          />
-                        ) : isPending(headCell.id, row[headCell.id]) ? (
-                          <div
-                            style={{
-                              background: "black",
-                              borderRadius: 50,
-                              color: "#FFA726",
-                              width: 80,
-                              fontFamily: "Roboto",
-                              fontSize: "12px",
-                              fontWeight: "900",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              paddingTop: 2,
-                            }}
-                          >
-                            {row[headCell.id]}
-                          </div>
-                        ) : isMarked(headCell.id, row[headCell.id]) ? (
-                          <div
-                            style={{
-                              background: "black",
-                              borderRadius: 50,
-                              color: "#4CAF50",
-                              width: 80,
-                              fontFamily: "Roboto",
-                              fontSize: "12px",
-                              fontWeight: "900",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              paddingTop: 2,
-                            }}
-                          >
-                            {row[headCell.id]}
-                          </div>
-                        ) : isAction(headCell.id) ? (
-                          <button
-                            style={{
-                              background: "linear-gradient(180deg, #2196F3 0%, #1976D2 100%)",
-                              borderRadius: 50,
-                              color: "#FFF",
-                              width: 80,
-                              fontFamily: "Roboto",
-                              fontSize: "12px",
-                              fontWeight: "900",
-                              border: "none",
-                              cursor: "pointer",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              paddingTop: 2,
-                            }}
-                          >
-                            Inform
-                          </button>
-                        ) : (
-                          row[headCell.id]
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                );
-              })}
+                      {isChecked(headCell.id, row[headCell.id]) ? (
+                        <Checkbox
+                          defaultChecked
+                          sx={{
+                            color: "#D9D9D9",
+                            "&.Mui-checked": {
+                              color: "#43A047",
+                            },
+                          }}
+                        />
+                      ) : isUnchecked(headCell.id, row[headCell.id]) ? (
+                        <Checkbox
+                          sx={{
+                            color: "#D9D9D9",
+                            "&.Mui-checked": {
+                              color: "#43A047",
+                            },
+                          }}
+                        />
+                      ) : isPending(headCell.id, row[headCell.id]) ? (
+                        <div
+                          style={{
+                            background: "#FFA726",
+                            borderRadius: 50,
+                            color: "white",
+                            width: 80,
+                            fontFamily: "Roboto",
+                            fontSize: "12px",
+                            fontWeight: "900",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            paddingTop: 2,
+                          }}
+                        >
+                          {row[headCell.id]}
+                        </div>
+                      ) : isMarked(headCell.id, row[headCell.id]) ? (
+                        <div
+                          style={{
+                            background: "#4CAF50",
+                            borderRadius: 50,
+                            color: "white",
+                            width: 80,
+                            fontFamily: "Roboto",
+                            fontSize: "12px",
+                            fontWeight: "900",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            paddingTop: 2,
+                          }}
+                        >
+                          {row[headCell.id]}
+                        </div>
+                      ) : isAction(headCell.id) ? (
+                        <button
+                          style={{
+                            background: "#FFF", // White background
+                            border: "1px solid #1A73E8", // Blue outline
+                            color: "#1A73E8", // Blue font color
+                            width: 80,
+                            fontFamily: "Roboto",
+                            fontSize: "12px",
+                            fontWeight: "900",
+                            cursor: "pointer",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            paddingTop: 2,
+                            borderRadius: 50,
+                          }}
+                        >
+                          Inform
+                        </button>
+                      ) : (
+                        row[headCell.id]
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
               {emptyRows > 0 && (
                 <TableRow
                   style={{
@@ -534,20 +301,22 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          sx={{
-            position: "relative",
-            top: "-5rem",
-          }}
-        />
       </Paper>
+
+      {/* Pagination outside the TableContainer */}
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{
+          position: "relative",
+          top: "-5rem",
+        }}
+      />
     </Box>
   );
 }

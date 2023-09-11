@@ -8,9 +8,8 @@ import lombok.Data;
 @Table(name = "Lecturer")
 public class lecturer{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
-    private String firstName;
-    private String lastName;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
     private String qualification;
 }

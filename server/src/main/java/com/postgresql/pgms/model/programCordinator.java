@@ -1,8 +1,6 @@
 package com.postgresql.pgms.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -11,6 +9,7 @@ import lombok.Data;
 public class programCordinator {
 
     @Id
-    private Long pcId;
-    private Long userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
 }

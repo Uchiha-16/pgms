@@ -9,7 +9,7 @@ import lombok.Data;
 public class program {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long programID;
+    private Integer programID;
 
     private String name;
 

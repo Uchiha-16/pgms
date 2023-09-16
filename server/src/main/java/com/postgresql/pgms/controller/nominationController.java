@@ -30,7 +30,7 @@ public class nominationController {
         return ResponseEntity.ok(service.listnominations());
     }
 
-//get the list of nominations of the particular user
+    //get the list of nominations of the particular user
     @GetMapping("/nominations/{id}")
     public ResponseEntity<List<Nominations>> getAllNominationsByUser(@PathVariable("id") Integer id){
         return ResponseEntity.ok(service.listnominationsByUser(id));

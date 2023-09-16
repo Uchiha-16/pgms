@@ -45,4 +45,8 @@ public class nominationService {
 
         repo.save(nomination);
     }
+
+    public void updateNomination(){
+
+    }
 }

@@ -1,15 +1,17 @@
 package com.postgresql.pgms.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "Course")
-public class course {
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long courseId ;
@@ -20,12 +22,4 @@ public class course {
     private String hallName;
     private String programId;
 
-    public course(String courseNo, String courseName, Integer semester, Integer credit, String hallName, String programId) {
-        this.courseNo = courseNo;
-        this.courseName = courseName;
-        this.semester = semester;
-        this.credit = credit;
-        this.hallName = hallName;
-        this.programId = programId;
-    }
 }

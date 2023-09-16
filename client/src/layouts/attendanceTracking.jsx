@@ -6,7 +6,7 @@ import TableHeaderComponent from '../components/TableHeaderComponent';
 import AttendanceTrackingComponent from '../components/AttendanceTrackingTableComponent';
 import { headCells } from '../config/attendanceConfig';
 
-// Replace degreesData with your actual session data
+// Replace degreesData with actual session data
 const sessionData = [
   {
     degreeTitle: 'Master of Information Security',
@@ -50,8 +50,8 @@ const Layout1 = ({ degree }) => {
     STATUS: session.attended ? 1 : 0,
   }));
 
-  const done = 0; // You might want to adjust this value based on your logic
-  const btn = 0; // You might want to adjust this value based on your logic
+  const done = 0; //might want to adjust this value based on your logic
+  const btn = 0; // might want to adjust this value based on your logic
 
   return (
     <div>

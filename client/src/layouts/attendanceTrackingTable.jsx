@@ -35,7 +35,7 @@ class AttendaceTrackingTable extends Component {
     ];
 
     // Determine the degree program for the Program Coordinator
-    // You can fetch this information from your backend or based on user authentication
+    // fetch this information from  backend or based on user authentication
     const programCoordinatorRole = 'Information Technology'; // Example program name
 
     return (

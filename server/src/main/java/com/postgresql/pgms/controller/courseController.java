@@ -27,4 +27,9 @@ public class courseController {
     public ResponseEntity<List<Course>> getCourses(){
         return ResponseEntity.ok(courseService.getAllCourses());
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteCourse(@PathVariable Long id){
+        courseService.deleteCourse(id);
+    }
 }

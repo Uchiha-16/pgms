@@ -18,13 +18,6 @@ public class nominationController {
 
     private final nominationService service;
 
-
-//    @PostMapping("/add")
-//    public ResponseEntity<String> addNomination(@RequestBody NominationSaveDTO nominationSaveDTO) {
-//        service.addNomination(nominationSaveDTO);
-//        return ResponseEntity.ok("Nomination added successfully.");
-//    }
-
     @GetMapping("/nominations")
     public ResponseEntity<List<Nominations>> getAllNominations(){
         return ResponseEntity.ok(service.listnominations());

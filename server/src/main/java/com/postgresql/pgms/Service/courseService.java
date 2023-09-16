@@ -31,4 +31,12 @@ public class courseService{
         List<Course> coursesList = courseRepo.findAll();
         return (coursesList);
     }
+
+    //delete course
+    public void deleteCourse(Long id) {
+        if (!courseRepo.existsById(id)){
+            //error exception
+        }
+        courseRepo.deleteById(id);
+    }
 }

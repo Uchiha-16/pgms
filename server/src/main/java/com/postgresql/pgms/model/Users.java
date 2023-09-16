@@ -24,26 +24,24 @@ public class Users implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;
-
     private String firstname;
-
     private String lastname;
-
     private String email;
-
     private String password;
-
     @Enumerated(EnumType.STRING)
     private Role role;
-
     private String contact;
-
     @Builder.Default
     private String profileImage = "user.png";
-
     @Builder.Default
     private LocalDate EmployedDate = LocalDate.now();
 
+    //course table mapping
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "lecturer_course",
+            joinColumns = @JoinColumn(name = "lecturer_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Course> courses;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

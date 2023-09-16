@@ -48,7 +48,7 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                 top: -40,
                 zIndex: 0,
                 paddingTop: 5,
-                width: '52.3rem',
+                width: 'auto',
                 boxShadow: '0px 13px 20px -7px rgba(0, 0, 0, 0.15)',
                 overflow: 'hidden',
             }}>

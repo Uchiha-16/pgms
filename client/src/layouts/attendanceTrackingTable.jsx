@@ -27,11 +27,16 @@ class AttendaceTrackingTable extends Component {
   }
 
   render() {
+    // Modify dummyRows for the relevant degree program (e.g., Information Technology)
     const dummyRows = [
       this.createData('10.45 AM - 12.45 PM', 'Modelling and Simulation of Data', 'Dr. Smith', 'MARKED', 'PENDING', 1, 'Inform'),
       this.createData('12.45 AM - 2.45 PM', 'Individual Research Project', 'Prof. Johnson', 'PENDING', 'PENDING', 0, 'Inform'),
       // Add more rows...
     ];
+
+    // Determine the degree program for the Program Coordinator
+    // You can fetch this information from your backend or based on user authentication
+    const programCoordinatorRole = 'Information Technology'; // Example program name
 
     return (
       <Box>
@@ -47,17 +52,22 @@ class AttendaceTrackingTable extends Component {
               <HeaderComponent />
             </Grid>
             <Grid item>
-              {/* Master of Information Technology */}
-              <Layout degreeName="Information Technology" rows={dummyRows} />
+              {/* Display data for the relevant degree program based on the Program Coordinator's role */}
+              {programCoordinatorRole === 'Information Technology' && (
+                <Layout degreeName="Information Technology" rows={dummyRows} />
+              )}
               
-              {/* Master of Information Security */}
-              <Layout degreeName="Information Security" rows={dummyRows} />
+              {programCoordinatorRole === 'Information Security' && (
+                <Layout degreeName="Information Security" rows={dummyRows} />
+              )}
               
-              {/* Master of Computer Science */}
-              <Layout degreeName="Computer Science" rows={dummyRows} />
+              {programCoordinatorRole === 'Computer Science' && (
+                <Layout degreeName="Computer Science" rows={dummyRows} />
+              )}
               
-              {/* Master of Business Analytics */}
-              <Layout degreeName="Business Analytics" rows={dummyRows} />
+              {programCoordinatorRole === 'Business Analytics' && (
+                <Layout degreeName="Business Analytics" rows={dummyRows} />
+              )}
             </Grid>
             <Grid item>
               <FooterComponent />

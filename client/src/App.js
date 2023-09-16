@@ -20,6 +20,7 @@ import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
 import TimeTable from './layouts/timeTable';
+import Demo from './components/Demo'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/timeTable" element={<TimeTable />} />
+        <Route path="/demo" element={<Demo />} />
 
         {/* private */}
         <Route element={<PersistLogin />}>

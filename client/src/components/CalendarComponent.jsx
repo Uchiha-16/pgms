@@ -1,72 +1,54 @@
 import * as React from 'react';
-import { DateAdapter, LocalizationProvider, DateRangePicker } from '@mui/lab';
-import AdapterDayjs from '@mui/lab/AdapterDayjs';
-import Day from '@mui/lab/Day';
-import { styled } from '@mui/system';
 import dayjs from 'dayjs';
-
-const DemoContainer = styled('div')({
-    '& .MuiCalendarPicker-root': {
-        width: 'auto',
-    },
-});
-
-const DemoItem = styled('div')({
-    '& .MuiTypography-caption': {
-        fontSize: '13px',
-    },
-    '& .MuiButtonBase-root': {
-        fontSize: '11px',
-        width: '30px',
-        height: '30px',
-        fontFamily: 'Open Sans',
-        fontWeight: '500',
-    },
-    '& .MuiIconButton-root': {
-        fontSize: '20px',
-    },
-    '& .Mui-selected': {
-        backgroundColor: '#344767',
-        '&:hover': {
-            backgroundColor: '#42424A',
-        },
-    },
-    '& .MuiTypography-root': {
-        width: '30px',
-        height: '30px',
-        fontWeight: 'bold',
-        color: '#8E8C9A',
-    },
-    '& .MuiDay-root': {
-        width: '30px',
-        height: '30px',
-    },
-    '& .MuiCalendarPicker-daysHeader': {
-        paddingLeft: '42px',
-        paddingRight: '32px',
-    },
-    '& .MuiDay-root[data-mui-test="23"]': {
-        backgroundColor: 'yellow', // Change this color as needed
-    },
-});
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 export default function DateCalendarFormProps() {
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer>
+            <DemoContainer components={['DateCalendar']} sx={{
+                '& .MuiDateCalendar-root': {
+                    width: 'auto',
+                }
+            }}>
                 <DemoItem>
-                    <DateAdapter date={dayjs()}>
-                        {(adapterProps) => (
-                            <DateRangePicker
-                                {...adapterProps}
-                                open
-                                renderInput={() => <div />}
-                                calendars={1}
-                                view={CalendarPickerView}
-                                DayComponent={Day}
-                            />
-                        )}
-                    </DateAdapter>
+                    <DateCalendar defaultValue={dayjs()} readOnly sx={{
+                        '& .MuiPickersCalendarHeader-labelContainer': {
+                            fontSize: '13px',
+                        },
+                        '& .MuiButtonBase-root': {
+                            fontSize: '11px',
+                            width: '30px',
+                            height: '30px',
+                            fontFamily: 'Open Sans',
+                            fontWeight: '500',
+                        },
+                        '& .MuiPickersArrowSwitcher-button': {
+                            fontSize: '20px',
+                        },
+                        '& .css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root.Mui-selected': {
+                            backgroundColor: '#344767',
+                        },
+                        '& .css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover': {
+                            backgroundColor: '#42424A',
+                        },
+                        '& .MuiTypography-root': {
+                            width: '30px',
+                            height: '30px',
+                            fontWeight: 'bold',
+                            color: '#8E8C9A',
+                        },
+                        '& .MuiPickersDay-root': {
+                            width: '30px',
+                            height: '30px',
+                        },
+                        '& .MuiPickersCalendarHeader-root': {
+                            paddingLeft: '42px',
+                            paddingRight: '32px'
+                        }
+                    }}/>
                 </DemoItem>
             </DemoContainer>
         </LocalizationProvider>

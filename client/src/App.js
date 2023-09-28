@@ -49,7 +49,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/programs' element={<Programs />} />
-            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+            <Route path='/attendance-tracking' element={<AttendanceTracking />} />
 
           
             

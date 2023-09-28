@@ -3,7 +3,7 @@ import { Box, Grid } from '@mui/material/';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import TableHeaderComponent from '../components/TableHeaderComponent';
-import AttendanceTrackingComponent from '../components/AttendanceTrackingTableComponent';
+import AttendanceTrackingComponent from '../components/AttendanceTrackingComponent';
 import { headCells } from '../config/attendanceConfig';
 
 // Replace degreesData with actual session data

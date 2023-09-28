@@ -49,7 +49,7 @@ function App() {
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/lecturers' element={<Lecturers/>}/>
             <Route path='/programs' element={<Programs />} />
-            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+            <Route path='/attendance-tracking' element={<AttendanceTracking />} />
 
           
             

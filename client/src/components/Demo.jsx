@@ -1,9 +1,6 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { green, lightBlue } from '@mui/material/colors';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import {
     ViewState, EditingState, GroupingState, IntegratedGrouping, IntegratedEditing,
 } from '@devexpress/dx-react-scheduler';
@@ -16,35 +13,10 @@ import {
     DragDropProvider,
     GroupingPanel,
     WeekView,
-    MonthView,
-    Toolbar,
-    ViewSwitcher,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { data as appointments } from '../config/timetableData';
 
-const PREFIX = 'Demo';
-// #FOLD_BLOCK
-const classes = {
-    formControlLabel: `${PREFIX}-formControlLabel`,
-    text: `${PREFIX}-text`,
-};
-// #FOLD_BLOCK
-const StyledFormControlLabel = styled(FormControlLabel)(({
-    theme: { spacing, palette, typography },
-}) => ({
-    [`&.${classes.formControlLabel}`]: {
-        padding: spacing(2),
-        paddingLeft: spacing(10),
-    },
-    [`&.${classes.text}`]: {
-        ...typography.caption,
-        color: palette.text.secondary,
-        fontWeight: 'bold',
-        fontSize: '1rem',
-    },
-}));
-
-const isWeekOrMonthView = viewName => viewName === 'Week' || viewName === 'Month';
+const isWeekOrMonthView = viewName => viewName === 'Week';
 
 const priorityData = [
     { text: 'MCS', id: 1, color: lightBlue },
@@ -53,17 +25,6 @@ const priorityData = [
     { text: 'MBA', id: 4, color: '#FFA500' },
 
 ];
-
-const GroupOrderSwitcher = (({ isGroupByDate, onChange }) => (
-    <StyledFormControlLabel
-        control={
-            <Checkbox checked={isGroupByDate} onChange={onChange} color="primary" />
-        }
-        label="Group by Date First"
-        className={classes.formControlLabel}
-        classes={{ label: classes.text }}
-    />
-));
 
 export default class Demo extends React.PureComponent {
     constructor(props) {
@@ -112,20 +73,19 @@ export default class Demo extends React.PureComponent {
 
     render() {
         const {
-            data, resources, grouping, groupByDate, isGroupByDate,
+            data, resources, grouping, groupByDate,
         } = this.state;
 
         return (
             (
                 <div>
-                    <GroupOrderSwitcher isGroupByDate={isGroupByDate} onChange={this.onGroupOrderChange} />
                     <Paper>
                         <Scheduler
                             data={data}
-                            height={660}
+                            height={'auto'}
                         >
                             <ViewState
-                                defaultCurrentDate="2018-05-30"
+                                defaultCurrentDate="2023-9-28"
                             />
                             <EditingState
                                 onCommitChanges={this.commitChanges}
@@ -136,11 +96,10 @@ export default class Demo extends React.PureComponent {
                             />
 
                             <WeekView
-                                startDayHour={8.5}
+                                startDayHour={8}
                                 endDayHour={17}
-                                excludedDays={[0, 6]}
+                                excludedDays={[1, 2, 3, 4, 5]}  // Excludes Mon-Fri
                             />
-                            <MonthView />
 
                             <Appointments />
                             <Resources
@@ -153,8 +112,6 @@ export default class Demo extends React.PureComponent {
                             <AppointmentTooltip />
                             <AppointmentForm />
 
-                            <Toolbar />
-                            <ViewSwitcher />
                             <GroupingPanel />
                             <DragDropProvider />
                         </Scheduler>

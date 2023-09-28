@@ -39,6 +39,8 @@ function App() {
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/timeTable" element={<TimeTable />} />
         <Route path="/demo" element={<Demo />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+
 
         {/* private */}
         <Route element={<PersistLogin />}>
@@ -47,7 +49,6 @@ function App() {
             <Route path='/nominations' element={<AddNominations />} />
             <Route path='/programs' element={<Programs/>}/>
             <Route path='/profile/:userID' element={<Profile />} />
-            <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/lecturers' element={<Lecturers/>}/>
             <Route path='/programs' element={<Programs />} />

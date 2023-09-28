@@ -2,8 +2,8 @@ export const data = [
     {
         title: 'Website Re-Design Plan',
         priorityId: 2,
-        startDate: new Date(2018, 3, 30, 9, 30),
-        endDate: new Date(2018, 4, 3, 11, 30),
+        startDate: new Date(2023, 9, 24, 9, 30),
+        endDate: new Date(2023, 9, 24, 11, 30),
         id: 0,
     }, {
         title: 'Book Flights to San Fran for Sales Trip',

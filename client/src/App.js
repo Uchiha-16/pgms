@@ -8,6 +8,7 @@ import Programs from './layouts/programs';
 import AddNominations from './layouts/addNominations';
 import Profile from './layouts/profile';
 import Notifications from './layouts/notifications';
+import Form from './layouts/form';
 
 
 import Layout from './auth/Layout';
@@ -40,14 +41,14 @@ function App() {
 
         {/* private */}
         <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} >
+          {/* <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} > */}
             <Route path='home' element={<Home />} />
             <Route path='/nominations' element={<AddNominations />} />
             <Route path='/users' element={<Users/>}/>
             <Route path='/programs' element={<Programs/>}/>
             <Route path='/profile/:userID' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/notifications' element={<Notifications />} />
+            <Route path='/notifications' element={<Form />} />
             <Route path='/programs' element={<Programs />} />
             <Route path='/attendance-tracking' element={<AttendanceTracking />} />
 
@@ -56,7 +57,7 @@ function App() {
             
 
 
-          </Route>
+          {/* </Route> */}
           <Route element={<RequireAuth allowedRoles={["Staff"]}/>} >
             <Route path='/addUsers' element={<AddUser/>}/>
           </Route>

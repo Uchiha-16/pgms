@@ -1,12 +1,18 @@
 package com.postgresql.pgms.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Voucher")
 public class Voucher {
@@ -23,8 +29,8 @@ public class Voucher {
     private String PCID;
     private String staffID;
 
-    public Voucher() {
-    }
+//    public Voucher() {
+//    }
 
     public Voucher(LocalDate issuedDate, String month, BigDecimal payment, String programID, String headID,
                    String DRID, String PCID, String staffID) {

@@ -8,8 +8,6 @@ import Programs from './layouts/programs';
 import AddNominations from './layouts/addNominations';
 import Profile from './layouts/profile';
 import Notifications from './layouts/notifications';
-
-
 import Layout from './auth/Layout';
 import Home from './components/Home';
 import PersistLogin from './auth/PersistLogin';
@@ -19,8 +17,12 @@ import LinkPage from './layouts/LinkPage';
 import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
+import AttendanceTracking from './layouts/attendanceTracking';
 import TimeTable from './layouts/timeTable';
 import Demo from './components/Demo'
+import Lecturers from './layouts/lecturers';
+import Staff from './layouts/staff';
+import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
 
 
 function App() {
@@ -43,11 +45,15 @@ function App() {
           <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} >
             <Route path='home' element={<Home />} />
             <Route path='/nominations' element={<AddNominations />} />
-            <Route path='/users' element={<Users/>}/>
             <Route path='/programs' element={<Programs/>}/>
             <Route path='/profile/:userID' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/notifications' element={<Notifications />} />
+            <Route path='/lecturers' element={<Lecturers/>}/>
+            <Route path='/programs' element={<Programs />} />
+            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+
+          
             
             
 
@@ -55,6 +61,8 @@ function App() {
           </Route>
           <Route element={<RequireAuth allowedRoles={["Staff"]}/>} >
             <Route path='/addUsers' element={<AddUser/>}/>
+            <Route path='/users' element={<Users/>}/>
+            <Route path='/staff' element={<Staff/>}/>
           </Route>
         </Route>
 

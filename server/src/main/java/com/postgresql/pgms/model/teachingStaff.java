@@ -1,16 +1,21 @@
 package com.postgresql.pgms.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table (name = "TeachingStaff")
 public class teachingStaff {
 
     @Id
-    private Long tsId;
-    private Long userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { width } from '@mui/system';
+import Popup from './PopupComponent';
+
+
 
 class TableHeaderComponent extends Component {
     render() {
@@ -29,19 +31,7 @@ class TableHeaderComponent extends Component {
                 }}>{left}</h3>
                 {/* if addbtn add aaddcircleIcon else add right text */}
                 {addbtn ? 
-                    <AddCircleIcon sx={{
-                        marginLeft: 'auto',
-                        marginTop: 'auto',
-                        marginBottom: 'auto',
-                        color: '#FFFFFF',
-                        fontSize: '30px',
-                        filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15))',
-                        cursor: 'pointer',
-                        transition: '0.3s',
-                        ":hover": {
-                            transform: 'rotate(90deg)'
-                        }
-                    }} /> 
+                    <Popup/> 
                     : 
                     <h3 style={{
                         width: '50%',

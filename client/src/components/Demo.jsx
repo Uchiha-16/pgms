@@ -47,8 +47,11 @@ const StyledFormControlLabel = styled(FormControlLabel)(({
 const isWeekOrMonthView = viewName => viewName === 'Week' || viewName === 'Month';
 
 const priorityData = [
-    { text: 'Low Priority', id: 1, color: lightBlue },
-    { text: 'High Priority', id: 2, color: green },
+    { text: 'MCS', id: 1, color: lightBlue },
+    { text: 'MIS', id: 2, color: green },
+    { text: 'MIT', id: 3, color: '#dda0dd' },
+    { text: 'MBA', id: 4, color: '#FFA500' },
+
 ];
 
 const GroupOrderSwitcher = (({ isGroupByDate, onChange }) => (

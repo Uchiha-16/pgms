@@ -17,11 +17,14 @@ import LinkPage from './layouts/LinkPage';
 import ForgotPassword from './layouts/forgotPassword';
 import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
+import AttendanceTracking from './layouts/attendanceTracking';
 import TimeTable from './layouts/timeTable';
 import Lecturers from './layouts/lecturers';
 import Staff from './layouts/staff';
 import Payment from './layouts/payment';
 import PaymentReport1 from './layouts/paymentreport1';
+import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
+
 
 function App() {
   return (
@@ -51,6 +54,12 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/att' element={<Attendance />} />
             <Route path='/notifications' element={<Notifications />} />
+            <Route path='/lecturers' element={<Lecturers/>}/>
+            <Route path='/programs' element={<Programs />} />
+            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+
+          
+            
             
 
 

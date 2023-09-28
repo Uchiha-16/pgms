@@ -1,9 +1,15 @@
 package com.postgresql.pgms.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "coordinationPayment")
 public class coordinationPayment {
@@ -14,8 +20,8 @@ public class coordinationPayment {
     private String officerName;
     private long currAmount;
 
-    public coordinationPayment() {
-    }
+//    public coordinationPayment() {
+//    }
 
     public coordinationPayment(String officerName, long currAmount) {
         this.officerName = officerName;

@@ -39,9 +39,7 @@ function App() {
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/timeTable" element={<TimeTable />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/paymentreport1" element={<PaymentReport1 />} />
-
+      
 
         {/* private */}
         <Route element={<PersistLogin />}>
@@ -55,8 +53,10 @@ function App() {
             <Route path='/att' element={<Attendance />} />
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/lecturers' element={<Lecturers/>}/>
-            <Route path='/programs' element={<Programs />} />
+            {/* <Route path='/programs' element={<Programs />} /> */}
             <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+            <Route path="/payment" element={<Payment />} />
+        <Route path="/paymentreport1" element={<PaymentReport1 />} />
 
           
             

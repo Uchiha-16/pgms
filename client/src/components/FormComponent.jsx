@@ -8,10 +8,20 @@ function Form() {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
   const { scheduleID } = useParams(); // Assuming you get the schedule ID from the URL
-  const [budget, setBudget] = useState(null); // Replace 'user' with 'budget'
+  const [budget, setBudget] = useState({
+    startYear: 2020,
+    endYear: 2021,
+    budget: 50000,
+    rate: 4.5,
+    MISname: "John Doe",
+    MCSname: "Jane Smith",
+    MITname: "Alice Johnson",
+    MBAname: "Bob Wilson",
+  });
+   // Replace with actual data
   const { get, put } = useAxiosMethods();
 
-  const budget_URL = `budget/getBudget/${scheduleID}`; // Update this URL accordingly
+  const budget_URL = `budget/getBudget/${scheduleID}`;
 
   useEffect(() => {
     get(budget_URL, setBudget);
@@ -137,20 +147,31 @@ function Form() {
           <div edit>
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
-                Duration (Years):
+                Duration:
               </Typography>
               {isEditing ? (
-                <TextField
-                  name="duration"
-                  variant="outlined"
-                  size="small"
-                  style={contentStyle}
-                  value={formData.duration || budget?.duration}
-                  onChange={handleInputChange}
-                />
+                <>
+                  <TextField
+                    name="startYear"
+                    variant="outlined"
+                    size="small"
+                    style={contentStyle}
+                    value={formData.startYear || budget?.startYear}
+                    onChange={handleInputChange}
+                  />
+                  {" - "}
+                  <TextField
+                    name="endYear"
+                    variant="outlined"
+                    size="small"
+                    style={contentStyle}
+                    value={formData.endYear || budget?.endYear}
+                    onChange={handleInputChange}
+                  />
+                </>
               ) : (
                 <Typography variant="body2" style={contentStyle}>
-                  {budget?.duration}
+                  {budget?.startYear} - {budget?.endYear}
                 </Typography>
               )}
             </div>
@@ -185,12 +206,12 @@ function Form() {
                   variant="outlined"
                   size="small"
                   style={contentStyle}
-                  value={formData.rate}
+                  value={formData.rate || budget?.rate}
                   onChange={handleInputChange}
                 />
               ) : (
                 <Typography variant="body2" style={contentStyle}>
-                  {budget?.budget}
+                  {budget?.rate}
                 </Typography>
               )}
             </div>
@@ -205,7 +226,7 @@ function Form() {
                     variant="outlined"
                     size="small"
                     style={contentStyle}
-                    value={formData.MISname}
+                    value={formData.MISname || budget?.MISname}
                     onChange={handleInputChange}
                   />
                 </>
@@ -226,7 +247,7 @@ function Form() {
                     variant="outlined"
                     size="small"
                     style={contentStyle}
-                    value={formData.MCSname}
+                    value={formData.MCSname || budget?.MCSname}
                     onChange={handleInputChange}
                   />
                 </>
@@ -247,7 +268,7 @@ function Form() {
                     variant="outlined"
                     size="small"
                     style={contentStyle}
-                    value={formData.MIT}
+                    value={formData.MIT || budget?.MITname}
                     onChange={handleInputChange}
                   />
                 </>
@@ -268,7 +289,7 @@ function Form() {
                     variant="outlined"
                     size="small"
                     style={contentStyle}
-                    value={formData.MBAname}
+                    value={formData.MBAname || budget?.MBAname}
                     onChange={handleInputChange}
                   />
                 </>

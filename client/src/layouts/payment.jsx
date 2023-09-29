@@ -77,7 +77,7 @@ class payment extends Component {
                                 boxShadow: '0px 3.720207452774048px 11px 0px rgba(0, 0, 0, 0.12)',
                                 display: 'grid',
                                 gridTemplateRows: '100px 280px auto',
-                                height: '57%',
+                                height: '50%',
                                 marginRight: '30px'
                                 }}>
    
@@ -97,6 +97,7 @@ class payment extends Component {
                             <Grid sx={{ marginTop: -2 }}>
                                 
                              <TableHeaderComponent  center={'Payment Vouchers'} addbtn={false}/>
+
                              <Layout2 />
 </Grid>
                                

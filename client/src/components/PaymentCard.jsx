@@ -78,7 +78,8 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                                     fontStyle: 'normal',
                                     fontWeight: '800',
                                     paddingTop: 4,
-                                    paddingLeft: 3
+                                    paddingLeft: 3,
+                                    overflowY: 'hidden',
                           }}>
                                     {column}
                                 </TableCell>

@@ -67,16 +67,18 @@ class payment extends Component {
                         {/*=============================== Main ===============================*/}
                         <Fade in={true} timeout={1000}><Grid item sx={{
                             display: 'grid',
-                            marginBottom: 10,
+                            marginBottom: 8,
                             marginLeft: '24px'
                             }}>
                             {/*========== Center ==========*/}
                             <Grid item>
                                 {/* tables */}
                                 <Grid sx={{ marginTop: 5 }}>
-                                    <TableHeaderComponent left ={'Payment Voucher'}  right={<img src={DownloadButton} alt="Download" height={20} />} addbtn={false}  />
+                                    <TableHeaderComponent left ={'Payment Voucher'}  right={<img src={DownloadButton} alt="Download" height={20}  />} addbtn={false}  />
+                                    <Paper elevation={3}  style={{ maxHeight: '370px', overflowY: 'scroll', marginTop: '-15px' }}>
 
                                     <Layout1 />
+                                    </Paper>
 
                                 </Grid>
                               

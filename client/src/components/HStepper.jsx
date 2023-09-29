@@ -4,9 +4,9 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import { Box } from "@mui/material";
+import { grid } from "@mui/system";
 
-const steps = ['Forward Payment',
-	'Staff Approval', 'Coordinator Approval','DR Approval','Head Approval'];
+const steps = ['Forward Payment', 'Staff Approval', 'Coordinator Approval','DR Approval','Head Approval'];
 
 function HStepper() {
 
@@ -49,7 +49,7 @@ function HStepper() {
 	return (
 		<center>
 			
-			<div style={{ width: "90%", marginTop: "80px"}}>
+			<div style={{ width: "95%", marginTop: "70px"}}>
 				<Stepper activeStep={activeStepCount} >
 					{steps.map((label, index) => {
 						const stepProps = {};
@@ -60,43 +60,28 @@ function HStepper() {
 						}
 						return (
 							<Step key={label} {...stepProps}>
-								<StepLabel {...labelProps}>
-									{label}
+								<StepLabel {...labelProps} sx={{
+									display: 'grid',
+									alignItems: 'center',
+									justifyContent: 'center',
+									'& .MuiStepLabel-iconContainer':{
+										justifyContent: 'center',
+    									marginBottom: '0.5rem'
+									},
+									'& .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active':{
+										color: '#4CAF50'
+									},
+									'& .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed': {
+                                        color: '#4CAF50'
+									}
+									}}>
+								{label}
 								</StepLabel>
 							</Step>
 						);
 					})}
 				</Stepper>
-				{activeStepCount === steps.length ? (
-					<div>
-						<Box sx={{ display: 'flex',
-							flexDirection: 'row', pt: 4 }}>
-							<Box sx={{ flex: '1 1 auto' }} />
-							<Button onClick={handleStepReset}>Reset</Button>
-						</Box>
-					</div>
-				) : (
-					<div>
-						
-						<Box sx={{ display: 'flex', flexDirection: 'row',
-							pt: 2 }}>
-							<Button
-								color="primary"
-								disabled={activeStepCount === 0}
-								onClick={handleStepBack}
-								sx={{ mr: 1 }}
-							>
-								Previous
-							</Button>
-							<Box sx={{ flex: '1 1 auto' }} />
-
-							<Button onClick={handleStepNext}>
-								{activeStepCount === steps.length - 1 ?
-									'Done' : 'Next'}
-							</Button>
-						</Box>
-					</div>
-				)}
+				
 			</div>
 		</center>
 	);

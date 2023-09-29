@@ -24,6 +24,18 @@ public class UserService {
         return usersList;
     }
 
+    //get lecturerList from userService
+    public List<Users> listlecturers() {
+        List<Users> lecturerList = repo.findAllLecturers();
+        return lecturerList;
+    }
+
+    //get staffList from userService
+    public List<Users> liststaff() {
+        List<Users> staffList = repo.findAllStaff();
+        return staffList;
+    }
+
     public UserDTO getUserDTOByID(Integer id) {
         Optional<Users> userOptional = repo.findById(id);
 

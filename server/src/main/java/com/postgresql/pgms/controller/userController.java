@@ -22,6 +22,18 @@ public class userController {
         return ResponseEntity.ok(service.listusers());
     }
 
+    //get lecturerList
+    @GetMapping("/lecturerList")
+    public ResponseEntity<List<Users>> getLecturerList(){
+        return ResponseEntity.ok(service.listlecturers());
+    }
+
+    //get staffList
+    @GetMapping("/staffList")
+    public ResponseEntity<List<Users>> getStaffList(){
+        return ResponseEntity.ok(service.liststaff());
+    }
+
     @GetMapping("getUser/{id}")
     public ResponseEntity<UserDTO> getUserByID(@PathVariable Integer id) {
         UserDTO userDTO = service.getUserDTOByID(id);

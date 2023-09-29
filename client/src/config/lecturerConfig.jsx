@@ -18,10 +18,10 @@ export const headCells = [
         label: 'STATUS',
     },
     {
-        id: 'EMPLOYED',
-        numeric: true,
+        id: 'COURSE',
+        numeric: false,
         disablePadding: true,
-        label: 'EMPLOYED ON',
+        label: 'COURSE',
     },
     {
         id: 'ACTION',

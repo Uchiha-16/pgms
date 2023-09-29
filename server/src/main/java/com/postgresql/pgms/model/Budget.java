@@ -1,11 +1,17 @@
 package com.postgresql.pgms.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "budget")
 public class Budget {
@@ -25,8 +31,8 @@ public class Budget {
     private String PCID;
     private String staffID;
 
-    public Budget() {
-    }
+//    public Budget() {
+//    }
 
     public Budget(String name, String month, LocalDate startDate, LocalDate endDate, long prevAmount,
                   String type, String intakeID, String headID, String DRID, String PCID, String staffID) {

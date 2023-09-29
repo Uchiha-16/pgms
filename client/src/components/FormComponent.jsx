@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Typography, Paper, IconButton, Input } from "@mui/material";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import { Typography, Paper, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
 import useAxiosMethods from "../hooks/useAxiosMethods";
 
-function Profile() {
+function Form() {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
-  const { userID } = useParams();
-  const [user, setUser] = useState(null);
+  const { scheduleID } = useParams(); // Assuming you get the schedule ID from the URL
+  const [budget, setBudget] = useState(null); // Replace 'user' with 'budget'
   const { get, put } = useAxiosMethods();
 
-  const users_URL = `users/getUser/${userID}`;
+  const budget_URL = `budget/getBudget/${scheduleID}`; // Update this URL accordingly
 
   useEffect(() => {
-    get(users_URL, setUser);
-  }, []);
+    get(budget_URL, setBudget);
+  }, [budget_URL]);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -31,10 +29,7 @@ function Profile() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Handle image upload here if selectedImage is not null
-    // Example: Upload selectedImage to the server and update user's profile image
-
-    put(users_URL, formData)
+    put(budget_URL, formData)
       .then((response) => {
         console.log("Data updated successfully:", response.data);
         setIsEditing(false);
@@ -96,7 +91,6 @@ function Profile() {
   const editButtonStyle = {
     marginLeft: "570px",
     fontSize: "0.8rem",
-    // marginTop: "50px",
     backgroundColor: "#2196F3",
     color: "#fff",
     "&:hover": {
@@ -143,7 +137,7 @@ function Profile() {
           <div edit>
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
-                Duration(Years):
+                Duration (Years):
               </Typography>
               {isEditing ? (
                 <TextField
@@ -151,12 +145,12 @@ function Profile() {
                   variant="outlined"
                   size="small"
                   style={contentStyle}
-                  value={formData.duration || user?.duration}
+                  value={formData.duration || budget?.duration}
                   onChange={handleInputChange}
                 />
               ) : (
                 <Typography variant="body2" style={contentStyle}>
-                  {user?.duration}
+                  {budget?.duration}
                 </Typography>
               )}
             </div>
@@ -166,22 +160,21 @@ function Profile() {
                 Budget for the intake:
               </Typography>
               {isEditing ? (
-                <>
-                  <TextField
-                    name="budget"
-                    variant="outlined"
-                    size="small"
-                    style={contentStyle}
-                    value={formData.budget || user?.budget}
-                    onChange={handleInputChange}
-                  />
-                </>
+                <TextField
+                  name="budget"
+                  variant="outlined"
+                  size="small"
+                  style={contentStyle}
+                  value={formData.budget || budget?.budget}
+                  onChange={handleInputChange}
+                />
               ) : (
                 <Typography variant="body2" style={contentStyle}>
-                  {user?.budget}
+                  {budget?.budget}
                 </Typography>
               )}
             </div>
+
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
                 Rate:
@@ -197,7 +190,7 @@ function Profile() {
                 />
               ) : (
                 <Typography variant="body2" style={contentStyle}>
-                  {user?.rate}
+                  {budget?.budget}
                 </Typography>
               )}
             </div>
@@ -218,7 +211,7 @@ function Profile() {
                 </>
               ) : (
                 <Typography variant="body2" style={contentStyle}>
-                  {user?.MISname}
+                  {budget?.MISname}
                 </Typography>
               )}
             </div>
@@ -239,7 +232,7 @@ function Profile() {
                 </>
               ) : (
                 <Typography variant="body2" style={contentStyle}>
-                  {user?.MCSname}
+                  {budget?.MCSname}
                 </Typography>
               )}
             </div>
@@ -260,7 +253,7 @@ function Profile() {
                 </>
               ) : (
                 <Typography variant="body2" style={contentStyle}>
-                  {user?.MITname}
+                  {budget?.MITname}
                 </Typography>
               )}
             </div>
@@ -281,7 +274,7 @@ function Profile() {
                 </>
               ) : (
                 <Typography variant="body2" style={contentStyle}>
-                  {user?.MBAname}
+                  {budget?.MBAname}
                 </Typography>
               )}
             </div>
@@ -292,4 +285,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Form;

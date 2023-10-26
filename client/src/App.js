@@ -21,10 +21,11 @@ import AttendanceTracking from './layouts/attendanceTracking';
 import TimeTable from './layouts/timeTable';
 import Lecturers from './layouts/lecturers';
 import Staff from './layouts/staff';
+import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
+import Programs from './layouts/programs';
+
 import Payment from './layouts/payment';
 import PaymentReport1 from './layouts/paymentreport1';
-import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
-
 
 function App() {
   return (

@@ -1,5 +1,7 @@
 package com.postgresql.pgms.controller;
 
+import com.postgresql.pgms.DTO.UserDTO;
+import com.postgresql.pgms.Service.UserService;
 import com.postgresql.pgms.Service.dashboardService;
 import com.postgresql.pgms.model.Course;
 import com.postgresql.pgms.model.lecturer;
@@ -18,6 +20,20 @@ import java.util.List;
 @RequestMapping("/api/v1/dashboard")
 public class dashboardController {
     private final dashboardService dashboardService;
+    private final UserService userService;
+
+    //get User Name
+    @GetMapping("{id/name}")
+    public ResponseEntity<UserDTO> getUserByID(@PathVariable Integer id) {
+        UserDTO userDTO = userService.getUserDTOByID(id);
+        if (userDTO != null) {
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    //get special events
 
     //get course count by Lecturer
     @GetMapping("{id}")
@@ -37,10 +53,10 @@ public class dashboardController {
         return dashboardService.countAllLecturers();
     }
 
-    //get today's schedule
-    @GetMapping("/schedule")
-    public ResponseEntity<List<session>> getAllSchedules(){
-        return ResponseEntity.ok(dashboardService.getAllSchedules());
+    //get today's schedule by lecturer ID
+    @GetMapping("/schedule/{id}")
+    public ResponseEntity<List<session>> getAllSchedules(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(dashboardService.getAllSchedules(id));
     }
 
 }

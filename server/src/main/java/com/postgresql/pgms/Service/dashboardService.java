@@ -29,8 +29,8 @@ public class dashboardService {
         return userRepository.countByRole(Role.Lecturer);
     }
 
-    public List<session> getAllSchedules(){
-        List<session> sessionList = sessionRepository.findAllByDate(LocalDate.now());
+    public List<session> getAllSchedules(Integer id){
+        List<session> sessionList = sessionRepository.findAllByDate(LocalDate.now(),id);
         return (sessionList);
     }
 

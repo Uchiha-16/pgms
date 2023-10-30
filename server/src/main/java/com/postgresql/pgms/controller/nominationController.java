@@ -29,11 +29,11 @@ public class nominationController {
         return ResponseEntity.ok(service.listnominationsByUser(id));
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addNomination(@RequestBody NominationApplyDTO nominationApplyDTO) {
-        service.applyNominations(nominationApplyDTO);
-        return ResponseEntity.ok("Nomination added successfully.");
-    }
+//    @PostMapping("/add")
+//    public ResponseEntity<String> addNomination(@RequestBody NominationApplyDTO nominationApplyDTO) {
+//        service.applyNominations(nominationApplyDTO);
+//        return ResponseEntity.ok("Nomination added successfully.");
+//    }
 
     @PostMapping("/open")
     public ResponseEntity<String> openNominations(@RequestBody NominationOpeningDTO nominationOpeningDTO) {

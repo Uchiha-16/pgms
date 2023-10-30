@@ -19,10 +19,7 @@ public class NominationOpeningDTO implements Serializable {
     private String programId;
     private Integer semester;
     private Course course;
-    @Builder.Default
-    private LocalDate date = LocalDate.now();
-
-    @Builder.Default
-    private String nominationStatus = "Open";
+    private LocalDate date;
+    private String nominationStatus;
 
 }

@@ -23,8 +23,4 @@ public class Course {
     private Integer credit;
     private String hallName;
     private String programId;
-
-    @OneToMany(mappedBy = "course")
-    private List<Nominations> nominations;
-
 }

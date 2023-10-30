@@ -19,7 +19,6 @@ import VerifyEmail from './layouts/verifyEmail';
 import ResetPassword from './layouts/resetPassword';
 import AttendanceTracking from './layouts/attendanceTracking';
 import TimeTable from './layouts/timeTable';
-import Demo from './components/Demo'
 import Lecturers from './layouts/lecturers';
 import Staff from './layouts/staff';
 import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
@@ -38,7 +37,6 @@ function App() {
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/timeTable" element={<TimeTable />} />
-        <Route path="/demo" element={<Demo />} />
         <Route path='/dashboard' element={<Dashboard />} />
 
 

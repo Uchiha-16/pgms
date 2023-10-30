@@ -21,6 +21,8 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
+import axios from "../api/axios";
+
 
 // Helper functions to determine cell conditions
 const isOnline = (columnName, cellValue) => {
@@ -75,6 +77,30 @@ function stableSort(array, comparator) {
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
+}
+
+function HandleDelete(Selected){
+  console.log(Selected);
+
+  const confirmed = window.confirm('Are you sure you want to delete the selected users?');
+  if (!confirmed) {
+    return;
+  }
+  for (const userID of Selected) {
+    const deleteUserUrl = `/users/deleteUser/${userID}`
+    axios.delete(deleteUserUrl)
+    .then((response) => {
+      console.log('User deleted successfully:', response.data);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    })
+    .catch((error) => {
+      console.error('Error deleting user:', error);
+      // Handle error, e.g., show an error message.
+    }
+    );
+  }
 }
 
 // Component for the table header
@@ -158,8 +184,10 @@ EnhancedTableHead.propTypes = {
 
 // Component for the table toolbar
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+  const { numSelected, selected } = props;
 
+  //print selected array
+  console.log(selected);
   return (
     <Toolbar
       sx={{
@@ -179,7 +207,7 @@ function EnhancedTableToolbar(props) {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={() => HandleDelete(selected)}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -203,9 +231,10 @@ export default function GeneralTable({ rows, headCells }) {
   const navigate = useNavigate();
 
   const navigateProfile = (userID) => {
-    return () => {
-      navigate(`/profile/${userID}`);
-    };
+    // return () => {
+    //   navigate(`/profile/${userID}`);
+    // };
+    navigate(`/profile/${userID}`);
   };
 
   const profileImage = user?.profileImage || "user.png";
@@ -224,7 +253,7 @@ export default function GeneralTable({ rows, headCells }) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.NAME);
+      const newSelected = rows.map((n) => n.ID);
       setSelected(newSelected);
       return;
     }
@@ -287,6 +316,7 @@ export default function GeneralTable({ rows, headCells }) {
       >
         <EnhancedTableToolbar
           numSelected={selected.length}
+          selected = {selected}
           sx={{
             "& .MuiToolbar-root": {
               float: "right",
@@ -319,14 +349,14 @@ export default function GeneralTable({ rows, headCells }) {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.NAME);
+                const isItemSelected = isSelected(row.ID);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     key={index}
                     hover
-                    onClick={(event) => handleClick(event, row.NAME)}
+                    onClick={(event) => handleClick(event, row.ID)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
@@ -458,7 +488,8 @@ export default function GeneralTable({ rows, headCells }) {
                           </div>
                         ) : isEdit(headCell.id) ? (
                           <span
-                            onClick={navigateProfile(row["ID"])}
+                            // onClick={navigateProfile(row["ID"])}
+                            onClick={()=>navigateProfile(row["ID"])}
                             style={{ cursor: "pointer" }}
                           >
                             {row[headCell.id]}

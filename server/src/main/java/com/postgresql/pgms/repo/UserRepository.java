@@ -3,9 +3,12 @@ package com.postgresql.pgms.repo;
 import com.postgresql.pgms.DTO.UserDTO;
 import com.postgresql.pgms.model.ResetToken;
 import com.postgresql.pgms.model.Users;
+import com.postgresql.pgms.model.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Optional;
@@ -30,4 +33,14 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
     """)
     List<Users> findAllStaff();
 
+    //query to delete user with cascading
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Token t WHERE t.user = :user")
+    void deleteTokensByUser(Users user);
+
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Users u WHERE u = :user")
+    void deleteUser(Users user);
 }

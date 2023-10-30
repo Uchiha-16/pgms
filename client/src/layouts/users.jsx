@@ -14,14 +14,13 @@ const users_URL = "/users/users"
 const Layout1 = () => {
     const [users, setUsers] = useState([]);
     const { get } = useAxiosMethods();
-    console.log(users);
     useEffect(() => {
         // Call the get method to fetch user data
         
         get(users_URL, setUsers);
         
-    }, [get]);
-    console.log(users);
+    }, []);
+
 
     // const columns = ['NAME', 'ROLE', 'STATUS', 'EMAIL', 'ACTION'];
     const rows = users.map(user => ({

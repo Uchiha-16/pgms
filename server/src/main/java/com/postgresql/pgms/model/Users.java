@@ -45,7 +45,6 @@ public class Users implements UserDetails {
     @Builder.Default
     private LocalDate EmployedDate = LocalDate.now();
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

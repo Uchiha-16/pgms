@@ -63,17 +63,17 @@ function App() {
             <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
             <Route path='/form' element={<Form />} />
             <Route path='/previousIntakeDetails' element={<PreviousIntakeDetails />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={["Lecturer"]}/>} >
+            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
 
           
-            
-            
-
-
           </Route>
           <Route element={<RequireAuth allowedRoles={["Staff"]}/>} >
             <Route path='/addUsers' element={<AddUser/>}/>
             <Route path='/users' element={<Users/>}/>
             <Route path='/staff' element={<Staff/>}/>
+            <Route path='/attendance-page' element={<AttendanceTracking />} />
           </Route>
         </Route>
 

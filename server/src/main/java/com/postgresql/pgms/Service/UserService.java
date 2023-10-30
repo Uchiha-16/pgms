@@ -4,6 +4,7 @@ import com.postgresql.pgms.DTO.UserDTO;
 import com.postgresql.pgms.DTO.UserListResponseDTO;
 import com.postgresql.pgms.model.Users;
 import com.postgresql.pgms.repo.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,7 @@ public class UserService {
         return staffList;
     }
 
+
     public UserDTO getUserDTOByID(Integer id) {
         Optional<Users> userOptional = repo.findById(id);
 
@@ -44,6 +46,30 @@ public class UserService {
             return new UserDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getRole(), user.getContact(), user.getProfileImage(), user.getEmployedDate());
         } else {
             return null;
+        }
+    }
+
+    public void updateUser(Integer id, UserDTO userDTO) {
+        Optional<Users> userOptional = repo.findById(id);
+
+        if (userOptional.isPresent()) {
+            Users user = userOptional.get();
+            user.setFirstname(userDTO.getFirstname());
+            user.setLastname(userDTO.getLastname());
+            user.setEmail(userDTO.getEmail());
+            user.setRole(userDTO.getRole());
+            user.setContact(userDTO.getContact());
+            user.setProfileImage(userDTO.getProfileImage());
+            repo.save(user);
+        }
+    }
+
+    @Transactional
+    public void deleteUserWithTokens(Integer userId) {
+        Users user = repo.findById(userId).orElse(null);
+        if (user != null) {
+            repo.deleteTokensByUser(user);
+            repo.deleteUser(user);
         }
     }
 }

@@ -22,13 +22,13 @@ public class attendance {
         @JoinColumn(name = "session_id")
         private session session;
 
-        @ManyToOne
-        @JoinColumn(name = "program_id")
-        private program programID;
+//        @ManyToOne
+//        @JoinColumn(name = "program_id")
+//        private program programID;
 
-        @ManyToOne
-        @JoinColumn(name = "lecturer_id")
-        private Users lecturerID;
+//        @ManyToOne
+//        @JoinColumn(name = "lecturer_id")
+//        private Users lecturerID;
 
         @ManyToOne
         @JoinColumn(name = "staff_id")

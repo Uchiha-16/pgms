@@ -150,8 +150,9 @@ EnhancedTableHead.propTypes = {
 
 // Component for the table toolbar
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
-
+  const { numSelected, selected } = props;
+  // console.log selected array
+  console.log(selected);
   return (
     <Toolbar
       sx={{
@@ -279,6 +280,7 @@ export default function GeneralTable({ rows, headCells }) {
       >
         <EnhancedTableToolbar
           numSelected={selected.length}
+          selected={selected}
           sx={{
             "& .MuiToolbar-root": {
               float: "right",

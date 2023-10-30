@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Paper, Box, TableContainer } from '@mui/material';
+import { 
+    Paper, 
+    Box, 
+    TableContainer,
+    ToggleButton,
+    ToggleButtonGroup, 
+} from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { green, lightBlue } from '@mui/material/colors';
 import {
     ViewState, EditingState, GroupingState, IntegratedGrouping, IntegratedEditing,
@@ -46,7 +53,6 @@ const sundayDate = sunday.getDate();
 
 console.log("Saturday:", saturdayDate);
 console.log("Sunday:", sundayDate);
-
 
 export default class Schedule extends React.PureComponent {
     constructor(props) {
@@ -97,6 +103,7 @@ export default class Schedule extends React.PureComponent {
         const {
             data, resources, grouping, groupByDate,
         } = this.state;
+        
 
         return (
                 <Box>
@@ -119,7 +126,39 @@ export default class Schedule extends React.PureComponent {
                                 borderRadius: "5px",
                             }}
                         >
-
+                            <div style={{ flex: 1 }}>
+                                <ToggleButtonGroup>
+                                    <ToggleButton
+                                        value="Saturday"
+                                        sx={{
+                                            border: '1px solid #C9D1D8',
+                                            fontSize: '10px',
+                                            borderRadius: '20px',
+                                        }}
+                                    >
+                                        Sat
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        value="Sunday"
+                                        sx={{
+                                            border: '1px solid #C9D1D8',
+                                            fontSize: '10px',
+                                            borderRadius: '20px',
+                                        }}
+                                    >
+                                        Sun
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        sx={{
+                                            border: '1px solid #C9D1D8',
+                                            fontSize: '10px',
+                                            borderRadius: '20px',
+                                        }}
+                                    >
+                                        <AddCircleIcon fontSize="small" />
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                            </div>
                             <Scheduler
                                 data={data}
                                 height={'auto'}

@@ -17,18 +17,19 @@ public class Nominations {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long nominationid;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
     private String programId;
     private Integer semester;
-    private String courseId;
-
-    @Builder.Default
-    private String status = "Pending";
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
     @Builder.Default
     private LocalDate date = LocalDate.now();
+
+    @Builder.Default
+    private String nominationStatus = "Open";
 
 }
 

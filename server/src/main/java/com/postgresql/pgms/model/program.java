@@ -19,9 +19,6 @@ public class program {
 
     private String name;
 
-//    public program() {
-//    }
-
     public program(String name) {
         this.name = name;
     }

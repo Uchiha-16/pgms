@@ -24,8 +24,7 @@ public class Course {
     private String hallName;
     private String programId;
 
-
-//    private List<lecturer> lecturers;
-
+    @OneToMany(mappedBy = "course")
+    private List<Nominations> nominations;
 
 }

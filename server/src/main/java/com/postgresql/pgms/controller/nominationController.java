@@ -1,7 +1,7 @@
 package com.postgresql.pgms.controller;
 
-import com.postgresql.pgms.DTO.NominationListResponseDTO;
-import com.postgresql.pgms.DTO.NominationSaveDTO;
+import com.postgresql.pgms.DTO.NominationApplyDTO;
+import com.postgresql.pgms.DTO.NominationOpeningDTO;
 import com.postgresql.pgms.Service.nominationService;
 import com.postgresql.pgms.model.Nominations;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +30,16 @@ public class nominationController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addNomination(@RequestBody NominationSaveDTO nominationSaveDTO) {
-        service.addNomination(nominationSaveDTO);
+    public ResponseEntity<String> addNomination(@RequestBody NominationApplyDTO nominationApplyDTO) {
+        service.applyNominations(nominationApplyDTO);
         return ResponseEntity.ok("Nomination added successfully.");
     }
+
+    @PostMapping("/open")
+    public ResponseEntity<String> openNominations(@RequestBody NominationOpeningDTO nominationOpeningDTO) {
+        service.addNewNomination(nominationOpeningDTO);
+        return ResponseEntity.ok("Nomination added successfully.");
+    }
+
 
 }

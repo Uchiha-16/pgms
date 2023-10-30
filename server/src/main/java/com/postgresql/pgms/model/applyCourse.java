@@ -1,8 +1,6 @@
 package com.postgresql.pgms.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,10 +15,13 @@ import lombok.NoArgsConstructor;
 public class applyCourse {
     @Id
     private long appId;
-    private long courseNo;
-    private String courseName;
-    private String description;
-    private String status;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
+
+    private long nominationid;
+    @Builder.Default
+    private String status = "Pending";
 
     
 }

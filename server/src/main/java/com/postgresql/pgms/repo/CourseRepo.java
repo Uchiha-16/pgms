@@ -8,6 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 @RepositoryRestResource
-public interface CourseRepo extends JpaRepository<course,Long> {
+public interface CourseRepo extends JpaRepository<course,Integer> {
 
 }

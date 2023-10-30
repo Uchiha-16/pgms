@@ -56,7 +56,7 @@ const Layout1 = () => {
 
     // Filter courses based on programID and populate data arrays
     courses.forEach(course => {
-        if (course.programId === "MCS") {
+        if (course.programId.programID === 1) {
             dataP1.push({
                 'Semester': course.semester,
                 'Code': course.courseNo,
@@ -64,7 +64,7 @@ const Layout1 = () => {
                 'Lecture Hall': course.hallName,
                 'Credits': course.credit,
             });
-        } else if (course.programId === "MIS") {
+        } else if (course.programId.programID  === 3) {
             dataP2.push({
                 'Semester': course.semester,
                 'Code': course.courseNo,
@@ -72,7 +72,7 @@ const Layout1 = () => {
                 'Lecture Hall': course.hallName,
                 'Credits': course.credit,
             });
-        } else if (course.programId === "MIT") {
+        } else if (course.programId.programID === 2) {
             dataP3.push({
                 'Semester': course.semester,
                 'Code': course.courseNo,

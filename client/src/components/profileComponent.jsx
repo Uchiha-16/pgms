@@ -9,9 +9,10 @@ import {
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosMethods from "../hooks/useAxiosMethods";
 import axios from "../api/axios";
+
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
@@ -25,7 +26,12 @@ function Profile() {
   const { userID } = useParams();
   const [user, setUser] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const { get, put } = useAxiosMethods();
+  const { get } = useAxiosMethods();
+  const navigate = useNavigate();
+  
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState('success');
+  const [alertMessage, setAlertMessage] = useState('');
 
   const users_URL = `users/getUser/${userID}`;
   const update_user = `users/updateUser/${userID}`;
@@ -55,15 +61,25 @@ function Profile() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(formData);
-    axios.put(update_user, formData)
-    .then((response) => {
-      console.log('Data updated successfully:', response.data);
-      // Handle successful update, e.g., show a success message.
-    })
-    .catch((error) => {
-      console.error('Error updating data:', error);
-      // Handle error, e.g., show an error message.
-    });
+    axios.post(update_user, formData)
+      .then((response) => {
+        console.log(response);
+        setOpenAlert(true);
+        setAlertSeverity('success');
+        setAlertMessage('User Details Updated successfully!');
+        // Handle success, display success message or redirect if needed
+        setTimeout(() => { 
+          //refresh the page and leave the popup component
+          window.location.reload();
+          setOpenAlert(false);
+          navigate(`/profile/${userID}`, { replace: true });
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error('Error updating user:', error);
+        // Handle error, display error message
+      });
+
     
     setIsEditing(false);
   };

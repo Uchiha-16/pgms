@@ -14,13 +14,13 @@ const Layout = ({ degreeName, rows }) => (
 );
 
 class AttendaceTrackingTable extends Component {
-  createData(TIME, COURSE, LECTURER, LECTURERCONFRIMATION, STAFFCONFIRMATION, STATUS, ACTION) {
+  createData(TIME, COURSE, LECTURER, STAFFCONFIRMATION, PCCONFIRMATION, STATUS, ACTION) {
     return {
       TIME,
       COURSE,
       LECTURER,
-      LECTURERCONFRIMATION,
       STAFFCONFIRMATION,
+      PCCONFIRMATION,
       STATUS,
       ACTION
     };
@@ -29,7 +29,7 @@ class AttendaceTrackingTable extends Component {
   render() {
     // Modify dummyRows for the relevant degree program (e.g., Information Technology)
     const dummyRows = [
-      this.createData('10.45 AM - 12.45 PM', 'Modelling and Simulation of Data', 'Dr. Smith', 'MARKED', 'PENDING', 1, 'Inform'),
+      this.createData('10.45 AM - 12.45 PM', 'Modelling and Simulation of Data', 'Dr. Smith', 'MARKED', 'PENDING', 0, 'Inform'),
       this.createData('12.45 AM - 2.45 PM', 'Individual Research Project', 'Prof. Johnson', 'PENDING', 'PENDING', 0, 'Inform'),
       // Add more rows...
     ];

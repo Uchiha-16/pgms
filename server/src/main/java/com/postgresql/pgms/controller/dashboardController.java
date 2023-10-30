@@ -3,12 +3,8 @@ package com.postgresql.pgms.controller;
 import com.postgresql.pgms.DTO.UserDTO;
 import com.postgresql.pgms.Service.UserService;
 import com.postgresql.pgms.Service.dashboardService;
-import com.postgresql.pgms.model.Course;
-import com.postgresql.pgms.model.lecturer;
 import com.postgresql.pgms.model.session;
-import com.postgresql.pgms.repo.LecturerRepo;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.IdGeneratorType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +19,11 @@ public class dashboardController {
     private final UserService userService;
 
     //get User Name
-    @GetMapping("{id/name}")
-    public ResponseEntity<UserDTO> getUserByID(@PathVariable Integer id) {
+    @GetMapping("getUser/{id}")
+    public ResponseEntity<String> getUserByID(@PathVariable Integer id) {
         UserDTO userDTO = userService.getUserDTOByID(id);
         if (userDTO != null) {
-            return ResponseEntity.ok(userDTO);
+            return ResponseEntity.ok(userDTO.getFirstname());
         } else {
             return ResponseEntity.notFound().build();
         }

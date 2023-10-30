@@ -19,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Users")
 public class Users implements UserDetails {
     @Id
@@ -76,5 +77,9 @@ public class Users implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setUserId(Integer staffId) {
+        this.id = staffId;
     }
 }

@@ -23,24 +23,32 @@ public class attendanceController {
 
     //get attendance of a particular lecturer
     @GetMapping(path = "/getLecturerAttendance/{id}")
-    public ResponseEntity<List<attendance>> getAttendance(@PathVariable Integer id){
+    public ResponseEntity<List<attendance>> getAttendance(@PathVariable Integer id) {
         return ResponseEntity.ok(attendanceService.getLecturerAttendance(id));
     }
 
     @GetMapping(path = "/getAttendance")
-    public ResponseEntity<List<attendance>> getAttendance(){
+    public ResponseEntity<List<attendance>> getAttendance() {
         return ResponseEntity.ok(attendanceService.getAllAttendance());
     }
 
     //get attendance of a particular program
     @GetMapping(path = "/getCourseAttendance/{id}")
-    public ResponseEntity<List<attendance>> getCourseAttendance(@PathVariable Integer id){
+    public ResponseEntity<List<attendance>> getCourseAttendance(@PathVariable Integer id) {
         return ResponseEntity.ok(attendanceService.getCourseAttendance(id));
     }
 
-    //adding a session
+    //Stuff marking the attendance
+    @PutMapping(path = "/updateStaffId/{attendanceId}")
+    public ResponseEntity<Void> updateStaffId(@PathVariable Integer attendanceId, @RequestBody Integer staffId) {
+        attendanceService.updateStaffId(staffId, attendanceId);
+        return ResponseEntity.ok().build();
+    }
 
-
-
-
+    //PC marking the attendance
+    @PutMapping(path = "/updatePcId/{attendanceId}")
+    public ResponseEntity<Void> updatePcId(@PathVariable Integer attendanceId, @RequestBody Integer pcId) {
+        attendanceService.updatePcId(pcId, attendanceId);
+        return ResponseEntity.ok().build();
+    }
 }

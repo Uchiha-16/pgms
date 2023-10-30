@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 
 @Data
 @Builder
@@ -18,9 +16,9 @@ import java.time.LocalDate;
 public class attendance {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        private long attendanceid;
+        private Integer attendanceid;
 
-        @ManyToOne
+        @OneToOne
         @JoinColumn(name = "session_id")
         private session session;
 
@@ -28,18 +26,29 @@ public class attendance {
         @JoinColumn(name = "program_id")
         private program programID;
 
-        @OneToOne
+        @ManyToOne
         @JoinColumn(name = "lecturer_id")
-        private lecturer lecturerID;
+        private Users lecturerID;
 
-        @OneToOne
+        @ManyToOne
         @JoinColumn(name = "staff_id")
-        private staff staffID;
+        private Users staffID;
 
-        @OneToOne
+        @ManyToOne
         @JoinColumn(name = "pc_id")
-        private programCordinator pcID;
+        private Users pcID;
 
         @Builder.Default
         private String status = "Pending";
+
+        public void setStaffID(Integer staffId) {
+                this.staffID = new Users();
+                this.staffID.setUserId(staffId);
+        }
+
+
+        public void setPcID(Integer pcId) {
+                this.pcID = new Users();
+                this.pcID.setUserId(pcId);
+        }
 }

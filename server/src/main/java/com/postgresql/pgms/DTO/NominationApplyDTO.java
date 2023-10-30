@@ -1,53 +1,21 @@
 package com.postgresql.pgms.DTO;
 
-import java.io.Serializable;
+import com.postgresql.pgms.model.Nominations;
+import com.postgresql.pgms.model.Users;
+import lombok.*;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class NominationApplyDTO implements Serializable {
 
-    private Integer userID;
-    private String programId;
-    private Integer semester;
-    private String courseId;
-
-    public NominationApplyDTO() {
-    }
-
-    public NominationApplyDTO(Integer userID, String programId, Integer semester, String courseId) {
-        this.userID = userID;
-        this.programId = programId;
-        this.semester = semester;
-        this.courseId = courseId;
-    }
-
-    public Integer getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Integer userID) {
-        this.userID = userID;
-    }
-
-    public String getProgramId() {
-        return programId;
-    }
-
-    public void setProgramId(String programId) {
-        this.programId = programId;
-    }
-
-    public Integer getSemester() {
-        return semester;
-    }
-
-    public void setSemester(Integer semester) {
-        this.semester = semester;
-    }
-
-    public String getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
+    private long appId;
+    private Users user;
+    private Nominations nominations;
+    private String status;
+    private LocalDate date;
 }

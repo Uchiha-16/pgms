@@ -2,14 +2,14 @@ package com.postgresql.pgms.Service;
 
 import com.postgresql.pgms.DTO.NominationApplyDTO;
 import com.postgresql.pgms.DTO.NominationOpeningDTO;
-import com.postgresql.pgms.DTO.NominationSaveDTO;
+import com.postgresql.pgms.model.ApplyNomination;
 import com.postgresql.pgms.model.Course;
-import com.postgresql.pgms.model.applyCourse;
 import com.postgresql.pgms.model.Nominations;
 import com.postgresql.pgms.model.Users;
-import com.postgresql.pgms.repo.CourseRepo;
+import com.postgresql.pgms.repo.ApplyNominationRepo;
 import com.postgresql.pgms.repo.NominationRepo;
 import com.postgresql.pgms.repo.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import java.util.List;
 public class nominationService {
 
     private final NominationRepo repo;
-    private final CourseRepo courseRepo;
+    private final ApplyNominationRepo applyNominationRepo;
     private final UserRepository userRepository;
 
     //view All Nominations
@@ -38,23 +38,32 @@ public class nominationService {
     }
 
     //apply for a nomination
-//    public void applyNominations(NominationApplyDTO nominationApplyDTO) {
-//        Users user = userRepository.findById(nominationApplyDTO.getUserID())
-//                .orElseThrow(() -> new RuntimeException("User not found")); // Handle this exception properly
-//
-//        applyCourse applycourse = applyCourse.builder()
-//                .user(user)
-//                .programId(nominationApplyDTO.getProgramId())
-//                .semester(nominationApplyDTO.getSemester())
-//                .courseId(nominationApplyDTO.getCourseId())
-//                .build();
-//
-//        repo.save(applycourse);
-//    }
+    public void applyNominations(NominationApplyDTO nominationApplyDTO) {
+        Users user = nominationApplyDTO.getUser(); // Retrieve user directly from DTO
+        Nominations nominations = nominationApplyDTO.getNominations(); // Retrieve nominations directly from DTO
+        ApplyNomination applyNomination = ApplyNomination.builder()
+                .user(user)
+                .nominations(nominations)
+                .build();
+
+        applyNominationRepo.save(applyNomination);
+    }
 
     //update Nomination Status
-    public void updateNominationStatus(){
+    public void acceptNomination(long appId) {
+        ApplyNomination applyNomination = applyNominationRepo.findById(appId)
+                .orElseThrow(() -> new EntityNotFoundException("Nomination not found"));
 
+        applyNomination.setStatus("Accepted");
+        applyNominationRepo.save(applyNomination);
+    }
+
+    public void rejectNomination(long appId) {
+        ApplyNomination applyNomination = applyNominationRepo.findById(appId)
+                .orElseThrow(() -> new EntityNotFoundException("Nomination not found"));
+
+        applyNomination.setStatus("Rejected");
+        applyNominationRepo.save(applyNomination);
     }
 
     //open New Nomination

@@ -29,16 +29,32 @@ public class nominationController {
         return ResponseEntity.ok(service.listnominationsByUser(id));
     }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<String> addNomination(@RequestBody NominationApplyDTO nominationApplyDTO) {
-//        service.applyNominations(nominationApplyDTO);
-//        return ResponseEntity.ok("Nomination added successfully.");
-//    }
+    // apply for a nomination by lecturer
+    @PostMapping("/add")
+    public ResponseEntity<String> applyNomination(@RequestBody NominationApplyDTO nominationApplyDTO) {
+        service.applyNominations(nominationApplyDTO);
+        return ResponseEntity.ok("Applied successfully.");
+    }
 
+    //open a new nomination by PG coordinator
     @PostMapping("/open")
     public ResponseEntity<String> openNominations(@RequestBody NominationOpeningDTO nominationOpeningDTO) {
         service.addNewNomination(nominationOpeningDTO);
         return ResponseEntity.ok("Nomination added successfully.");
+    }
+
+    //accepting the nomination application
+    @PutMapping("/accept/{appId}")
+    public ResponseEntity<String> acceptNomination(@PathVariable long appId) {
+        service.acceptNomination(appId);
+        return ResponseEntity.ok("Nomination accepted successfully");
+    }
+
+    //rejecting the nomination application
+    @PutMapping("/reject/{appId}")
+    public ResponseEntity<String> rejectNomination(@PathVariable long appId) {
+        service.rejectNomination(appId);
+        return ResponseEntity.ok("Nomination rejected successfully");
     }
 
 

@@ -59,18 +59,17 @@ function App() {
             {/* <Route path='/notifications' element={<Notifications />} /> */}
             <Route path='/lecturers' element={<Lecturers/>}/>
             <Route path='/programs' element={<Programs />} />
-            <Route path='/attendance-tracking' element={<AttendanceTracking />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={["Lecturer"]}/>} >
+            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
 
           
-            
-            
-
-
           </Route>
           <Route element={<RequireAuth allowedRoles={["Staff"]}/>} >
             <Route path='/addUsers' element={<AddUser/>}/>
             <Route path='/users' element={<Users/>}/>
             <Route path='/staff' element={<Staff/>}/>
+            <Route path='/attendance-page' element={<AttendanceTracking />} />
           </Route>
         </Route>
 

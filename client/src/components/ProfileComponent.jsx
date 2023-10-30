@@ -11,20 +11,30 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
 import useAxiosMethods from "../hooks/useAxiosMethods";
+import axios from "../api/axios";
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    role: "",
+    contact: "",
+    email: "",
+  });
   const { userID } = useParams();
   const [user, setUser] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const { get, put } = useAxiosMethods();
 
   const users_URL = `users/getUser/${userID}`;
+  const update_user = `users/updateUser/${userID}`;
 
   useEffect(() => {
     get(users_URL, setUser);
   }, []);
+
+  // console.log(formData);
 
   const profileImage = user?.profileImage || "user.png";
 
@@ -42,22 +52,22 @@ function Profile() {
     setSelectedImage(URL.createObjectURL(uploadedImage));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-
-    // Handle image upload here if selectedImage is not null
-    // Example: Upload selectedImage to the server and update user's profile image
-
-    put(users_URL, formData)
-      .then((response) => {
-        console.log("Data updated successfully:", response.data);
-        setIsEditing(false);
-      })
-      .catch((error) => {
-        console.error("Error updating data:", error);
-      });
+    console.log(formData);
+    axios.put(update_user, formData)
+    .then((response) => {
+      console.log('Data updated successfully:', response.data);
+      // Handle successful update, e.g., show a success message.
+    })
+    .catch((error) => {
+      console.error('Error updating data:', error);
+      // Handle error, e.g., show an error message.
+    });
+    
+    setIsEditing(false);
   };
-
+  
   const paperStyle = {
     width: "70%",
     height: "auto",
@@ -164,7 +174,7 @@ function Profile() {
             onChange={handleImageUpload}
             id="image-upload"
           />
-          <label htmlFor="image-upload" >
+          <label htmlFor="image-upload">
             <IconButton
               aria-label="Upload Profile Photo"
               component="span"
@@ -176,44 +186,10 @@ function Profile() {
         </div>
         <div style={roleStyle}>
           <Typography variant="h5" style={nameStyle}>
-            {!isEditing ? (
-              <>
-                {user?.firstname} {user?.lastname}
-              </>
-            ) : (
-              <>
-                <TextField
-                  name="firstname"
-                  variant="outlined"
-                  size="small"
-                  style={contentStyle}
-                  value={formData.firstname || user?.firstname}
-                  onChange={handleInputChange}
-                />
-                <TextField
-                  name="lastname"
-                  variant="outlined"
-                  size="small"
-                  style={contentStyle}
-                  value={formData.lastname || user?.lastname}
-                  onChange={handleInputChange}
-                />
-              </>
-            )}
+            {user?.firstname} {user?.lastname}
           </Typography>
           <Typography variant="body1" style={roleStyle}>
-            {!isEditing ? (
-              user?.role
-            ) : (
-              <TextField
-                name="role"
-                variant="outlined"
-                size="small"
-                style={contentStyle}
-                value={formData.role || user?.role}
-                onChange={handleInputChange}
-              />
-            )}
+            { user?.role }
           </Typography>
         </div>
         <div style={infoStyle}>
@@ -275,11 +251,11 @@ function Profile() {
               </Typography>
               {isEditing ? (
                 <TextField
-                  name="mobile"
+                  name="contact"
                   variant="outlined"
                   size="small"
                   style={contentStyle}
-                  value={formData.mobile || user?.contact}
+                  value={formData.contact || user?.contact}
                   onChange={handleInputChange}
                 />
               ) : (
@@ -312,7 +288,7 @@ function Profile() {
         <Button
           variant="outlined"
           style={editButtonStyle}
-          onClick={handleEditToggle}
+          onClick={isEditing ? handleSubmit : handleEditToggle}
         >
           {isEditing ? "Save" : "Edit"}
         </Button>

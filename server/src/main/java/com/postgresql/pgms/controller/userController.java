@@ -43,5 +43,17 @@ public class userController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/updateUser/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
+        service.updateUser(id, userDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        service.deleteUserWithTokens(id);
+        return ResponseEntity.ok().build();
+    }
 }
 

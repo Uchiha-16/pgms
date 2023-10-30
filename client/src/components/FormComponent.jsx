@@ -3,6 +3,7 @@ import { Typography, Paper, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useParams } from "react-router-dom";
 import useAxiosMethods from "../hooks/useAxiosMethods";
+import PopupComponent2 from "./PopupComponent2";
 
 function Form() {
   const [isEditing, setIsEditing] = useState(false);
@@ -18,7 +19,7 @@ function Form() {
     MITname: "Alice Johnson",
     MBAname: "Bob Wilson",
   });
-   // Replace with actual data
+  // Replace with actual data
   const { get, put } = useAxiosMethods();
 
   const budget_URL = `budget/getBudget/${scheduleID}`;
@@ -76,8 +77,9 @@ function Form() {
   };
 
   const sectionStyle = {
-    fontSize: "1.2rem",
-    marginBottom: "20px",
+    fontSize: "1.1rem",
+    width: "150px",
+    color: "#444",
     fontWeight: "bold",
   };
 
@@ -99,7 +101,8 @@ function Form() {
   };
 
   const editButtonStyle = {
-    marginLeft: "570px",
+    top: "40px",
+    marginLeft: "630px",
     fontSize: "0.8rem",
     backgroundColor: "#2196F3",
     color: "#fff",
@@ -108,33 +111,43 @@ function Form() {
     },
   };
 
-  const addButtonStyle = {
-    marginLeft: "490px",
-    fontSize: "0.8rem",
-    marginTop: "30px",
-    marginBottom: "10px",
-    backgroundColor: "#2196F3",
-    color: "#fff",
-    "&:hover": {
-      backgroundColor: "#1976D2",
-    },
-  };
+  // const addButtonStyle = {
+  //   marginLeft: "490px",
+  //   fontSize: "0.8rem",
+  //   marginTop: "30px",
+  //   marginBottom: "10px",
+  //   backgroundColor: "#2196F3",
+  //   color: "#fff",
+  //   "&:hover": {
+  //     backgroundColor: "#1976D2",
+  //   },
+  // };
 
   return (
     <form onSubmit={handleSubmit}>
       <Paper elevation={3} style={paperStyle}>
         <div style={{ position: "relative" }}></div>
         <div style={roleStyle}>
-          <a href="" style={sectionStyle}>
-            Previous
+          <a href="/previousIntakeDetails" style={sectionStyle}>
+            Previous Intake Details
           </a>
-          <Button
+          {/* <Button
             variant="outlined"
             style={addButtonStyle}
             onClick={handleEditToggle}
           >
             Add
-          </Button>
+          </Button> */}
+          <div
+            style={{
+              position: "absolute",
+              top: "5px", // Adjust the top value as needed
+              right: "30px", // Adjust the right value as needed
+            }}
+          >
+            <PopupComponent2 />
+          </div>
+
           <Button
             variant="outlined"
             style={editButtonStyle}

@@ -24,6 +24,7 @@ import Staff from './layouts/staff';
 import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
 import Programs from './layouts/programs';
 import Form from './layouts/form';
+import PreviousIntakeDetails from './layouts/previousIntakeDetails';
 
 import Payment from './layouts/payment';
 import PaymentReport1 from './layouts/paymentreport1';
@@ -54,12 +55,14 @@ function App() {
             {/* <Route path='/programs' element={<Programs/>}/> */}
             <Route path='/profile/:userID' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/notifications' element={<Form />} />
+           
             <Route path='/att' element={<Attendance />} />
-            {/* <Route path='/notifications' element={<Notifications />} /> */}
+            <Route path='/notifications' element={<Notifications />} />
             <Route path='/lecturers' element={<Lecturers/>}/>
             <Route path='/programs' element={<Programs />} />
-            <Route path='/attendance-tracking' element={<AttendanceTracking />} />
+            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+            <Route path='/form' element={<Form />} />
+            <Route path='/previousIntakeDetails' element={<PreviousIntakeDetails />} />
 
           
             

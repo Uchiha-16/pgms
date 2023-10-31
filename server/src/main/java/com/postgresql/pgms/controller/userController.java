@@ -55,5 +55,13 @@ public class userController {
         service.deleteUserWithTokens(id);
         return ResponseEntity.ok().build();
     }
+
+    //Search
+    // New endpoint for user search
+    @GetMapping("/search")
+    public ResponseEntity<List<Users>> searchUsers(@RequestParam String query) {
+        List<Users> searchResults = service.searchUsers(query);
+        return ResponseEntity.ok(searchResults);
+    }
 }
 

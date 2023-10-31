@@ -43,4 +43,15 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
     @Modifying
     @Query("DELETE FROM Users u WHERE u = :user")
     void deleteUser(Users user);
+
+    //Search
+    // Custom query method for user search
+    @Query("""
+    SELECT u FROM Users u 
+    WHERE 
+        (u.firstname LIKE %:keyword% OR u.lastname LIKE %:keyword%) 
+    AND
+        (u.role = :role OR :role IS NULL)
+    """)
+    List<Users> searchUsersByKeywordAndRole(String keyword, String role);
 }

@@ -2,7 +2,7 @@
 
 <h1 align="center">
   <br>
-  <img src="./client/public/logo.png" alt="Pgms" width="500">
+  <img src="./client/public/logo.png" alt="Pgms" width="200">
   <br>
   <br>
 </h1>

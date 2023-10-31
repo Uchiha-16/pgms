@@ -6,7 +6,7 @@ import FooterComponent from '../components/FooterComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import CalendarEventComponent from '../components/CalendarEventComponent';
 import DashboardCard from '../components/DashboardCardComponent';
-import PaymentTable from '../components/PaymentTable';
+import PaymentTable from '../components/PaymentPreComponent';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 import ProgramsIcon from '../assets/icons/programs.png';
 import StaffIcon from '../assets/icons/staff.png';
@@ -18,30 +18,24 @@ import DownloadButton from '../assets/icons/Maskgroup.png'
 
 
 const Layout1 = () => {
-    // const [users, setUsers] = useState([]);
-    
-
-    // useEffect(() => {
-    //     axios.get(users_URL)
-    //         .then(res => {
-    //             console.log(res)
-    //             setUsers(res.data);
-    //         });
-    // }, []);
-
-    const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
-    
+    const columns = ['No', 'Date', 'Subject', 'Hours', 'Rate Rs', 'Amount', 'AttendanceStatus'];
+    const data = [
+        { No: '01', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved'},
+        { No: '02', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved'},
+        { No: '03', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved'},
+        { No: '04', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved'},
+        { No: '05', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved'},
+        { No: '06', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved'},
+    ];
     const done = 0;
     const btn = 0;
-    const title = 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE';
-    const title2 = 'For The Month of August';
 
 
     return (
         
     
 
-        <PaymentTable title2={title2} title={title} columns={columns} data={data} done={done} btn={btn} />
+        <PaymentTable columns={columns} data={data} done={done} btn={btn} />
         
     );
 };
@@ -74,7 +68,7 @@ class payment extends Component {
                             <Grid item>
                                 {/* tables */}
                                 <Grid sx={{ marginTop: 5 }}>
-                                    <TableHeaderComponent left ={'Payment Report'}  right={<img src={DownloadButton} alt="Download" height={20}  />} addbtn={false}  />
+                                    <TableHeaderComponent left ={'General Voucher History'} addbtn={false}  />
                                     <Paper elevation={3}  style={{ maxHeight: '370px', overflowY: 'scroll', marginTop: '-15px' }}>
 
                                     <Layout1 />

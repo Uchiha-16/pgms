@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Grid, Typography, Fade, Paper } from '@mui/material/';
+import { Box, Grid, Typography, Fade, Paper, Button } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
@@ -108,7 +108,7 @@ class payment extends Component {
                            {/* tables */}
                            <Grid item sx={{ marginTop:-25, marginLeft:4}}>
 <Grid item sx={{marginBottom:-2}}>
-                                    <TableHeaderComponent   left ={'<'} center={'General Voucher - August 2020/2021 Intake'} right={'>'} addbtn={false}/>
+                                    <TableHeaderComponent   left ={'General Voucher - August 2020/2021 Intake'}/>
                                     </Grid>
                                     <Paper elevation={3}  style={{ maxHeight: '230px', overflowY: 'scroll' }}>
 

@@ -23,7 +23,7 @@ import Lecturers from './layouts/lecturers';
 import Staff from './layouts/staff';
 import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
 import Programs from './layouts/programs';
-
+import PaymentPrevious from './layouts/paymentPrevious';
 import Payment from './layouts/payment';
 import PaymentReport1 from './layouts/paymentreport1';
 
@@ -58,6 +58,8 @@ function App() {
             <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
             <Route path="/payment" element={<Payment />} />
         <Route path="/paymentreport1" element={<PaymentReport1 />} />
+        <Route path="/paymentPrevious" element={<PaymentPrevious />} />
+
 
           
             

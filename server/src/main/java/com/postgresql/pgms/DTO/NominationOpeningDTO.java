@@ -2,6 +2,7 @@ package com.postgresql.pgms.DTO;
 
 import com.postgresql.pgms.model.course;
 import com.postgresql.pgms.model.Users;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 import java.io.Serializable;
@@ -14,10 +15,10 @@ import java.time.LocalDate;
 public class NominationOpeningDTO implements Serializable {
 
     private long nominationid;
-    private Users user;
+    private Integer userId;
     private String programId;
     private Integer semester;
-    private course course;
+    private Integer courseId;
     private LocalDate opendate;
     private LocalDate closedate;
     private String nominationStatus;

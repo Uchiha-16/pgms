@@ -2,11 +2,9 @@ package com.postgresql.pgms.Service;
 
 import com.postgresql.pgms.DTO.NominationApplyDTO;
 import com.postgresql.pgms.DTO.NominationOpeningDTO;
-import com.postgresql.pgms.model.ApplyNomination;
-import com.postgresql.pgms.model.course;
-import com.postgresql.pgms.model.Nominations;
-import com.postgresql.pgms.model.Users;
+import com.postgresql.pgms.model.*;
 import com.postgresql.pgms.repo.ApplyNominationRepo;
+import com.postgresql.pgms.repo.CourseRepo;
 import com.postgresql.pgms.repo.NominationRepo;
 import com.postgresql.pgms.repo.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -22,6 +20,7 @@ public class nominationService {
     private final NominationRepo repo;
     private final ApplyNominationRepo applyNominationRepo;
     private final UserRepository userRepository;
+    private final CourseRepo courseRepo;
 
     //view All Nominations
     public List<Nominations> listnominations() {
@@ -39,11 +38,16 @@ public class nominationService {
 
     //apply for a nomination
     public void applyNominations(NominationApplyDTO nominationApplyDTO) {
-        Users user = nominationApplyDTO.getUser(); // Retrieve user directly from DTO
-        Nominations nominations = nominationApplyDTO.getNominations(); // Retrieve nominations directly from DTO
+        // Look up the user by userID from the database
+        Users user = userRepository.findById(nominationApplyDTO.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+        // Look up the user by userID from the database
+        Nominations nominations = repo.findById(nominationApplyDTO.getNominationId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+
         ApplyNomination applyNomination = ApplyNomination.builder()
-                .user(user)
-                .nominations(nominations)
+                .userId(user)
+                .nominationId(nominations)
                 .build();
 
         applyNominationRepo.save(applyNomination);
@@ -68,18 +72,25 @@ public class nominationService {
 
     //open New Nomination
     public void addNewNomination(NominationOpeningDTO nominationOpeningDTO) {
-        Users user = nominationOpeningDTO.getUser(); // Retrieve user directly from DTO
-        course course = nominationOpeningDTO.getCourse(); // Retrieve course directly from DTO
+        // Look up the course by courseId from the database
+        course courseEntity = courseRepo.findById(nominationOpeningDTO.getCourseId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid course ID"));
+
+        // Look up the user by userID from the database
+        Users user = userRepository.findById(nominationOpeningDTO.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+
         Nominations nomination = Nominations.builder()
-                .user(user)
+                .userId(user)
                 .programId(nominationOpeningDTO.getProgramId())
                 .semester(nominationOpeningDTO.getSemester())
-                .course(course)
+                .courseId(courseEntity)
                 .closedate(nominationOpeningDTO.getClosedate())
                 .build();
 
         repo.save(nomination);
     }
+
 
     //close nomination
     public void closeNomination(long nomId) {

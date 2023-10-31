@@ -19,18 +19,19 @@ public class Nominations {
     private long nominationid;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Users user;
+    private Users userId;
     private String programId;
     private Integer semester;
     @ManyToOne
     @JoinColumn(name = "course_id")
-    private course course;
+    private course courseId;
     @Builder.Default
     private LocalDate opendate = LocalDate.now();
     private LocalDate closedate;
 
     @Builder.Default
     private String nominationStatus = "Open";
+
 
 }
 

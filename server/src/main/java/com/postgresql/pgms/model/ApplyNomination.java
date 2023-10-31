@@ -20,10 +20,10 @@ public class ApplyNomination {
     private long appId;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Users user;
+    private Users userId;
     @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Nominations nominations;
+    @JoinColumn(name = "nomination_id")
+    private Nominations nominationId;
     @Builder.Default
     private String status = "Pending";
 

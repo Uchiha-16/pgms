@@ -42,7 +42,7 @@ public class courseService{
     }
 
     //delete course
-    public void deleteCourse(Long id) {
+    public void deleteCourse(Integer id) {
         if (!courseRepo.existsById(id)){
             //error exception
         }

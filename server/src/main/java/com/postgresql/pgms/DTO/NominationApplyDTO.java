@@ -14,8 +14,8 @@ import java.time.LocalDate;
 public class NominationApplyDTO implements Serializable {
 
     private long appId;
-    private Users user;
-    private Nominations nominations;
+    private Integer userId;
+    private long nominationId;
     private String status;
     private LocalDate date;
 }

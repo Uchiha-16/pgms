@@ -37,13 +37,6 @@ public class Users implements UserDetails {
     @Builder.Default
     private LocalDate EmployedDate = LocalDate.now();
 
-    //course table mapping
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "lecturer_course",
-            joinColumns = @JoinColumn(name = "lecturer_user_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<Course> courses;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

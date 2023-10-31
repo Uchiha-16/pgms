@@ -30,14 +30,14 @@ const isUnchecked = (columnName, cellValue) => {
 
 const isPending = (columnName, cellValue) => {
   return (
-    (columnName === "LECTURERCONFRIMATION" || columnName === "STAFFCONFIRMATION") &&
+    (columnName === "PCCONFIRMATION" || columnName === "STAFFCONFIRMATION") &&
     cellValue === "PENDING"
   );
 };
 
 const isMarked = (columnName, cellValue) => {
   return (
-    (columnName === "LECTURERCONFRIMATION" || columnName === "STAFFCONFIRMATION") &&
+    (columnName === "PCCONFIRMATION" || columnName === "STAFFCONFIRMATION") &&
     cellValue === "MARKED"
   );
 };
@@ -45,7 +45,7 @@ const isMarked = (columnName, cellValue) => {
 const isAction = (columnName, row) => {
   return (
     columnName === "ACTION" &&
-    (isPending("LECTURERCONFRIMATION", row["LECTURERCONFRIMATION"]) ||
+    (isPending("PCCONFIRMATION", row["PCCONFIRMATION"]) ||
       isPending("STAFFCONFIRMATION", row["STAFFCONFIRMATION"]))
   );
 };

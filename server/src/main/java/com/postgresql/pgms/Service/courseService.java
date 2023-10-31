@@ -2,7 +2,9 @@ package com.postgresql.pgms.Service;
 
 import com.postgresql.pgms.model.Course;
 import com.postgresql.pgms.DTO.CourseSaveDTO;
+import com.postgresql.pgms.model.program;
 import com.postgresql.pgms.repo.CourseRepo;
+import com.postgresql.pgms.repo.ProgramRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,22 +15,29 @@ import java.util.List;
 public class courseService{
 
     private final CourseRepo courseRepo;
+    private final ProgramRepo programRepo;
 
     public void addCourse(CourseSaveDTO courseSaveDTO) {
-        Course course = Course.builder()
-            .courseNo(courseSaveDTO.getCourseNo())
-            .courseName(courseSaveDTO.getCourseName())
-            .semester(courseSaveDTO.getSemester())
-            .credit(courseSaveDTO.getCredit())
-            .hallName(courseSaveDTO.getHallName())
-            .programId(courseSaveDTO.getProgramId())
-            .build();
+        course course = new course();
+        course.setCourseNo(courseSaveDTO.getCourseNo());
+        course.setCourseName(courseSaveDTO.getCourseName());
+        course.setSemester(courseSaveDTO.getSemester());
+        course.setCredit(courseSaveDTO.getCredit());
+        course.setHallName(courseSaveDTO.getHallName());
+
+        // Look up the program by programId from the database
+        program program = programRepo.findById(courseSaveDTO.getProgramId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid programId"));
+
+        // Set the program for the course
+        course.setProgramId(program);
 
         courseRepo.save(course);
     }
 
-    public List<Course> getAllCourses() {
-        List<Course> coursesList = courseRepo.findAll();
+
+    public List<course> getAllCourses() {
+        List<course> coursesList = courseRepo.findAll();
         return (coursesList);
     }
 

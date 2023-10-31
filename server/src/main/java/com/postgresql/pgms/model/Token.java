@@ -25,7 +25,7 @@ public class Token {
 
     private boolean revoked;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private Users user;
 }

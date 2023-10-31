@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import DoneIcon from '@mui/icons-material/Done';
 import ProgressbarComponent from './ProgressbarComponent';
 import VoucherSummaryComponent from './VoucherSummaryComponent';
+import { width } from '@mui/system';
 
 const voucherSummaryStyle = {
     maxHeight: '0',
@@ -16,15 +17,9 @@ const expandedVoucherSummaryStyle = {
 };
 
 
-const GeneralDashboardTable = ({ columns, data, done, btn }) => {
+const PaymentTable = ({title2, title, columns, data, done, btn }) => {
 
-    const isChecked = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 1;
-    };
-
-    const isUnchecked = (columnName, cellValue) => {
-        return columnName === 'STATUS' && cellValue === 0;
-    };
+  
 
     const isAdded = (columnName, cellValue) => {
         return columnName === 'AddtoVoucher' && cellValue === 1;
@@ -56,7 +51,7 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                 top: -40,
                 zIndex: 0,
                 paddingTop: 5,
-                width: 'auto',
+                width: '50 rem',
                 boxShadow: '0px 13px 20px -7px rgba(0, 0, 0, 0.15)',
                 overflow: 'hidden',
             }}>
@@ -67,9 +62,9 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                         paddingLeft: '22px',
                         margin: 0,
                         alignItems: 'center',
-                        paddingTop: '10px',
+                        paddingTop: '15px',
                         }}>
-                        <div style={{
+                        {/* <div style={{
                             width: '50%',
                             textAlign: 'left',
                             color: '#898989',
@@ -77,12 +72,12 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                             alignItems: 'center',
                             }}>
                             <DoneIcon sx={{ color: '#4CAF50' }}/><p><b>03 done</b> this month</p>
-                        </div>
-                        <div style={{
+                        </div> */}
+                        {/* <div style={{
                             width: '50%',
                             textAlign: 'right',
-                            }}>
-                            <Button sx={{
+                            }}> */}
+                            {/* <Button sx={{
                                 borderRadius: '11px',
                                 border: '1px solid #1A73E8',
                                 color: '#1A73E8',
@@ -93,12 +88,40 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                             }}
                             onClick={isExpanded ? handleViewLessClick : handleViewMoreClick}>
                                 {isExpanded ? 'View Less' : 'View More'}
-                            </Button>
-                        </div>
+                            </Button> */}
+                        {/* </div> */}
                     </Box></>
                 ) : ( '' )}
                 <Table>
+
                     <TableHead>
+                    <TableCell colSpan={columns.length} sx={{ alignItems: 'center' }}>
+    <div>
+        <h2 style={{ fontSize: '13px' }}>{title}</h2>
+        <h2 style={{ fontSize: '11px', color: '#495057' }}>{title2}</h2>
+    </div>
+    <div style={{ marginLeft: '750px', marginTop: '-50px', position: 'absolute', transform: 'translateY(-40%)', display: 'flex', alignItems: 'center', background: '#D9D9D9', borderRadius: '4%' ,width: '300px'}}>
+    <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, margin: '0px' }} />
+    <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' },marginLeft : '40px' }} />
+    <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '40px' }} />
+    <Checkbox sx={{  color: '#ADB5BD', '&.Mui-checked': { color: '#43A047' }, marginLeft: '40px' }} />
+</div>
+
+<div style={{ marginLeft: '750px', marginTop: '-20px', position: 'absolute', transform: 'translateY(-40%)', display: 'flex', alignItems: 'center',width: '300px'}}>
+<div style={{ marginTop: '4px',marginLeft : '4px' }}>Staff</div>
+<div style={{ marginTop: '4px',marginLeft : '33px' }}> Coordinator</div>
+<div style={{ marginTop: '4px',marginLeft : '34px' }}>DR</div>
+<div style={{ marginTop: '4px',marginLeft : '55px' }}>Head</div>
+
+</div>
+
+
+</TableCell>
+
+
+
+        
+
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell key={column} sx={{
@@ -109,7 +132,7 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                                     fontWeight: '800',
                                     paddingTop: 4,
                                     paddingLeft: 3
-                                }}>
+                          }}>
                                     {column}
                                 </TableCell>
                             ))}
@@ -129,23 +152,10 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                                             paddingTop: 2.3,
                                             paddingBottom: 2.3,
                                         }}>
-                                        {isChecked(column, row[column]) ? (
-                                            <Checkbox defaultChecked sx={{
-                                                color: '#D9D9D9',
-                                                '&.Mui-checked': {
-                                                    color: '#43A047',
-                                                },
-                                            }} />
-                                        ) : isUnchecked(column, row[column]) ? (
-                                            <Checkbox sx={{
-                                                color: '#D9D9D9',
-                                                '&.Mui-checked': {
-                                                    color: '#43A047',
-                                                },
-                                            }} />
+                                       
 
                                             
-                                        ) : isPercentage(column, row[column]) ? (
+                                        { isPercentage(column, row[column]) ? (
                                             <><div style={{ display: 'flex', alignItems: 'center' }}>
                                                 <p style={{ color: '#898989' }}>{row[column]}</p>
                                                 <ProgressbarComponent percentage={row[column].replace('%', '')} />
@@ -184,9 +194,11 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                 <div className="voucher-summary" sx={{ ...voucherSummaryStyle, ...(isExpanded && expandedVoucherSummaryStyle) }}>
                     {done === 1 && btn === 1 && isExpanded && <VoucherSummaryComponent />}
                 </div>
+
+
             </TableContainer></>
     );
 };
 
 
-export default GeneralDashboardTable;
+export default PaymentTable;

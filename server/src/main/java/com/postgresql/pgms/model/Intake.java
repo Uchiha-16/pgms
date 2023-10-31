@@ -17,20 +17,20 @@ import java.math.BigDecimal;
 public class Intake {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long intakeID;
+    private Integer intakeID;
 
-    private int year;
-    private BigDecimal rate;
-    private BigDecimal lectureFeePerHour;
-    private BigDecimal practicalFeePerHour;
-    private BigDecimal TAFeePerHour;
-    private BigDecimal LMSFeePerHour;
+    private String year;
+    private long rate;
+    private long lectureFeePerHour;
+    private long practicalFeePerHour;
+    private long TAFeePerHour;
+    private long LMSFeePerHour;
 
 //    public Intake() {
 //    }
 
-    public Intake(int year, BigDecimal rate, BigDecimal lectureFeePerHour, BigDecimal practicalFeePerHour,
-                  BigDecimal TAFeePerHour, BigDecimal LMSFeePerHour) {
+    public Intake(String year, long rate, long lectureFeePerHour, long practicalFeePerHour,
+                  long TAFeePerHour, long LMSFeePerHour) {
         this.year = year;
         this.rate = rate;
         this.lectureFeePerHour = lectureFeePerHour;

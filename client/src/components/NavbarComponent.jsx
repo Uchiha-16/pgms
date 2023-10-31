@@ -35,6 +35,7 @@ export default function NavbarComponent() {
     const navigate = useNavigate();
 
     const userID = auth.user_id
+    const role = auth.role
 
     const [page, setPage] = useState("Dashboard");
     useEffect(() => {
@@ -133,7 +134,7 @@ export default function NavbarComponent() {
                             { text: 'Dashboard', path: '/dashboard', icon: <DashboardRoundedIcon /> },
                             { text: 'Timetable', path: '/timetable', icon: <CalendarMonthIcon /> },
                             { text: 'Payment Voucher', path: '/payment-voucher', icon: <DescriptionIcon /> },
-                            { text: 'Attendance Tracking', path: '/attendance-tracking', icon: <PlaceIcon /> },
+                            { text: 'Attendance Tracking', path: role === "Staff" ? '/attendance-page' : '/attendance-tracking', icon: <PlaceIcon />},
                             { text: 'Nominations', path: '/nominations', icon: <GroupAddIcon /> },
                             { text: 'Notifications', path: '/notifications', icon: <NotificationsIcon /> },
                             { text: 'Profile', path: `/profile/${userID}`, icon: <PersonIcon /> },

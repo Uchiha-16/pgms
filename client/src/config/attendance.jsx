@@ -1,7 +1,7 @@
 export const headCells = [
     {
         id: 'TIME',
-        numeric: false,
+        numeric: true,
         disablePadding: true,
         label: 'TIME',
     },
@@ -18,27 +18,9 @@ export const headCells = [
         label: 'LECTURER',
     },
     {
-        id: 'STAFFCONFIRMATION',
-        numeric: false,
-        disablePadding: true,
-        label: 'STAFF CONFRIMATION',
-    },
-    {
-        id: 'PCCONFIRMATION',
-        numeric: false,
-        disablePadding: true,
-        label: 'PC CONFIRMATION',
-    },
-    {
         id: 'STATUS',
-        numeric: false,
+        numeric: true,
         disablePadding: true,
         label: 'STATUS',
-    },
-    {
-        id: 'ACTION',
-        numeric: false,
-        disablePadding: true,
-        label: 'ACTION',
     },
 ];

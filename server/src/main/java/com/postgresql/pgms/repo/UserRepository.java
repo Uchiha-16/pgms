@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
     List<Users> findAllByOrderByIdDesc();
 
     @Query("""
-    select u from Users u where u.role = 'Lecturer'
+    select u from Users u where u.role = 'Lecturer' or u.role = 'VisitingLecturer'
     """)
     List<Users> findAllLecturers();
 

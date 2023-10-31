@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -24,14 +24,30 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 
 const Popup = () => {
+
+  const users_URL = "/users/lecturerList"
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+      // Call the get method to fetch user data
+      axios.get(users_URL)
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+      
+  }, []);
   const [formData, setFormData] = useState({
-    duration: { startYear: "", endYear: "" },
+    year: "",
     budget: "",
     rate: "",
-    coordinatorMIS: "",
-    coordinatorMCS: "",
-    coordinatorMIT: "",
-    coordinatorMBA: "",
+    mis: "",
+    mcs: "",
+    mit: "",
+    mba: "",
   });
 
   const [openAlert, setOpenAlert] = useState(false);
@@ -42,34 +58,22 @@ const Popup = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
 
-    // For fields inside "duration", handle them separately
-    if (name.startsWith("duration.")) {
-      const subField = name.split(".")[1];
-      setFormData({
-        ...formData,
-        duration: {
-          ...formData.duration,
-          [subField]: value,
-        },
-      });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
   };
 
   const handleSubmit = (e) => {
+    console.log(formData)
     e.preventDefault();
     axios
-      .post("/auth/register", formData)
+      .post("/intake/add", formData)
       .then((response) => {
         setOpenAlert(true);
         setAlertSeverity("success");
-        setAlertMessage("User Added successfully!");
+        setAlertMessage("New Intake Added successfully!");
         setTimeout(() => {
-          window.location.reload();
           setOpenAlert(false);
-          navigate("/users", { replace: true });
+          navigate("/previousIntakeDetails", { replace: true });
         }, 3000);
       })
       .catch((error) => {
@@ -89,13 +93,13 @@ const Popup = () => {
 
   const handleReset = () => {
     setFormData({
-      duration: { startYear: "", endYear: "" },
+      year: "",
       budget: "",
       rate: "",
-      coordinatorMIS: "",
-      coordinatorMCS: "",
-      coordinatorMIT: "",
-      coordinatorMBA: "",
+      mis: "",
+      mcs: "",
+      mit: "",
+      mba: "",
     });
   };
 
@@ -143,40 +147,21 @@ const Popup = () => {
                 }}
               >
                 <Typography paddingTop={"2px"} color={"white"}>
-                  Add Details
+                  Add Intake Details
                 </Typography>
               </Box>
               <DialogContent>
                 <Stack spacing={2} margin={2}>
                   <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                  <Grid item xs={12}>
                       <TextField
                         required
                         fullWidth
-                        label="Start Year"
-                        type="date"
-                        name="duration.startYear"
-                        value={formData.duration.startYear}
+                        label="Duration (YYYY - YYYY)"
+                        type="text"
+                        name="year"
+                        value={formData.year}
                         onChange={handleChange}
-                        InputLabelProps={{
-                          shrink: true, // This shrinks the label to the top when there's input
-                        }}
-                        sx={{ mt: 1 }} // Add margin-top to separate the label and input
-                      />
-                    </Grid>
-                    <Grid item xs={6}>
-                      <TextField
-                        required
-                        fullWidth
-                        label="End Year"
-                        type="date"
-                        name="duration.endYear"
-                        value={formData.duration.endYear}
-                        onChange={handleChange}
-                        InputLabelProps={{
-                          shrink: true, // This shrinks the label to the top when there's input
-                        }}
-                        sx={{ mt: 1 }} // Add margin-top to separate the label and input
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -202,45 +187,85 @@ const Popup = () => {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        label="Coordinator MIS"
-                        name="coordinatorMIS"
-                        value={formData.coordinatorMIS}
-                        onChange={handleChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        label="Coordinator MCS"
-                        name="coordinatorMCS"
-                        value={formData.coordinatorMCS}
-                        onChange={handleChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        label="Coordinator MIT"
-                        name="coordinatorMIT"
-                        value={formData.coordinatorMIT}
-                        onChange={handleChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        label="Coordinator MBA"
-                        name="coordinatorMBA"
-                        value={formData.coordinatorMBA}
-                        onChange={handleChange}
-                      />
-                    </Grid>
+              <FormControl fullWidth>
+              
+              <InputLabel id="demo-simple-select-label" required>MIS Coordinator</InputLabel>
+                <Select
+                  required
+                  label="MIS Coordinator"
+                  id="mis"
+                  value={formData.mis}
+                  onChange={handleChange}
+                  name="mis"
+                >
+                {users.map((user) => (
+                  <MenuItem key={user.id} value={user.id}>
+                    {`${user.firstname} ${user.lastname}`}
+                  </MenuItem>
+                ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+              
+              <InputLabel id="demo-simple-select-label" required>MCS Coordinator</InputLabel>
+                <Select
+                  required
+                  label="MCS Coordinator"
+                  id="mcs"
+                  value={formData.mcs}
+                  onChange={handleChange}
+                  name="mcs"
+                >
+                {users.map((user) => (
+                  <MenuItem key={user.id} value={user.id}>
+                    {`${user.firstname} ${user.lastname}`}
+                  </MenuItem>
+                ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+              
+              <InputLabel id="demo-simple-select-label" required>MIT Coordinator</InputLabel>
+                <Select
+                  required
+                  label="MIT Coordinator"
+                  id="mit"
+                  value={formData.mit}
+                  onChange={handleChange}
+                  name="mit"
+                >
+                {users.map((user) => (
+                  <MenuItem key={user.id} value={user.id}>
+                    {`${user.firstname} ${user.lastname}`}
+                  </MenuItem>
+                ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+              
+              <InputLabel id="demo-simple-select-label" required>MBA Coordinator</InputLabel>
+                <Select
+                  required
+                  label="MBA Coordinator"
+                  id="mba"
+                  value={formData.mba}
+                  onChange={handleChange}
+                  name="mba"
+                >
+                {users.map((user) => (
+                  <MenuItem key={user.id} value={user.id}>
+                    {`${user.firstname} ${user.lastname}`}
+                  </MenuItem>
+                ))}
+                </Select>
+              </FormControl>
+            </Grid>
                   </Grid>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <Button

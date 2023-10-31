@@ -42,7 +42,7 @@ const Layout1 = () => {
 
 
 
-class payment extends Component {
+class paymentPrevious extends Component {
     render() {
         return (
             <Box>
@@ -90,4 +90,4 @@ class payment extends Component {
     }
 }
 
-export default payment;
+export default paymentPrevious;

@@ -483,6 +483,7 @@ console.log("Program Value:", formData.programId);
               <Grid item xs={12}>
 
               <FormControl fullWidth>
+              <TextField label="Closing Date" type= "date" variant="outlined" required/>
 
     </FormControl>
               </Grid>

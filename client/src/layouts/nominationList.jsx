@@ -4,7 +4,7 @@ import NavbarComponent from '../components/NavbarComponent';
 import FooterComponent from '../components/FooterComponent';
 import { Box, Grid } from '@mui/material/';
 import NominationComponent from '../components/CallNomination';
-import NominationsTable from '../components/NominationsTable';
+import NominationsTable from '../components/NominationsTablePC';
 import { useEffect, useState } from "react";
 import useAxiosMethods from '../hooks/useAxiosMethods';
 import useAuth from "../hooks/useAuth";
@@ -28,7 +28,7 @@ const TableLayout = () => {
         }
     }, []);
 
-    const columns = ['POSITION', 'OPENING DATE','CLOSING DATE', 'STATUS'];
+    const columns = ['POSITION', 'OPENING DATE','CLOSING DATE', 'STATUS', 'ACTION' ];
 
     const data = nominations.map(nomination => ({ 
 

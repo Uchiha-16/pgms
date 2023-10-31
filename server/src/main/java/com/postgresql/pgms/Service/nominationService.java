@@ -32,7 +32,7 @@ public class nominationService {
     public List<Nominations> listnominationsByUser(Integer id) {
         Users user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found")); // Handle this exception properly
-        List<Nominations> nominationsList = repo.findAllByUser(user);
+        List<Nominations> nominationsList = repo.findAllByUserId(user);
         return nominationsList;
     }
 

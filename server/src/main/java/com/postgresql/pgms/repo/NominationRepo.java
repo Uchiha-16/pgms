@@ -15,6 +15,6 @@ public interface NominationRepo extends JpaRepository<Nominations, Long> {
     List<Nominations> findAllByOrderByNominationidDesc();
 
     //get the list of nominations of the particular user
-    List<Nominations> findAllByUser(Users user);
+    List<Nominations> findAllByUserId(Users user);
 
 }

@@ -139,15 +139,39 @@ export default class ScheduleComponent extends React.PureComponent {
 
     // Add a method to toggle the selected day
     toggleSelectedDay(day) {
-        let firstDayOfWeek = 6; // Saturday
-        if (day === 'Sunday') {
+        const currentDate = new Date();
+
+        if (day === 'Saturday') {
+            // Calculate the upcoming Saturday
+            const currentDayOfWeek = currentDate.getDay();
+            const daysUntilSaturday = 6 - currentDayOfWeek;
+            const startDay = new Date(currentDate);
+            startDay.setDate(currentDate.getDate() + daysUntilSaturday);
+            const endDay = new Date(startDay);
+            endDay.setDate(startDay.getDate() + 1);
+
+            this.setState({
+                selectedDay: day,
+                weekViewStartDate: startDay,
+                weekViewEndDate: endDay,
+            });
+        } else if (day === 'Sunday') {
             // Calculate the upcoming Sunday
             const currentDayOfWeek = currentDate.getDay();
-            firstDayOfWeek = currentDayOfWeek === 0 ? 7 : 7 - currentDayOfWeek;
-        }
+            const daysUntilSunday = currentDayOfWeek === 0 ? 7 : 7 - currentDayOfWeek;
+            const startDay = new Date(currentDate);
+            startDay.setDate(currentDate.getDate() + daysUntilSunday);
+            const endDay = new Date(startDay);
+            endDay.setDate(startDay.getDate() + 1);
 
-        this.setState({ selectedDay: day, firstDayOfWeek });
+            this.setState({
+                selectedDay: day,
+                weekViewStartDate: startDay,
+                weekViewEndDate: endDay,
+            });
+        }
     }
+
 
     commitChanges({ added, changed, deleted }) {
         console.log('Added:', added);
@@ -172,19 +196,16 @@ export default class ScheduleComponent extends React.PureComponent {
 
     render() {
         const {
-            data, resources, grouping, groupByDate, selectedDay, isGroupByDate,
+            data, resources, grouping, groupByDate, selectedDay, isGroupByDate, weekViewStartDate, weekViewEndDate,
         } = this.state;
 
         // Define a variable to store the excluded days based on the selectedDay
         let excludedDays = [];
-        let saturdaySelected = false;
         if (selectedDay === 'Saturday') {
             excludedDays = [0, 1, 2, 3, 4, 5]; // Exclude all days except Saturday
-            saturdaySelected = true;
         } else if (selectedDay === 'Sunday') {
             // Calculate the following Sunday
             excludedDays = [1, 2, 3, 4, 5, 6];
-            saturdaySelected = false;
         }
 
 
@@ -280,11 +301,10 @@ export default class ScheduleComponent extends React.PureComponent {
                             <WeekView
                                 startDayHour={8}
                                 endDayHour={18}
+                                startDay={weekViewStartDate}
+                                endDay={weekViewEndDate}
                                 excludedDays={excludedDays}
-                                intervalCount={1} // Display one day in WeekView
-                            //Display only Saturday or next week Sunday
-                            // startDay={saturdaySelected ? 0 : 1} // Display Saturday or Sunday
-                            // endDay={saturdaySelected ? 6 : 0} // Display Saturday or Sunday
+                                // intervalCount={1}
                             />
 
                             <Appointments
@@ -296,7 +316,6 @@ export default class ScheduleComponent extends React.PureComponent {
                                         <div style={{ fontSize: '14px' }}>{data.title}</div>
                                         <div style={{ color: '#55596F' }}>{data.hallName}</div>
                                         <div style={{ color: '#3E4152' }}>{data.lecturerName}</div>
-                                        <div style={{ color: '#3E4152' }}>{data.id}</div>
                                     </div>
                                 )}
                             />

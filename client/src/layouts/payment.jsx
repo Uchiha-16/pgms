@@ -108,7 +108,7 @@ class payment extends Component {
                            {/* tables */}
                            <Grid item sx={{ marginTop:-25, marginLeft:4}}>
 <Grid item sx={{marginBottom:-2}}>
-                                    <TableHeaderComponent   left ={'General Voucher - August 2020/2021 Intake'}/>
+                                    <TableHeaderComponent   left ={'General Voucher - August 2020/2021 Intake'}  right={ <Button variant="contained" color="primary" style={{ textTransform: 'none' }}> Voucher History </Button>} />
                                     </Grid>
                                     <Paper elevation={3}  style={{ maxHeight: '230px', overflowY: 'scroll' }}>
 

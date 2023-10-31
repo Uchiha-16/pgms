@@ -26,7 +26,8 @@ public class Nominations {
     @JoinColumn(name = "course_id")
     private Course course;
     @Builder.Default
-    private LocalDate date = LocalDate.now();
+    private LocalDate opendate = LocalDate.now();
+    private LocalDate closedate;
 
     @Builder.Default
     private String nominationStatus = "Open";

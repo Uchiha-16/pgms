@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 @RepositoryRestResource
-public interface NominationRepo extends JpaRepository<Nominations, Integer> {
+public interface NominationRepo extends JpaRepository<Nominations, Long> {
 
     //get the list of nominations in order of the descending order of the nomination id
     List<Nominations> findAllByOrderByNominationidDesc();

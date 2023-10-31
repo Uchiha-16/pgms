@@ -75,8 +75,18 @@ public class nominationService {
                 .programId(nominationOpeningDTO.getProgramId())
                 .semester(nominationOpeningDTO.getSemester())
                 .course(course)
+                .closedate(nominationOpeningDTO.getClosedate())
                 .build();
 
+        repo.save(nomination);
+    }
+
+    //close nomination
+    public void closeNomination(long nomId) {
+        Nominations nomination = repo.findById(nomId)
+                .orElseThrow(() -> new EntityNotFoundException("Nomination not found"));
+
+        nomination.setNominationStatus("closed");
         repo.save(nomination);
     }
 }

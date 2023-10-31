@@ -57,5 +57,12 @@ public class nominationController {
         return ResponseEntity.ok("Nomination rejected successfully");
     }
 
+    //close nominations
+    @PutMapping("/close/{nomId}")
+    public ResponseEntity<String> closeNomination(@PathVariable long nomId) {
+        service.closeNomination(nomId);
+        return ResponseEntity.ok("Nomination closed successfully");
+    }
+
 
 }

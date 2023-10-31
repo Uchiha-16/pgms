@@ -19,7 +19,8 @@ public class NominationOpeningDTO implements Serializable {
     private String programId;
     private Integer semester;
     private Course course;
-    private LocalDate date;
+    private LocalDate opendate;
+    private LocalDate closedate;
     private String nominationStatus;
 
 }

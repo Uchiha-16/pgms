@@ -24,7 +24,7 @@ public class Nominations {
     private Integer semester;
     @ManyToOne
     @JoinColumn(name = "course_id")
-    private Course course;
+    private course course;
     @Builder.Default
     private LocalDate opendate = LocalDate.now();
     private LocalDate closedate;

@@ -1,9 +1,7 @@
 package com.postgresql.pgms.Service;
 
 import com.postgresql.pgms.enumeration.Role;
-import com.postgresql.pgms.model.Course;
 import com.postgresql.pgms.model.session;
-import com.postgresql.pgms.repo.LecturerRepo;
 import com.postgresql.pgms.repo.SessionRepository;
 import com.postgresql.pgms.repo.UserRepository;
 import lombok.AllArgsConstructor;

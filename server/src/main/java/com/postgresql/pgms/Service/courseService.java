@@ -1,6 +1,6 @@
 package com.postgresql.pgms.Service;
 
-import com.postgresql.pgms.model.Course;
+import com.postgresql.pgms.model.course;
 import com.postgresql.pgms.DTO.CourseSaveDTO;
 import com.postgresql.pgms.model.program;
 import com.postgresql.pgms.repo.CourseRepo;

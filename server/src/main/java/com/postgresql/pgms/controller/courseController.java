@@ -2,7 +2,7 @@ package com.postgresql.pgms.controller;
 
 import com.postgresql.pgms.DTO.CourseSaveDTO;
 import com.postgresql.pgms.Service.courseService;
-import com.postgresql.pgms.model.Course;
+import com.postgresql.pgms.model.course;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class courseController {
     }
 
     @GetMapping(path = "/viewcourses")
-    public ResponseEntity<List<Course>> getCourses(){
+    public ResponseEntity<List<course>> getCourses(){
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 

@@ -3,7 +3,7 @@ package com.postgresql.pgms.Service;
 import com.postgresql.pgms.DTO.NominationApplyDTO;
 import com.postgresql.pgms.DTO.NominationOpeningDTO;
 import com.postgresql.pgms.model.ApplyNomination;
-import com.postgresql.pgms.model.Course;
+import com.postgresql.pgms.model.course;
 import com.postgresql.pgms.model.Nominations;
 import com.postgresql.pgms.model.Users;
 import com.postgresql.pgms.repo.ApplyNominationRepo;
@@ -69,7 +69,7 @@ public class nominationService {
     //open New Nomination
     public void addNewNomination(NominationOpeningDTO nominationOpeningDTO) {
         Users user = nominationOpeningDTO.getUser(); // Retrieve user directly from DTO
-        Course course = nominationOpeningDTO.getCourse(); // Retrieve course directly from DTO
+        course course = nominationOpeningDTO.getCourse(); // Retrieve course directly from DTO
         Nominations nomination = Nominations.builder()
                 .user(user)
                 .programId(nominationOpeningDTO.getProgramId())

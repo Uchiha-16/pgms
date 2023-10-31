@@ -1,8 +1,7 @@
 package com.postgresql.pgms.DTO;
 
-import com.postgresql.pgms.model.Course;
+import com.postgresql.pgms.model.course;
 import com.postgresql.pgms.model.Users;
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
@@ -18,7 +17,7 @@ public class NominationOpeningDTO implements Serializable {
     private Users user;
     private String programId;
     private Integer semester;
-    private Course course;
+    private course course;
     private LocalDate opendate;
     private LocalDate closedate;
     private String nominationStatus;

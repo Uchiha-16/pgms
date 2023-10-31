@@ -28,6 +28,8 @@ import PreviousIntakeDetails from "./layouts/previousIntakeDetails";
 
 import Payment from "./layouts/payment";
 import PaymentReport1 from "./layouts/paymentreport1";
+import PaymentPrevious from "./layouts/paymentPrevious";
+import NominationList from "./layouts/nominationList";
 
 function App() {
   return (
@@ -55,6 +57,20 @@ function App() {
             {/* <Route path='/programs' element={<Programs/>}/> */}
             <Route path="/profile/:userID" element={<Profile />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/att" element={<Attendance />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/lecturers" element={<Lecturers />} />
+            {/* <Route path='/programs' element={<Programs />} /> */}
+            <Route
+              path="/attendance-tracking"
+              element={<AttendanceTrackingTable />}
+            />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/paymentreport1" element={<PaymentReport1 />} />
+            <Route path="/paymentPrevious" element={<PaymentPrevious />} />
+            <Route path="/nominationList" element={<NominationList />} />
 
             <Route path="/att" element={<Attendance />} />
             <Route path="/notifications" element={<Notifications />} />

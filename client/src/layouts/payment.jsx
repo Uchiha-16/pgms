@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Grid, Typography, Fade, Paper } from '@mui/material/';
+import { Box, Grid, Typography, Fade, Paper, Button } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
@@ -77,7 +77,7 @@ class payment extends Component {
                                 boxShadow: '0px 3.720207452774048px 11px 0px rgba(0, 0, 0, 0.12)',
                                 display: 'grid',
                                 gridTemplateRows: '100px 280px auto',
-                                height: '57%',
+                                height: '50%',
                                 marginRight: '30px'
                                 }}>
    
@@ -97,6 +97,7 @@ class payment extends Component {
                             <Grid sx={{ marginTop: -2 }}>
                                 
                              <TableHeaderComponent  center={'Payment Vouchers'} addbtn={false}/>
+
                              <Layout2 />
 </Grid>
                                
@@ -107,7 +108,7 @@ class payment extends Component {
                            {/* tables */}
                            <Grid item sx={{ marginTop:-25, marginLeft:4}}>
 <Grid item sx={{marginBottom:-2}}>
-                                    <TableHeaderComponent   left ={'<'} center={'General Voucher - August 2020/2021 Intake'} right={'>'} addbtn={false}/>
+                                    <TableHeaderComponent   left ={'General Voucher - August 2020/2021 Intake'}  right={ <Button variant="contained" color="primary" style={{ textTransform: 'none' }}> Voucher History </Button>} />
                                     </Grid>
                                     <Paper elevation={3}  style={{ maxHeight: '230px', overflowY: 'scroll' }}>
 

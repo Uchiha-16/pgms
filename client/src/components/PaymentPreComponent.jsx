@@ -17,7 +17,7 @@ const expandedVoucherSummaryStyle = {
 };
 
 
-const PaymentCard = ({ columns, data, done, btn }) => {
+const PaymentTable = ({title2, title, columns, data, done, btn }) => {
 
   
 
@@ -64,10 +64,47 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                         alignItems: 'center',
                         paddingTop: '15px',
                         }}>
+                        {/* <div style={{
+                            width: '50%',
+                            textAlign: 'left',
+                            color: '#898989',
+                            display: 'flex',
+                            alignItems: 'center',
+                            }}>
+                            <DoneIcon sx={{ color: '#4CAF50' }}/><p><b>03 done</b> this month</p>
+                        </div> */}
+                        {/* <div style={{
+                            width: '50%',
+                            textAlign: 'right',
+                            }}> */}
+                            {/* <Button sx={{
+                                borderRadius: '11px',
+                                border: '1px solid #1A73E8',
+                                color: '#1A73E8',
+                                fontFamily: 'Inter',
+                                fontWeight: 700,
+                                fontSize: '12px',
+                                padding: '2px 20px',
+                            }}
+                            onClick={isExpanded ? handleViewLessClick : handleViewMoreClick}>
+                                {isExpanded ? 'View Less' : 'View More'}
+                            </Button> */}
+                        {/* </div> */}
                     </Box></>
                 ) : ( '' )}
                 <Table>
+
                     <TableHead>
+                    <TableCell colSpan={columns.length} sx={{ alignItems: 'center' }}>
+ 
+
+
+
+</TableCell>
+
+
+
+        
 
                         <TableRow>
                             {columns.map((column) => (
@@ -78,8 +115,7 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                                     fontStyle: 'normal',
                                     fontWeight: '800',
                                     paddingTop: 4,
-                                    paddingLeft: 3,
-                                    overflowY: 'hidden',
+                                    paddingLeft: 3
                           }}>
                                     {column}
                                 </TableCell>
@@ -126,8 +162,6 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                                                 },
                                             }} />
                                         ) :
-
-                                        
                                         (
                                             row[column]
                                         )
@@ -140,14 +174,15 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                             </TableRow>
                         ))}
                     </TableBody>
-                
                 </Table>
                 <div className="voucher-summary" sx={{ ...voucherSummaryStyle, ...(isExpanded && expandedVoucherSummaryStyle) }}>
                     {done === 1 && btn === 1 && isExpanded && <VoucherSummaryComponent />}
                 </div>
+
+
             </TableContainer></>
     );
 };
 
 
-export default PaymentCard;
+export default PaymentTable;

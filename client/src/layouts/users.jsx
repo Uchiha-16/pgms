@@ -46,29 +46,17 @@ const Layout1 = () => {
 
 
    // ====================== Dummy Data for testing ======================//
-    // function createData(NAME, ROLE, STATUS, EMAIL, ACTION) {
+    // function createData(NAME, ROLE, STATUS, EMPLOYED, ACTION) {
     //     return {
     //         NAME,
     //         ROLE,
     //         STATUS,
-    //         EMAIL,
+    //         EMPLOYED,
     //         ACTION
     //     };
     // }
     // const rows = [
-    //     createData('Johny Michael', 'Lecturer', 'ONLINE', 'john@gmail.com', 'Edit'),
-    //     createData('Alexa Liras', 'Lecturer', 'ONLINE', 'alexa@gmail.com', 'Edit'),
-    //     createData('Laurent Perrier', 'Lecturer', 'OFFLINE', 'laurent@gmail.com', 'Edit'),
-    //     createData('Michael Levi', 'Lecturer', 'ONLINE', 'michael@gmail.com', 'Edit'),
-    //     createData('Richard Gran', 'Visiting Lecturer', 'ONLINE', 'richard@gmail.com', 'Edit'),
-    //     createData('Miriam Eric', 'Lecturer', 'ONLINE', 'miriam@gmail.com', 'Edit'),
-    //     createData('Anne Marie', 'Lecturer', 'ONLINE', 'annemarie@gmail.com', 'Edit'),
-    //     createData('Nick Daniel', 'Visiting Lecturer', 'OFFLINE', 'nickdaniel@gmail.com', 'Edit'),
-    //     createData('KitKat', 'Staff', 'OFFLINE', 'kitkat@gmail.com', 'Edit'),
-    //     createData('Lollipop', 'Staff', 'ONLINE', 'lollipop@gmail.com', 'Edit'),
-    //     createData('Marshmallow', 'Staff', 'OFFLINE', 'marshmellow@gmail.com', 'Edit'),
-    //     createData('Nougat', 'Staff', 'ONLINE', 'nougat@gmail.com', 'Edit'),
-    //     createData('Oreo', 'Staff', 'ONLINE', 'oreo@gmail.com', 'Edit'),
+    //     createData('Johny Michael', 'Lecturer', 'ONLINE', 'yo', 'Edit')
     // ];
 
     return (

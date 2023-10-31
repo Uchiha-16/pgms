@@ -96,7 +96,16 @@ export default class ScheduleComponent extends React.PureComponent {
 
         this.state = {
             data: appointments,
-            resources: [{
+            resources: [
+                {
+                    fieldName: 'semester',
+                    title: 'Semester',
+                    instances: [
+                        { text: 'Semester 4', id: 1 },
+                        { text: 'Semester 2', id: 2 },
+                    ],
+                },
+                {
                 fieldName: 'priorityId',
                 title: 'Priority',
                 instances: [
@@ -105,18 +114,9 @@ export default class ScheduleComponent extends React.PureComponent {
                     { text: 'MBA', id: 'MBA', color: '#dda0dd' },
                     { text: 'MIS', id: 'MIS', color: '#FFB939' },
                 ],
-            },
-                {
-                    fieldName: 'semester',
-                    title: 'Semester',
-                    instances: [
-                        { text: 'Semester 4', id: 1 },
-                        { text: 'Semester 2', id: 2 },
-                    ],
-                }
-            ],
+            }],
             grouping: [
-                // { resourceName: 'semester' },
+                { resourceName: 'semester' },
                 { resourceName: 'priorityId' },
             ],
             groupByDate: isWeekOrMonthView,
@@ -150,6 +150,9 @@ export default class ScheduleComponent extends React.PureComponent {
     }
 
     commitChanges({ added, changed, deleted }) {
+        console.log('Added:', added);
+        console.log('Changed:', changed);
+        console.log('Deleted:', deleted);
         this.setState((state) => {
             let { data } = state;
             if (added) {
@@ -293,6 +296,7 @@ export default class ScheduleComponent extends React.PureComponent {
                                         <div style={{ fontSize: '14px' }}>{data.title}</div>
                                         <div style={{ color: '#55596F' }}>{data.hallName}</div>
                                         <div style={{ color: '#3E4152' }}>{data.lecturerName}</div>
+                                        <div style={{ color: '#3E4152' }}>{data.id}</div>
                                     </div>
                                 )}
                             />

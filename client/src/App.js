@@ -26,6 +26,7 @@ import Programs from './layouts/programs';
 import PaymentPrevious from './layouts/paymentPrevious';
 import Payment from './layouts/payment';
 import PaymentReport1 from './layouts/paymentreport1';
+import NominationList from './layouts/nominationList';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
             <Route path="/payment" element={<Payment />} />
         <Route path="/paymentreport1" element={<PaymentReport1 />} />
         <Route path="/paymentPrevious" element={<PaymentPrevious />} />
+        <Route path="/nominationList" element={<NominationList />} />
 
 
           

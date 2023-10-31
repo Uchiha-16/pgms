@@ -4,7 +4,7 @@ import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import TableHeaderComponent from '../components/TableHeaderComponent';
-import { Box, Grid, Fade } from '@mui/material/';
+import { Box, Grid } from '@mui/material/';
 
 // Get the current date
 const currentDate = new Date();

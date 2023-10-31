@@ -143,7 +143,7 @@ const Popup = () => {
                 }}
               >
                 <Typography paddingTop={"2px"} color={"white"}>
-                  Add User
+                  Add Details
                 </Typography>
               </Box>
               <DialogContent>

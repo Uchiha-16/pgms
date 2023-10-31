@@ -1,83 +1,77 @@
-import React, { Component } from 'react';
-import { Box, Grid } from '@mui/material/';
+import React from 'react';
+import { Box, Grid, Paper } from '@mui/material/';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import TableHeaderComponent from '../components/TableHeaderComponent';
-import AttendanceTrackingComponent from '../components/AttendanceTrackingComponent';
-import { headCells } from '../config/attendanceConfig';
+import useAxiosMethods from '../hooks/useAxiosMethods';
+import { useEffect, useState } from "react";
+import NavBarComponent from '../components/NavbarComponent';
+import GeneralDashboardTable from '../components/GeneralDashboardTable'; // Import the GeneralDashboardTable component
 
-// Replace degreesData with actual session data
-const sessionData = [
-  {
-    degreeTitle: 'Master of Information Security',
-    courses: [
-      { startTime: '10:45 AM', endTime: '01:30 PM', courseId: 1, lecturer: 'Dr. Smith', attended: false },
-      { startTime: '02:00 PM', endTime: '03:30 PM', courseId: 2, lecturer: 'Prof. Johnson', attended: false },
-      // Add more sessions...
-    ],
-  },
-  {
-    degreeTitle: 'Master of Computer Science',
-    courses: [
-      { startTime: '10:45 AM', endTime: '01:30 PM', courseId: 3, lecturer: 'Dr. Smith', attended: false },
-      { startTime: '02:00 PM', endTime: '03:30 PM', courseId: 4, lecturer: 'Prof. Johnson', attended: false },
-    ],
-  },
-  {
-    degreeTitle: 'Master of Information Technology',
-    courses: [
-      { startTime: '10:45 AM', endTime: '01:30 PM', courseId: 5, lecturer: 'Dr. Smith', attended: false },
-      { startTime: '02:00 PM', endTime: '03:30 PM', courseId: 6, lecturer: 'Prof. Johnson', attended: false },
-    ],
-  },
-  {
-    degreeTitle: 'Master of Business Analytics',
-    courses: [
-      { startTime: '10:45 AM', endTime: '01:30 PM', courseId: 7, lecturer: 'Dr. Smith', attended: false },
-      { startTime: '02:00 PM', endTime: '03:30 PM', courseId: 8, lecturer: 'Prof. Johnson', attended: false },
-    ],
-  },
-];
 
 const Layout1 = ({ degree }) => {
-  const columns = ['TIME', 'COURSE', 'LECTURER', 'STATUS'];
 
+  const columns = ['DATE', 'TIME',  'COURSE', 'LECTURER', 'STATUS'];
+  console.log(degree);
   // Extract session data from the degree object
-  const data = degree.courses.map(session => ({
+  const data = degree.map(session => ({
+    DATE: session.date,
     TIME: `${session.startTime} - ${session.endTime}`,
-    COURSE: session.courseId, // Display courseID instead of courseName
-    LECTURER: session.lecturer,
-    STATUS: session.attended ? 1 : 0,
+    COURSE: session.courseId.courseName, // Display courseID instead of courseName
+    LECTURER: `${session.tsId.firstname} ${session.tsId.lastname}`,
+    STATUS: session.status === "Pending" ? 0 : 1,
   }));
-
-  const done = 0; //might want to adjust this value based on your logic
-  const btn = 0; // might want to adjust this value based on your logic
 
   return (
     <div>
-      <TableHeaderComponent left={degree.degreeTitle} right={'Sat 12th Aug, 2023'} />
-      <AttendanceTrackingComponent columns={columns} data={data} done={done} btn={btn} />
+      <TableHeaderComponent left={degree[0].courseId.programId.name}/>
+      <Paper sx={{ borderRadius: '7px', background: '#FFF', boxShadow: '0px 13px 20px -7px rgba(0, 0, 0, 0.15)', marginTop: 2 }}>
+            {/* Use the GeneralDashboardTable component */}
+            <GeneralDashboardTable columns={columns} data={data} />
+        </Paper>
     </div>
   );
 };
 
 const AttendanceTrackingLayout = () => {
+
+  const attendance_url = `attendance/getAttendance`
+  const [sessions, setSessions] = useState([]);
+  const { get } = useAxiosMethods();
+  useEffect(() => {
+      // Call the get method to fetch user data
+      get(attendance_url, setSessions);
+  }, []);
+
+  // Group sessions by programId
+  const sessionsByProgram = {};
+  sessions.forEach(session => {
+    const programId = session.courseId.programId.name; // Assuming programId contains a 'name' property
+    if (!sessionsByProgram[programId]) {
+      sessionsByProgram[programId] = [];
+    }
+    sessionsByProgram[programId].push(session);
+    console.log(sessionsByProgram);
+  });
+
   return (
     <Box>
       <Grid container spacing={2}>
-        <Grid item xs={2.5}></Grid>
-        <Grid container xs={9.3} sx={{
-          display: 'grid',
-          gridTemplateRows: '16.5% auto 10%',
-          height: '100vh',
-        }}>
+        <Grid item xs={2.5}>
+          <NavBarComponent />
+        </Grid>
+        <Grid container xs={9.3} sx={{ 
+            display: 'grid', 
+            gridTemplateRows: '16.5% auto 10%',
+            height: '100vh', 
+          }}>
           <Grid item>
             <HeaderComponent />
           </Grid>
           <Grid item>
-            {/* Map over your actual session data */}
-            {sessionData.map((degree, index) => (
-              <Layout1 key={index} degree={degree} />
+            {/* Map over programIds and create Layout1 components for each program */
+            Object.keys(sessionsByProgram).map(programId => (
+              <Layout1 key={programId} degree={sessionsByProgram[programId]} />
             ))}
           </Grid>
           <Grid item>

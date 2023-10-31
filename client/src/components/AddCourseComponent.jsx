@@ -131,10 +131,10 @@ const Course = () => { // Changed the function name to start with uppercase "P"
                   onChange={handleChange}
                   name="programId"
                 >
-                    <MenuItem value={'MCS'}>Master of Computer Science</MenuItem>
-                    <MenuItem value={'MIT'}>Master of Information Technology</MenuItem>
-                    <MenuItem value={'MIS'}>Master of Information Security</MenuItem>
-                    <MenuItem value={'MBA'}>Master of Business Analytics</MenuItem>
+                    <MenuItem value={1}>Master of Computer Science</MenuItem>
+                    <MenuItem value={2}>Master of Information Technology</MenuItem>
+                    <MenuItem value={3}>Master of Information Security</MenuItem>
+                    <MenuItem value={4}>Master of Business Analytics</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

@@ -54,9 +54,57 @@ const useAxiosMethods = () => {
         }
     }
 
+    const put = (url, data, setResponse) => {
 
+        let isMounted = true;
+        const controller = new AbortController();
 
-  return {get, post}
+        const putData = async () => {
+            try {
+                const response = await axiosPrivate.put(url, data, {
+                    signal: controller.signal,
+                });
+                isMounted && setResponse(response.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        putData().then();
+
+        return () => {
+            isMounted = false;
+            controller.abort();
+        }
+
+    }
+
+    const del = (url, setResponse) => {
+
+            let isMounted = true;
+            const controller = new AbortController();
+
+            const deleteData = async () => {
+                try {
+                    const response = await axiosPrivate.delete(url, {
+                        signal: controller.signal,
+                    });
+                    isMounted && setResponse(response.data);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+
+            deleteData().then();
+
+            return () => {
+                isMounted = false;
+                controller.abort();
+            }
+    }
+
+    return { get, post, put, del };
+
 }
 
-export default useAxiosMethods
+export default useAxiosMethods;

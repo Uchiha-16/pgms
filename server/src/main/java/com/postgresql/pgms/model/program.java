@@ -16,13 +16,6 @@ public class program {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer programID;
-
     private String name;
 
-//    public program() {
-//    }
-
-    public program(String name) {
-        this.name = name;
-    }
 }

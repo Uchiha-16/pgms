@@ -77,6 +77,7 @@ function Form() {
   };
 
   const sectionStyle = {
+    marginLeft: "-130px",
     fontSize: "1.1rem",
     width: "150px",
     color: "#444",
@@ -111,33 +112,26 @@ function Form() {
     },
   };
 
-  // const addButtonStyle = {
-  //   marginLeft: "490px",
-  //   fontSize: "0.8rem",
-  //   marginTop: "30px",
-  //   marginBottom: "10px",
-  //   backgroundColor: "#2196F3",
-  //   color: "#fff",
-  //   "&:hover": {
-  //     backgroundColor: "#1976D2",
-  //   },
-  // };
+  const h2 = {
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+    color: "#444",
+    marginBottom: "-70px",
+    marginLeft: "-130px",
+    marginTop: "50px",
+  };
+
 
   return (
     <form onSubmit={handleSubmit}>
       <Paper elevation={3} style={paperStyle}>
-        <div style={{ position: "relative" }}></div>
+        {/* <div style={{ position: "relative" }}></div> */}
         <div style={roleStyle}>
           <a href="/previousIntakeDetails" style={sectionStyle}>
             Previous Intake Details
           </a>
-          {/* <Button
-            variant="outlined"
-            style={addButtonStyle}
-            onClick={handleEditToggle}
-          >
-            Add
-          </Button> */}
+          <h2 style={h2}>Current Intake Details</h2>
+          
           <div
             style={{
               position: "absolute",

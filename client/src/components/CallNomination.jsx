@@ -106,7 +106,7 @@ console.log("Program Value:", formData.programId);
               right: '20px', // Place it on the left
               margin: '16px', // Add margin for spacing
             }}
-            >Apply for a Course
+            >Call for Nomination
             </Button>
             <Dialog 
             // fullScreen 
@@ -480,11 +480,10 @@ console.log("Program Value:", formData.programId);
 
               </Grid>
 
-              <Grid item xs={12}>
-
+              <Grid item xs={12} >
+<InputLabel id='Closing Date' required style={{ marginLeft: '13px' }}>Closing date</InputLabel>
               <FormControl fullWidth>
-              <TextField label="Closing Date" type= "date" variant="outlined" required/>
-
+              <TextField id="demo-simple-select-label" type='date' ></TextField>
     </FormControl>
               </Grid>
             </Grid>

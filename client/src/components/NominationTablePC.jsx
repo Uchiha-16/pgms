@@ -19,16 +19,13 @@ const NominationsTable = ({ columns, data }) => {
     };
 
 const isAccepted = (columnName, cellValue) => {
-  return columnName === "STATUS" && cellValue === "Accepted";
+  return columnName === "STATUS" && cellValue === "Open";
 };
 
 const isRejected = (columnName, cellValue) => {
-  return columnName === "STATUS" && cellValue === "Rejected";
+  return columnName === "STATUS" && cellValue === "Closed";
 };
 
-const isPending = (columnName, cellValue) => {
-  return columnName === "STATUS" && cellValue === "Pending";
-};
 
 const isNameColumn = (columnName) => {
   return columnName === "Name";
@@ -199,21 +196,8 @@ const visibleRows = data.slice(startRowIndex, endRowIndex);
                                                     alignItems: 'center',
                                                     paddingTop: 2,
                                                 }}>{row[column]}</div>
-                                        ) : isPending(column, row[column]) ? (
-                                                <div style={{
-                                                    background: 'orange',
-                                                    borderRadius: 50,
-                                                    color: '#FFF',
-                                                    width: 80,
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '12px',
-                                                    fontWeight: '900',
-                                                    display: 'flex',
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                    paddingTop: 2,
-                                                }}>{row[column]}</div>
-                                        ) : isFunctionColumn(column) ? (
+                                        ) : 
+                                        isFunctionColumn(column) ? (
                                             <div>
                                                 <span>{row[column]}</span><br />
                                                 <span style={{

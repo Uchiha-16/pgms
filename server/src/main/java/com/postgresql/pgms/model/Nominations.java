@@ -20,7 +20,7 @@ public class Nominations {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users userId;
-    private String programId;
+    private Integer programId;
     private Integer semester;
     @ManyToOne
     @JoinColumn(name = "course_id")

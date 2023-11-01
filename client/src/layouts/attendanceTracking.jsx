@@ -19,8 +19,11 @@ const Layout1 = ({ degree }) => {
     TIME: `${session.startTime} - ${session.endTime}`,
     COURSE: session.courseId.courseName, // Display courseID instead of courseName
     LECTURER: `${session.tsId.firstname} ${session.tsId.lastname}`,
-    STATUS: session.status === "Pending" ? 0 : 1,
+    STATUS: session.staffID == null ? 0 : 1,
+    SESSIONID: session.sessionId
   }));
+
+  // console.log(data);
 
   return (
     <div>

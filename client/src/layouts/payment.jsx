@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useState, useEffect} from 'react';
 import { Box, Grid, Typography, Fade, Paper, Button } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
@@ -6,11 +6,18 @@ import FooterComponent from '../components/FooterComponent';
 import PaymentCard from '../components/PaymentCard';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 import HStepper from '../components/HStepper';
+import useAxiosMethods from '../hooks/useAxiosMethods';
 
 // const users_URL = "http://localhost:8080/api/users/getUsers"
 
 
 const Layout1 = () => {
+
+    const [data2, setData2] = useState([]);
+    const {post, get} = useAxiosMethods();
+    const [data1, setData1]= useState([]);
+    const URL = "/payment/changeFwd"
+    const URL2 = "/payment/userPayments"
  
     const columns = ['No', 'Date', 'Subject', 'Hours', 'Rate Rs', 'Amount', 'AttendanceStatus', 'AddtoVoucher'];
     const data = [
@@ -21,11 +28,52 @@ const Layout1 = () => {
         { No: '05', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved', AddtoVoucher: 0},
         { No: '06', Date: '05/09/2023', Subject: 'MIS3202', Hours: 3, RateRs: 5000, Amount: 15000, AttendanceStatus: 'Approved', AddtoVoucher: 1},
     ];
+
+    useEffect(
+        ()=>{
+            console.log("useeffecter ran");
+            // setData1(data);
+            try{
+                get(URL2, setData2)
+
+            }catch(e){
+                console.error(e,"error in getdata for individual payment list");
+            }          
+            
+            
+        },
+      
+    [data1])
+
     const done = 0;
     const btn = 0;
 
+    const hell=async(no, atv)=>{
+        // const id = id1
+        console.log(`${no} clicked`);
+
+        const datatotransfer = {
+            "no" : 1,
+            "addtoVoucher" : 1
+        }
+
+        try{
+            post(URL,datatotransfer,setData1)
+
+        }catch(e){
+            console.log(e);
+        }
+
+        // try {
+        //     const response = await axios.get('/auth/paymentlist');           
+        //     console.log(response.data);
+        //   } catch (error) {
+        //     console.error('An error occurred:', error);
+        //   }
+    }
+
     return (
-        <PaymentCard columns={columns} data={data} done={done} btn={btn} />
+        <PaymentCard columns={columns} data={data2} done={done} btn={btn} onChange = {hell} />
     );
 };
 

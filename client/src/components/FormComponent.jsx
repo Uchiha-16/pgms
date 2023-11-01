@@ -6,21 +6,19 @@ import useAxiosMethods from "../hooks/useAxiosMethods";
 import PopupComponent2 from "./PopupComponent2";
 
 const Form = () => {
-
   const [formData, setFormData] = useState([]);
   const [budget, setBudget] = useState([]);
   const { get } = useAxiosMethods();
 
   const currentIntake_URL = `/intake/getCurrentIntake`;
-  const updateIntake_URL = `/intake/updateIntake/`
+  const updateIntake_URL = `/intake/updateIntake/`;
 
   useEffect(() => {
     // Fetch data from the server using Axios
-    get(currentIntake_URL, setBudget)
+    get(currentIntake_URL, setBudget);
   }, []); // Make sure to include the dependency
 
   console.log(budget);
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,10 +39,14 @@ const Form = () => {
   };
 
   const paperStyle = {
-    width: "70%",
-    height: "auto",
-    margin: "50px auto",
+    backgroundColor: "#FFFFFF",
     position: "relative",
+    top: -20,
+    zIndex: 0,
+
+    // width: "95%",
+    // height: "auto",
+    // margin: "auto 50px",
     textAlign: "center",
     borderRadius: "10px",
   };
@@ -66,14 +68,6 @@ const Form = () => {
     width: "28rem",
   };
 
-  const sectionStyle = {
-    marginLeft: "-130px",
-    fontSize: "1.0rem",
-    width: "150px",
-    color: "#444",
-    fontWeight: "bold",
-  };
-
   const detailContainerStyle = {
     display: "flex",
     marginBottom: "20px",
@@ -91,48 +85,36 @@ const Form = () => {
     fontSize: "14px",
   };
 
-  const editButtonStyle = {
-    top: "40px",
-    marginLeft: "630px",
-    fontSize: "0.8rem",
-    backgroundColor: "#2196F3",
-    color: "#fff",
-    "&:hover": {
-      backgroundColor: "#1976D2",
-    },
+  const headerContainerStyle = {
+    display: "flex",
+    alignItems: "center",
+    height: "90px",
+  };
+
+  const a = {
+    fontSize: "1.0rem",
+    color: "#444",
+    fontWeight: "bold",
+    marginLeft: "800px", // This will push "Previous Intake Details" to the right
   };
 
   const h2 = {
     fontSize: "1.2rem",
     fontWeight: "bold",
     color: "#444",
-    marginBottom: "-70px",
-    marginLeft: "-130px",
-    marginTop: "50px",
+    marginLeft: "20px",
   };
-
 
   return (
     <form onSubmit={handleSubmit}>
       <Paper elevation={3} style={paperStyle}>
-        {/* <div style={{ position: "relative" }}></div> */}
-        <div style={roleStyle}>
-          <a href="/previousIntakeDetails" style={sectionStyle}>
+        <div style={headerContainerStyle}>
+          <h2 style={h2}>Current Intake Details</h2>
+          <a href="/previousIntakeDetails" style={a}>
             Previous Intake Details
           </a>
-          <h2 style={h2}>Current Intake Details</h2>
-          
-          <div
-            style={{
-              position: "absolute",
-              top: "20px",
-              marginLeft: "630px",
-             
-            }}
-          >
-            <PopupComponent2 />
-          </div>
         </div>
+
         <div style={infoStyle}>
           <div edit>
             <div style={detailContainerStyle}>
@@ -140,7 +122,7 @@ const Form = () => {
                 Duration:
               </Typography>
               <Typography variant="body2" style={contentStyle}>
-                {budget.length > 0 ? `${budget[0].year}` : ''}
+                {budget.length > 0 ? `${budget[0].year}` : ""}
               </Typography>
             </div>
 
@@ -149,7 +131,7 @@ const Form = () => {
                 Budget for the intake:
               </Typography>
               <Typography variant="body2" style={contentStyle}>
-                {budget.length > 0 ? budget[0].budget : ''}
+                {budget.length > 0 ? budget[0].budget : ""}
               </Typography>
             </div>
 
@@ -158,7 +140,7 @@ const Form = () => {
                 Rate:
               </Typography>
               <Typography variant="body2" style={contentStyle}>
-                {budget.length > 0 ? budget[0].rate : ''}
+                {budget.length > 0 ? budget[0].rate : ""}
               </Typography>
             </div>
             <div style={detailContainerStyle}>
@@ -166,7 +148,9 @@ const Form = () => {
                 Coordinator MIS:
               </Typography>
               <Typography variant="body2" style={contentStyle}>
-                {budget.length > 0 ? `${budget[0].mis.firstname} ${budget[0].mis.lastname}` : ''}
+                {budget.length > 0
+                  ? `${budget[0].mis.firstname} ${budget[0].mis.lastname}`
+                  : ""}
               </Typography>
             </div>
             <div style={detailContainerStyle}>
@@ -174,7 +158,9 @@ const Form = () => {
                 Coordinator MCS:
               </Typography>
               <Typography variant="body2" style={contentStyle}>
-                {budget.length > 0 ? `${budget[0].mcs.firstname} ${budget[0].mcs.lastname}` : ''}
+                {budget.length > 0
+                  ? `${budget[0].mcs.firstname} ${budget[0].mcs.lastname}`
+                  : ""}
               </Typography>
             </div>
             <div style={detailContainerStyle}>
@@ -182,7 +168,9 @@ const Form = () => {
                 Coordinator MIT:
               </Typography>
               <Typography variant="body2" style={contentStyle}>
-                {budget.length > 0 ? `${budget[0].mit.firstname} ${budget[0].mit.lastname}` : ''}
+                {budget.length > 0
+                  ? `${budget[0].mit.firstname} ${budget[0].mit.lastname}`
+                  : ""}
               </Typography>
             </div>
             <div style={detailContainerStyle}>
@@ -190,7 +178,9 @@ const Form = () => {
                 Coordinator MBA:
               </Typography>
               <Typography variant="body2" style={contentStyle}>
-                {budget.length > 0 ? `${budget[0].mba.firstname} ${budget[0].mba.lastname}` : ''}
+                {budget.length > 0
+                  ? `${budget[0].mba.firstname} ${budget[0].mba.lastname}`
+                  : ""}
               </Typography>
             </div>
           </div>
@@ -198,6 +188,6 @@ const Form = () => {
       </Paper>
     </form>
   );
-}
+};
 
 export default Form;

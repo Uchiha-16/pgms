@@ -25,10 +25,11 @@ import AttendanceTrackingTable from "./layouts/attendanceTrackingTable";
 import Programs from "./layouts/programs";
 import Form from "./layouts/form";
 import PreviousIntakeDetails from "./layouts/previousIntakeDetails";
+
 import Payment from "./layouts/payment";
 import PaymentReport1 from "./layouts/paymentreport1";
-import NominationList from "./layouts/nominationList";
 import PaymentPrevious from "./layouts/paymentPrevious";
+import NominationList from "./layouts/nominationList";
 
 function App() {
   return (
@@ -54,104 +55,40 @@ function App() {
         <Route path="/addNominations" element={<AddNominations />} />{" "}
       </Route>
 
-      {/* private */}
-      <Route element={<PersistLogin />}>
-        <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]} />}>
-          <Route path="home" element={<Home />} />
-          <Route path="/nominations" element={<AddNominations />} />
-          <Route path="/users" element={<Users />} />
-          {/* <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} > */}
-          <Route path="home" element={<Home />} />
-          <Route path="/users" element={<Users />} />
-          {/* <Route path='/programs' element={<Programs/>}/> */}
-          <Route path="/profile/:userID" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/att" element={<Attendance />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/lecturers" element={<Lecturers />} />
-          {/* <Route path='/programs' element={<Programs />} /> */}
-          <Route
-            path="/attendance-tracking"
-            element={<AttendanceTrackingTable />}
-          />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/paymentreport1" element={<PaymentReport1 />} />
-          <Route path="/paymentPrevious" element={<PaymentPrevious />} />
-          <Route path="/nominationList" element={<NominationList />} />
-          <Route path="/profile/:userID" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+        {/* private */}
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff", "PCMIT", "PCMIS", "PCMCS", "PCMBA"]}/>} >
+            <Route path='home' element={<Home />} />
+            <Route path='/users' element={<Users/>}/>
+            {/* <Route path='/programs' element={<Programs/>}/> */}
+            <Route path='/profile/:userID' element={<Profile />} />
+            <Route path='/dashboard' element={<Dashboard />} />
+           
+            <Route path='/att' element={<Attendance />} />
+            <Route path='/notifications' element={<Notifications />} />
+            <Route path='/lecturers' element={<Lecturers/>}/>
+            <Route path='/programs' element={<Programs />} />
+            <Route path='/form' element={<Form />} />
+            <Route path='/previousIntakeDetails' element={<PreviousIntakeDetails />} />
+           
+            <Route path='/nominationList' element={<NominationList />} />
+          </Route>
+          {/* <Route element={<RequireAuth allowedRoles={["Lecturer"]}/>} >
+          
 
-          <Route path="/att" element={<Attendance />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/lecturers" element={<Lecturers />} />
-          <Route path="/programs" element={<Programs />} />
-          <Route
-            path="/attendance-tracking"
-            element={<AttendanceTrackingTable />}
-          />
-          <Route path="/form" element={<Form />} />
-          <Route
-            path="/previousIntakeDetails"
-            element={<PreviousIntakeDetails />}
-          />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={["Lecturer"]} />}>
-          <Route
-            path="/attendance-tracking"
-            element={<AttendanceTrackingTable />}
-          />
-          <Route path="/profile/:userID" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          
+          </Route> */}
+          <Route element={<RequireAuth allowedRoles={["Staff"]}/>} >
+            <Route path='/addUsers' element={<AddUser/>}/>
+            <Route path='/users' element={<Users/>}/>
+            <Route path='/staff' element={<Staff/>}/>
+            <Route path='/attendance-page' element={<AttendanceTracking />} />
+          </Route>
 
-          <Route path="/att" element={<Attendance />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/lecturers" element={<Lecturers />} />
-          <Route path="/programs" element={<Programs />} />
-          <Route
-            path="/attendance-tracking"
-            element={<AttendanceTrackingTable />}
-          />
-          <Route path="/form" element={<Form />} />
-          <Route
-            path="/previousIntakeDetails"
-            element={<PreviousIntakeDetails />}
-          />
-
-          <Route path="/nominationList" element={<NominationList />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={["Lecturer"]} />}>
-          <Route
-            path="/attendance-tracking"
-            element={<AttendanceTrackingTable />}
-          />
-
-          <Route path="/att" element={<Attendance />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/lecturers" element={<Lecturers />} />
-          <Route path="/programs" element={<Programs />} />
-          <Route
-            path="/attendance-tracking"
-            element={<AttendanceTrackingTable />}
-          />
-          <Route path="/form" element={<Form />} />
-          <Route
-            path="/previousIntakeDetails"
-            element={<PreviousIntakeDetails />}
-          />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={["Lecturer"]} />}>
-          <Route
-            path="/attendance-tracking"
-            element={<AttendanceTrackingTable />}
-          />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={["Staff"]} />}>
-          <Route path="/addUsers" element={<AddUser />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/staff" element={<Staff />} />
-          <Route path="/attendance-page" element={<AttendanceTracking />} />
+          <Route element={<RequireAuth allowedRoles={["PCMIT", "PCMIS", "PCMCS", "PCMBA"]}/>} >
+            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+          </Route>
+          
         </Route>
       </Route>
     </Routes>

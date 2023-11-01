@@ -3,6 +3,9 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import DoneIcon from '@mui/icons-material/Done';
 import ProgressbarComponent from './ProgressbarComponent';
 import VoucherSummaryComponent from './VoucherSummaryComponent';
+import axios from '../api/axios';
+import { display } from '@mui/system';
+import useAuth from "../hooks/useAuth";
 
 const voucherSummaryStyle = {
     maxHeight: '0',
@@ -18,6 +21,7 @@ const expandedVoucherSummaryStyle = {
 
 const GeneralDashboardTable = ({ columns, data, done, btn }) => {
 
+    const { auth } = useAuth();
     const isChecked = (columnName, cellValue) => {
         return columnName === 'STATUS' && cellValue === 1;
     };
@@ -47,6 +51,27 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
     const handleViewLessClick = () => {
         setIsExpanded(false);
     };
+
+    const handleStatusCheckboxChange = (row, column, sessionID) => {
+        
+        const confirmed = window.confirm('Do you want to perform this action?');
+        if (!confirmed) {
+            row.STATUS = 0;
+            return;
+        }
+
+        const payload = []
+
+        axios.put(`/attendance/updateStaffId/${sessionID}/${auth.user_id}`, payload)
+          .then(response => {
+            // Handle the successful response, e.g., update your state
+            console.log('PUT request successful', response.data);
+          })
+          .catch(error => {
+            // Handle any errors
+            console.error('PUT request error', error);
+          });
+      };
 
     return (
         <>
@@ -130,14 +155,20 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                                             paddingBottom: 2.3,
                                         }}>
                                         {isChecked(column, row[column]) ? (
-                                            <Checkbox defaultChecked sx={{
-                                                color: '#D9D9D9',
-                                                '&.Mui-checked': {
-                                                    color: '#43A047',
-                                                },
-                                            }} />
+                                            <Checkbox
+                                            checked={isChecked(column, row[column])}
+                                            sx={{
+                                              color: '#D9D9D9',
+                                              '&.Mui-checked': {
+                                                color: '#43A047',
+                                              },
+                                            }}
+                                          />
+                                          
                                         ) : isUnchecked(column, row[column]) ? (
-                                            <Checkbox sx={{
+                                            <Checkbox 
+                                            onChange={() => handleStatusCheckboxChange(row, column, row.SESSIONID )}
+                                            sx={{
                                                 color: '#D9D9D9',
                                                 '&.Mui-checked': {
                                                     color: '#43A047',
@@ -167,7 +198,7 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                                                     color: '#43A047',
                                                 },
                                             }} />
-                                        ) :
+                                        ) : 
                                         (
                                             row[column]
                                         )

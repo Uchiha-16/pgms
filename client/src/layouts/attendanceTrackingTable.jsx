@@ -6,6 +6,7 @@ import TableHeaderComponent from '../components/TableHeaderComponent';
 import AttendanceTrackingComponent from '../components/AttendanceTrackingTableComponent';
 import { headCells } from '../config/attendanceConfig';
 import NavbarComponent from '../components/NavbarComponent';
+import useAuth from "../hooks/useAuth";
 
 const Layout = ({ degreeName, rows }) => (
   <>
@@ -37,7 +38,7 @@ class AttendaceTrackingTable extends Component {
 
     // Determine the degree program for the Program Coordinator
     // fetch this information from  backend or based on user authentication
-    const programCoordinatorRole = 'Information Technology'; // Example program name
+    const programCoordinatorRole = 'Computer Sceince'; // Example program name
 
     return (
       <Box>

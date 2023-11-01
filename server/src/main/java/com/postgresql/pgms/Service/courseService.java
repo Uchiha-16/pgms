@@ -1,8 +1,5 @@
 package com.postgresql.pgms.Service;
 
-import com.postgresql.pgms.DTO.CourseListResponseDTO;
-import com.postgresql.pgms.DTO.NominationSaveDTO;
-import com.postgresql.pgms.model.Nominations;
 import com.postgresql.pgms.model.course;
 import com.postgresql.pgms.DTO.CourseSaveDTO;
 import com.postgresql.pgms.model.program;
@@ -41,5 +38,13 @@ public class courseService{
     public List<course> getAllCourses() {
         List<course> coursesList = courseRepo.findAll();
         return (coursesList);
+    }
+
+    //delete course
+    public void deleteCourse(Integer id) {
+        if (!courseRepo.existsById(id)){
+            //error exception
+        }
+        courseRepo.deleteById(id);
     }
 }

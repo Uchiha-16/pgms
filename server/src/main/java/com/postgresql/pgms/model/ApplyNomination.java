@@ -1,4 +1,5 @@
 package com.postgresql.pgms.model;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,26 +13,21 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table (name = "nomination")
-public class Nominations {
+@Table (name = "apply_nominations")
+public class ApplyNomination {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long nominationid;
+    private long appId;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users userId;
     private String programId;
-    private Integer semester;
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private course courseNo;
+    private String courseId;
     @Builder.Default
-    private LocalDate opendate = LocalDate.now();
-    private LocalDate closedate;
+    private String status = "Pending";
 
     @Builder.Default
-    private String nominationStatus = "Open";
+    private LocalDate date = LocalDate.now();
 
-
+    
 }
-

@@ -50,7 +50,7 @@ function App() {
 
         {/* private */}
         <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} >
+          <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff", "PCMIT", "PCMIS", "PCMCS", "PCMBA"]}/>} >
             <Route path='home' element={<Home />} />
             <Route path='/nominations' element={<AddNominations />} />
             <Route path='/users' element={<Users/>}/>
@@ -62,27 +62,28 @@ function App() {
             <Route path='/notifications' element={<Notifications />} />
             <Route path='/lecturers' element={<Lecturers/>}/>
             <Route path='/programs' element={<Programs />} />
-            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
             <Route path='/form' element={<Form />} />
             <Route path='/previousIntakeDetails' element={<PreviousIntakeDetails />} />
            
             <Route path='/nominationList' element={<NominationList />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={["Lecturer"]}/>} >
-            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+          {/* <Route element={<RequireAuth allowedRoles={["Lecturer"]}/>} >
           
 
           
-          </Route>
+          </Route> */}
           <Route element={<RequireAuth allowedRoles={["Staff"]}/>} >
             <Route path='/addUsers' element={<AddUser/>}/>
             <Route path='/users' element={<Users/>}/>
             <Route path='/staff' element={<Staff/>}/>
             <Route path='/attendance-page' element={<AttendanceTracking />} />
           </Route>
+
+          <Route element={<RequireAuth allowedRoles={["PCMIT", "PCMIS", "PCMCS", "PCMBA"]}/>} >
+            <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+          </Route>
+          
         </Route>
-
-
       </Route>
     </Routes>
   );

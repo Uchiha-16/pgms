@@ -29,7 +29,7 @@ public class attendanceService {
     }
 
     public List<session> getCourseAttendance(Integer id) {
-        List<session> attendanceList = repo.findAllCourseAttendance(id);
+        List<session> attendanceList = repo.findAllSessionsByProgramId(id);
         return attendanceList;
     }
 
@@ -45,7 +45,9 @@ public class attendanceService {
     public void updatePcId(Integer sessionId, Integer pcID) {
         session session = repo.findById(sessionId).orElseThrow(() -> new EntityNotFoundException("Session not found"));
         Users users = userRepo.findById(pcID).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        session.setPcId(users); // This line should be updated
+        session.setPcId(users);
+        //status should be changed to Marked
+        session.setStatus("Marked");
         repo.save(session);
     }
 

@@ -101,9 +101,9 @@ console.log("Program Value:", formData.programId);
             {/* <h1>Nomination Application</h1> */}
             <Button onClick={functionOpenPopup} color="primary" variant="contained"
             sx={{
-              position: 'absolute', // Position absolutely
-              top: '90px', // Place it at the top
-              right: '20px', // Place it on the left
+              // position: 'auto', // Position absolutely
+              top: '-100px', // Place it at the top
+              right: '-500px', // Place it on the left
               margin: '16px', // Add margin for spacing
             }}
             >Call for Nomination

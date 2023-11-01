@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, Component } from 'react';
 import { Box, Grid, Typography, Fade, Paper } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
@@ -26,16 +26,16 @@ const Layout1 = () => {
     // const [users, setUsers] = useState([]);
     
 
-    useEffect(() => {
-        console.log("useeffecter ran");
-        // setData1(data);
-        try{
-            get(URL, setData2)
+    // useEffect(() => {
+    //     console.log("useeffecter ran");
+    //     // setData1(data);
+    //     try{
+    //         get(URL, setData2)
 
-        }catch(e){
-            console.error(e,"error in getdata for individual payment list");
-        }    
-    }, []);
+    //     }catch(e){
+    //         console.error(e,"error in getdata for individual payment list");
+    //     }    
+    // }, []);
 
     const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
     

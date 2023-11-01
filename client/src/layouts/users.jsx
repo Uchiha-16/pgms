@@ -36,29 +36,6 @@ const Layout1 = () => {
     ));
 
 
-    // const rows = users.map(user => createData(
-    //         `${user.firstname} ${user.lastname}`,
-    //         user.role,
-    //         'ONLINE', // Assuming you want to display a static status for all users
-    //         user.email,
-    //         'Edit'
-    // ));
-
-
-   // ====================== Dummy Data for testing ======================//
-    // function createData(NAME, ROLE, STATUS, EMPLOYED, ACTION) {
-    //     return {
-    //         NAME,
-    //         ROLE,
-    //         STATUS,
-    //         EMPLOYED,
-    //         ACTION
-    //     };
-    // }
-    // const rows = [
-    //     createData('Johny Michael', 'Lecturer', 'ONLINE', 'yo', 'Edit')
-    // ];
-
     return (
         <GeneralTable rows={rows} headCells={headCells} />
     );

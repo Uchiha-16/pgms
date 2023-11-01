@@ -23,19 +23,19 @@ public class Intake {
     private long rate;
     private long budget;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "MCS_id")
     private Users MCS;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "MIT_id")
     private Users MIT;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "MIS_id")
     private Users MIS;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "MBA_id")
     private Users MBA;
 

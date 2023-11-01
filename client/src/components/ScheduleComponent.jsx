@@ -24,7 +24,8 @@ import {
     GroupingPanel,
     WeekView,
 } from '@devexpress/dx-react-scheduler-material-ui';
-import { data as appointments } from '../config/timetableData';
+import axios from '../api/axios';
+// import { data as appointments } from '../config/timetableData';
 
 const isWeekOrMonthView = viewName => viewName === 'Week';
 
@@ -85,6 +86,54 @@ console.log("Saturday:", saturdayDate);
 console.log("Sunday:", sundayDate);
 
 export default class ScheduleComponent extends React.PureComponent {
+    
+    componentDidMount() {
+        // Make an Axios GET request within componentDidMount
+        axios.get('/sessions/get')
+          .then((response) => {
+            const fetchedData = response.data;
+      
+            const appointments = fetchedData.map((item) => {
+              // Define the conversion logic here
+              const {
+                date,
+                startTime,
+                endTime,
+                hallName,
+                tsId,
+                courseId,
+                sessionId,
+              } = item;
+      
+              // Parse date and time strings to JavaScript Date objects
+              const [year, month, day] = date.split('-').map(Number);
+              const [startHour, startMinute] = startTime.split(':').map(Number);
+              const [endHour, endMinute] = endTime.split(':').map(Number);
+      
+              const startDate = new Date(year, month - 1, day, startHour, startMinute);
+              const endDate = new Date(year, month - 1, day, endHour, endMinute);
+              
+              return {
+                title: courseId.courseNo, // Modify to match your data structure
+                priorityId: courseId.programId.name, // Modify to match your data structure
+                //if semester id == 1 or 2 change value to 2 else to 1
+                semester: courseId.semester === 4 ? 1 : courseId.semester === 2 ? 2 : 0,
+                startDate,
+                endDate,
+                hallName, // Modify to match your data structure
+                lecturerName: `${tsId.firstname} ${tsId.lastname}`, // Modify to match your data structure
+                id: sessionId, // Modify to match your data structure
+              };
+            });
+      
+            this.setState({ data: appointments });
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      }
+      
+
     constructor(props) {
         super(props);
 
@@ -95,7 +144,7 @@ export default class ScheduleComponent extends React.PureComponent {
         }
 
         this.state = {
-            data: appointments,
+            data: [],
             resources: [
                 {
                     fieldName: 'semester',
@@ -194,6 +243,15 @@ export default class ScheduleComponent extends React.PureComponent {
         });
     }
 
+    handleAppointmentContextMenu = (e, appointment) => {
+        e.preventDefault(); // Prevent the default browser context menu
+        const confirmation = window.confirm('Are you sure you want to delete this appointment?');
+        if (confirmation) {
+            // Delete the appointment here, you can use your commitChanges or other logic
+            this.commitChanges({ deleted: appointment.id });
+        }
+    };
+
     render() {
         const {
             data, resources, grouping, groupByDate, selectedDay, isGroupByDate, weekViewStartDate, weekViewEndDate,
@@ -208,8 +266,9 @@ export default class ScheduleComponent extends React.PureComponent {
             excludedDays = [1, 2, 3, 4, 5, 6];
         }
 
-
+        
         return (
+            
             <Box>
                 <GroupOrderSwitcher isGroupByDate={isGroupByDate} onChange={this.onGroupOrderChange} />
                 <Paper
@@ -285,6 +344,7 @@ export default class ScheduleComponent extends React.PureComponent {
                         <Scheduler
                             data={data}
                             height={'auto'}
+                            onAppointmentContextMenu={(e) => this.openDeleteConfirmation(e.appointmentData)}
                         >
                             <ViewState
                                 defaultCurrentDate="2023-10-30"
@@ -309,13 +369,17 @@ export default class ScheduleComponent extends React.PureComponent {
 
                             <Appointments
                                 appointmentContentComponent={({ data }) => (
-                                    <div style={{
-                                        color: 'white',
-                                        fontWeight: 'bold',
-                                    }}><br />
-                                        <div style={{ fontSize: '14px' }}>{data.title}</div>
-                                        <div style={{ color: '#55596F' }}>{data.hallName}</div>
-                                        <div style={{ color: '#3E4152' }}>{data.lecturerName}</div>
+                                    <div
+                                        onContextMenu={(e) => this.handleAppointmentContextMenu(e, data)}
+                                    >
+                                        <div style={{
+                                            color: 'white',
+                                            fontWeight: 'bold',
+                                        }}><br />
+                                            <div style={{ fontSize: '14px' }}>{data.title}</div>
+                                            <div style={{ color: '#55596F' }}>{data.hallName}</div>
+                                            <div style={{ color: '#3E4152' }}>{data.lecturerName}</div>
+                                        </div>
                                     </div>
                                 )}
                             />

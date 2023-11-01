@@ -1,6 +1,5 @@
 package com.postgresql.pgms.controller;
 
-import com.postgresql.pgms.DTO.SessionDTO;
 import com.postgresql.pgms.Service.attendanceService;
 
 import com.postgresql.pgms.model.session;

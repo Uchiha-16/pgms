@@ -3,10 +3,12 @@ import HeaderComponent from "../components/HeaderComponent";
 import NavbarComponent from "../components/NavbarComponent";
 import FooterComponent from "../components/FooterComponent";
 import { Box, Grid } from "@mui/material/";
+import TableHeaderComponent from "../components/TableHeaderComponent";
 import NominationComponent from "../components/NominationComponent";
 import CallNomination from "../components/CallNomination";
 import NominationsTable from "../components/NominationsTable";
 import NominationTable from "../components/NominationTablePC";
+
 import { useEffect, useState } from "react";
 import useAxiosMethods from "../hooks/useAxiosMethods";
 import useAuth from "../hooks/useAuth";
@@ -101,17 +103,20 @@ class AddNominations extends Component {
             <Grid item>
               {/* content */}
               <Grid item xs={12}>
-                <TableLayout />
                 <NominationComponent />
+                <TableLayout />
+               
               </Grid>
             </Grid>
             <Grid item sx={{ height: "25px", }} >
-              <CallNomination />
+              
             </Grid>
             <Grid item xs={12}>
+            <CallNomination />
+            <TableHeaderComponent left={'Active Nominations'} right={''} />
               <TableLayout1 />
+              
             </Grid>
-            {/*============================== Footer ==============================*/}
             <Grid item>
               <FooterComponent />
             </Grid>

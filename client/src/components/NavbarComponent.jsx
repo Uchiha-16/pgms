@@ -72,6 +72,7 @@ export default function NavbarComponent() {
                         color: '#fff',
                         position: 'fixed',
                         top: 20,
+                        bottom: 20,
                         borderRadius: 2,
                         left: 20,
                         height: 'auto',
@@ -172,7 +173,7 @@ export default function NavbarComponent() {
                     justifyContent: 'start',
                     marginLeft: 25,
                     marginRight: 25,
-                    marginTop: '6rem'
+                    marginTop: 'auto'
                 }}>
                     <List sx={{
                         width: '13.6rem',

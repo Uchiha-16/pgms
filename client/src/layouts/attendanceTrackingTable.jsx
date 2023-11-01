@@ -5,6 +5,7 @@ import FooterComponent from '../components/FooterComponent';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 import AttendanceTrackingComponent from '../components/AttendanceTrackingTableComponent';
 import { headCells } from '../config/attendanceConfig';
+import NavbarComponent from '../components/NavbarComponent';
 
 const Layout = ({ degreeName, rows }) => (
   <>
@@ -41,7 +42,9 @@ class AttendaceTrackingTable extends Component {
     return (
       <Box>
         <Grid container spacing={2}>
-          <Grid item xs={2.5}></Grid>
+          <Grid item xs={2.5}>
+            <NavbarComponent />
+          </Grid>
           <Grid container xs={9.3} sx={{ 
             display: 'grid', 
             gridTemplateRows: '16.5% auto 10%',

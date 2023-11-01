@@ -25,7 +25,8 @@ public class dashboardController {
     public ResponseEntity<String> getUserByID(@PathVariable Integer id) {
         UserDTO userDTO = userService.getUserDTOByID(id);
         if (userDTO != null) {
-            return ResponseEntity.ok(userDTO.getFirstname());
+            String fullName = userDTO.getFirstname() + " " + userDTO.getLastname();
+            return ResponseEntity.ok(fullName);
         } else {
             return ResponseEntity.notFound().build();
         }

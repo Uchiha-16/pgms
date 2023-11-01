@@ -3,6 +3,7 @@ package com.postgresql.pgms.controller;
 import com.postgresql.pgms.DTO.NominationApplyDTO;
 import com.postgresql.pgms.DTO.NominationOpeningDTO;
 import com.postgresql.pgms.Service.nominationService;
+import com.postgresql.pgms.model.ApplyNomination;
 import com.postgresql.pgms.model.Nominations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,14 @@ public class nominationController {
 
     private final nominationService service;
 
-    @GetMapping("/nominations")
+    @GetMapping("/viewnominations")
     public ResponseEntity<List<Nominations>> getAllNominations(){
         return ResponseEntity.ok(service.listnominations());
+    }
+    //get all Applications
+    @GetMapping("/viewapplications")
+    public ResponseEntity<List<ApplyNomination>> getAllApplications(){
+        return ResponseEntity.ok(service.listApplications());
     }
 
     //get the list of nominations of the particular user

@@ -26,6 +26,11 @@ public class nominationService {
         return nominationsList;
     }
 
+    //view All Applications
+    public List<ApplyNomination> listApplications() {
+        List<ApplyNomination> nominationsList = applyNominationRepo.findAll();
+        return nominationsList;
+    }
     //view all nominations by user
     public List<Nominations> listnominationsByUser(Integer id) {
         Users user = userRepository.findById(id)

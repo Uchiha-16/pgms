@@ -27,7 +27,6 @@ import Form from './layouts/form';
 import PreviousIntakeDetails from './layouts/previousIntakeDetails';
 import Payment from './layouts/payment';
 import PaymentReport1 from './layouts/paymentreport1';
-import NominationList from './layouts/nominationList';
 import PaymentPrevious from './layouts/paymentPrevious';
 
 function App() {
@@ -46,7 +45,8 @@ function App() {
         <Route path='/paymentreport1' element={<PaymentReport1 />} />
             <Route path='/payment' element={<Payment />} />
             <Route path='/paymentPrevious' element={<PaymentPrevious />} />
-            <Route path='/nominationList' element={<NominationList />} /> </Route>
+            <Route path='/addNominations' element={<AddNominations />} /> </Route>
+            
             
       
 

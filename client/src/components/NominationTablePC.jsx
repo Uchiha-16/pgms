@@ -10,7 +10,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import PendingIcon from '@mui/icons-material/QueryBuilder';
 
 
-const NominationsTable = ({ columns, data }) => {
+const NominationTable = ({ columns, data }) => {
 
     const [alignment, setAlignment] = useState('');
 
@@ -295,4 +295,4 @@ const visibleRows = data.slice(startRowIndex, endRowIndex);
   );
 };
 
-export default NominationsTable;
+export default NominationTable;

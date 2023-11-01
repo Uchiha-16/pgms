@@ -16,5 +16,7 @@ public interface NominationRepo extends JpaRepository<Nominations, Long> {
 
     //get the list of nominations of the particular user
     List<Nominations> findAllByUserId(Users user);
+    @Query(value = "SELECT * FROM nomination n WHERE n.program_id = :programId AND n.course_id = :courseId", nativeQuery = true)
+    Nominations findNominationID(String programId, String courseId);
 
 }

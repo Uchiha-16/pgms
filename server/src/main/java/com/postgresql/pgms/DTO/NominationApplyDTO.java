@@ -6,16 +6,16 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class NominationApplyDTO implements Serializable {
-
-    private long appId;
     private Integer userId;
-    private long nominationId;
-    private String status;
-    private LocalDate date;
+    private String programId;
+    private String courseId;
+    private Integer semester;
+    //private long nominationId;
 }

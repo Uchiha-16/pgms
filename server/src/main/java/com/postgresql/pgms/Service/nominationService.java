@@ -3,10 +3,7 @@ package com.postgresql.pgms.Service;
 import com.postgresql.pgms.DTO.NominationApplyDTO;
 import com.postgresql.pgms.DTO.NominationOpeningDTO;
 import com.postgresql.pgms.model.*;
-import com.postgresql.pgms.repo.ApplyNominationRepo;
-import com.postgresql.pgms.repo.CourseRepo;
-import com.postgresql.pgms.repo.NominationRepo;
-import com.postgresql.pgms.repo.UserRepository;
+import com.postgresql.pgms.repo.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +18,7 @@ public class nominationService {
     private final ApplyNominationRepo applyNominationRepo;
     private final UserRepository userRepository;
     private final CourseRepo courseRepo;
+    private final ProgramRepo programRepo;
 
     //view All Nominations
     public List<Nominations> listnominations() {
@@ -41,13 +39,11 @@ public class nominationService {
         // Look up the user by userID from the database
         Users user = userRepository.findById(nominationApplyDTO.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-        // Look up the user by userID from the database
-        Nominations nominations = repo.findById(nominationApplyDTO.getNominationId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
         ApplyNomination applyNomination = ApplyNomination.builder()
                 .userId(user)
-                .nominationId(nominations)
+                .programId(nominationApplyDTO.getProgramId())
+                .courseId(nominationApplyDTO.getCourseId())
                 .build();
 
         applyNominationRepo.save(applyNomination);
@@ -84,7 +80,7 @@ public class nominationService {
                 .userId(user)
                 .programId(nominationOpeningDTO.getProgramId())
                 .semester(nominationOpeningDTO.getSemester())
-                .courseId(courseEntity)
+                .courseNo(courseEntity)
                 .closedate(nominationOpeningDTO.getClosedate())
                 .build();
 

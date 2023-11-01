@@ -21,9 +21,8 @@ public class ApplyNomination {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users userId;
-    @ManyToOne
-    @JoinColumn(name = "nomination_id")
-    private Nominations nominationId;
+    private String programId;
+    private String courseId;
     @Builder.Default
     private String status = "Pending";
 

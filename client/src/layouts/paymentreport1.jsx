@@ -46,6 +46,179 @@ const Layout1 = () => {
     );
 };
 
+const Layout2 = () => {
+    // const [users, setUsers] = useState([]);
+    
+
+    // useEffect(() => {
+    //     axios.get(users_URL)
+    //         .then(res => {
+    //             console.log(res)
+    //             setUsers(res.data);
+    //         });
+    // }, []);
+
+    const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
+    
+    const done = 0;
+    const btn = 0;
+    const title = 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE';
+    const title2 = 'For The Month of August';
+
+
+    return (
+        
+    
+
+        <PaymentTable title2={title2} title={title} columns={columns} data={data} done={done} btn={btn} />
+        
+    );
+};
+
+const Layout3 = () => {
+    // const [users, setUsers] = useState([]);
+    
+
+    // useEffect(() => {
+    //     axios.get(users_URL)
+    //         .then(res => {
+    //             console.log(res)
+    //             setUsers(res.data);
+    //         });
+    // }, []);
+
+    const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
+    
+    const done = 0;
+    const btn = 0;
+    const title = 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE';
+    const title2 = 'For The Month of August';
+
+
+    return (
+        
+    
+
+        <PaymentTable title2={title2} title={title} columns={columns} data={data} done={done} btn={btn} />
+        
+    );
+};
+
+const Layout4 = () => {
+    // const [users, setUsers] = useState([]);
+    
+
+    // useEffect(() => {
+    //     axios.get(users_URL)
+    //         .then(res => {
+    //             console.log(res)
+    //             setUsers(res.data);
+    //         });
+    // }, []);
+
+    const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
+    
+    const done = 0;
+    const btn = 0;
+    const title = 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE';
+    const title2 = 'For The Month of August';
+
+
+    return (
+        
+    
+
+        <PaymentTable title2={title2} title={title} columns={columns} data={data} done={done} btn={btn} />
+        
+    );
+};
+
+const Layout5 = () => {
+    // const [users, setUsers] = useState([]);
+    
+
+    // useEffect(() => {
+    //     axios.get(users_URL)
+    //         .then(res => {
+    //             console.log(res)
+    //             setUsers(res.data);
+    //         });
+    // }, []);
+
+    const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
+    
+    const done = 0;
+    const btn = 0;
+    const title = 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE';
+    const title2 = 'For The Month of August';
+
+
+    return (
+        
+    
+
+        <PaymentTable title2={title2} title={title} columns={columns} data={data} done={done} btn={btn} />
+        
+    );
+};
+
+const Layout6 = () => {
+    // const [users, setUsers] = useState([]);
+    
+
+    // useEffect(() => {
+    //     axios.get(users_URL)
+    //         .then(res => {
+    //             console.log(res)
+    //             setUsers(res.data);
+    //         });
+    // }, []);
+
+    const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
+    
+    const done = 0;
+    const btn = 0;
+    const title = 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE';
+    const title2 = 'For The Month of August';
+
+
+    return (
+        
+    
+
+        <PaymentTable title2={title2} title={title} columns={columns} data={data} done={done} btn={btn} />
+        
+    );
+};
+
+const Layout7 = () => {
+    // const [users, setUsers] = useState([]);
+    
+
+    // useEffect(() => {
+    //     axios.get(users_URL)
+    //         .then(res => {
+    //             console.log(res)
+    //             setUsers(res.data);
+    //         });
+    // }, []);
+
+    const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
+    
+    const done = 0;
+    const btn = 0;
+    const title = 'MASTER OF COMPUTER SCIENCE/ MASTER OF SCIENCE IN COMPUTER SCIENCE';
+    const title2 = 'For The Month of August';
+
+
+    return (
+        
+    
+
+        <PaymentTable title2={title2} title={title} columns={columns} data={data} done={done} btn={btn} />
+        
+    );
+};
 
 
 class payment extends Component {

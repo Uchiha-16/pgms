@@ -269,6 +269,8 @@ export default class ScheduleComponent extends React.PureComponent {
         // Get the current date in the format "YYYY-MM-DD"
         const currentDate = new Date().toISOString().split('T')[0];
 
+        const notesArray = data.notes ? data.notes.split(',') : [];
+        console.log(notesArray);
         
         return (
             
@@ -318,7 +320,7 @@ export default class ScheduleComponent extends React.PureComponent {
                                 >
                                     Sat
                                 </ToggleButton>
-                                <ToggleButton
+                                <ToggleButton    
                                     value="Sunday"
                                     sx={{
                                         border: '1px solid #C9D1D8',
@@ -380,8 +382,18 @@ export default class ScheduleComponent extends React.PureComponent {
                                             fontWeight: 'bold',
                                         }}><br />
                                             <div style={{ fontSize: '14px' }}>{data.title}</div>
-                                            <div style={{ color: '#55596F' }}>{data.hallName}</div>
-                                            <div style={{ color: '#3E4152' }}>{data.lecturerName}</div>
+                                            {data.notes ? ( // Check if notes exist
+                                                <div style={{ color: '#FF5733' }}>
+                                                    Hall Name: {notesArray[0]}
+                                                    <br />
+                                                    Lecturer Name: {notesArray[1]}
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    <div style={{ color: '#55596F' }}>{data.hallName}</div>
+                                                    <div style={{ color: '#3E4152' }}>{data.lecturerName}</div>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                 )}

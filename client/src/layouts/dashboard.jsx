@@ -135,7 +135,7 @@ fetchUserName() {
                             display: 'grid',
                             gridTemplateColumns: '75% 25%',
                             marginBottom: 10,
-                            marginLeft: '24px'
+                            marginLeft: '24px',
                             }}>
                             {/*========== Center ==========*/}
                             <Grid item>
@@ -172,11 +172,11 @@ fetchUserName() {
                                     </Grid>
                                 </Grid>
                                 {/* tables */}
-                                <Grid sx={{ marginTop: 5 }}>
+                                <Grid sx={{ marginTop: 5, marginRight: 4 }}>
                                     <TableHeaderComponent left={'Todays Schedule'} right={'Sat 12th Aug, 2023'} addbtn={false}/>
                                     <Layout1 />
                                 </Grid>
-                                <Grid sx={{ marginTop: 5 }}>
+                                <Grid sx={{ marginTop: 5, marginRight: 4 }}>
                                     <TableHeaderComponent left={'Payment Vouchers'} right={''} addbtn={false} />
                                     <Layout2 />
                                 </Grid>
@@ -240,7 +240,7 @@ fetchUserName() {
                             </Grid>
                         </Grid></Fade>
                         {/*============================== Footer ==============================*/}
-                        <Grid item>
+                        <Grid item sx={{textAlign: 'center'}}>
                             <FooterComponent />
                         </Grid>
                     </Grid>

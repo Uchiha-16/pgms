@@ -8,6 +8,7 @@ class footerComponent extends Component {
                 color: '#898989',
                 borderTop: '1px solid #DEDEDE',
                 bottom: '0',
+                fontAlign: 'center',
             }}>
                 <p>&copy; 2023, All rights reserved by University of Colombo School of Computing<br />
                 No: 35, Reid Avenue, Colombo 7, Sri Lanka.</p>

@@ -1,14 +1,22 @@
 package com.postgresql.pgms.DTO;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class SessionDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class SessionSaveDTO {
+
+    private Integer intakeID;
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
     private Integer hours;
     private String type;
+    private String hallName;
 
     private Integer tsID;
 
@@ -19,25 +27,6 @@ public class SessionDTO {
     private Integer pcID;
 
     private String status;
-
-    private String hallName;
-
-    public SessionDTO() {
-    }
-
-    public SessionDTO(LocalDate date, LocalTime startTime, LocalTime endTime, Integer hours, String type, Integer tsID, Integer courseId, Integer staffID, Integer pcID, String status, String hallName) {
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.hours = hours;
-        this.type = type;
-        this.tsID = tsID;
-        this.courseId = courseId;
-        this.staffID = staffID;
-        this.pcID = pcID;
-        this.status = status;
-        this.hallName = hallName;
-    }
 
     public LocalDate getDate() {
         return date;
@@ -119,14 +108,27 @@ public class SessionDTO {
         this.status = status;
     }
 
-    public void setHallName(String hallName) {
-        this.hallName = hallName;
+    public Integer getTsId() {
+        return tsID;
     }
 
+    public void setTsId(Integer tsID) {
+        this.tsID = tsID;
+    }
+
+    public Integer getIntakeID() {
+        return intakeID;
+    }
+
+    //get hall name from course table
     public String getHallName() {
         return hallName;
     }
 
+    //set hall name from course table
+    public void setHallName(String hallName) {
+        this.hallName = hallName;
+    }
 }
 
 

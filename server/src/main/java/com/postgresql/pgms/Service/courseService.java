@@ -26,7 +26,6 @@ public class courseService{
         course.setCourseName(courseSaveDTO.getCourseName());
         course.setSemester(courseSaveDTO.getSemester());
         course.setCredit(courseSaveDTO.getCredit());
-        course.setHallName(courseSaveDTO.getHallName());
 
         // Look up the program by programId from the database
         program program = programRepo.findById(courseSaveDTO.getProgramId())

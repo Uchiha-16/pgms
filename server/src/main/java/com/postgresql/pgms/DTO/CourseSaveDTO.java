@@ -10,7 +10,6 @@ public class CourseSaveDTO {
     private String courseName;
     private Integer semester;
     private Integer credit;
-    private String hallName;
     private Integer programId;
 
     public String getCourseNo() {
@@ -43,14 +42,6 @@ public class CourseSaveDTO {
 
     public void setCredit(Integer credit) {
         this.credit = credit;
-    }
-
-    public String getHallName() {
-        return hallName;
-    }
-
-    public void setHallName(String hallName) {
-        this.hallName = hallName;
     }
 
     public Integer getProgramId() {

@@ -66,18 +66,15 @@ export default function NavbarComponent() {
             <CssBaseline />
             <Drawer
                 sx={{
-                    width: drawerWidth,
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
                         backgroundImage: 'linear-gradient(#42424A, #191919)',
                         color: '#fff',
                         position: 'fixed',
                         top: 20,
                         borderRadius: 2,
                         left: 20,
-                        height: 'calc(100% - 40px)',
+                        height: 'auto',
                         paddingTop: 2,
                         paddingBottom: 2,
                         overflowY: 'hidden'

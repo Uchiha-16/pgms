@@ -5,6 +5,7 @@ import { Box, Grid } from '@mui/material/';
 import FooterComponent from '../components/FooterComponent';
 import FormComponent from '../components/FormComponent';
 import TableHeaderComponent from '../components/TableHeaderComponent';
+import Popupcomponent2 from '../components/PopupComponent2';
 class profile extends Component { 
     render() {
         return (
@@ -23,7 +24,7 @@ class profile extends Component {
                         </Grid>
                         {/*=============================== Main ===============================*/}
                         <Grid item>
-                            <TableHeaderComponent left={'Intake Details'} right={''} />
+                            <TableHeaderComponent left={'Intake Details'} right={<Popupcomponent2/>} />
                             <FormComponent />
                         </Grid>
                         {/*============================== Footer ==============================*/}

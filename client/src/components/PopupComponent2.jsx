@@ -73,7 +73,7 @@ const Popup = () => {
         setAlertMessage("New Intake Added successfully!");
         setTimeout(() => {
           setOpenAlert(false);
-          navigate("/previousIntakeDetails", { replace: true });
+          window.location.reload();
         }, 3000);
       })
       .catch((error) => {

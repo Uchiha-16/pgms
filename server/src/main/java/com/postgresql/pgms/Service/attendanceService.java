@@ -1,6 +1,5 @@
 package com.postgresql.pgms.Service;
 
-import com.postgresql.pgms.DTO.SessionDTO;
 import com.postgresql.pgms.model.Users;
 import com.postgresql.pgms.model.session;
 import com.postgresql.pgms.repo.AttendanceRepo;

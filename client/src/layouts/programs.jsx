@@ -22,7 +22,7 @@ const Layout1 = () => {
     }, []);
 
 
-    const columns = ['Semester', 'Code', 'Course Name', 'Lecture Hall', 'Credits'];
+    const columns = ['Semester', 'Code', 'Course Name', 'Credits'];
     
     const program = [
         {
@@ -61,7 +61,6 @@ const Layout1 = () => {
                 'Semester': course.semester,
                 'Code': course.courseNo,
                 'Course Name': course.courseName,
-                'Lecture Hall': course.hallName,
                 'Credits': course.credit,
             });
         } else if (course.programId.programID  === 3) {
@@ -69,7 +68,6 @@ const Layout1 = () => {
                 'Semester': course.semester,
                 'Code': course.courseNo,
                 'Course Name': course.courseName,
-                'Lecture Hall': course.hallName,
                 'Credits': course.credit,
             });
         } else if (course.programId.programID === 2) {
@@ -77,7 +75,6 @@ const Layout1 = () => {
                 'Semester': course.semester,
                 'Code': course.courseNo,
                 'Course Name': course.courseName,
-                'Lecture Hall': course.hallName,
                 'Credits': course.credit,
             });
         } else {
@@ -85,7 +82,6 @@ const Layout1 = () => {
                 'Semester': course.semester,
                 'Code': course.courseNo,
                 'Course Name': course.courseName,
-                'Lecture Hall': course.hallName,
                 'Credits': course.credit,
             });
         }

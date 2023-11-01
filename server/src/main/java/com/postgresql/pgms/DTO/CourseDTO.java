@@ -11,7 +11,6 @@ public class CourseDTO {
     private String courseName;
     private Integer semester;
     private Integer credit;
-    private String hallName;
     private String programId;
 
     public long getCourseId() {
@@ -52,14 +51,6 @@ public class CourseDTO {
 
     public void setCredit(Integer credit) {
         this.credit = credit;
-    }
-
-    public String getHallName() {
-        return hallName;
-    }
-
-    public void setHallName(String hallName) {
-        this.hallName = hallName;
     }
 
     public String getProgramId() {

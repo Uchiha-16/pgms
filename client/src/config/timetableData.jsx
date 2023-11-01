@@ -1,8 +1,6 @@
 // IMPORTANT
 // Months are in the range 0-11.
 
-//get data by the databse using axios and map it into data variable
-
 export const data = [
     {
         title: 'MIT4204',

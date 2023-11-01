@@ -28,7 +28,7 @@ class TableHeaderComponent extends Component {
                 alignItems: 'center',
             }}>
                 <h3 style={{
-                    width: '50%',
+                    width: '100%',
                     textAlign: 'left'
                 }}>{left}</h3>
                 {/* if addbtn add addcircleIcon else add right text */}

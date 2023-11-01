@@ -78,7 +78,7 @@ function Form() {
 
   const sectionStyle = {
     marginLeft: "-130px",
-    fontSize: "1.1rem",
+    fontSize: "1.0rem",
     width: "150px",
     color: "#444",
     fontWeight: "bold",
@@ -113,7 +113,7 @@ function Form() {
   };
 
   const h2 = {
-    fontSize: "1.5rem",
+    fontSize: "1.2rem",
     fontWeight: "bold",
     color: "#444",
     marginBottom: "-70px",
@@ -135,8 +135,9 @@ function Form() {
           <div
             style={{
               position: "absolute",
-              top: "5px", // Adjust the top value as needed
-              right: "30px", // Adjust the right value as needed
+              top: "20px",
+              marginLeft: "630px",
+             
             }}
           >
             <PopupComponent2 />

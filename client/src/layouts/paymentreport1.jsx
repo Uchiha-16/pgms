@@ -13,11 +13,14 @@ import StaffIcon from '../assets/icons/staff.png';
 import UsersIcon from '../assets/icons/users.png';
 import data from '../components/DummyData';
 import DownloadButton from '../assets/icons/Maskgroup.png'
+import useAuth from "../hooks/useAuth";
+
 
 // const users_URL = "http://localhost:8080/api/users/getUsers"
 
 
 const Layout1 = () => {
+    const URL = "paymentlist/staff"
     // const [users, setUsers] = useState([]);
     
 
@@ -47,6 +50,8 @@ const Layout1 = () => {
 };
 
 const Layout2 = () => {
+    const URL = "paymentlist/pcmcs"
+
     // const [users, setUsers] = useState([]);
     
 
@@ -76,6 +81,8 @@ const Layout2 = () => {
 };
 
 const Layout3 = () => {
+    const URL = "paymentlist/pcmis"
+
     // const [users, setUsers] = useState([]);
     
 
@@ -105,6 +112,8 @@ const Layout3 = () => {
 };
 
 const Layout4 = () => {
+    const URL = "paymentlist/pcmit"
+
     // const [users, setUsers] = useState([]);
     
 
@@ -134,6 +143,8 @@ const Layout4 = () => {
 };
 
 const Layout5 = () => {
+    const URL = "paymentlist/pcmba"
+
     // const [users, setUsers] = useState([]);
     
 
@@ -163,6 +174,8 @@ const Layout5 = () => {
 };
 
 const Layout6 = () => {
+    const URL = "paymentlist/dr"
+
     // const [users, setUsers] = useState([]);
     
 
@@ -192,6 +205,8 @@ const Layout6 = () => {
 };
 
 const Layout7 = () => {
+    const URL = "paymentlist/head"
+
     // const [users, setUsers] = useState([]);
     
 

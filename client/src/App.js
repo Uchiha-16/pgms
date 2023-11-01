@@ -25,14 +25,10 @@ import AttendanceTrackingTable from "./layouts/attendanceTrackingTable";
 import Programs from "./layouts/programs";
 import Form from "./layouts/form";
 import PreviousIntakeDetails from "./layouts/previousIntakeDetails";
-
-import Payment from "./layouts/payment";
 import PaymentReport1 from "./layouts/paymentreport1";
 import PaymentPrevious from "./layouts/paymentPrevious";
 import Payment from "./layouts/payment";
-import PaymentReport1 from "./layouts/paymentreport1";
 import NominationList from "./layouts/nominationList";
-import PaymentPrevious from "./layouts/paymentPrevious";
 
 function App() {
   return (

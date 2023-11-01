@@ -3,7 +3,7 @@ import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import { Box, Grid } from '@mui/material/';
 import FooterComponent from '../components/FooterComponent';
-import ProfileComponent from '../components/ProfileComponent';
+import ProfileComponent from '../components/profileComponent';
 class profile extends Component { 
     render() {
         return (

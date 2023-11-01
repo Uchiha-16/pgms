@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -10,7 +10,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import PendingIcon from '@mui/icons-material/QueryBuilder';
 
 
-const NominationsTable = ({ columns, data }) => {
+const NominationTable = ({ columns, data }) => {
 
     const [alignment, setAlignment] = useState('');
 
@@ -18,14 +18,23 @@ const NominationsTable = ({ columns, data }) => {
         setAlignment(newAlignment);
     };
 
-const isAccepted = (columnName, cellValue) => {
-  return columnName === "STATUS" && cellValue === "Open";
+const isOpened = (columnName, cellValue) => {
+  return columnName === "STATUS" && cellValue === "Opened";
 };
 
-const isRejected = (columnName, cellValue) => {
+const isClosed = (columnName, cellValue) => {
   return columnName === "STATUS" && cellValue === "Closed";
 };
 
+const isOpened1 = (columnName, cellValue) => {
+    return columnName === "ACTION" && cellValue === "Open";
+  };
+  
+
+const isClosed1 = (columnName, cellValue) => {
+    return columnName === "ACTION" && cellValue === "Close";
+  };
+  
 
 const isNameColumn = (columnName) => {
   return columnName === "Name";
@@ -168,7 +177,7 @@ const visibleRows = data.slice(startRowIndex, endRowIndex);
                                         paddingTop: 2.3,
                                         paddingBottom: 2.3,
                                     }}>
-                                        {isAccepted(column, row[column]) ? (
+                                        {isOpened(column, row[column]) ? (
                                             <div style={{
                                                 background: 'linear-gradient(180deg, #66BB6A 0%, #43A047 100%)',
                                                 borderRadius: 50,
@@ -182,7 +191,7 @@ const visibleRows = data.slice(startRowIndex, endRowIndex);
                                                 alignItems: 'center',
                                                 paddingTop: 2,
                                             }}>{row[column]}</div>
-                                        ) : isRejected(column, row[column]) ? (
+                                        ) : isClosed(column, row[column]) ? (
                                                 <div style={{
                                                     background: 'black',
                                                     borderRadius: 50,
@@ -196,6 +205,36 @@ const visibleRows = data.slice(startRowIndex, endRowIndex);
                                                     alignItems: 'center',
                                                     paddingTop: 2,
                                                 }}>{row[column]}</div>
+                                        ) :
+                                        isOpened1(column, row[column]) ? (
+                                            <button style={{
+                                                background: 'linear-gradient(180deg, #66BB6A 0%, #43A047 100%)',
+                                                borderRadius: 50,
+                                                color: '#FFF',
+                                                width: 80,
+                                                fontFamily: 'Roboto',
+                                                fontSize: '12px',
+                                                fontWeight: '900',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                paddingTop: 2,
+                                            }}>{row[column]}</button>
+                                        ) :
+                                        isClosed1(column, row[column]) ? (
+                                            <button style={{
+                                                background: 'black',
+                                                borderRadius: 50,
+                                                color: '#FFF',
+                                                width: 80,
+                                                fontFamily: 'Roboto',
+                                                fontSize: '12px',
+                                                fontWeight: '900',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                paddingTop: 2,
+                                            }}>{row[column]}</button>
                                         ) : 
                                         isFunctionColumn(column) ? (
                                             <div>
@@ -256,4 +295,4 @@ const visibleRows = data.slice(startRowIndex, endRowIndex);
   );
 };
 
-export default NominationsTable;
+export default NominationTable;

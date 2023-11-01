@@ -3,7 +3,7 @@ import { Box, Grid, Typography, Fade } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
-import CalendarComponent from '../components/CalendarComponent';
+// import CalendarComponent from '../components/CalendarComponent';
 import CalendarEventComponent from '../components/CalendarEventComponent';
 import DashboardCard from '../components/DashboardCardComponent';
 import GeneralDashboardTable from '../components/GeneralDashboardTable';
@@ -11,6 +11,7 @@ import TableHeaderComponent from '../components/TableHeaderComponent';
 import ProgramsIcon from '../assets/icons/programs.png';
 import StaffIcon from '../assets/icons/staff.png';
 import UsersIcon from '../assets/icons/users.png';
+import axios from 'axios';
 
 // const users_URL = "http://localhost:8080/api/users/getUsers"
 
@@ -56,7 +57,50 @@ const Layout2 = () => {
 };
 
 class dashboard extends Component {
+    cconstructor(props) {
+        super(props);
+        this.state = {
+          usersCount: null,
+          programsCount: null,
+          staffCount: null,
+        };
+      }
+    
+      componentDidMount() {
+        // Fetch data for Users count
+        axios.get("http://localhost:3000/api/v1/dashboard/lecturers")
+          .then((response) => {
+            this.setState({ usersCount: response.data.length });
+          })
+          .catch((error) => {
+            console.error('Error fetching user data', error);
+          });
+
+          // Fetch data for programs count
+        axios.get("http://localhost:3000/api/v1/dashboard/allPrograms")
+        .then((response) => {
+          this.setState({ programsCount: response.data.length });
+        })
+        .catch((error) => {
+          console.error('Error fetching user data', error);
+        });
+
+        // Fetch data for Users count
+        axios.get("http://localhost:3000/api/v1/dashboard/allstaff")
+          .then((response) => {
+            this.setState({ staffCount: response.data.length });
+          })
+          .catch((error) => {
+            console.error('Error fetching user data', error);
+          });
+    
+        // You can add similar code for fetching Programs count and Staff count here
+        // Update the URLs as needed
+      }
+
     render() {
+        const { usersCount, programsCount, staffCount } = this.state;
+
         return (
             <Box>
                 <Grid container spacing={2}>
@@ -88,8 +132,8 @@ class dashboard extends Component {
                                         <Box mb={1.5}>
                                             <DashboardCard
                                                 icon={UsersIcon}
-                                                title="Users"
-                                                count="30"
+                                                title="Lecturers"
+                                                count={usersCount !== null ? usersCount : 'Loading...'}
                                             />
                                         </Box>
                                     </Grid>
@@ -98,7 +142,7 @@ class dashboard extends Component {
                                             <DashboardCard
                                                 icon={ProgramsIcon}
                                                 title="Programs"
-                                                count="4"
+                                                count={programsCount !== null ? programsCount : 'Loading...'}                      
                                             />
                                         </Box>
                                     </Grid>
@@ -107,7 +151,7 @@ class dashboard extends Component {
                                             <DashboardCard
                                                 icon={StaffIcon}
                                                 title="Staff"
-                                                count="37"
+                                                count={staffCount !== null ? staffCount : 'Loading...'}
                                             />
                                         </Box>
                                     </Grid>
@@ -158,7 +202,7 @@ class dashboard extends Component {
 
                                 {/* Calendar */}
                                 <Grid item>
-                                    <CalendarComponent />
+                                    {/* <CalendarComponent /> */}
                                 </Grid>
 
                                 {/* Description */}

@@ -16,26 +16,38 @@ import java.math.BigDecimal;
 @Table(name = "Intake")
 public class Intake {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long intakeID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer intakeID;
 
-    private int year;
-    private BigDecimal rate;
-    private BigDecimal lectureFeePerHour;
-    private BigDecimal practicalFeePerHour;
-    private BigDecimal TAFeePerHour;
-    private BigDecimal LMSFeePerHour;
+    private String year;
+    private long rate;
+    private long budget;
 
-//    public Intake() {
-//    }
+    @ManyToOne
+    @JoinColumn(name = "MCS_id")
+    private Users MCS;
 
-    public Intake(int year, BigDecimal rate, BigDecimal lectureFeePerHour, BigDecimal practicalFeePerHour,
-                  BigDecimal TAFeePerHour, BigDecimal LMSFeePerHour) {
+    @ManyToOne
+    @JoinColumn(name = "MIT_id")
+    private Users MIT;
+
+    @ManyToOne
+    @JoinColumn(name = "MIS_id")
+    private Users MIS;
+
+    @ManyToOne
+    @JoinColumn(name = "MBA_id")
+    private Users MBA;
+
+
+
+    public Intake(String year, long rate, long budget, Users MCS, Users MIT, Users MIS, Users MBA) {
         this.year = year;
         this.rate = rate;
-        this.lectureFeePerHour = lectureFeePerHour;
-        this.practicalFeePerHour = practicalFeePerHour;
-        this.TAFeePerHour = TAFeePerHour;
-        this.LMSFeePerHour = LMSFeePerHour;
+        this.budget = budget;
+        this.MCS = MCS;
+        this.MIT = MIT;
+        this.MIS = MIS;
+        this.MBA = MBA;
     }
 }

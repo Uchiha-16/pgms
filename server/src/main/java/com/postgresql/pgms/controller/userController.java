@@ -43,5 +43,25 @@ public class userController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/updateUser/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
+        service.updateUser(id, userDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        service.deleteUserWithTokens(id);
+        return ResponseEntity.ok().build();
+    }
+
+    //Search
+    // New endpoint for user search
+    @GetMapping("/search")
+    public ResponseEntity<List<Users>> searchUsers(@RequestParam String query) {
+        List<Users> searchResults = service.searchUsers(query);
+        return ResponseEntity.ok(searchResults);
+    }
 }
 

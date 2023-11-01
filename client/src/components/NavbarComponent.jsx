@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DescriptionIcon from '@mui/icons-material/Description';
+import PlaceIcon from '@mui/icons-material/Place';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
@@ -34,6 +35,7 @@ export default function NavbarComponent() {
     const navigate = useNavigate();
 
     const userID = auth.user_id
+    const role = auth.role
 
     const [page, setPage] = useState("Dashboard");
     useEffect(() => {
@@ -64,18 +66,15 @@ export default function NavbarComponent() {
             <CssBaseline />
             <Drawer
                 sx={{
-                    width: drawerWidth,
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
                         backgroundImage: 'linear-gradient(#42424A, #191919)',
                         color: '#fff',
                         position: 'fixed',
                         top: 20,
                         borderRadius: 2,
                         left: 20,
-                        height: 'calc(100% - 40px)',
+                        height: 'auto',
                         paddingTop: 2,
                         paddingBottom: 2,
                         overflowY: 'hidden'
@@ -135,7 +134,8 @@ export default function NavbarComponent() {
                             { text: 'Dashboard', path: '/dashboard', icon: <DashboardRoundedIcon /> },
                             { text: 'Timetable', path: '/timetable', icon: <CalendarMonthIcon /> },
                             { text: 'Payment Voucher', path: '/payment-voucher', icon: <DescriptionIcon /> },
-                            { text: 'Nominations', path: '/nominations', icon: <GroupAddIcon /> },
+                            { text: 'Attendance Tracking', path: role === "Staff" ? '/attendance-page' : '/attendance-tracking', icon: <PlaceIcon />},
+                            { text: 'Nominations', path: '/addNominations', icon: <GroupAddIcon /> },
                             { text: 'Notifications', path: '/notifications', icon: <NotificationsIcon /> },
                             { text: 'Profile', path: `/profile/${userID}`, icon: <PersonIcon /> },
                             { text: 'Logout', path: '/', icon: <LogoutIcon /> },

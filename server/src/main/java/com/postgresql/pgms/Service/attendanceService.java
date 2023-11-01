@@ -1,7 +1,9 @@
 package com.postgresql.pgms.Service;
 
+import com.postgresql.pgms.model.Users;
+import com.postgresql.pgms.model.session;
 import com.postgresql.pgms.repo.AttendanceRepo;
-import com.postgresql.pgms.model.attendance;
+import com.postgresql.pgms.repo.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -14,35 +16,39 @@ import java.util.List;
 public class attendanceService {
 
     private final AttendanceRepo repo;
+    private final UserRepository userRepo;
 
-    public List<attendance> getLecturerAttendance(Integer id) {
-        List<attendance> attendanceList = repo.findAllLecturerAttendance(id);
+    public List<session> getLecturerAttendance(Integer id) {
+        List<session> attendanceList = repo.findAllLecturerAttendance(id);
         return attendanceList;
     }
 
-    public List<attendance> getAllAttendance() {
-        List<attendance> attendanceList = repo.findAll();
+    public List<session> getAllAttendance() {
+        List<session> attendanceList = repo.findAll();
         return attendanceList;
     }
 
-    public List<attendance> getCourseAttendance(Integer id) {
-        List<attendance> attendanceList = repo.findAllCourseAttendance(id);
+    public List<session> getCourseAttendance(Integer id) {
+        List<session> attendanceList = repo.findAllSessionsByProgramId(id);
         return attendanceList;
     }
 
     @Transactional
-    public void updateStaffId(Integer staffId, Integer attendanceId) {
-        attendance attendance = repo.findById(attendanceId).orElseThrow(() -> new EntityNotFoundException("Attendance not found"));
-        attendance.setStaffID(staffId);
-        repo.save(attendance);
+    public void updateStaffId(Integer sessionId, Integer staffID) {
+        session session = repo.findById(sessionId).orElseThrow(() -> new EntityNotFoundException("Session not found"));
+        Users users = userRepo.findById(staffID).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        session.setStaffId(users); // This line should be updated
+        repo.save(session);
     }
 
     @Transactional
-    public void updatePcId(Integer pcId, Integer attendanceId) {
-        attendance attendance = repo.findById(attendanceId).orElseThrow(() -> new EntityNotFoundException("Attendance not found"));
-        attendance.setPcID(pcId);
-        repo.save(attendance);
+    public void updatePcId(Integer sessionId, Integer pcID) {
+        session session = repo.findById(sessionId).orElseThrow(() -> new EntityNotFoundException("Session not found"));
+        Users users = userRepo.findById(pcID).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        session.setPcId(users);
+        //status should be changed to Marked
+        session.setStatus("Marked");
+        repo.save(session);
     }
-
 
 }

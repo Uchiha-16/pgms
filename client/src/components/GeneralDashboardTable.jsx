@@ -3,6 +3,9 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import DoneIcon from '@mui/icons-material/Done';
 import ProgressbarComponent from './ProgressbarComponent';
 import VoucherSummaryComponent from './VoucherSummaryComponent';
+import axios from '../api/axios';
+import { display } from '@mui/system';
+import useAuth from "../hooks/useAuth";
 
 const voucherSummaryStyle = {
     maxHeight: '0',
@@ -18,12 +21,21 @@ const expandedVoucherSummaryStyle = {
 
 const GeneralDashboardTable = ({ columns, data, done, btn }) => {
 
+    const { auth } = useAuth();
     const isChecked = (columnName, cellValue) => {
         return columnName === 'STATUS' && cellValue === 1;
     };
 
     const isUnchecked = (columnName, cellValue) => {
         return columnName === 'STATUS' && cellValue === 0;
+    };
+
+    const isAdded = (columnName, cellValue) => {
+        return columnName === 'AddtoVoucher' && cellValue === 1;
+    };
+
+    const isNotAdded = (columnName, cellValue) => {
+        return columnName === 'AddtoVoucher' && cellValue === 0;
     };
 
     const isPercentage = (columnName, cellValue) => {
@@ -40,6 +52,27 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
         setIsExpanded(false);
     };
 
+    const handleStatusCheckboxChange = (row, column, sessionID) => {
+        
+        const confirmed = window.confirm('Do you want to perform this action?');
+        if (!confirmed) {
+            row.STATUS = 0;
+            return;
+        }
+
+        const payload = []
+
+        axios.put(`/attendance/updateStaffId/${sessionID}/${auth.user_id}`, payload)
+          .then(response => {
+            // Handle the successful response, e.g., update your state
+            console.log('PUT request successful', response.data);
+          })
+          .catch(error => {
+            // Handle any errors
+            console.error('PUT request error', error);
+          });
+      };
+
     return (
         <>
             <TableContainer component={Paper} sx={{
@@ -48,7 +81,7 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                 top: -40,
                 zIndex: 0,
                 paddingTop: 5,
-                width: '52.3rem',
+                width: 'auto',
                 boxShadow: '0px 13px 20px -7px rgba(0, 0, 0, 0.15)',
                 overflow: 'hidden',
             }}>
@@ -122,28 +155,57 @@ const GeneralDashboardTable = ({ columns, data, done, btn }) => {
                                             paddingBottom: 2.3,
                                         }}>
                                         {isChecked(column, row[column]) ? (
+                                            <Checkbox
+                                            checked={isChecked(column, row[column])}
+                                            sx={{
+                                              color: '#D9D9D9',
+                                              '&.Mui-checked': {
+                                                color: '#43A047',
+                                              },
+                                            }}
+                                          />
+                                          
+                                        ) : isUnchecked(column, row[column]) ? (
+                                            <Checkbox 
+                                            onChange={() => handleStatusCheckboxChange(row, column, row.SESSIONID )}
+                                            sx={{
+                                                color: '#D9D9D9',
+                                                '&.Mui-checked': {
+                                                    color: '#43A047',
+                                                },
+                                            }} />
+
+                                            
+                                        ) : isPercentage(column, row[column]) ? (
+                                            <><div style={{ display: 'flex', alignItems: 'center' }}>
+                                                <p style={{ color: '#898989' }}>{row[column]}</p>
+                                                <ProgressbarComponent percentage={row[column].replace('%', '')} />
+                                            </div></> 
+                                        ) :
+                                         
+                                        isAdded(column, row[column]) ? (
                                             <Checkbox defaultChecked sx={{
                                                 color: '#D9D9D9',
                                                 '&.Mui-checked': {
                                                     color: '#43A047',
                                                 },
                                             }} />
-                                        ) : isUnchecked(column, row[column]) ? (
-                                            <Checkbox sx={{
+                                        ) :
+                                        isNotAdded(column, row[column]) ? (
+                                            <Checkbox defaultChecked sx={{
                                                 color: '#D9D9D9',
                                                 '&.Mui-checked': {
                                                     color: '#43A047',
                                                 },
                                             }} />
-                                        ) : isPercentage(column, row[column]) ? (
-                                            <><div style={{ display: 'flex', alignItems: 'center' }}>
-                                                <p style={{ color: '#898989' }}>{row[column]}</p>
-                                                <ProgressbarComponent percentage={row[column].replace('%', '')} />
-                                            </div></> 
-                                        ) : (
+                                        ) : 
+                                        (
                                             row[column]
                                         )
                                         }
+                                        
+                                                
+                                
                                     </TableCell>
                                 ))}
                             </TableRow>

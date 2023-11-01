@@ -105,7 +105,7 @@ console.log("Program Value:", formData.programId);
               right: '20px', // Place it on the left
               margin: '16px', // Add margin for spacing
             }}
-            >Apply for a Course
+            >Apply for a Nomination
             </Button>
             <Dialog 
             // fullScreen 
@@ -127,7 +127,7 @@ console.log("Program Value:", formData.programId);
                       borderBottomRightRadius:50,
                       textAlign:"center"
                           }}>
-                  <Typography paddingTop={"2px"} color={"white"}>Apply for a Course</Typography></Box>
+                  <Typography paddingTop={"2px"} color={"white"}>Apply for a Nomination</Typography></Box>
                  {/* Added a closing tag for CloseIcon */}
                 <DialogContent>
                     {/* <DialogContentText>Do you want to remove this user?</DialogContentText> */}

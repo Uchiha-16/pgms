@@ -1,6 +1,5 @@
 package com.postgresql.pgms.controller;
 
-import com.postgresql.pgms.DTO.CourseListResponseDTO;
 import com.postgresql.pgms.DTO.CourseSaveDTO;
 import com.postgresql.pgms.Service.courseService;
 import com.postgresql.pgms.model.course;
@@ -27,5 +26,10 @@ public class courseController {
     @GetMapping(path = "/viewcourses")
     public ResponseEntity<List<course>> getCourses(){
         return ResponseEntity.ok(courseService.getAllCourses());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteCourse(@PathVariable Integer id){
+        courseService.deleteCourse(id);
     }
 }

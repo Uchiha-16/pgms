@@ -6,7 +6,7 @@ import Popup from './PopupComponent';
 
 class TableHeaderComponent extends Component {
     render() {
-        const { left, right, addbtn } = this.props;
+        const { left, right,center, addbtn } = this.props;
         return (
             <div style={{
                 display: 'flex',
@@ -16,28 +16,36 @@ class TableHeaderComponent extends Component {
                 color: '#FFFFFF',
                 paddingRight: '20px',
                 paddingLeft: '20px',
-                width: addbtn ? '97%' : '91.5%',
+                // width: addbtn ? '97%' : '91.5%',
+                width: '97%',
                 marginRight: addbtn ? 'auto' : '3.5rem',
                 marginLeft: addbtn? 'auto' : '1rem', 
                 position: 'relative',
                 zIndex: 1,
-                fontSize: addbtn ? '18.72px' : '13px',
-                height: addbtn ? '70px' : '60px',
+                fontSize: addbtn ? '16px' : '13px',
+                // height: addbtn ? '70px' : '60px',
+                height: '60px',
                 alignItems: 'center',
             }}>
                 <h3 style={{
-                    width: '50%',
+                    width: '100%',
                     textAlign: 'left'
                 }}>{left}</h3>
-                {/* if addbtn add aaddcircleIcon else add right text */}
+                {/* if addbtn add addcircleIcon else add right text */}
                 {addbtn ? 
                     <Popup/> 
                     : 
                     <h3 style={{
+                        width: '100%',
+                        textAlign: 'center'
+                    }}>{center}</h3>
+                }
+                    <h3 style={{
                         width: '50%',
                         textAlign: 'right'
                     }}>{right}</h3>
-                }
+                
+                 
             </div>
         );
     }

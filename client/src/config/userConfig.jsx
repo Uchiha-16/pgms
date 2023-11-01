@@ -19,7 +19,7 @@ export const headCells = [
     },
     {
         id: 'EMPLOYED',
-        numeric: true,
+        numeric: false,
         disablePadding: true,
         label: 'EMPLOYED ON',
     },

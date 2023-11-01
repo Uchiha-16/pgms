@@ -4,5 +4,9 @@ public enum Role {
     Lecturer,
     Staff,
     TechnicalStaff,
-    VisitingLecturer
+    VisitingLecturer,
+    PCMIT,
+    PCMCS,
+    PCMIS,
+    PCMBA
 }

@@ -46,7 +46,7 @@ const PaymentCard = ({ columns, data, done, btn }) => {
     const hell = (no, atv)=>{
         // let id = e.target.dataid ;
         console.log(no,atv,"clicked now");
-        onChange(no, atv);
+        // onChange(no, atv);
     }
 
     return (

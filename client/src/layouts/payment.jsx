@@ -6,6 +6,7 @@ import FooterComponent from '../components/FooterComponent';
 import PaymentCard from '../components/PaymentCard';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 import HStepper from '../components/HStepper';
+import useAxiosMethods from '../hooks/useAxiosMethods';
 
 // const users_URL = "http://localhost:8080/api/users/getUsers"
 

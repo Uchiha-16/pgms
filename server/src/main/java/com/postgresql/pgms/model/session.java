@@ -51,6 +51,10 @@ public class session {
     @Builder.Default
     private String status = "Pending";
 
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
     public void setStaffId(Users users) {
         this.staffID = users;
     }

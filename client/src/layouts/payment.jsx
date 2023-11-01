@@ -11,6 +11,7 @@ import useAxiosMethods from '../hooks/useAxiosMethods';
 // const users_URL = "http://localhost:8080/api/users/getUsers"
 
 
+
 const Layout1 = () => {
 
     const [data2, setData2] = useState([]);
@@ -94,6 +95,7 @@ const Layout2 = () => {
 };
 
 class payment extends Component {
+
     render() {
         return (
             <Box>

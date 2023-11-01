@@ -11,7 +11,7 @@ import TableHeaderComponent from '../components/TableHeaderComponent';
 import ProgramsIcon from '../assets/icons/programs.png';
 import StaffIcon from '../assets/icons/staff.png';
 import UsersIcon from '../assets/icons/users.png';
-import axios from 'axios';
+import axios from '../api/axios';
 
 // const users_URL = "http://localhost:8080/api/users/getUsers"
 
@@ -57,10 +57,6 @@ const Layout2 = () => {
 };
 
 class dashboard extends Component {
-<<<<<<< Updated upstream
-=======
-    
->>>>>>> Stashed changes
     constructor(props) {
         super(props);
         this.state = {
@@ -75,7 +71,7 @@ class dashboard extends Component {
 
         console.log("componentDidMount is called");
         // Fetch data for Users count
-        axios.get("http://localhost:3000/api/v1/dashboard/lecturers")
+        axios.get("/dashboard/lecturers")
         .then((response) => {
             console.log("Users Data:", response.data);
             this.setState({ usersCount: response.data.length });
@@ -86,7 +82,7 @@ class dashboard extends Component {
 
 
           // Fetch data for programs count
-        axios.get("http://localhost:3000/api/v1/dashboard/allPrograms")
+        axios.get("/dashboard/allPrograms")
         .then((response) => {
           this.setState({ programsCount: response.data.length });
         })
@@ -95,7 +91,7 @@ class dashboard extends Component {
         });
 
         // Fetch data for Users count
-        axios.get("http://localhost:3000/api/v1/dashboard/allstaff")
+        axios.get("/dashboard/allstaff")
           .then((response) => {
             this.setState({ staffCount: response.data.length });
           })
@@ -106,7 +102,7 @@ class dashboard extends Component {
 
 fetchUserName() {
   const userId = 1; // Replace with the actual user ID
-  axios.get(`http://localhost:3000/api/v1/dashboard/getUser/${userId}`)
+  axios.get(`/dashboard/getUser/${userId}`)
     .then((response) => {
       const userName = response.data;
       this.setState({ userName });
@@ -151,7 +147,7 @@ fetchUserName() {
                                         <Box mb={1.5}>
                                             <DashboardCard
                                                 icon={UsersIcon}
-                                                title="Lecturers"
+                                                title="Users"
                                                 count={usersCount !== null ? usersCount : '0'}
                                             />
                                         </Box>

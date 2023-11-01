@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface SessionRepository extends JpaRepository<session,Long> {
 
-    @Query(value = """
-    select * from session where date=:localDate and tsId=:id
-    """, nativeQuery = true)
-    List<session> findAllByDate(@Param("localDate") LocalDate localDate, @Param("id") Integer id);
+    @Query(value = "SELECT * FROM session s WHERE s.date = :localDate AND s.teach_id = :id", nativeQuery = true)
+    List<session> findAllByDate(LocalDate localDate,Integer id);
+
+
 }

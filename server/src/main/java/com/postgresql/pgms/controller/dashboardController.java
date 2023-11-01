@@ -1,5 +1,7 @@
 package com.postgresql.pgms.controller;
 
+import com.postgresql.pgms.DTO.SessionDTO;
+import com.postgresql.pgms.DTO.SessionTodayDTO;
 import com.postgresql.pgms.DTO.UserDTO;
 import com.postgresql.pgms.Service.UserService;
 import com.postgresql.pgms.Service.dashboardService;
@@ -57,8 +59,9 @@ public class dashboardController {
 
     //get today's schedule by lecturer ID
     @GetMapping("/schedule/{id}")
-    public ResponseEntity<List<session>> getAllSchedules(@PathVariable("id") Integer id){
-        return ResponseEntity.ok(dashboardService.getAllSchedules(id));
+    public ResponseEntity<List<SessionTodayDTO>> getAllSchedules(@PathVariable Integer id){
+        List<SessionTodayDTO> sessionTodayDTOList = dashboardService.getAllSchedules(id);
+        return ResponseEntity.ok(sessionTodayDTOList);
     }
 
 }

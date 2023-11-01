@@ -25,9 +25,10 @@ import AttendanceTrackingTable from './layouts/attendanceTrackingTable';
 import Programs from './layouts/programs';
 import Form from './layouts/form';
 import PreviousIntakeDetails from './layouts/previousIntakeDetails';
-
 import Payment from './layouts/payment';
 import PaymentReport1 from './layouts/paymentreport1';
+import NominationList from './layouts/nominationList';
+import PaymentPrevious from './layouts/paymentPrevious';
 
 function App() {
   return (
@@ -42,9 +43,10 @@ function App() {
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/timeTable" element={<TimeTable />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/paymentreport1" element={<PaymentReport1 />} />
-
+        <Route path='/paymentreport1' element={<PaymentReport1 />} />
+            <Route path='/payment' element={<Payment />} />
+            <Route path='/paymentPrevious' element={<PaymentPrevious />} />
+      
 
         {/* private */}
         <Route element={<PersistLogin />}>
@@ -63,9 +65,12 @@ function App() {
             <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
             <Route path='/form' element={<Form />} />
             <Route path='/previousIntakeDetails' element={<PreviousIntakeDetails />} />
+           
+            <Route path='/nominationList' element={<NominationList />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={["Lecturer"]}/>} >
             <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
+          
 
           
           </Route>

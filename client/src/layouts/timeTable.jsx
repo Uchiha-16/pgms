@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import ScheduleComponent from '../components/ScheduleComponent';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 import { Box, Grid } from '@mui/material/';
+import useAxiosMethods from '../hooks/useAxiosMethods';
 
 // Get the current date
 const currentDate = new Date();
@@ -29,43 +30,50 @@ const endDateString = endDate.toISOString().slice(0, 10);
 
 const nbsp = '\u00A0';
 
-// Intake Details
-const intakeStartYear = '2022';
-const intakeEndYear = '2023';
-class TimeTable extends Component {
-    render() {
-        return (
-            <Box>
-                <Grid container spacing={2}>
-                    <Grid item xs={2.5}>
-                        <NavBarComponent />
+const TimeTable = () => {
+
+    const [intake, setIntake] = useState([]);
+    const { get } = useAxiosMethods();
+
+    const currentIntake_URL = `/intake/getCurrentIntake`;
+  
+    useEffect(() => {
+      // Fetch data from the server using Axios
+      get(currentIntake_URL, setIntake)
+    },[get, currentIntake_URL]); // Make sure to include the dependency
+  
+    console.log(intake);
+
+    //pass the intake year to Timetable class
+    const IntakeYear = intake[0] ? intake[0].year : "Loading...";
+    return (
+        <Box>
+            <Grid container spacing={2}>
+                <Grid item xs={2.5}>
+                    <NavBarComponent />
+                </Grid>
+                <Grid container xs={9.3} sx={{
+                    display: 'grid',
+                    gridTemplateRows: '12.5% auto 10%',
+                }}>
+                    {/*============================== Header ==============================*/}
+                    <Grid item>
+                        <HeaderComponent />
                     </Grid>
-                    <Grid container xs={9.3} sx={{
-                        display: 'grid',
-                        gridTemplateRows: '12.5% auto 10%',
-                    }}>
-                        {/*============================== Header ==============================*/}
-                        <Grid item>
-                            <HeaderComponent />
-                        </Grid>
-                        <Grid item>
-                            {/*============================== Table Header ==============================*/}
-                            <TableHeaderComponent 
-                                left={`TIMETABLE ${nbsp} : ${nbsp} ${startDateString} ${nbsp} to ${nbsp} ${endDateString}`} 
-                                right={`INTAKE ${nbsp} ${intakeStartYear} - ${intakeEndYear}`}
-                                addbtn={false} />
-                            {/*============================== Schedule ==============================*/}
-                            <ScheduleComponent />
-                        </Grid>
-                        {/*============================== Footer ==============================*/}
-                        <Grid item>
-                            <FooterComponent />
-                        </Grid>
+                    {/*============================== Table Header ==============================*/}
+                    <Grid item>
+                        <TableHeaderComponent left={`TIMETABLE ${nbsp} : ${nbsp} ${startDateString} ${nbsp} to ${nbsp} ${endDateString}`} right={`INTAKE ${nbsp} ${IntakeYear}`} addbtn={false} />
+                        {/*============================== Schedule ==============================*/}
+                        <ScheduleComponent />
+                    </Grid>
+                    {/*============================== Footer ==============================*/}
+                    <Grid item>
+                        <FooterComponent />
                     </Grid>
                 </Grid>
-            </Box>
-        );
-    }
+            </Grid>
+        </Box>
+    );
 }
 
 export default TimeTable;

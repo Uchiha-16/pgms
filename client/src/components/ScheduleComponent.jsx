@@ -24,7 +24,8 @@ import {
     GroupingPanel,
     WeekView,
 } from '@devexpress/dx-react-scheduler-material-ui';
-import { data as appointments } from '../config/timetableData';
+import axios from '../api/axios';
+// import { data as appointments } from '../config/timetableData';
 
 const isWeekOrMonthView = viewName => viewName === 'Week';
 
@@ -85,6 +86,37 @@ console.log("Saturday:", saturdayDate);
 console.log("Sunday:", sundayDate);
 
 export default class ScheduleComponent extends React.PureComponent {
+    
+    componentDidMount() {
+        // Make an Axios GET request within componentDidMount
+        axios.get('/sessions/get')
+          .then((response) => {
+            const fetchedData = response.data;
+            console.log(fetchedData);
+
+            const appointments = fetchedData.map((item) => {
+                return {
+                    title: item.courseId.courseNo,
+                    priorityId: item.courseId.programId.name,
+                    semester: item.courseId.semester,
+                    startDate: item.startTime,
+                    endDate: item.endTime,
+                    hallName: item.hallName,
+                    lecturerName: `${item.tsId.firstname} ${item.tsId.lastname}`,
+                    id: item.sessionId,
+                }
+            })
+            this.setState({ data: appointments });
+            console.log(appointments);
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+
+          //Map the fields to appointment const
+
+      }
+
     constructor(props) {
         super(props);
 
@@ -95,7 +127,6 @@ export default class ScheduleComponent extends React.PureComponent {
         }
 
         this.state = {
-            data: appointments,
             resources: [
                 {
                     fieldName: 'semester',

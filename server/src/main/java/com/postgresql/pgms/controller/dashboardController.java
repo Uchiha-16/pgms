@@ -49,6 +49,12 @@ public class dashboardController {
         return dashboardService.countAllLecturers();
     }
 
+    //get Count of All Programs
+    @GetMapping("/allPrograms")
+    public Long countAllPrograms(){
+        return dashboardService.countPrograms();
+    }
+
     //get today's schedule by lecturer ID
     @GetMapping("/schedule/{id}")
     public ResponseEntity<List<session>> getAllSchedules(@PathVariable("id") Integer id){

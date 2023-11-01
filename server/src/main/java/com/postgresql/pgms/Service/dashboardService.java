@@ -2,6 +2,7 @@ package com.postgresql.pgms.Service;
 
 import com.postgresql.pgms.enumeration.Role;
 import com.postgresql.pgms.model.session;
+import com.postgresql.pgms.repo.ProgramRepo;
 import com.postgresql.pgms.repo.SessionRepository;
 import com.postgresql.pgms.repo.UserRepository;
 import lombok.AllArgsConstructor;
@@ -15,8 +16,13 @@ import java.util.List;
 public class dashboardService {
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
+    private final ProgramRepo programRepo;
     public Integer countCoursesDoneBy(Integer userId) {
         return userRepository.countById(userId);
+    }
+
+    public Long countPrograms() {
+        return programRepo.count();
     }
 
     public Long countAllStaff(){

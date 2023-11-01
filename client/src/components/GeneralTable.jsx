@@ -105,18 +105,10 @@ function HandleDelete(Selected){
 
 // Component for the table header
 function EnhancedTableHead(props) {
-  const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-    headCells,
-  } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
+    const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } = props;
+    const createSortHandler = (property) => (event) => {
+        onRequestSort(event, property);
+    };
 
   return (
     <TableHead>
@@ -187,6 +179,7 @@ function EnhancedTableToolbar(props) {
   const { numSelected, selected } = props;
 
   //print selected array
+  // console.log selected array
   console.log(selected);
   return (
     <Toolbar

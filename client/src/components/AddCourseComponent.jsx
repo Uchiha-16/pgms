@@ -20,7 +20,6 @@ const Course = () => { // Changed the function name to start with uppercase "P"
     courseName: '',
     semester: '',
     credit: '',
-    hallName: '',
     programId: '',
   });
 
@@ -81,7 +80,6 @@ const Course = () => { // Changed the function name to start with uppercase "P"
         courseName: '',
         semester: '',
         credit: '',
-        hallName: '',
         programId: '',
       });
     };
@@ -188,17 +186,6 @@ const Course = () => { // Changed the function name to start with uppercase "P"
                   label="Course Credit"
                   name="credit"
                   value={formData.credit}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  name="hallName"
-                  label="Hall Name"
-                  id="hallName"
-                  value={formData.hallName}
                   onChange={handleChange}
                 />
               </Grid>

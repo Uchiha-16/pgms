@@ -5,32 +5,22 @@ import { useParams } from "react-router-dom";
 import useAxiosMethods from "../hooks/useAxiosMethods";
 import PopupComponent2 from "./PopupComponent2";
 
-function Form() {
-  const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({});
-  const { scheduleID } = useParams(); // Assuming you get the schedule ID from the URL
-  const [budget, setBudget] = useState({
-    startYear: 2020,
-    endYear: 2021,
-    budget: 50000,
-    rate: 4.5,
-    MISname: "John Doe",
-    MCSname: "Jane Smith",
-    MITname: "Alice Johnson",
-    MBAname: "Bob Wilson",
-  });
-  // Replace with actual data
-  const { get, put } = useAxiosMethods();
+const Form = () => {
 
-  const budget_URL = `budget/getBudget/${scheduleID}`;
+  const [formData, setFormData] = useState([]);
+  const [budget, setBudget] = useState([]);
+  const { get } = useAxiosMethods();
+
+  const currentIntake_URL = `/intake/getCurrentIntake`;
+  const updateIntake_URL = `/intake/updateIntake/`
 
   useEffect(() => {
-    get(budget_URL, setBudget);
-  }, [budget_URL]);
+    // Fetch data from the server using Axios
+    get(currentIntake_URL, setBudget)
+  }, []); // Make sure to include the dependency
 
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing);
-  };
+  console.log(budget);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -40,14 +30,14 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    put(budget_URL, formData)
-      .then((response) => {
-        console.log("Data updated successfully:", response.data);
-        setIsEditing(false);
-      })
-      .catch((error) => {
-        console.error("Error updating data:", error);
-      });
+    // put(updateIntake_URL, formData)
+    //   .then((response) => {
+    //     console.log("Data updated successfully:", response.data);
+    //     setIsEditing(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error updating data:", error);
+    //   });
   };
 
   const paperStyle = {
@@ -142,14 +132,6 @@ function Form() {
           >
             <PopupComponent2 />
           </div>
-
-          <Button
-            variant="outlined"
-            style={editButtonStyle}
-            onClick={handleEditToggle}
-          >
-            {isEditing ? "Save" : "Edit"}
-          </Button>
         </div>
         <div style={infoStyle}>
           <div edit>
@@ -157,155 +139,59 @@ function Form() {
               <Typography variant="body2" style={labelStyle}>
                 Duration:
               </Typography>
-              {isEditing ? (
-                <>
-                  <TextField
-                    name="startYear"
-                    variant="outlined"
-                    size="small"
-                    style={contentStyle}
-                    value={formData.startYear || budget?.startYear}
-                    onChange={handleInputChange}
-                  />
-                  {" - "}
-                  <TextField
-                    name="endYear"
-                    variant="outlined"
-                    size="small"
-                    style={contentStyle}
-                    value={formData.endYear || budget?.endYear}
-                    onChange={handleInputChange}
-                  />
-                </>
-              ) : (
-                <Typography variant="body2" style={contentStyle}>
-                  {budget?.startYear} - {budget?.endYear}
-                </Typography>
-              )}
+              <Typography variant="body2" style={contentStyle}>
+                {budget.length > 0 ? `${budget[0].year}` : ''}
+              </Typography>
             </div>
 
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
                 Budget for the intake:
               </Typography>
-              {isEditing ? (
-                <TextField
-                  name="budget"
-                  variant="outlined"
-                  size="small"
-                  style={contentStyle}
-                  value={formData.budget || budget?.budget}
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <Typography variant="body2" style={contentStyle}>
-                  {budget?.budget}
-                </Typography>
-              )}
+              <Typography variant="body2" style={contentStyle}>
+                {budget.length > 0 ? budget[0].budget : ''}
+              </Typography>
             </div>
 
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
                 Rate:
               </Typography>
-              {isEditing ? (
-                <TextField
-                  name="rate"
-                  variant="outlined"
-                  size="small"
-                  style={contentStyle}
-                  value={formData.rate || budget?.rate}
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <Typography variant="body2" style={contentStyle}>
-                  {budget?.rate}
-                </Typography>
-              )}
+              <Typography variant="body2" style={contentStyle}>
+                {budget.length > 0 ? budget[0].rate : ''}
+              </Typography>
             </div>
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
                 Coordinator MIS:
               </Typography>
-              {isEditing ? (
-                <>
-                  <TextField
-                    name="MISname"
-                    variant="outlined"
-                    size="small"
-                    style={contentStyle}
-                    value={formData.MISname || budget?.MISname}
-                    onChange={handleInputChange}
-                  />
-                </>
-              ) : (
-                <Typography variant="body2" style={contentStyle}>
-                  {budget?.MISname}
-                </Typography>
-              )}
+              <Typography variant="body2" style={contentStyle}>
+                {budget.length > 0 ? `${budget[0].mis.firstname} ${budget[0].mis.lastname}` : ''}
+              </Typography>
             </div>
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
                 Coordinator MCS:
               </Typography>
-              {isEditing ? (
-                <>
-                  <TextField
-                    name="MCSname"
-                    variant="outlined"
-                    size="small"
-                    style={contentStyle}
-                    value={formData.MCSname || budget?.MCSname}
-                    onChange={handleInputChange}
-                  />
-                </>
-              ) : (
-                <Typography variant="body2" style={contentStyle}>
-                  {budget?.MCSname}
-                </Typography>
-              )}
+              <Typography variant="body2" style={contentStyle}>
+                {budget.length > 0 ? `${budget[0].mcs.firstname} ${budget[0].mcs.lastname}` : ''}
+              </Typography>
             </div>
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
                 Coordinator MIT:
               </Typography>
-              {isEditing ? (
-                <>
-                  <TextField
-                    name="MITname"
-                    variant="outlined"
-                    size="small"
-                    style={contentStyle}
-                    value={formData.MIT || budget?.MITname}
-                    onChange={handleInputChange}
-                  />
-                </>
-              ) : (
-                <Typography variant="body2" style={contentStyle}>
-                  {budget?.MITname}
-                </Typography>
-              )}
+              <Typography variant="body2" style={contentStyle}>
+                {budget.length > 0 ? `${budget[0].mit.firstname} ${budget[0].mit.lastname}` : ''}
+              </Typography>
             </div>
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
                 Coordinator MBA:
               </Typography>
-              {isEditing ? (
-                <>
-                  <TextField
-                    name="MBAname"
-                    variant="outlined"
-                    size="small"
-                    style={contentStyle}
-                    value={formData.MBAname || budget?.MBAname}
-                    onChange={handleInputChange}
-                  />
-                </>
-              ) : (
-                <Typography variant="body2" style={contentStyle}>
-                  {budget?.MBAname}
-                </Typography>
-              )}
+              <Typography variant="body2" style={contentStyle}>
+                {budget.length > 0 ? `${budget[0].mba.firstname} ${budget[0].mba.lastname}` : ''}
+              </Typography>
             </div>
           </div>
         </div>

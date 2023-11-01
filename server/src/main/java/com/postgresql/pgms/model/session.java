@@ -20,7 +20,7 @@ public class session {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sessionId ;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "intake_id")
     private Intake intakeID;
     private LocalDate date;
@@ -28,22 +28,25 @@ public class session {
     private LocalTime endTime;
     private Integer hours;
     private String type;
+    private String hallName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "teach_id")
     private Users tsId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "course_id")
     private course courseId;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @Builder.Default
+    @ManyToOne(optional = true)
     @JoinColumn(name = "staff_id")
-    private Users staffID;
+    private Users staffID = null;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @Builder.Default
+    @ManyToOne(optional = true)
     @JoinColumn(name = "pc_id")
-    private Users pcID;
+    private Users pcID = null;
 
     @Builder.Default
     private String status = "Pending";
@@ -55,5 +58,18 @@ public class session {
     public void setPcId(Users users) {
         this.pcID = users;
     }
+
+    public void setStaffID(Users staff) {
+        this.staffID = staff;
+    }
+
+    public void setTsId(Users ts) {
+        this.tsId = ts;
+    }
+
+    public void setIntakeID(Intake intake) {
+        this.intakeID = intake;
+    }
+
 }
 

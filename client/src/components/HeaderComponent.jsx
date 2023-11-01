@@ -62,12 +62,7 @@ export default function HeaderComponent() {
 
   // Function to handle search
   const handleSearch = () => {
-    // Perform a search with the searchQuery
-    // You can make an API request to your back-end here to fetch search results.
-    // Update the searchResults state with the response data.
-    // Example: send a request using Axios or another HTTP client.
-
-    // For now, let's log the search query as an example.
+    
     console.log("Search query:", searchQuery);
   };
 
@@ -295,11 +290,12 @@ export default function HeaderComponent() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Search>
+            <Search >
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase
+              <StyledInputBase 
+                sx={{ width:"15rem" }}
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
                 // Bind the input value to the searchQuery state

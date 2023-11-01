@@ -135,7 +135,7 @@ export default function NavbarComponent() {
                             { text: 'Timetable', path: '/timetable', icon: <CalendarMonthIcon /> },
                             { text: 'Payment Voucher', path: '/payment-voucher', icon: <DescriptionIcon /> },
                             { text: 'Attendance Tracking', path: role === "Staff" ? '/attendance-page' : '/attendance-tracking', icon: <PlaceIcon />},
-                            { text: 'Nominations', path: '/nominations', icon: <GroupAddIcon /> },
+                            { text: 'Nominations', path: '/addNominations', icon: <GroupAddIcon /> },
                             { text: 'Notifications', path: '/notifications', icon: <NotificationsIcon /> },
                             { text: 'Profile', path: `/profile/${userID}`, icon: <PersonIcon /> },
                             { text: 'Logout', path: '/', icon: <LogoutIcon /> },

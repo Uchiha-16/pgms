@@ -43,6 +43,12 @@ const PaymentCard = ({ columns, data, done, btn }) => {
         setIsExpanded(false);
     };
 
+    const hell = (no, atv)=>{
+        // let id = e.target.dataid ;
+        console.log(no,atv,"clicked now");
+        onChange(no, atv);
+    }
+
     return (
         <>
             <TableContainer component={Paper} sx={{
@@ -89,6 +95,7 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                     <TableBody>
                         {data.map((row, rowIndex) => (
                             <TableRow key={rowIndex}>
+                                {console.log(row.AddtoVoucher)}
                                 {columns.map((column, colIndex) => (
                                     <TableCell key={`${rowIndex}-${colIndex}`}
                                         sx={{
@@ -111,7 +118,7 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                                         ) :
                                          
                                         isAdded(column, row[column]) ? (
-                                            <Checkbox defaultChecked sx={{
+                                            <Checkbox defaultChecked onClick={() => hell(row.No, row.AddtoVoucher)} sx={{
                                                 color: '#D9D9D9',
                                                 '&.Mui-checked': {
                                                     color: '#43A047',
@@ -119,7 +126,7 @@ const PaymentCard = ({ columns, data, done, btn }) => {
                                             }} />
                                         ) :
                                         isNotAdded(column, row[column]) ? (
-                                            <Checkbox defaultChecked sx={{
+                                            <Checkbox onClick={() => hell(row.No, row.AddtoVoucher)} sx={{
                                                 color: '#D9D9D9',
                                                 '&.Mui-checked': {
                                                     color: '#43A047',

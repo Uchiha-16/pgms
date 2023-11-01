@@ -67,7 +67,8 @@ const Form = () => {
   };
 
   const sectionStyle = {
-    fontSize: "1.1rem",
+    marginLeft: "-130px",
+    fontSize: "1.0rem",
     width: "150px",
     color: "#444",
     fontWeight: "bold",
@@ -101,30 +102,32 @@ const Form = () => {
     },
   };
 
-  // const addButtonStyle = {
-  //   marginLeft: "490px",
-  //   fontSize: "0.8rem",
-  //   marginTop: "30px",
-  //   marginBottom: "10px",
-  //   backgroundColor: "#2196F3",
-  //   color: "#fff",
-  //   "&:hover": {
-  //     backgroundColor: "#1976D2",
-  //   },
-  // };
+  const h2 = {
+    fontSize: "1.2rem",
+    fontWeight: "bold",
+    color: "#444",
+    marginBottom: "-70px",
+    marginLeft: "-130px",
+    marginTop: "50px",
+  };
+
 
   return (
     <form onSubmit={handleSubmit}>
       <Paper elevation={3} style={paperStyle}>
+        {/* <div style={{ position: "relative" }}></div> */}
         <div style={roleStyle}>
           <a href="/previousIntakeDetails" style={sectionStyle}>
             Previous Intake Details
           </a>
+          <h2 style={h2}>Current Intake Details</h2>
+          
           <div
             style={{
               position: "absolute",
-              top: "5px",
-              right: "30px",
+              top: "20px",
+              marginLeft: "630px",
+             
             }}
           >
             <PopupComponent2 />

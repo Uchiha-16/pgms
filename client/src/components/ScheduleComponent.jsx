@@ -92,30 +92,47 @@ export default class ScheduleComponent extends React.PureComponent {
         axios.get('/sessions/get')
           .then((response) => {
             const fetchedData = response.data;
-            console.log(fetchedData);
-
+      
             const appointments = fetchedData.map((item) => {
-                return {
-                    title: item.courseId.courseNo,
-                    priorityId: item.courseId.programId.name,
-                    semester: item.courseId.semester,
-                    startDate: item.startTime,
-                    endDate: item.endTime,
-                    hallName: item.hallName,
-                    lecturerName: `${item.tsId.firstname} ${item.tsId.lastname}`,
-                    id: item.sessionId,
-                }
-            })
+              // Define the conversion logic here
+              const {
+                date,
+                startTime,
+                endTime,
+                hallName,
+                tsId,
+                courseId,
+                sessionId,
+              } = item;
+      
+              // Parse date and time strings to JavaScript Date objects
+              const [year, month, day] = date.split('-').map(Number);
+              const [startHour, startMinute] = startTime.split(':').map(Number);
+              const [endHour, endMinute] = endTime.split(':').map(Number);
+      
+              const startDate = new Date(year, month - 1, day, startHour, startMinute);
+              const endDate = new Date(year, month - 1, day, endHour, endMinute);
+              
+              return {
+                title: courseId.courseNo, // Modify to match your data structure
+                priorityId: courseId.programId.name, // Modify to match your data structure
+                //if semester id == 1 or 2 change value to 2 else to 1
+                semester: courseId.semester === 4 ? 1 : courseId.semester === 2 ? 2 : 0,
+                startDate,
+                endDate,
+                hallName, // Modify to match your data structure
+                lecturerName: `${tsId.firstname} ${tsId.lastname}`, // Modify to match your data structure
+                id: sessionId, // Modify to match your data structure
+              };
+            });
+      
             this.setState({ data: appointments });
-            console.log(appointments);
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
           });
-
-          //Map the fields to appointment const
-
       }
+      
 
     constructor(props) {
         super(props);
@@ -127,6 +144,7 @@ export default class ScheduleComponent extends React.PureComponent {
         }
 
         this.state = {
+            data: [],
             resources: [
                 {
                     fieldName: 'semester',

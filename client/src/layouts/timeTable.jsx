@@ -40,7 +40,7 @@ const TimeTable = () => {
     useEffect(() => {
       // Fetch data from the server using Axios
       get(currentIntake_URL, setIntake)
-    },[get, currentIntake_URL]); // Make sure to include the dependency
+    },[]); // Make sure to include the dependency
   
     console.log(intake);
 

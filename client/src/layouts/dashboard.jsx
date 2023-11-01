@@ -57,6 +57,10 @@ const Layout2 = () => {
 };
 
 class dashboard extends Component {
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
     constructor(props) {
         super(props);
         this.state = {
@@ -67,14 +71,19 @@ class dashboard extends Component {
       }
     
       componentDidMount() {
+        this.fetchUserName();
+
+        console.log("componentDidMount is called");
         // Fetch data for Users count
         axios.get("http://localhost:3000/api/v1/dashboard/lecturers")
-          .then((response) => {
+        .then((response) => {
+            console.log("Users Data:", response.data);
             this.setState({ usersCount: response.data.length });
-          })
-          .catch((error) => {
+        })
+        .catch((error) => {
             console.error('Error fetching user data', error);
-          });
+        });
+
 
           // Fetch data for programs count
         axios.get("http://localhost:3000/api/v1/dashboard/allPrograms")
@@ -93,10 +102,20 @@ class dashboard extends Component {
           .catch((error) => {
             console.error('Error fetching user data', error);
           });
-    
-        // You can add similar code for fetching Programs count and Staff count here
-        // Update the URLs as needed
       }
+
+fetchUserName() {
+  const userId = 1; // Replace with the actual user ID
+  axios.get(`http://localhost:3000/api/v1/dashboard/getUser/${userId}`)
+    .then((response) => {
+      const userName = response.data;
+      this.setState({ userName });
+    })
+    .catch((error) => {
+      console.error('Error fetching user name', error);
+    });
+}
+
 
     render() {
         const { usersCount, programsCount, staffCount } = this.state;
@@ -191,7 +210,7 @@ class dashboard extends Component {
                                         marginRight: 3,
                                         fontSize: '14px',
                                         }}>
-                                        Ms. Anne Marie
+                                        {this.state.userName}
                                     </Typography>
                                     <img src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' style={{
                                         width: '50px',

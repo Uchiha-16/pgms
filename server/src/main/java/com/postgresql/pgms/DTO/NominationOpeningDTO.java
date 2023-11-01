@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class NominationOpeningDTO implements Serializable {
 
     private Integer userId;
-    private String programId;
+    private Integer programId;
     private Integer semester;
     private Integer courseId;
     private LocalDate closedate;

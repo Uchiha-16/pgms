@@ -179,6 +179,7 @@ function EnhancedTableToolbar(props) {
   const { numSelected, selected } = props;
 
   //print selected array
+  // console.log selected array
   console.log(selected);
   return (
     <Toolbar

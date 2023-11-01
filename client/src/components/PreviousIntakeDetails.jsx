@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -10,36 +10,58 @@ import {
   TablePagination,
   TableSortLabel,
 } from "@mui/material";
+import useAxiosMethods from "../hooks/useAxiosMethods";
 
 
 //dummydata
-const tableData = [
-  {
-    year: 20202021,
-    budget: 50000,
-    rate: 4.5,
-    misCoordinator: "John Doe",
-    mcsCoordinator: "Jane Smith",
-    mitCoordinator: "Alice Johnson",
-    mbaCoordinator: "Bob Wilson",
-  },
-  {
-    year: 20212022,
-    budget: 55000,
-    rate: 4.8,
-    misCoordinator: "Ella Davis",
-    mcsCoordinator: "Chris Brown",
-    mitCoordinator: "Grace Lee",
-    mbaCoordinator: "David Allen",
-  },
-  // Add more data as needed
-];
+// const tableData = [
+//   {
+//     year: 20202021,
+//     budget: 50000,
+//     rate: 4.5,
+//     misCoordinator: "John Doe",
+//     mcsCoordinator: "Jane Smith",
+//     mitCoordinator: "Alice Johnson",
+//     mbaCoordinator: "Bob Wilson",
+//   },
+//   {
+//     year: 20212022,
+//     budget: 55000,
+//     rate: 4.8,
+//     misCoordinator: "Ella Davis",
+//     mcsCoordinator: "Chris Brown",
+//     mitCoordinator: "Grace Lee",
+//     mbaCoordinator: "David Allen",
+//   },
+//   // Add more data as needed
+// ];
 
 const PreviousIntakeDetails = () => {
+
+  const intake_URL = `/intake/get`
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState("year");
   const [order, setOrder] = useState("asc");
+  const [data, setData] = useState([]);
+  const { get } = useAxiosMethods();
+
+
+  //get data from the database using axios
+  useEffect(() => {
+    get(intake_URL, setData)
+    console.log(data);
+  }, [])
+
+  const tableData = data.map(intake => ({
+    year: intake.year,
+    budget: intake.budget,
+    rate: intake.rate,
+    misCoordinator: `${intake.mis.firstname} ${intake.mis.lastname}`,
+    mcsCoordinator: `${intake.mcs.firstname} ${intake.mcs.lastname}`,
+    mitCoordinator: `${intake.mit.firstname} ${intake.mit.lastname}`,
+    mbaCoordinator: `${intake.mba.firstname} ${intake.mba.lastname}`,
+  }));
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

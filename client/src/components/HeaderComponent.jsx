@@ -12,10 +12,15 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import HomeIcon from "@mui/icons-material/Home";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LockResetIcon from "@mui/icons-material/LockReset";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SettingsIcon from "@mui/icons-material/Settings";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Icon from "@mui/material/Icon";
 import { useState } from "react";
 
 function handleClick(event) {
@@ -29,6 +34,9 @@ export default function HeaderComponent() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  // State to store search query
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -45,6 +53,17 @@ export default function HeaderComponent() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  // Function to handle search input change
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // Function to handle search
+  const handleSearch = () => {
+    
+    console.log("Search query:", searchQuery);
   };
 
   const menuId = "primary-search-account-menu";
@@ -70,12 +89,38 @@ export default function HeaderComponent() {
           window.location.href = "/form";
         }}
       >
+        <ListItemIcon>
+          <Icon>
+            <AccountBalanceIcon />
+          </Icon>{" "}
+        </ListItemIcon>
         Intake Details
       </MenuItem>
 
-      <MenuItem onClick={handleMenuClose}>Account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Notifications</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Change Password</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <ListItemIcon>
+          <Icon>
+            <AccountCircleIcon />
+          </Icon>{" "}
+        </ListItemIcon>
+        Account
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <ListItemIcon>
+          <Icon>
+            <NotificationsIcon />
+          </Icon>{" "}
+        </ListItemIcon>
+        Notifications
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <ListItemIcon>
+          <Icon>
+            <LockResetIcon />
+          </Icon>{" "}
+        </ListItemIcon>
+        Change Password
+      </MenuItem>
     </Menu>
   );
 
@@ -245,14 +290,29 @@ export default function HeaderComponent() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Search>
+            <Search >
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase
+              <StyledInputBase 
+                sx={{ width:"15rem" }}
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
+                // Bind the input value to the searchQuery state
+                value={searchQuery}
+                // Handle input change
+                onChange={handleSearchInputChange}
+                autoFocus
               />
+              {/* Search button/icon */}
+              <IconButton
+                onClick={handleSearch}
+                size="small"
+                color="primary"
+                aria-label="search"
+              >
+                <SearchIcon />
+              </IconButton>
             </Search>
             {/* profile icon */}
             <IconButton

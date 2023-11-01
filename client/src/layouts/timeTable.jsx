@@ -4,7 +4,7 @@ import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
 import TableHeaderComponent from '../components/TableHeaderComponent';
-import { Box, Grid, Fade } from '@mui/material/';
+import { Box, Grid } from '@mui/material/';
 
 // Get the current date
 const currentDate = new Date();
@@ -30,8 +30,8 @@ const endDateString = endDate.toISOString().slice(0, 10);
 const nbsp = '\u00A0';
 
 // Intake Details
-const intakeStartYear = '2020';
-const intakeEndYear = '2022';
+const intakeStartYear = '2022';
+const intakeEndYear = '2023';
 class TimeTable extends Component {
     render() {
         return (
@@ -52,7 +52,7 @@ class TimeTable extends Component {
                             {/*============================== Table Header ==============================*/}
                             <TableHeaderComponent 
                                 left={`TIMETABLE ${nbsp} : ${nbsp} ${startDateString} ${nbsp} to ${nbsp} ${endDateString}`} 
-                                right={`INTAKE ${nbsp} ${intakeStartYear} / ${intakeEndYear}`}
+                                right={`INTAKE ${nbsp} ${intakeStartYear} - ${intakeEndYear}`}
                                 addbtn={false} />
                             {/*============================== Schedule ==============================*/}
                             <ScheduleComponent />

@@ -3,7 +3,7 @@ import { Box, Grid, Typography, Fade } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
-import CalendarComponent from '../components/CalendarComponent';
+// import CalendarComponent from '../components/CalendarComponent';
 import CalendarEventComponent from '../components/CalendarEventComponent';
 import DashboardCard from '../components/DashboardCardComponent';
 import GeneralDashboardTable from '../components/GeneralDashboardTable';
@@ -202,7 +202,7 @@ class dashboard extends Component {
 
                                 {/* Calendar */}
                                 <Grid item>
-                                    <CalendarComponent />
+                                    {/* <CalendarComponent /> */}
                                 </Grid>
 
                                 {/* Description */}

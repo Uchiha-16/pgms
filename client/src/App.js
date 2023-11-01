@@ -47,6 +47,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/paymentreport1" element={<PaymentReport1 />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/paymentreport1" element={<PaymentReport1 />} />
 
         {/* private */}
         <Route element={<PersistLogin />}>
@@ -71,6 +73,28 @@ function App() {
             <Route path="/paymentreport1" element={<PaymentReport1 />} />
             <Route path="/paymentPrevious" element={<PaymentPrevious />} />
             <Route path="/nominationList" element={<NominationList />} />
+            <Route path="/profile/:userID" element={<Profile />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route path="/att" element={<Attendance />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/lecturers" element={<Lecturers />} />
+            <Route path="/programs" element={<Programs />} />
+            <Route
+              path="/attendance-tracking"
+              element={<AttendanceTrackingTable />}
+            />
+            <Route path="/form" element={<Form />} />
+            <Route
+              path="/previousIntakeDetails"
+              element={<PreviousIntakeDetails />}
+            />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={["Lecturer"]} />}>
+            <Route
+              path="/attendance-tracking"
+              element={<AttendanceTrackingTable />}
+            />
 
             <Route path="/att" element={<Attendance />} />
             <Route path="/notifications" element={<Notifications />} />

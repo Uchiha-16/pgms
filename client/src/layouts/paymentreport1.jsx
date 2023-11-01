@@ -14,6 +14,7 @@ import UsersIcon from '../assets/icons/users.png';
 import data from '../components/DummyData';
 import DownloadButton from '../assets/icons/Maskgroup.png'
 import useAuth from "../hooks/useAuth";
+import useAxiosMethods from '../hooks/useAxiosMethods';
 
 
 // const users_URL = "http://localhost:8080/api/users/getUsers"
@@ -21,16 +22,20 @@ import useAuth from "../hooks/useAuth";
 
 const Layout1 = () => {
     const URL = "paymentlist/staff"
+    const {get} = useAxiosMethods();
     // const [users, setUsers] = useState([]);
     
 
-    // useEffect(() => {
-    //     axios.get(users_URL)
-    //         .then(res => {
-    //             console.log(res)
-    //             setUsers(res.data);
-    //         });
-    // }, []);
+    useEffect(() => {
+        console.log("useeffecter ran");
+        // setData1(data);
+        try{
+            get(URL, setData2)
+
+        }catch(e){
+            console.error(e,"error in getdata for individual payment list");
+        }    
+    }, []);
 
     const columns = ['No', 'Name of the Course Lecturer/ Technical Assistant', 'Subject', ' Lecture Hours', 'Tutorials/Practical Hours', 'Hours as a technical assistant', 'Rate  Rs. ', 'Total Payment Rs.', 'Total Payment to each Lecturer Rs.'];
     
@@ -51,6 +56,7 @@ const Layout1 = () => {
 
 const Layout2 = () => {
     const URL = "paymentlist/pcmcs"
+    const {get} = useAxiosMethods();
 
     // const [users, setUsers] = useState([]);
     
@@ -82,6 +88,7 @@ const Layout2 = () => {
 
 const Layout3 = () => {
     const URL = "paymentlist/pcmis"
+    const {get} = useAxiosMethods();
 
     // const [users, setUsers] = useState([]);
     
@@ -113,6 +120,7 @@ const Layout3 = () => {
 
 const Layout4 = () => {
     const URL = "paymentlist/pcmit"
+    const {get} = useAxiosMethods();
 
     // const [users, setUsers] = useState([]);
     
@@ -144,6 +152,7 @@ const Layout4 = () => {
 
 const Layout5 = () => {
     const URL = "paymentlist/pcmba"
+    const {get} = useAxiosMethods();
 
     // const [users, setUsers] = useState([]);
     
@@ -175,6 +184,7 @@ const Layout5 = () => {
 
 const Layout6 = () => {
     const URL = "paymentlist/dr"
+    const {get} = useAxiosMethods();
 
     // const [users, setUsers] = useState([]);
     
@@ -206,6 +216,7 @@ const Layout6 = () => {
 
 const Layout7 = () => {
     const URL = "paymentlist/head"
+    const {get} = useAxiosMethods();
 
     // const [users, setUsers] = useState([]);
     

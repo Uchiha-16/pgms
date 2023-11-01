@@ -220,8 +220,6 @@ export default class ScheduleComponent extends React.PureComponent {
         // Get the current date in the format "YYYY-MM-DD"
         const currentDate = new Date().toISOString().split('T')[0];
 
-        const notesArray = data.notes ? data.notes.split(',') : [];
-        console.log(notesArray);
         
         return (
             
@@ -334,11 +332,12 @@ export default class ScheduleComponent extends React.PureComponent {
                                         }}><br />
                                             <div style={{ fontSize: '14px' }}>{data.title}</div>
                                             {data.notes ? ( // Check if notes exist
-                                                <div style={{ color: '#FF5733' }}>
-                                                    Hall Name: {notesArray[0]}
-                                                    <br />
-                                                    Lecturer Name: {notesArray[1]}
+                                                <><div style={{ color: '#55596F' }}>
+                                                    {data.notes.split(',')[0]}
                                                 </div>
+                                                <div style={{ color: '#3E4152' }}>
+                                                    {data.notes.split(',')[1]}
+                                                </div></>
                                             ) : (
                                                 <>
                                                     <div style={{ color: '#55596F' }}>{data.hallName}</div>

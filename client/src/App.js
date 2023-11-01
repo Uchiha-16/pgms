@@ -46,13 +46,14 @@ function App() {
         <Route path='/paymentreport1' element={<PaymentReport1 />} />
             <Route path='/payment' element={<Payment />} />
             <Route path='/paymentPrevious' element={<PaymentPrevious />} />
+            <Route path='/nominationList' element={<NominationList />} /> </Route>
+            
       
 
         {/* private */}
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={["Lecturer", "Staff"]}/>} >
             <Route path='home' element={<Home />} />
-            <Route path='/nominations' element={<AddNominations />} />
             <Route path='/users' element={<Users/>}/>
             {/* <Route path='/programs' element={<Programs/>}/> */}
             <Route path='/profile/:userID' element={<Profile />} />
@@ -66,8 +67,7 @@ function App() {
             <Route path='/form' element={<Form />} />
             <Route path='/previousIntakeDetails' element={<PreviousIntakeDetails />} />
            
-            <Route path='/nominationList' element={<NominationList />} />
-          </Route>
+           
           <Route element={<RequireAuth allowedRoles={["Lecturer"]}/>} >
             <Route path='/attendance-tracking' element={<AttendanceTrackingTable />} />
           

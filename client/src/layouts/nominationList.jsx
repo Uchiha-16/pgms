@@ -30,8 +30,12 @@ const TableLayout = () => {
 
     const columns = ['POSITION', 'OPENING DATE','CLOSING DATE', 'STATUS', 'ACTION' ];
 
-    const data = nominations.map(nomination => ({ 
-
+    const data = nominations.map(nomination => ({
+        POSITION: `Application for ${nomination.courseId} Lecturer`,
+        OPENINGDATE:'23/10/2023',
+        CLOSINGDATE:'3/4/2034',
+        STATUS: 'opened', 
+        ACTION: 'close',
     }));
 
     return (

@@ -266,6 +266,9 @@ export default class ScheduleComponent extends React.PureComponent {
             excludedDays = [1, 2, 3, 4, 5, 6];
         }
 
+        // Get the current date in the format "YYYY-MM-DD"
+        const currentDate = new Date().toISOString().split('T')[0];
+
         
         return (
             
@@ -347,7 +350,7 @@ export default class ScheduleComponent extends React.PureComponent {
                             onAppointmentContextMenu={(e) => this.openDeleteConfirmation(e.appointmentData)}
                         >
                             <ViewState
-                                defaultCurrentDate="2023-10-30"
+                                defaultCurrentDate={currentDate}
                             />
                             <EditingState
                                 onCommitChanges={this.commitChanges}

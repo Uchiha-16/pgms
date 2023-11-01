@@ -57,7 +57,7 @@ const Layout2 = () => {
 };
 
 class dashboard extends Component {
-    cconstructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
           usersCount: null,
@@ -133,7 +133,7 @@ class dashboard extends Component {
                                             <DashboardCard
                                                 icon={UsersIcon}
                                                 title="Lecturers"
-                                                count={usersCount !== null ? usersCount : 'Loading...'}
+                                                count={usersCount !== null ? usersCount : '0'}
                                             />
                                         </Box>
                                     </Grid>
@@ -142,7 +142,7 @@ class dashboard extends Component {
                                             <DashboardCard
                                                 icon={ProgramsIcon}
                                                 title="Programs"
-                                                count={programsCount !== null ? programsCount : 'Loading...'}                      
+                                                count={programsCount !== null ? programsCount : '0'}                      
                                             />
                                         </Box>
                                     </Grid>
@@ -151,7 +151,7 @@ class dashboard extends Component {
                                             <DashboardCard
                                                 icon={StaffIcon}
                                                 title="Staff"
-                                                count={staffCount !== null ? staffCount : 'Loading...'}
+                                                count={staffCount !== null ? staffCount : '0'}
                                             />
                                         </Box>
                                     </Grid>

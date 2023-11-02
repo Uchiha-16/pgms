@@ -75,7 +75,7 @@ const visibleRows = data.slice(startRowIndex, endRowIndex);
                 zIndex: 1,
             }}>
                 <h3>Nominations</h3>
-                <AddCircleIcon sx={{
+                {/* <AddCircleIcon sx={{
                     marginLeft: 'auto',
                     marginTop: 'auto',
                     marginBottom: 'auto',
@@ -87,7 +87,7 @@ const visibleRows = data.slice(startRowIndex, endRowIndex);
                     ":hover": {
                         transform: 'rotate(90deg)'
                     }
-                }} />
+                }} /> */}
             </div>
 
 {/* Table */}

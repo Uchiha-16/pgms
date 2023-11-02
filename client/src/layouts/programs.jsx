@@ -113,7 +113,7 @@ class programs extends Component {
                         <Grid item>
                             {/* content */}
                             <AddCourse />
-                            <TableHeaderComponent left="Programs" right="" addbtn={true} />
+                            <TableHeaderComponent left="Programs" right=""/>
                             <Layout1 />
                         </Grid>
                         {/*============================== Footer ==============================*/}

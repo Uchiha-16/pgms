@@ -59,8 +59,8 @@ public class userController {
     //Search
     // New endpoint for user search
     @GetMapping("/search")
-    public ResponseEntity<List<Users>> searchUsers(@RequestParam String query) {
-        List<Users> searchResults = service.searchUsers(query);
+    public ResponseEntity<List<Users>> searchUsersByFirstName(@RequestParam String firstName) {
+        List<Users> searchResults = service.searchUsersByFirstName(firstName);
         return ResponseEntity.ok(searchResults);
     }
 }

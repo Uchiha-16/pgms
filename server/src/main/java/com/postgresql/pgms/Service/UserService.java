@@ -74,16 +74,10 @@ public class UserService {
     }
 
     //Search``````
-    public List<Users> searchUsers(String searchTerm) {
-        // You can implement the search logic based on your requirements.
-        // For example, you can search by user's name, email, or other criteria.
-        // Here, we are searching by user's first name, last name, and email.
-        List<Users> searchResults = repo.searchUsersByKeywordAndRole(searchTerm, searchTerm);
-        return searchResults;
+    // New method for searching users by first name
+    public List<Users> searchUsersByFirstName(String firstName) {
+        return repo.findByFirstnameContaining(firstName);
     }
 
 
-//    public List<Users> findByFirstnameContainingOrLastnameContainingOrEmailContaining(String searchTerm) {
-//        return repo.findByFirstnameContainingOrLastnameContainingOrEmailContaining(searchTerm, searchTerm, searchTerm);
-//    }
 }

@@ -15,6 +15,8 @@ import Box from "@mui/material/Box";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { visuallyHidden } from "@mui/utils";
+import axios from "../api/axios";
+import useAuth from "../hooks/useAuth";
 
 
 
@@ -83,11 +85,30 @@ function stableSort(array, comparator) {
 // Main table component
 export default function AttendanceTrackingComponent({ rows, headCells }) {
   const navigate = useNavigate();
+  const { auth } = useAuth();
+ 
 
-  const handleInformClick = (row) => {
-    // Handle the "Inform" button click here
-    // You can navigate to a specific route or perform other actions as needed
-    navigate(`/inform/${row.ID}`); // Example: Redirect to the /inform/:ID route
+  const handleStatusCheckboxChange = (row) => {
+    const { SESSIONID } = row;
+    const confirmed = window.confirm('Do you want to perform this action?');
+    if (!confirmed) {
+        row.STATUS = 0;
+        return;
+    }
+
+    const payload = []
+
+    axios.put(`/attendance/updatePcId/${SESSIONID}/${auth.user_id}`, payload)
+      .then(response => {
+        // Handle the successful response, e.g., update your state
+        console.log('PUT request successful', response.data);
+        //refresh page
+        window.location.reload();
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error('PUT request error', error);
+      });
   };
 
   const [order, setOrder] = React.useState("asc");
@@ -215,6 +236,7 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
                       {isChecked(headCell.id, row[headCell.id]) ? (
                         <Checkbox
                           defaultChecked
+
                           sx={{
                             color: "#D9D9D9",
                             "&.Mui-checked": {
@@ -224,6 +246,8 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
                         />
                       ) : isUnchecked(headCell.id, row[headCell.id]) ? (
                         <Checkbox
+                        
+                        onChange={() => handleStatusCheckboxChange(row)}
                           sx={{
                             color: "#D9D9D9",
                             "&.Mui-checked": {
@@ -284,7 +308,7 @@ export default function AttendanceTrackingComponent({ rows, headCells }) {
                             paddingTop: 2,
                             borderRadius: '5px',
                           }}
-                          onClick={() => handleInformClick(row)} // Handle the "Inform" button click
+                           // Handle the "Inform" button click
                         >
                           Inform
                         </button>

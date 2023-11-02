@@ -318,7 +318,7 @@ export default class ScheduleComponent extends React.PureComponent {
                                 >
                                     Sat
                                 </ToggleButton>
-                                <ToggleButton
+                                <ToggleButton    
                                     value="Sunday"
                                     sx={{
                                         border: '1px solid #C9D1D8',
@@ -380,8 +380,19 @@ export default class ScheduleComponent extends React.PureComponent {
                                             fontWeight: 'bold',
                                         }}><br />
                                             <div style={{ fontSize: '14px' }}>{data.title}</div>
-                                            <div style={{ color: '#55596F' }}>{data.hallName}</div>
-                                            <div style={{ color: '#3E4152' }}>{data.lecturerName}</div>
+                                            {data.notes ? ( // Check if notes exist
+                                                <><div style={{ color: '#55596F' }}>
+                                                    {data.notes.split(',')[0]}
+                                                </div>
+                                                <div style={{ color: '#3E4152' }}>
+                                                    {data.notes.split(',')[1]}
+                                                </div></>
+                                            ) : (
+                                                <>
+                                                    <div style={{ color: '#55596F' }}>{data.hallName}</div>
+                                                    <div style={{ color: '#3E4152' }}>{data.lecturerName}</div>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                 )}

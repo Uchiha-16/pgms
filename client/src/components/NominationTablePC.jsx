@@ -17,6 +17,7 @@ const NominationTable = ({ columns, data }) => {
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
+    console.log(data);
 
 const isOpened = (columnName, cellValue) => {
   return columnName === "STATUS" && cellValue === "Opened";

@@ -90,7 +90,7 @@ const PreviousIntakeDetails = () => {
                   direction={orderBy === "year" ? order : "asc"}
                   onClick={createSortHandler("year")}
                 >
-                  Year
+                  Intake
                 </TableSortLabel>
               </TableCell>
               <TableCell>
@@ -99,7 +99,7 @@ const PreviousIntakeDetails = () => {
                   direction={orderBy === "budget" ? order : "asc"}
                   onClick={createSortHandler("budget")}
                 >
-                  Budget
+                  Budget(Rs.)
                 </TableSortLabel>
               </TableCell>
               <TableCell>
@@ -108,7 +108,7 @@ const PreviousIntakeDetails = () => {
                   direction={orderBy === "rate" ? order : "asc"}
                   onClick={createSortHandler("rate")}
                 >
-                  Rate
+                  Rate per Hour(Rs.)
                 </TableSortLabel>
               </TableCell>
               <TableCell>

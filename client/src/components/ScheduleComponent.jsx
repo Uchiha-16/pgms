@@ -237,7 +237,20 @@ export default class ScheduleComponent extends React.PureComponent {
                     changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
             }
             if (deleted !== undefined) {
-                data = data.filter(appointment => appointment.id !== deleted);
+                // Make a DELETE request to your API endpoint to delete the selected appointment
+                axios
+                    .delete(`/sessions/delete/${deleted}`)
+                    .then((response) => {
+                        console.log('Appointment deleted successfully:', response.data);
+                        // If needed, you can update the UI to reflect the deletion
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting appointment:', error);
+                        // Handle errors as needed
+                    });
+    
+                // Remove the deleted appointment from the data array
+                data = data.filter((appointment) => appointment.id !== deleted);
             }
             return { data };
         });

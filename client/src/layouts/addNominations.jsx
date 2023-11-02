@@ -23,23 +23,35 @@ const TableLayout = () => {
   const nominations_StaffURL = "/nominations/nominations";
   const nominations_LecturerURL = `/nominations/nominations/${auth.user_id}`;
 
-  useEffect(() => {
-    if (auth.role == "Lecturer") {
-      get(nominations_LecturerURL, setNominations);
-    } else {
-      get(nominations_StaffURL, setNominations);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (auth.role == "Lecturer") {
+  //     get(nominations_LecturerURL, setNominations);
+  //   } else {
+  //     get(nominations_StaffURL, setNominations);
+  //   }
+  // }, []);
 
   const columns = ["REQUEST", "NAME", "STATUS", "DATE", "ACTION"];
 
-  const data = nominations.map((nomination) => ({
-    REQUEST: `Application for ${nomination.courseId} Lecturer`,
-    NAME: `${nomination.user.firstname} ${nomination.user.lastname}`,
-    STATUS: "Pending",
-    DATE: nomination.date,
-    ACTION: "Edit",
-  }));
+  const data = [
+    {
+      REQUEST: "Application for MIS3202 Lecturer",
+      NAME: "Kasun Gunawardhana",
+      STATUS: "opened",
+      DATE: "23/10/2023",
+      ACTION: "close",
+
+    },
+
+    {
+      REQUEST: "Application for MIS3201 Lecturer",
+      NAME: "Ajantha Athukorala",
+      STATUS: "opened",
+      DATE: "23/10/2023",
+      ACTION: "close",
+    }
+
+  ]
 
   return <NominationsTable columns={columns} data={data} />;
 };
@@ -54,29 +66,74 @@ const TableLayout1 = () => {
   const nominations_StaffURL = "/nominations/nominations";
   const nominations_LecturerURL = `/nominations/nominations/${auth.user_id}`;
 
-  useEffect(() => {
-    if (auth.role == "Lecturer") {
-      get(nominations_LecturerURL, setNominations);
-    } else {
-      get(nominations_StaffURL, setNominations);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (auth.role == "Lecturer") {
+  //     get(nominations_LecturerURL, setNominations);
+  //   } else {
+  //     get(nominations_StaffURL, setNominations);
+  //   }
+  // }, []);
 
   const columns = [
     "POSITION",
-    "OPENING DATE",
-    "CLOSING DATE",
+    "OPENINGDATE",
+    "CLOSINGDATE",
     "STATUS",
     "ACTION",
   ];
 
-  const data = nominations.map((nomination) => ({
-    POSITION: `Application for ${nomination.courseId} Lecturer`,
-    OPENINGDATE: "23/10/2023",
-    CLOSINGDATE: "3/4/2034",
-    STATUS: "opened",
-    ACTION: "close",
-  }));
+  // const data = nominations.map((nomination) => ({
+  //   POSITION: `Application for ${nomination.courseId} Lecturer`,
+  //   OPENINGDATE: "23/10/2023",
+  //   CLOSINGDATE: "3/4/2034",
+  //   STATUS: "opened",
+  //   ACTION: "close",
+  // }));
+
+  const data = [
+    {
+      POSITION: "Application for MIS3202 Lecturer",
+      OPENINGDATE: "23/10/2023",
+      CLOSINGDATE: "3/4/2034",
+      STATUS: "opened",
+      ACTION: "close",
+    },
+    {
+      POSITION: "Application for MIS3202 Lecturer",
+      OPENINGDATE: "23/10/2023",
+      CLOSINGDATE: "3/4/2034",
+      STATUS: "opened",
+      ACTION: "close",
+    },
+    {
+      POSITION: "Application for MIS3202 Lecturer",
+      OPENINGDATE: "23/10/2023",
+      CLOSINGDATE: "3/4/2034",
+      STATUS: "opened",
+      ACTION: "close",
+    },
+    {
+      POSITION: "Application for MIS3202 Lecturer",
+      OPENINGDATE: "23/10/2023",
+      CLOSINGDATE: "3/4/2034",
+      STATUS: "opened",
+      ACTION: "close",
+    },
+    {
+      POSITION: "Application for MIS3202 Lecturer",
+      OPENINGDATE: "23/10/2023",
+      CLOSINGDATE: "3/4/2034",
+      STATUS: "opened",
+      ACTION: "close",
+    },
+    {
+      POSITION: "Application for MIS3202 Lecturer",
+      OPENINGDATE: "23/10/2023",
+      CLOSINGDATE: "3/4/2034",
+      STATUS: "opened",
+      ACTION: "close",
+    }
+  ]
 
   return <NominationTable columns={columns} data={data} />;
 };

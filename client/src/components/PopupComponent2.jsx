@@ -157,7 +157,7 @@ const Popup = () => {
                       <TextField
                         required
                         fullWidth
-                        label="Duration (YYYY - YYYY)"
+                        label="Intake(YYYY - YYYY)"
                         type="text"
                         name="year"
                         value={formData.year}

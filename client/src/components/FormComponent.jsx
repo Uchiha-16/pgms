@@ -119,7 +119,7 @@ const Form = () => {
           <div edit>
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
-                Duration:
+                Intake:
               </Typography>
               <Typography variant="body2" style={contentStyle}>
                 {budget.length > 0 ? `${budget[0].year}` : ""}
@@ -128,7 +128,7 @@ const Form = () => {
 
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
-                Budget for the intake:
+                Budget for the intake(Rs.):
               </Typography>
               <Typography variant="body2" style={contentStyle}>
                 {budget.length > 0 ? budget[0].budget : ""}
@@ -137,7 +137,7 @@ const Form = () => {
 
             <div style={detailContainerStyle}>
               <Typography variant="body2" style={labelStyle}>
-                Rate:
+                Rate per Hour(Rs.):
               </Typography>
               <Typography variant="body2" style={contentStyle}>
                 {budget.length > 0 ? budget[0].rate : ""}

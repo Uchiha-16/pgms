@@ -7,6 +7,7 @@ import { Box, Grid } from '@mui/material/';
 import useAxiosMethods from '../hooks/useAxiosMethods';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 import { headCells } from '../config/userConfig';
+import useAuth from '../hooks/useAuth';
 
 const users_URL = "/users/users"
 
@@ -14,6 +15,7 @@ const UsersPage = () => {
     const [users, setUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");  //added a useState hook to manage the search input query. This state variable is used to store the user's input when they search for a user by name.
     const { get } = useAxiosMethods();
+    const { auth } = useAuth();
 
     useEffect(() => {
         // Call the get method to fetch user data
@@ -30,7 +32,7 @@ const UsersPage = () => {
     const rows = filteredUsers.map(user => ({
         NAME: `${user.firstname} ${user.lastname}`,
         ROLE: user.role,
-        STATUS: 'ONLINE',
+        STATUS: user.id == auth.user_id ? 'ONLINE' :'OFFLINE' ,
         EMAIL: user.email,
         ACTION: 'Edit',
         ID: user.id,

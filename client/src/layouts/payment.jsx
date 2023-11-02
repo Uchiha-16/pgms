@@ -7,6 +7,7 @@ import PaymentCard from '../components/PaymentCard';
 import TableHeaderComponent from '../components/TableHeaderComponent';
 import HStepper from '../components/HStepper';
 import useAxiosMethods from '../hooks/useAxiosMethods';
+import { Link } from 'react-router-dom';
 
 // const users_URL = "http://localhost:8080/api/users/getUsers"
 
@@ -19,6 +20,7 @@ const Layout1 = () => {
     const [data1, setData1]= useState([]);
     const URL = "/payment/changeFwd"
     const URL2 = "/payment/userPayments"
+    
  
     const columns = ['No', 'Date', 'Subject', 'Hours', 'Rate Rs', 'Amount', 'AttendanceStatus', 'AddtoVoucher'];
     const data = [
@@ -74,7 +76,7 @@ const Layout1 = () => {
     }
 
     return (
-        <PaymentCard columns={columns} data={data2} done={done} btn={btn} onChange = {hell} />
+        <PaymentCard columns={columns} data={data} done={done} btn={btn} onChange = {hell} />
     );
 };
 
@@ -84,7 +86,7 @@ const Layout2 = () => {
 
     const columns = ['Month', 'Completion'];
     const data = [
-        { Month: currentMonth, Completion: '75%' },
+        { Month: currentMonth, Completion: '10%' },
     ];
     const done = 1;
     const btn = 1;
@@ -158,7 +160,7 @@ class payment extends Component {
                            {/* tables */}
                            <Grid item sx={{ marginTop:-25, marginLeft:4}}>
 <Grid item sx={{marginBottom:-2}}>
-                                    <TableHeaderComponent   left ={'General Voucher - August 2020/2021 Intake'}  right={ <Button variant="contained" color="primary" style={{ textTransform: 'none' }}> Voucher History </Button>} />
+                                    <TableHeaderComponent   left ={'General Voucher - August 2020/2021 Intake'}  right={ <Link to ="/paymentreport1"> <Button variant="contained" color="primary" style={{ textTransform: 'none' }}> Payment Report </Button> </Link>} />
                                     </Grid>
                                     <Paper elevation={3}  style={{ maxHeight: '230px', overflowY: 'scroll' }}>
 

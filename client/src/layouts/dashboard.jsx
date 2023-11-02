@@ -3,7 +3,7 @@ import { Box, Grid, Typography, Fade } from '@mui/material/';
 import NavBarComponent from '../components/NavbarComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponent';
-// import CalendarComponent from '../components/CalendarComponent';
+import {Calendar} from '../components/Calendar';
 import CalendarEventComponent from '../components/CalendarEventComponent';
 import DashboardCard from '../components/DashboardCardComponent';
 import GeneralDashboardTable from '../components/GeneralDashboardTable';
@@ -158,7 +158,7 @@ class dashboard extends Component {
 
                                 {/* Calendar */}
                                 <Grid item>
-                                    {/* <CalendarComponent /> */}
+                                    <Calendar />
                                 </Grid>
 
                                 {/* Description */}
@@ -166,6 +166,7 @@ class dashboard extends Component {
                                     borderTop: '1px solid #E0E0E0',
                                     marginLeft: 3,
                                     marginRight: 3,
+                                    marginTop: 15,
                                     }}>
                                     <CalendarEventComponent 
                                         date="Wednesday, 23 August 2023"
